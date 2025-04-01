@@ -48,4 +48,9 @@ public class LoginPageObjectModel {
     public void togglePasswordVisibility(){
         page.locator(visibilityIcon).click();
     }
+
+    public String getLoginURL(){
+        page.waitForURL("**/login");
+        return page.url();
+    }
 }

@@ -27,7 +27,6 @@ public class PlaywrightManager {
                 );
                 context = browser.newContext(new Browser.NewContextOptions()
                         .setIgnoreHTTPSErrors(true) // Accept insecure certificates
-//                        .setViewportSize(1920,1080) // Maximize border window
                 );
                 page = context.newPage();
 

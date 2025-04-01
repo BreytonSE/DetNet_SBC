@@ -40,4 +40,11 @@ public class LoginValidation {
                 .as("Validation Failed! Eye icon should be visible in the password input field")
                 .isTrue();
     }
+
+    public void validateLoginPageURL(String expectedURL){
+        String actualURL = loginPageObjectModel.getLoginURL();
+        softly.assertThat(actualURL)
+                .as("Actual URL does not match expected URL")
+                .isEqualTo(expectedURL);
+    }
 }
