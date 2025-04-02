@@ -23,7 +23,7 @@ jobs:
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4
         with:
-          maven-version: '4.0.0'   # Match your local Maven version
+          maven-version: '3.9.7'   # Match your local Maven version
 
       - name: Cache Maven Dependencies
         uses: actions/cache@v3
