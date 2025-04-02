@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    runs-on: self-hosted  # Use Windows if needed: windows-latest
+    runs-on: self-hosted # Use Windows if needed: windows-latest
 
     steps:
       - name: Checkout repository
@@ -37,9 +37,20 @@ jobs:
         run: |
           npx playwright install --with-deps
 
+      - name: Start BlastWeb Service
+        run: |
+          Start-Process -NoNewWindow -FilePath "C:\Detnet\BlastWeb\blastweb_service.exe"
+        shell: powershell
+
       - name: Run Tests
         run: |
           mvn test -Dtest=BlastWebMainRunner  # Adjust to match your test runner
+
+      - name: Stop BlastWeb Service
+        if: always()
+        run: |
+          Stop-Process -Name "blastweb_service" -Force
+        shell: powershell
 
       - name: Upload Test Reports (Extent & Allure)
         if: always()  # Always upload reports, even if tests fail
