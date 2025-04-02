@@ -22,12 +22,12 @@ public class ValidLogin_StepDefn {
     private final DashboardValidation dashboardValidation;
 
     public ValidLogin_StepDefn() {
-        page = PlaywrightManager.getPage();
-        pageObjectManager = PageObjectManager.getInstance(page);
-        loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
-        loginValidation = new LoginValidation(loginPageObjectModel);
-        dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        this.page = PlaywrightManager.getPage();
+        this.pageObjectManager = PageObjectManager.getInstance(page);
+        this.loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
+        this.dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        this.loginValidation = new LoginValidation(loginPageObjectModel);
+        this.dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
     }
 
     @Given("I enter my BlastWeb username and password")
