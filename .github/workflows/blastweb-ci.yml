@@ -49,7 +49,12 @@ jobs:
       - name: Stop BlastWeb Service
         if: always()
         run: |
-          Stop-Process -Name "blastweb_service" -Force
+          $process = Get-Process -Name "blastweb-golang" -ErrorAction SilentlyContinue 
+          if ($process) {
+              Stop-Process -Id $process.Id -Force
+              Write-Host "BlastWeb service stopped successfully."
+          } else {
+              Write-Host "BlastWeb service is not running"
         shell: powershell
 
       - name: Upload Test Reports (Extent & Allure)
