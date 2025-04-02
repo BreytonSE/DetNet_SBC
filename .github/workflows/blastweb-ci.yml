@@ -49,7 +49,7 @@ jobs:
       - name: Stop BlastWeb Service
         if: always()
         run: |
-          $process = Get-Process -Name "blastweb-golang" -ErrorAction SilentlyContinue 
+          $process = Get-Process -Name "blastweb_golang" -ErrorAction SilentlyContinue 
           if ($process) {
               Stop-Process -Id $process.Id -Force
               Write-Host "BlastWeb service stopped successfully."
