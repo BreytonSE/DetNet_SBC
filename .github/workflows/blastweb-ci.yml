@@ -44,7 +44,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          mvn test -Dtest=BlastWebMainRunner  # Adjust to match your test runner
+          mvn test -Dheadless=true -Dtest=BlastWebMainRunner  # Adjust to match your test runner
 
       - name: Stop BlastWeb Service
         if: always()
