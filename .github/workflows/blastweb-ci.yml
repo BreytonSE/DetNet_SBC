@@ -55,6 +55,7 @@ jobs:
               Write-Host "BlastWeb service stopped successfully."
           } else {
               Write-Host "BlastWeb service is not running"
+          }
         shell: powershell
 
       - name: Upload Test Reports (Extent & Allure)
