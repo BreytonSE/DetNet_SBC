@@ -16,8 +16,12 @@ public class PlaywrightManager {
             tearDownPlayWright(); // Ensures that no stale instances exists before starting a new session
 
             playwright = Playwright.create();
+
+//            Detect if running in GitHub Actions
+            boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
+
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                    .setHeadless(false) // Run in UI mode
+                    .setHeadless(isCI) // Run headless in CD/CI, non-headless locally
                     .setArgs(Arrays.asList(
                             "--start-fullscreen",
                             "--disable-infobars",
@@ -29,8 +33,10 @@ public class PlaywrightManager {
             context = browser.newContext(new Browser.NewContextOptions().setIgnoreHTTPSErrors(true));
             page = context.newPage();
 
-//          Resize window to full screen
-            page.evaluate("window.moveTo(0, 0); window.resizeTo(screen.width, screen.height);");
+//          Resize window to full screen (only if not headless)
+            if(!isCI){
+                page.evaluate("window.moveTo(0, 0); window.resizeTo(screen.width, screen.height);");
+            }
 
 //          Navigate to the login page
             page.navigate("http://localhost:8080/en/login");
