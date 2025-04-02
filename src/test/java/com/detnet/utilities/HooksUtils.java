@@ -67,7 +67,7 @@ public class HooksUtils {
             SoftAssertionUtils.reset();
 
             if (scenarioCount.get() < TOTAL_SCENARIOS) {
-                Thread.sleep(2000); // Allow time for teardown to complete
+//                Thread.sleep(2000); // Allow time for teardown to complete
                 PlaywrightManager.setUpPlaywright(); // Ensure Playwright is fully reinitialized before the next test
                 page = PlaywrightManager.getPage(); // Retrieve new page instance
                 pageObjectManager.updatePage(page);
