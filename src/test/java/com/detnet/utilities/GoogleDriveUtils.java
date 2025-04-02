@@ -13,6 +13,8 @@ import com.google.api.services.drive.model.Permission;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
@@ -25,7 +27,7 @@ public class GoogleDriveUtils {
 
 //    Initialize the Google Drive Services
     public static Drive getDriveServices() throws GeneralSecurityException, IOException {
-        InputStream inputStream = new FileInputStream(CREDENTIALS_FILE_PATH);
+        InputStream inputStream = Files.newInputStream(Paths.get(CREDENTIALS_FILE_PATH));
         GoogleCredential credential = GoogleCredential.fromStream(inputStream)
                 .createScoped(SCOPES);
         return new Drive.Builder(GoogleNetHttpTransport.newTrustedTransport(),JSON_FACTORY,credential)

@@ -13,29 +13,27 @@ public class PlaywrightManager {
 
     public static void setUpPlaywright(){
         try{
-            if (playwright == null){
-                playwright = Playwright.create();
-                browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                        .setHeadless(false) // Run in UI mode
-                        .setArgs(Arrays.asList(
-                                "--start-fullscreen",
-                                "--disable-infobars",
-                                "--disable-extentions",
-                                "--disable-popup-blocking"
-                        ))
-                        .setIgnoreDefaultArgs(Collections.singletonList("--disable-blink-features=AutomationControlled")) // Mimic user behavior
-                );
-                context = browser.newContext(new Browser.NewContextOptions()
-                        .setIgnoreHTTPSErrors(true) // Accept insecure certificates
-                );
-                page = context.newPage();
+            tearDownPlayWright(); // Ensures that no stale instances exists before starting a new session
 
-//                ** Resize window to full screen
-                page.evaluate("window.moveTo(0, 0); window.resizeTo(screen.width, screen.height);");
+            playwright = Playwright.create();
+            browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
+                    .setHeadless(false) // Run in UI mode
+                    .setArgs(Arrays.asList(
+                            "--start-fullscreen",
+                            "--disable-infobars",
+                            "--disable-extentions",
+                            "--disable-popup-blocking"
+                    ))
+                    .setIgnoreDefaultArgs(Collections.singletonList("--disable-blink-features=AutomationControlled")) // Mimic user behavior
+            );
+            context = browser.newContext(new Browser.NewContextOptions().setIgnoreHTTPSErrors(true));
+            page = context.newPage();
 
-//                Navigate to the login page
-                page.navigate("http://localhost:8080/en/login");
-            }
+//          Resize window to full screen
+            page.evaluate("window.moveTo(0, 0); window.resizeTo(screen.width, screen.height);");
+
+//          Navigate to the login page
+            page.navigate("http://localhost:8080/en/login");
         }catch (Exception e){
             e.printStackTrace();
         }

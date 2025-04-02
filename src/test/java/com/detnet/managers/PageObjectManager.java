@@ -6,7 +6,7 @@ import com.microsoft.playwright.Page;
 
 public class PageObjectManager {
     private static PageObjectManager instance;
-    private final Page page;
+    private Page page;
 
     private LoginPageObjectModel loginPageObjectModel;
     private DashboardPageObjectModel dashboardPageObjectModel;
@@ -15,11 +15,17 @@ public class PageObjectManager {
         this.page = page;
     }
 
-    public static PageObjectManager getInstance(Page page){
-        if(instance == null){
+    public static synchronized PageObjectManager getInstance(Page page){
+        if(instance == null || page.isClosed()){
             instance = new PageObjectManager(page);
         }
         return instance;
+    }
+
+    public void updatePage(Page newPage){
+     this.page = newPage; // Allow updating page when Playwright restart
+     loginPageObjectModel = null; // Reset cached page objects
+     dashboardPageObjectModel = null;
     }
 
     public LoginPageObjectModel getLoginPageObjectModel(){

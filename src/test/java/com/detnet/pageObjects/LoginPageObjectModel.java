@@ -4,10 +4,13 @@ import com.microsoft.playwright.Page;
 
 public class LoginPageObjectModel {
     private final Page page;
+
     private final String userNameInputField = "//input[@id='loginUsername']";
     private final String passwordInputField = "//input[@id='loginPassword']";
     private final String loginButton = "//button[@id='loginButton']";
     private final String visibilityIcon = "//mat-icon[@role='img']";
+    private final String passwordErrorLabel = "#mat-mdc-error-2";
+    private final String unauthorizedLabel = "//div[@class='mat-mdc-snack-bar-label mdc-snackbar__label']";
 
     public LoginPageObjectModel(Page page) {
         this.page = page;
@@ -52,5 +55,21 @@ public class LoginPageObjectModel {
     public String getLoginURL(){
         page.waitForURL("**/login");
         return page.url();
+    }
+
+    public boolean isPasswordErrorMessageVisible(){
+        return page.locator(passwordErrorLabel).isVisible();
+    }
+
+    public String getPasswordErrorLabel(){
+        return page.locator(passwordErrorLabel).textContent();
+    }
+
+    public boolean isUnauthorizedMessageVisible(){
+        return page.locator(unauthorizedLabel).isVisible();
+    }
+
+    public String getUnauthorizedLabel(){
+        return page.locator(unauthorizedLabel).textContent();
     }
 }

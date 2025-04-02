@@ -47,4 +47,32 @@ public class LoginValidation {
                 .as("Actual URL does not match expected URL")
                 .isEqualTo(expectedURL);
     }
+
+    public void validatePasswordErrorVisibility(){
+        boolean isPasswordErrorVisible = loginPageObjectModel.isPasswordErrorMessageVisible();
+        softly.assertThat(isPasswordErrorVisible)
+                .as("Test Failed! Password error message should be displaying")
+                .isTrue();
+    }
+
+    public void validateErrorMessage(String expectedErrorMessage){
+        String actualErrorMessage = loginPageObjectModel.getPasswordErrorLabel();
+        softly.assertThat(actualErrorMessage)
+                .as("Actual error message does not match expected error message")
+                .isEqualTo(expectedErrorMessage);
+    }
+
+    public void validateUnauthorizedUserAlertVisibility(){
+        boolean isAlertVisible = loginPageObjectModel.isUnauthorizedMessageVisible();
+        softly.assertThat(isAlertVisible)
+                .as("Unauthorized user label should be displaying if invalid credentials is entered")
+                .isTrue();
+    }
+
+    public void validateUnauthorizedAlert(String expectedAlert){
+        String actualAlert = loginPageObjectModel.getUnauthorizedLabel();
+        softly.assertThat(actualAlert)
+                .as("Actual alert message does not match expected alert message")
+                .isEqualTo(expectedAlert);
+    }
 }
