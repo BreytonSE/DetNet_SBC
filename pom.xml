@@ -187,7 +187,8 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>com.detnet.utilities.AllureReportUtils</mainClass>
+          <mainClass>com.detnet.runners.AllureReportRunner</mainClass>
+          <classpathScope>compile</classpathScope>
         </configuration>
       </plugin>
 
