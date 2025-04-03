@@ -43,8 +43,9 @@ jobs:
         shell: powershell
 
       - name: Run Tests
-        run: mvn test -Dtest=BlastWebMainRunner  || true # Adjust to match your test runner
-        shell: bash
+        run: | 
+          mvn test -Dtest=BlastWebMainRunner -ErrorAction Continue
+        shell: powershell
 
       - name: Upload Test Reports (Extent & Allure)
         if: always()  # Always upload reports, even if tests fail
