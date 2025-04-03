@@ -58,6 +58,10 @@ jobs:
             test-output/
             allure-results/
 
+      - name: Check Allure results
+        run: | 
+          ls -l allure-results/
+
       - name: Generate Allure Report
         run: |
           npm install -g allure-commandline

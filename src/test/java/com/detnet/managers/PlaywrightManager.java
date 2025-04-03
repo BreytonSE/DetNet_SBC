@@ -24,6 +24,9 @@ public class PlaywrightManager {
                     .setHeadless(false) // Run headless in CD/CI, non-headless locally
                     .setArgs(Arrays.asList(
                             "--disable-gpu",
+                            "--start-fullscreen",
+                            "--disable-extentions",
+                            "--disable-popup-blocking",
                             "--no-sandbox",
                             "--disable-dev-shm-usage"
                     ))
