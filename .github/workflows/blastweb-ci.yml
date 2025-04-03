@@ -59,11 +59,11 @@ jobs:
       - name: Generate Allure Report
         run: |
           npm install -g allure-commandline
-          if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
+          if (Test-Path "allure-results" -and (Get-ChildItem "allure-results" | Measure-Object).Count -gt 0) {
             allure generate --clean allure-results -o allure-report
-          else
+          } else {
             echo "No allure-results found. Skipping report generation."
-          fi
+          }
         shell: bash
 
       - name: Upload Allure Report
