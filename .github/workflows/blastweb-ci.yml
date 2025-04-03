@@ -45,6 +45,7 @@ jobs:
       - name: Run Tests
         run: |
           mvn test -Dtest=BlastWebMainRunner  || true # Adjust to match your test runner
+        shell: bash
 
       - name: Upload Test Reports (Extent & Allure)
         if: always()  # Always upload reports, even if tests fail
