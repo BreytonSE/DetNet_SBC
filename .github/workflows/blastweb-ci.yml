@@ -58,10 +58,10 @@ jobs:
             test-output/
             allure-results/
 
-#            Ensure Allure CLI is installed
-      - name: Install Scoop & Allure CLI
+#            Ensure Scoop is up-to-date and then proceeds to install Allure
+      - name: Update scoop & install Allure
         run: | 
-          iwr -useb get.scoop.sh | iex
+          scoop update
           scoop install allure
         shell: powershell
 
