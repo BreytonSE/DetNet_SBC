@@ -58,22 +58,17 @@ jobs:
             test-output/
             allure-results/
 
-#            Ensure Scoop is up-to-date and then proceeds to install Allure
+#            Ensure Scoop and Allure is up-to-date
       - name: Update scoop & install Allure
         run: | 
           scoop update
-          scoop install allure
+          scoop update allure
         shell: powershell
 
-      - name: Generate Allure Report
+      - name: Generate Allure Report (Explicit)
         run: |
-          echo "🔍 Checking Allure JSON Files before report generation..."
-          Get-ChildItem allure-results -Recurse
-          
-          echo "📌 Generating Allure Report..."
-          allure generate allure-results --clean -o allure-report
-          
-          echo "✅ Allure Report successfully generated!"
+          echo "Manually triggering Allure Report generation..."
+          mvn exec:java -Dexec.mainClass="com.detnet.utilities.AllureReportUtils"
         shell: powershell
 
       - name: Upload the generated Allure report
