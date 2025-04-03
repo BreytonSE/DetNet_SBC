@@ -22,15 +22,11 @@ public class PlaywrightManager {
 
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                     .setHeadless(false) // Run headless in CD/CI, non-headless locally
-                    .setArgs(Arrays.asList(
-                            "--disable-gpu",
-                            "--start-fullscreen",
-                            "--disable-extentions",
-                            "--disable-popup-blocking",
-                            "--no-sandbox",
-                            "--disable-dev-shm-usage"
+                    .setArgs(Arrays.asList("--disable-gpu", "--start-fullscreen", "--disable-extentions",
+                            "--disable-popup-blocking", "--no-sandbox", "--disable-dev-shm-usage"
                     ))
-                    .setIgnoreDefaultArgs(Collections.singletonList("--disable-blink-features=AutomationControlled")) // Mimic user behavior
+//                     Mimic user behavior
+                    .setIgnoreDefaultArgs(Collections.singletonList("--disable-blink-features=AutomationControlled"))
             );
             context = browser.newContext(new Browser.NewContextOptions().setIgnoreHTTPSErrors(true));
             page = context.newPage();
