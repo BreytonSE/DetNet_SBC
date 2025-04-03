@@ -59,9 +59,11 @@ jobs:
             allure-results/
 
 #            Ensure Allure CLI is installed
-      - name: Install Allure CLI
+      - name: Install Scoop & Allure CLI
         run: | 
-          choco install allurecommandline --version=2.21.0
+          iwr -useb get.scoop.sh | iex
+          scoop install allure
+        shell: powershell
 
       - name: Generate Allure Report
         run: |
