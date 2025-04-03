@@ -68,7 +68,7 @@ jobs:
       - name: Generate Allure Report (Explicit)
         run: |
           echo "Manually triggering Allure Report generation..."
-          mvn exec:java -Dexec.mainClass="com.detnet.utilities.AllureReportUtils"
+          mvn exec:java
         shell: powershell
 
       - name: Upload the generated Allure report
