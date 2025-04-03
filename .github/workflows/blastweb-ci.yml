@@ -46,18 +46,6 @@ jobs:
         run: |
           mvn test -Dtest=BlastWebMainRunner  # Adjust to match your test runner
 
-      - name: Stop BlastWeb Service
-        if: always()
-        run: |
-          $process = Get-Process -Name "blastweb_golang" -ErrorAction SilentlyContinue 
-          if ($process) {
-              Stop-Process -Id $process.Id -Force
-              Write-Host "BlastWeb service stopped successfully."
-          } else {
-              Write-Host "BlastWeb service is not running"
-          }
-        shell: powershell
-
       - name: Upload Test Reports (Extent & Allure)
         if: always()  # Always upload reports, even if tests fail
         uses: actions/upload-artifact@v4
