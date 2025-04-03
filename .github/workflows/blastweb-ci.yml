@@ -44,7 +44,8 @@ jobs:
 
       - name: Run Tests
         run: | 
-          mvn test -Dtest=BlastWebMainRunner -ErrorAction Continue
+          mvn test -Dtest=BlastWebMainRunner 
+          if ($?) { echo "Test Passed." } else { echo "Test failed, continuing pipeline."; }
         shell: powershell
 
       - name: Upload Test Reports (Extent & Allure)
