@@ -71,7 +71,12 @@ jobs:
       - name: Generate Allure Report
         run: |
           npm install -g allure-commandline
-          allure generate --clean allure-results -o allure-report
+          if [ -d "allure-results" ] && [ "$(ls -A allure-results)" ]; then
+            allure generate --clean allure-results -o allure-report
+          else
+            echo "No allure-results found. Skipping report generation."
+          fi
+        shell: bash
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
