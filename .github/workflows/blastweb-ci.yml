@@ -65,12 +65,7 @@ jobs:
       - name: Generate Allure Report
         run: |
           npm install -g allure-commandline
-          if (Test-Path "allure-results" -and (Get-ChildItem "allure-results" | Measure-Object).Count -gt 0) {
-            allure generate --clean allure-results -o allure-report
-          } else {
-            echo "No allure-results found. Skipping report generation."
-          }
-        shell: powershell
+          allure generate --clean allure-results -o allure-report
 
       - name: Upload Allure Report
         uses: actions/upload-artifact@v4
