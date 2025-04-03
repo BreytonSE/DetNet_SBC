@@ -56,6 +56,12 @@ jobs:
             test-output/
             allure-results/
 
+      - name: Debug - List files before generating Allure report
+        run: |
+          echo "Checking directory structure..."
+          Get-ChildItem -Path . -Recurse
+        shell: powershell
+
       - name: Generate Allure Report
         run: |
           npm install -g allure-commandline
