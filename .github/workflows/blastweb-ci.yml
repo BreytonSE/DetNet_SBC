@@ -58,17 +58,44 @@ jobs:
             test-output/
             allure-results/
 
-#            Ensure Scoop and Allure is up-to-date
-      - name: Update scoop & install Allure
+      - name: Verify Allure Installation & Add to Path
+        run: |
+          echo "Checking Allure installation..."
+          if (-Not (Get-Command allure -ErrorAction SilentlyContinue)) {
+            echo "Allure not found, installing..."
+            scoop install allure
+          } else {
+            echo "Allure is already installed"
+          }
+          echo "Allure version:"
+          allure --version
+        shell: powershell
+
+      - name: Check Allure Results Folder
+        run: |
+          if (Test-Path allure-results) {
+            echo "Allure results found. Proceeding with report generation."
+          } else {
+            echo "No Allure results found! Skipping report generation."
+            exit 1
+          }
+        shell: powershell
+
+      - name: Debug Allure Results Content
         run: | 
-          scoop update
-          scoop update allure
+          echo "Listing files inside allure-results:"
+          Get-ChildItem -Path allure-results -Recurse
         shell: powershell
 
       - name: Generate Allure Report (Explicit)
         run: |
-          echo "Manually triggering Allure Report generation..."
-          mvn exec:java
+          echo "Generating Allure Report..."
+          allure generate allure-results --clean -o allure-report
+
+      - name: Debug Allure Report Content
+        run: | 
+          echo "Listing files inside allure-report:"
+          Get-ChildItem -Path allure-report -Recurse
         shell: powershell
 
       - name: Upload the generated Allure report
