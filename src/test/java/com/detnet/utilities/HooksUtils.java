@@ -17,11 +17,7 @@ public class HooksUtils {
     private PageObjectManager pageObjectManager;
 
     static {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            AllureReportUtils.generateAllureReport();
-            EmailUtils.sendEmail();
-            ServiceManager.stopBlastWebService(); // Stops the service when the tests finish
-        }));
+        Runtime.getRuntime().addShutdownHook(new Thread(HooksUtils::executeShutdownHook));
     }
 
     static {
@@ -67,11 +63,24 @@ public class HooksUtils {
             SoftAssertionUtils.reset();
 
             if (scenarioCount.get() < TOTAL_SCENARIOS) {
-//                Thread.sleep(2000); // Allow time for teardown to complete
                 PlaywrightManager.setUpPlaywright(); // Ensure Playwright is fully reinitialized before the next test
                 page = PlaywrightManager.getPage(); // Retrieve new page instance
                 pageObjectManager.updatePage(page);
             }
+        }
+    }
+
+    public static void executeShutdownHook(){
+        AllureReportUtils.generateAllureReport();
+        EmailUtils.sendEmail();
+        ServiceManager.stopBlastWebService(); // Stops the service when the tests finish
+    }
+
+    public static void main(String[] args) {
+        if(args.length > 0 && "shutdown".equalsIgnoreCase(args[0])){
+            executeShutdownHook();
+        }else {
+            System.out.println("Invalid argument. Use 'shutdown' to trigger the shutdown hook");
         }
     }
 }
