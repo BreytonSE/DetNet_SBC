@@ -17,7 +17,11 @@ public class HooksUtils {
     private PageObjectManager pageObjectManager;
 
     static {
-        Runtime.getRuntime().addShutdownHook(new Thread(HooksUtils::executeShutdownHook));
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            AllureReportUtils.generateAllureReport();
+            EmailUtils.sendEmail();
+            ServiceManager.stopBlastWebService();
+        }));
     }
 
     static {
@@ -67,20 +71,6 @@ public class HooksUtils {
                 page = PlaywrightManager.getPage(); // Retrieve new page instance
                 pageObjectManager.updatePage(page);
             }
-        }
-    }
-
-    public static void executeShutdownHook(){
-        AllureReportUtils.generateAllureReport();
-        EmailUtils.sendEmail();
-        ServiceManager.stopBlastWebService(); // Stops the service when the tests finish
-    }
-
-    public static void main(String[] args) {
-        if(args.length > 0 && "shutdown".equalsIgnoreCase(args[0])){
-            executeShutdownHook();
-        }else {
-            System.out.println("Invalid argument. Use 'shutdown' to trigger the shutdown hook");
         }
     }
 }

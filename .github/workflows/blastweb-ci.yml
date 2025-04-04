@@ -53,4 +53,4 @@ jobs:
         shell: powershell #Use Powershell instead of Bash
         run: |
           Write-Host "Manually calling shutdown hook..."
-          mvn exec:java -Dexec.mainClass="com.detnet.utilities.HooksUtils" -- shutdown
+          mvn exec:java -Dexec.mainClass="com.detnet.utilities.ShutdownUtils"
