@@ -5,7 +5,6 @@ import com.detnet.managers.ServiceManager;
 import com.detnet.managers.PageObjectManager;
 import com.microsoft.playwright.*;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -19,9 +18,21 @@ public class HooksUtils {
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-//            AllureReportUtils.generateAllureReport();
-//            EmailUtils.sendEmail();
-            ServiceManager.stopBlastWebService();
+            System.out.println("Shutdown Hook Triggered 🚀");
+
+            try{
+                AllureReportUtils.generateAllureReport();
+                System.out.println("✅ Allure Report Generated");
+
+                EmailUtils.sendEmail();
+                System.out.println("✅ Email Sent");
+
+                ServiceManager.stopBlastWebService();
+                System.out.println("✅ BlastWeb Service Stopped");
+            }catch (Exception e){
+                e.printStackTrace();
+                System.err.println("❌ Error in Shutdown Hook: " + e.getMessage());
+            }
         }));
     }
 
@@ -73,11 +84,5 @@ public class HooksUtils {
                 pageObjectManager.updatePage(page);
             }
         }
-    }
-
-    @AfterAll
-    public static void finalizeExecution(){
-        AllureReportUtils.generateAllureReport();
-        EmailUtils.sendEmail();
     }
 }

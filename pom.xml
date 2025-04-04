@@ -170,8 +170,11 @@
         <configuration>
           <suiteXmlFiles>
             <suiteXmlFile>testng.xml</suiteXmlFile>
-            <testFailureIgnore>true</testFailureIgnore> <!-- Ensure the next steps still execute -->
+            <testFailureIgnore>true</testFailureIgnore> <!-- Ensure the next steps still execute even if there is a failure-->
           </suiteXmlFiles>
+          <forkCount>1</forkCount>
+          <reuseForks>true</reuseForks>
+          <forkedProcessExitTimeoutInSeconds>15</forkedProcessExitTimeoutInSeconds> <!-- Gives time for the shutdown hook-->
         </configuration>
       </plugin>
 
