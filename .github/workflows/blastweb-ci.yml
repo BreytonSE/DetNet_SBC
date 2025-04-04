@@ -50,7 +50,7 @@ jobs:
 
       - name: Manually Trigger Shutdown Hook
         if: always()  # Ensure this runs even if tests fail
-        shell: pwsh #Use Powershell instead of Bash
+        shell: powershell #Use Powershell instead of Bash
         run: |
           Write-Host "Manually calling shutdown hook..."
           mvn exec:java -Dexec.mainClass="com.detnet.utilities.HooksUtils" -- shutdown
