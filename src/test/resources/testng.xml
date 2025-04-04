@@ -5,10 +5,4 @@
             <class name="com.detnet.runners.BlastWebMainRunner"/>
         </classes>
     </test>
-
-    <test name="ShutdownHook">
-        <classes>
-            <class name="com.detnet.utilities.ShutdownUtils"/>
-        </classes>
-    </test>
 </suite>

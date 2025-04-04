@@ -5,6 +5,7 @@ import com.detnet.managers.ServiceManager;
 import com.detnet.managers.PageObjectManager;
 import com.microsoft.playwright.*;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -18,8 +19,8 @@ public class HooksUtils {
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            AllureReportUtils.generateAllureReport();
-            EmailUtils.sendEmail();
+//            AllureReportUtils.generateAllureReport();
+//            EmailUtils.sendEmail();
             ServiceManager.stopBlastWebService();
         }));
     }
@@ -72,5 +73,11 @@ public class HooksUtils {
                 pageObjectManager.updatePage(page);
             }
         }
+    }
+
+    @AfterAll
+    public static void finalizeExecution(){
+        AllureReportUtils.generateAllureReport();
+        EmailUtils.sendEmail();
     }
 }

@@ -47,10 +47,3 @@ jobs:
           mvn test -Dtest=BlastWebMainRunner 
           if ($?) { echo "Test Passed." } else { echo "Test failed, continuing pipeline."; }
         shell: powershell
-
-      - name: Manually Trigger Shutdown Hook
-        if: always()  # Ensure this runs even if tests fail
-        shell: powershell #Use Powershell instead of Bash
-        run: |
-          Write-Host "Manually calling shutdown hook..."
-          mvn exec:java -Dexec.mainClass="com.detnet.utilities.ShutdownUtils"
