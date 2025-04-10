@@ -13,7 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class HooksUtils {
     private static Page page;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-    private static final int TOTAL_SCENARIOS = 2; // Re adjust accordingly
+    private static final int TOTAL_SCENARIOS = 1; // Re adjust accordingly
     private PageObjectManager pageObjectManager;
 
     static {
@@ -41,7 +41,7 @@ public class HooksUtils {
         ServiceManager.startBlastWebService();
     }
 
-    @Before
+    @Before("@web")
     public void setUp(Scenario scenario){
         TestContextUtils.getInstance().setScenario(scenario);
         try {
@@ -60,8 +60,8 @@ public class HooksUtils {
         }
     }
 
-    @After
-    public void updateTestResults(Scenario scenario) throws InterruptedException {
+    @After("@web")
+    public void updateTestResults(Scenario scenario) {
         try {
             if(scenario.isFailed()){
                 System.out.println("Scenario failed: Capturing screenshot...");

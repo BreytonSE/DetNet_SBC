@@ -1,6 +1,27 @@
 package com.detnet.utilities;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Properties;
+
 public class LoginConstantUtils {
-    public static final String USERNAME = "wgjU2CxpL+61EUgEAdBAbw==";
-    public static final String PASSWORD = "BPeHrl5Z36ParZpJZRUUlg==";
+    private static final String CREDENTIALS_FILE = "src/test/resources/credentials.properties";
+
+    public static String getDecryptedUsername() throws Exception {
+        Properties properties = new Properties();
+        properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
+        return EncryptionUtils.decrypt(properties.getProperty("encrypted.username").trim());
+    }
+
+    public static String getDecryptedPassword() throws Exception {
+        Properties properties = new Properties();
+        properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
+        return EncryptionUtils.decrypt(properties.getProperty("encrypted.password")).trim();
+    }
+
+    public static String getDecryptedServerConfigPassword() throws Exception {
+        Properties properties = new Properties();
+        properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
+        return EncryptionUtils.decrypt(properties.getProperty("encrypted.configPassword")).trim();
+    }
 }

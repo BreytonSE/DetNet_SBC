@@ -1,7 +1,9 @@
 package com.detnet.managers;
 
+import com.detnet.pageObjects.BlastCardsPageObjectModel;
 import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.pageObjects.LoginPageObjectModel;
+import com.detnet.pageObjects.SettingsPageObjectModel;
 import com.microsoft.playwright.Page;
 
 public class PageObjectManager {
@@ -10,6 +12,8 @@ public class PageObjectManager {
 
     private LoginPageObjectModel loginPageObjectModel;
     private DashboardPageObjectModel dashboardPageObjectModel;
+    private SettingsPageObjectModel settingsPageObjectModel;
+    private BlastCardsPageObjectModel blastCardsPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -40,5 +44,19 @@ public class PageObjectManager {
             dashboardPageObjectModel = new DashboardPageObjectModel(page);
         }
         return dashboardPageObjectModel;
+    }
+
+    public SettingsPageObjectModel getSettingsPageObjectModel(){
+        if (settingsPageObjectModel == null){
+            settingsPageObjectModel = new SettingsPageObjectModel(page);
+        }
+        return settingsPageObjectModel;
+    }
+
+    public BlastCardsPageObjectModel getBlastCardsPageObjectModel(){
+        if (blastCardsPageObjectModel == null){
+            blastCardsPageObjectModel = new BlastCardsPageObjectModel(page);
+        }
+        return blastCardsPageObjectModel;
     }
 }

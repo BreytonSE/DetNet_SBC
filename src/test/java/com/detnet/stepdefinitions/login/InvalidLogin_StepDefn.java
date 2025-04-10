@@ -1,10 +1,10 @@
-package com.detnet.stepdefinitions;
+package com.detnet.stepdefinitions.login;
 
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.LoginPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
-import com.detnet.validations.LoginValidation;
+import com.detnet.validations.blastWebValidations.LoginValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 

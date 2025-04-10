@@ -18,7 +18,7 @@ public class PlaywrightManager {
             playwright = Playwright.create();
 
 //            Detect if running in GitHub Actions
-//            boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
+            boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
 
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                     .setHeadless(false) // Run headless in CD/CI, non-headless locally
@@ -32,9 +32,9 @@ public class PlaywrightManager {
             page = context.newPage();
 
 //          Resize window to full screen (only if not headless)
-//            if(!isCI){
+            if(!isCI){
                 page.evaluate("window.moveTo(0, 0); window.resizeTo(screen.width, screen.height);");
-//            }
+            }
 
 //          Navigate to the login page
             page.navigate("http://localhost:8080/en/login");

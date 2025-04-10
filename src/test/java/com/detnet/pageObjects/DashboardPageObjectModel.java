@@ -8,6 +8,7 @@ public class DashboardPageObjectModel {
     private final String userRoleLabel = "//p[@class='userRole']";
     private final String navigationMenu = "#mat-menu-panel-2";
     private final String logoutButton = "//span[contains(text(),'Logout')]";
+    private final String settingsButton = "//span[contains(text(),'Settings')]";
 
     public DashboardPageObjectModel(Page page) {
         this.page = page;
@@ -52,5 +53,17 @@ public class DashboardPageObjectModel {
 
     public void logOut(){
         page.locator(logoutButton).click();
+    }
+
+    public void openSettings(){
+        page.locator(settingsButton).click();
+    }
+
+    public boolean isSettingsButtonVisible(){
+        return page.locator(settingsButton).isVisible();
+    }
+
+    public boolean isSettingsButtonEnabled(){
+        return page.locator(settingsButton).isEnabled();
     }
 }

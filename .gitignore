@@ -8,3 +8,5 @@ target/
 *.iws
 *.iml
 *.ipr
+src/test/resources/credentials.properties
+src/test/resources/encryption.properties

@@ -1,4 +1,4 @@
-package com.detnet.validations;
+package com.detnet.validations.blastWebValidations;
 
 import com.detnet.pageObjects.LoginPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;

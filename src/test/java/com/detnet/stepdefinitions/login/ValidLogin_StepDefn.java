@@ -1,4 +1,4 @@
-package com.detnet.stepdefinitions;
+package com.detnet.stepdefinitions.login;
 
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
@@ -7,8 +7,8 @@ import com.detnet.pageObjects.LoginPageObjectModel;
 import com.detnet.utilities.EncryptionUtils;
 import com.detnet.utilities.LoginConstantUtils;
 import com.detnet.utilities.SoftAssertionUtils;
-import com.detnet.validations.DashboardValidation;
-import com.detnet.validations.LoginValidation;
+import com.detnet.validations.blastWebValidations.DashboardValidation;
+import com.detnet.validations.blastWebValidations.LoginValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
@@ -32,12 +32,10 @@ public class ValidLogin_StepDefn {
 
     @Given("I enter my BlastWeb username and password")
     public void i_enter_my_blast_web_username_and_password() throws Exception {
-        String username = EncryptionUtils.decrypt(LoginConstantUtils.USERNAME);
+        String username = EncryptionUtils.decrypt(LoginConstantUtils.getDecryptedUsername());
         loginPageObjectModel.setUsername(username);
-        loginValidation.validateUsernameField("administrator");
-        String password = EncryptionUtils.decrypt(LoginConstantUtils.PASSWORD);
+        String password = EncryptionUtils.decrypt(LoginConstantUtils.getDecryptedPassword());
         loginPageObjectModel.setPassword(password);
-        loginValidation.validatePasswordField("detnet");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("I click on the login button")

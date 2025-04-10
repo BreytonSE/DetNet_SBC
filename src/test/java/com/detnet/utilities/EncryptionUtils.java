@@ -2,11 +2,33 @@ package com.detnet.utilities;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
+import java.util.Properties;
 
 public class EncryptionUtils {
     private static final String ALGORITHM = "AES";
-    private static final String SECRET_KEY = "1234567890123456";
+    private static final String SECRET_KEY = loadSecretKey();
+
+    private static String loadSecretKey() {
+//        Load from environment variable
+        String envKey = System.getenv("ENC_KEY");
+        if (envKey != null && !envKey.isEmpty()) {
+            return envKey;
+        }
+
+//        Fallback to encryption.properties
+        try(InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/encryption.properties"))){
+            Properties props = new Properties();
+            props.load(inputStream);
+            return props.getProperty("encryption.key");
+        }catch (IOException e){
+            throw new RuntimeException("Encryption key not found in environment or credentials.properties",e);
+        }
+    }
 
     public static String encrypt(String data) throws Exception {
         SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(),ALGORITHM);

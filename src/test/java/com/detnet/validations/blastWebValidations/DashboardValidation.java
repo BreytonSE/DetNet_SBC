@@ -1,4 +1,4 @@
-package com.detnet.validations;
+package com.detnet.validations.blastWebValidations;
 
 import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
@@ -66,6 +66,20 @@ public class DashboardValidation {
         boolean isButtonEnabled = dashboardPageObjectModel.isLogoutButtonEnabled();
         softly.assertThat(isButtonEnabled)
                 .as("Test Failed! Log out button should be enabled")
+                .isTrue();
+    }
+
+    public void validateSettingsButtonVisibility(){
+        boolean isButtonVisible = dashboardPageObjectModel.isSettingsButtonVisible();
+        softly.assertThat(isButtonVisible)
+                .as("Settings button should be visible on the dropdown menu")
+                .isTrue();
+    }
+
+    public void validateSettingsButtonClick(){
+        boolean isButtonEnabled = dashboardPageObjectModel.isSettingsButtonEnabled();
+        softly.assertThat(isButtonEnabled)
+                .as("Settings button should be enabled")
                 .isTrue();
     }
 }

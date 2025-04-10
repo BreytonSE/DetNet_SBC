@@ -1,3 +1,4 @@
+@web
 Feature: BlastWeb login feature
   As a user of BlastWeb, I want to be able to log in and out of the application,so that I can securely access my account
   and end my session when needed.
