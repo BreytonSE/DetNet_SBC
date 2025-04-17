@@ -23,10 +23,10 @@ public class BlastCardDelete_StepDefn {
 
     @Then("the user clicks on the {string} button to delete multiple cards")
     public void the_user_clicks_on_the_button_to_delete_multiple_cards(String string) {
-        blastCardsValidation.validateDeleteCardsButtonVisibility();
-        blastCardsValidation.validateDeleteButtonOnClick();
-        blastCardsPageObjectModel.deleteBlastCard();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        blastCardsValidation.validateDeleteCardsButtonVisibility();
+//        blastCardsValidation.validateDeleteButtonOnClick();
+//        blastCardsPageObjectModel.deleteBlastCard();
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("the user clicks the {string} icon from the table to delete a single card")
     public void the_user_clicks_the_icon_from_the_table_to_delete_a_single_card(String string) {

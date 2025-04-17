@@ -73,7 +73,7 @@ public class EmailUtils {
 
         try{
             Message message = new MimeMessage(session);
-            String senderEmail = EncryptionUtils.decrypt("PMr6soMWx2FXcB/3VCD3HxLHdZzXnvB0pDg7QiSCF2M=");
+            String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
             message.setFrom(new InternetAddress(senderEmail));
             message.setRecipients(Message.RecipientType.TO,InternetAddress.parse(String.join(",", toEmails)));
             message.setSubject(subject);
@@ -105,8 +105,8 @@ public class EmailUtils {
             protected PasswordAuthentication getPasswordAuthentication() {
                 try{
                     return new PasswordAuthentication(
-                            EncryptionUtils.decrypt("PMr6soMWx2FXcB/3VCD3HxLHdZzXnvB0pDg7QiSCF2M="),
-                            EncryptionUtils.decrypt("Cj7j9hLQmd/YMjcCX4HeXep9OgBsnxrwWayu7SJcYiY=")
+                            LoginConstantUtils.getDecryptedEmailAddress(),
+                            LoginConstantUtils.getDecryptedEmailPassword()
                     );
                 }catch (Exception e){
                     throw new RuntimeException("Email authentication failed: " + e.getMessage(),e);

@@ -13,17 +13,20 @@ public class PlaywrightManager {
 
     public static void setUpPlaywright(){
         try{
-            tearDownPlayWright(); // Ensures that no stale instances exists before starting a new session
-
-            playwright = Playwright.create();
+            if(playwright == null){
+                playwright = Playwright.create();
+            }
 
 //            Detect if running in GitHub Actions
             boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
-
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                    .setHeadless(false) // Run headless in CD/CI, non-headless locally
-                    .setArgs(Arrays.asList("--disable-gpu", "--start-fullscreen", "--disable-extentions",
-                            "--disable-popup-blocking", "--no-sandbox", "--disable-dev-shm-usage"
+                    .setHeadless(isCI) // Run headless in CD/CI, non-headless locally
+                    .setArgs(Arrays.asList("--disable-gpu",
+                            "--start-fullscreen",
+                            "--disable-extentions",
+                            "--disable-popup-blocking",
+                            "--no-sandbox",
+                            "--disable-dev-shm-usage"
                     ))
 //                     Mimic user behavior
                     .setIgnoreDefaultArgs(Collections.singletonList("--disable-blink-features=AutomationControlled"))
@@ -44,8 +47,8 @@ public class PlaywrightManager {
     }
 
     public static Page getPage(){
-        if(page == null){
-            throw new IllegalStateException("Playwright page is not initialized. Call 'setUpPlaywright()' first.");
+        if(page == null || page.isClosed()){
+           throw new IllegalStateException("❌ Playwright page is not initialized. Call 'setUpPlaywright()' first.");
         }else{
             return page;
         }
@@ -53,24 +56,25 @@ public class PlaywrightManager {
 
     public static void tearDownPlayWright(){
         try{
-            if(page != null){
+            if(page != null && !page.isClosed()){
                 page.close();
-                page = null;
             }
             if (context != null){
                 context.close();
-                context = null;
             }
             if(browser != null){
                 browser.close();
-                browser = null;
             }
             if(playwright != null){
                 playwright.close();
-                playwright = null;
             }
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            page = null;
+            context = null;
+            browser = null;
+            playwright = null;
         }
     }
 }

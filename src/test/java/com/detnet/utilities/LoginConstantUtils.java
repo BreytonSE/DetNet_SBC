@@ -1,5 +1,6 @@
 package com.detnet.utilities;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Properties;
@@ -23,5 +24,18 @@ public class LoginConstantUtils {
         Properties properties = new Properties();
         properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
         return EncryptionUtils.decrypt(properties.getProperty("encrypted.configPassword")).trim();
+    }
+
+    public static String getDecryptedEmailAddress() throws Exception {
+        Properties properties = new Properties();
+        properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
+        return EncryptionUtils.decrypt(properties.getProperty("encrypted.emailAddress")).trim();
+
+    }
+
+    public static String getDecryptedEmailPassword() throws Exception {
+        Properties properties = new Properties();
+        properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
+        return EncryptionUtils.decrypt(properties.getProperty("encrypted.emailPassword")).trim();
     }
 }

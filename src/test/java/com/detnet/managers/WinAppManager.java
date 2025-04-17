@@ -3,7 +3,9 @@ package com.detnet.managers;
 import io.appium.java_client.windows.*;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -15,11 +17,12 @@ public class WinAppManager {
         try{
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setCapability("app","C:\\Detnet\\BlastWeb\\serverconfig.exe");
+            capabilities.setCapability("ms:appWorkingDir","C:\\Detnet\\BlastWeb\\");
             capabilities.setCapability("platformName", "Windows");
             capabilities.setCapability("deviceName", "WindowsPC");
+            capabilities.setCapability("automationName", "Windows");
 
             driver = new WindowsDriver<>(new URL("http://127.0.0.1:4723"),capabilities);
-            System.out.println("✅ Windows application launched successfully.");
         }catch (MalformedURLException e){
             throw new RuntimeException("❌ Invalid WinAppDriver URL", e);
         }catch (Exception e){
@@ -29,15 +32,22 @@ public class WinAppManager {
 
     public static WindowsDriver<WindowsElement> getDriver(){
         if(driver == null){
-            throw new IllegalStateException("Windows drover not initialized. Call setUp() first.");
+            throw new IllegalStateException("❌ Windows driver not initialized. Call setUp() first.");
         }
         return driver;
     }
 
     public static void tearDown(){
+        System.out.println("👋 Called tearDown()");
+
         if(driver != null){
-            driver.quit();
-            System.out.println("🛑 Windows application closed.");
+            try{
+                driver.quit();
+            }catch (Exception e){
+                System.out.println("⚠\uFE0F Error while quitting driver: " + e.getMessage());
+            }finally {
+                driver = null;
+            }
         }
     }
 

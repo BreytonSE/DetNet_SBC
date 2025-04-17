@@ -2,8 +2,14 @@ package com.detnet.pageObjects;
 
 import io.appium.java_client.windows.WindowsDriver;
 import io.appium.java_client.windows.WindowsElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
+import java.time.Duration;
+import java.util.Set;
 
 // For Desktop App scenario
 public class ServerConfigPageObjectModel {
@@ -67,7 +73,30 @@ public class ServerConfigPageObjectModel {
         return matchingFiles != null && matchingFiles.length > 0;
     }
 
+    private void switchToFileChooserDialog(){
+        //        Store the current window handle before the dialog opens
+        String mainWindow = driver.getWindowHandle();
+        Set<String> allWindows = driver.getWindowHandles();
+        for (String handle : allWindows){
+            if(!handle.equals(mainWindow)){
+                driver.switchTo().window(handle);
+                break;
+            }
+        }
+    }
+
     public void searchFile(String fileName){
+//        Wait a bit for the file dialog to open
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+//        Switch to the file chooser dialog
+       switchToFileChooserDialog();
+
+        WebDriverWait wait = new WebDriverWait(driver, 60);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className(fileNameInputField)));
         driver.findElementByClassName(fileNameInputField).sendKeys(fileName);
     }
 

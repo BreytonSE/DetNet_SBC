@@ -22,18 +22,18 @@ public class BlastCardArchive_StepDefn {
         this.blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
     }
 
-    @Then("the user clicks on the {string} button to archive multiple cards")
-    public void the_user_clicks_on_the_button_to_archive_multiple_cards(String string) {
+    @Then("the user clicks on the Archive Cards button to archive multiple cards")
+    public void the_user_clicks_on_the_archive_cards_button_to_archive_multiple_cards() {
         blastCardsValidation.validateBlastCardAlertWindowVisibility();
         blastCardsPageObjectModel.closeBlastCardAlertWindow();
 //        TODO: Blast cards mus exists!
 //        blastCardsValidation.validateArchiveButtonVisibility();
 //        blastCardsValidation.validateArchiveButtonOnClick();
 //        blastCardsPageObjectModel.archiveCards();
-//        SoftAssertionUtils.getSoftAssertions().assertAll();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @Then("the user clicks the {string} icon from the table to archive a single card")
-    public void the_user_clicks_the_icon_from_the_table_to_archive_a_single_card(String string) {
+    @Then("the user clicks the Archive icon from the table to archive a single card")
+    public void the_user_clicks_the_archive_icon_from_the_table_to_archive_a_single_card() {
 //        TODO: Card must be available first for the archive button to become visible
     }
     @Then("the user navigates to the Archived cards")

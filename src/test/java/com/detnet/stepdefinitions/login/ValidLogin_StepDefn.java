@@ -32,9 +32,9 @@ public class ValidLogin_StepDefn {
 
     @Given("I enter my BlastWeb username and password")
     public void i_enter_my_blast_web_username_and_password() throws Exception {
-        String username = EncryptionUtils.decrypt(LoginConstantUtils.getDecryptedUsername());
+        String username = LoginConstantUtils.getDecryptedUsername();
         loginPageObjectModel.setUsername(username);
-        String password = EncryptionUtils.decrypt(LoginConstantUtils.getDecryptedPassword());
+        String password = LoginConstantUtils.getDecryptedPassword();
         loginPageObjectModel.setPassword(password);
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
@@ -62,7 +62,6 @@ public class ValidLogin_StepDefn {
         dashboardValidation.validateLogOutButtonClick();
         dashboardPageObjectModel.logOut();
         SoftAssertionUtils.getSoftAssertions().assertAll();
-
     }
     @Then("verify that I am back on the login page")
     public void verify_that_i_am_back_on_the_login_page() {

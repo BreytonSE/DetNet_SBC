@@ -9,14 +9,14 @@ public class LoginPageObjectModel {
     private final String passwordInputField = "//input[@id='loginPassword']";
     private final String loginButton = "//button[@id='loginButton']";
     private final String visibilityIcon = "//mat-icon[@role='img']";
-    private final String passwordErrorLabel = "#mat-mdc-error-2";
-    private final String unauthorizedLabel = "//div[@class='mat-mdc-snack-bar-label mdc-snackbar__label']";
+    private final String passwordErrorLabel = "[id^='mat-mdc-error-']";
+    private final String unauthorizedLabel = "//span[normalize-space()='Dismiss']";
 
     public LoginPageObjectModel(Page page) {
         this.page = page;
     }
 
-//    Set the username
+    //    Set the username
     public void setUsername(String username){
         page.locator(userNameInputField).fill(username);
     }
@@ -25,7 +25,7 @@ public class LoginPageObjectModel {
         return page.locator(userNameInputField).inputValue();
     }
 
-//    Set the password
+    //    Set the password
     public void setPassword(String password){
         page.locator(passwordInputField).click();
         page.locator(passwordInputField).fill(password);
@@ -35,7 +35,7 @@ public class LoginPageObjectModel {
         return page.locator(passwordInputField).inputValue();
     }
 
-//    Click on the login button
+    //    Click on the login button
     public void logIn(){
         page.locator(loginButton).click();
     }

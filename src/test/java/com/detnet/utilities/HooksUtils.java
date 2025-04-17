@@ -12,8 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class HooksUtils {
     private static Page page;
-    private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-    private static final int TOTAL_SCENARIOS = 1; // Re adjust accordingly
     private PageObjectManager pageObjectManager;
 
     static {
@@ -49,7 +47,6 @@ public class HooksUtils {
                 PlaywrightManager.setUpPlaywright();
                 page = PlaywrightManager.getPage(); // Retrieve the initialized page
             }
-
             if(pageObjectManager == null){
                 pageObjectManager = PageObjectManager.getInstance(page);
             }else{
@@ -63,24 +60,22 @@ public class HooksUtils {
     @After("@web")
     public void updateTestResults(Scenario scenario) {
         try {
-            if(scenario.isFailed()){
-                System.out.println("Scenario failed: Capturing screenshot...");
-                if(page != null && !page.isClosed()){
-                    ScreenshotUtils.captureScreenshot(page, scenario);
-                }else {
-                    System.out.println("Warning: Page is null, skipping screenshot");
-                }
+            if(scenario.isFailed() && page != null && !page.isClosed()){
+                ScreenshotUtils.captureScreenshot(page, scenario);
             }
         }catch (Exception e){
             throw new RuntimeException("Error in @After: " + e.getMessage(),e);
         }finally {
-            PlaywrightManager.tearDownPlayWright();  // Close Playwright AFTER screenshot capture
-            scenarioCount.incrementAndGet();
             SoftAssertionUtils.reset();
+            PlaywrightManager.tearDownPlayWright();
 
-            if (scenarioCount.get() < TOTAL_SCENARIOS) {
-                PlaywrightManager.setUpPlaywright(); // Ensure Playwright is fully reinitialized before the next test
-                page = PlaywrightManager.getPage(); // Retrieve new page instance
+            if(page == null || page.isClosed()){
+                PlaywrightManager.setUpPlaywright();
+                page = PlaywrightManager.getPage();
+            }
+            if(pageObjectManager == null){
+                pageObjectManager = PageObjectManager.getInstance(page);
+            }else {
                 pageObjectManager.updatePage(page);
             }
         }

@@ -49,9 +49,13 @@ public class EncryptionUtils {
     public static void main(String[] args) throws Exception {
         String username = "";
         String password = "";
+        String decryptedUsername = decrypt(username);
         String encryptedUsername = encrypt(username);
+        String decryptedPassword = decrypt(password);
         String encryptedPassword = encrypt(password);
         System.out.println("Encrypted Username: " + encryptedUsername);
+        System.out.println("Decrypted Username: " + decryptedUsername);
         System.out.println("Encrypted Password: " + encryptedPassword);
+        System.out.println("Decrypted Password: " + decryptedPassword);
     }
 }

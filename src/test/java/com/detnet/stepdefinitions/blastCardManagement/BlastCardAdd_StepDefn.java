@@ -6,7 +6,6 @@ import com.detnet.pageObjects.BlastCardsPageObjectModel;
 import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.pageObjects.LoginPageObjectModel;
 import com.detnet.pageObjects.SettingsPageObjectModel;
-import com.detnet.utilities.EncryptionUtils;
 import com.detnet.utilities.LoginConstantUtils;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.BlastCardsValidation;
@@ -27,7 +26,7 @@ public class BlastCardAdd_StepDefn {
     private final BlastCardsPageObjectModel blastCardsPageObjectModel;
     private final BlastCardsValidation blastCardsValidation;
 
-    public BlastCardAdd_StepDefn() {
+    public BlastCardAdd_StepDefn() { // Ensure it is called after the page is ready
         this.page = PlaywrightManager.getPage();
         this.pageObjectManager = PageObjectManager.getInstance(page);
         this.loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
@@ -64,16 +63,16 @@ public class BlastCardAdd_StepDefn {
         dashboardPageObjectModel.openSettings();
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @When("the user navigates to the {string} section")
-    public void the_user_navigates_to_the_section(String string) {
+    @When("the user navigates to the Blast Cards section")
+    public void the_user_navigates_to_the_blast_cards_section() {
         settingsValidation.validateSettingsURL("http://localhost:8080/en/settings/networks");
         settingsValidation.validateSettingsLabelVisibility();
         settingsValidation.validateSettingsLabelName("Settings");
         settingsValidation.validateBlastCardButtonVisibility();
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @When("the user navigates to the {string} tab")
-    public void the_user_navigates_to_the_tab(String string) {
+    @When("the user navigates to the Active Cards tab")
+    public void the_user_navigates_to_the_active_cards_tab() {
         settingsValidation.validateBlastCardClick();
         settingsPageObjectModel.viewActiveBlastCards();
         blastCardsValidation.validateActiveBlastCardsURL("http://localhost:8080/en/settings/activeCards");
@@ -81,15 +80,15 @@ public class BlastCardAdd_StepDefn {
         blastCardsValidation.validateActiveBlastCardLabelName("Active Cards");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @When("the user clicks on the {string} button")
-    public void the_user_clicks_on_the_button(String string) {
+    @When("the user clicks on the Add Blast Card button")
+    public void the_user_clicks_on_the_add_blast_card_button() {
         blastCardsValidation.validateAddBlastCardButtonVisibility();
         blastCardsValidation.validateAddBlastCardClick();
         blastCardsPageObjectModel.addBlastCard();
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @Then("the user taps the blast card on the NFC reader when the {string} popup is displayed")
-    public void the_user_taps_the_blast_card_on_the_nfc_reader_when_the_popup_is_displayed(String string) {
+    @Then("the user taps the blast card on the NFC reader when the Add Blast Card popup is displayed")
+    public void the_user_taps_the_blast_card_on_the_nfc_reader_when_the_add_blast_card_popup_is_displayed() {
 //        TODO: Requires a blast card and NFC reader to complete this scenario
     }
 }

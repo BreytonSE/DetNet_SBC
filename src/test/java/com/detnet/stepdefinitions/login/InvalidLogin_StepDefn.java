@@ -44,7 +44,7 @@ public class InvalidLogin_StepDefn {
     @Then("the {string} bar should be visible at the bottom right corner")
     public void the_bar_should_be_visible_at_the_bottom_right_corner(String string) {
        loginValidation.validateUnauthorizedUserAlertVisibility();
-//       loginValidation.validateUnauthorizedAlert("Unauthorized - Token invalid , user unauthorized!");
+       loginValidation.validateUnauthorizedAlert(" Dismiss ");
        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }
