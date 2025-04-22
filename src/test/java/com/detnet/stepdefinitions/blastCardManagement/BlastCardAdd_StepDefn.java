@@ -16,30 +16,16 @@ import io.cucumber.java.en.*;
 
 //Scenario: Verify that user can add a blast, active, and timed blast on the system.
 public class BlastCardAdd_StepDefn {
-    private Page page;
     private final PageObjectManager pageObjectManager;
-    private final LoginPageObjectModel loginPageObjectModel;
-    private final DashboardPageObjectModel dashboardPageObjectModel;
-    private final DashboardValidation dashboardValidation;
-    private final SettingsPageObjectModel settingsPageObjectModel;
-    private final SettingsValidation settingsValidation;
-    private final BlastCardsPageObjectModel blastCardsPageObjectModel;
-    private final BlastCardsValidation blastCardsValidation;
 
     public BlastCardAdd_StepDefn() { // Ensure it is called after the page is ready
-        this.page = PlaywrightManager.getPage();
-        this.pageObjectManager = PageObjectManager.getInstance(page);
-        this.loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
-        this.dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        this.dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        this.settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
-        this.settingsValidation = new SettingsValidation(settingsPageObjectModel);
-        this.blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
-        this.blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
+        Page page = PlaywrightManager.getPage();
+        pageObjectManager = PageObjectManager.getInstance(page);
     }
 
     @Given("the user has entered valid BlastWeb login credentials")
     public void the_user_has_entered_valid_blast_web_login_credentials() throws Exception {
+        LoginPageObjectModel loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
         String username = LoginConstantUtils.getDecryptedUsername();
         loginPageObjectModel.setUsername(username);
         String password = LoginConstantUtils.getDecryptedPassword();
@@ -53,11 +39,14 @@ public class BlastCardAdd_StepDefn {
     }
     @When("the user opens the navigation menu by clicking the current system user's name")
     public void the_user_opens_the_navigation_menu_by_clicking_the_current_system_user_s_name() {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         dashboardPageObjectModel.openNavigationMenu();
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user navigates to the Settings page")
     public void the_user_navigates_to_the_settings_page() {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateSettingsButtonVisibility();
         dashboardValidation.validateSettingsButtonClick();
         dashboardPageObjectModel.openSettings();
@@ -65,7 +54,9 @@ public class BlastCardAdd_StepDefn {
     }
     @When("the user navigates to the Blast Cards section")
     public void the_user_navigates_to_the_blast_cards_section() {
-        settingsValidation.validateSettingsURL("http://localhost:8080/en/settings/networks");
+        SettingsPageObjectModel settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
+        SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
+        settingsValidation.validateSettingsURL("http://localhost:8080/en/settings/networks"); // deliberate failure
         settingsValidation.validateSettingsLabelVisibility();
         settingsValidation.validateSettingsLabelName("Settings");
         settingsValidation.validateBlastCardButtonVisibility();
@@ -73,8 +64,13 @@ public class BlastCardAdd_StepDefn {
     }
     @When("the user navigates to the Active Cards tab")
     public void the_user_navigates_to_the_active_cards_tab() {
+        SettingsPageObjectModel settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
+        SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
         settingsValidation.validateBlastCardClick();
         settingsPageObjectModel.viewActiveBlastCards();
+
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateActiveBlastCardsURL("http://localhost:8080/en/settings/activeCards");
         blastCardsValidation.validateActiveBlastCardsVisibility();
         blastCardsValidation.validateActiveBlastCardLabelName("Active Cards");
@@ -82,6 +78,8 @@ public class BlastCardAdd_StepDefn {
     }
     @When("the user clicks on the Add Blast Card button")
     public void the_user_clicks_on_the_add_blast_card_button() {
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateAddBlastCardButtonVisibility();
         blastCardsValidation.validateAddBlastCardClick();
         blastCardsPageObjectModel.addBlastCard();

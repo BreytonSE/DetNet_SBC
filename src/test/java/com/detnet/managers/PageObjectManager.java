@@ -6,6 +6,8 @@ import com.detnet.pageObjects.LoginPageObjectModel;
 import com.detnet.pageObjects.SettingsPageObjectModel;
 import com.microsoft.playwright.Page;
 
+import java.lang.reflect.Field;
+
 public class PageObjectManager {
     private static PageObjectManager instance;
     private Page page;
@@ -27,9 +29,23 @@ public class PageObjectManager {
     }
 
     public void updatePage(Page newPage){
-     this.page = newPage; // Allow updating page when Playwright restart
-     loginPageObjectModel = null; // Reset cached page objects
-     dashboardPageObjectModel = null;
+     this.page = newPage;
+     resetCachedPageObjects();
+    }
+
+//    Looks for page object model variables in current class (PageObjectManager) that contains the pattern "PageObjectModel", and set them to null automatically
+    private void resetCachedPageObjects(){
+        Field[] fields = this.getClass().getDeclaredFields();
+        for(Field field : fields){
+            if (field.getName().endsWith("PageObjectModel")){
+                field.setAccessible(true);
+            }
+            try{
+                field.set(this,null);
+            }catch (IllegalAccessException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     public LoginPageObjectModel getLoginPageObjectModel(){

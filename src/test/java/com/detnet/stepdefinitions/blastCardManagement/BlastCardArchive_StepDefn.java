@@ -3,42 +3,24 @@ package com.detnet.stepdefinitions.blastCardManagement;
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.BlastCardsPageObjectModel;
-import com.detnet.pageObjects.DashboardPageObjectModel;
-import com.detnet.pageObjects.LoginPageObjectModel;
-import com.detnet.pageObjects.SettingsPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.BlastCardsValidation;
-import com.detnet.validations.blastWebValidations.DashboardValidation;
-import com.detnet.validations.blastWebValidations.SettingsValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
 //  Scenario: Verify that user can archive blast cards
 public class BlastCardArchive_StepDefn {
-    private Page page;
     private final PageObjectManager pageObjectManager;
-    private final BlastCardsPageObjectModel blastCardsPageObjectModel;
-    private final BlastCardsValidation blastCardsValidation;
-    private final LoginPageObjectModel loginPageObjectModel;
-    private final DashboardPageObjectModel dashboardPageObjectModel;
-    private final DashboardValidation dashboardValidation;
-    private final SettingsPageObjectModel settingsPageObjectModel;
-    private final SettingsValidation settingsValidation;
 
     public BlastCardArchive_StepDefn() {
-        this.page = PlaywrightManager.getPage();
-        this.pageObjectManager = PageObjectManager.getInstance(page);
-        this.loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
-        this.dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        this.dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        this.settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
-        this.settingsValidation = new SettingsValidation(settingsPageObjectModel);
-        this.blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
-        this.blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
+        Page page = PlaywrightManager.getPage();
+        pageObjectManager = PageObjectManager.getInstance(page);
     }
 
     @Then("the user clicks on the Archive Cards button to archive multiple cards")
     public void the_user_clicks_on_the_archive_cards_button_to_archive_multiple_cards() {
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateBlastCardAlertWindowVisibility();
         blastCardsPageObjectModel.closeBlastCardAlertWindow();
 //        TODO: Blast cards mus exists!
@@ -53,6 +35,8 @@ public class BlastCardArchive_StepDefn {
     }
     @Then("the user navigates to the Archived cards")
     public void the_user_navigates_to_the_archived_cards() {
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateArchivedButtonVisibility();
         blastCardsValidation.validateArchivedButtonOnClick();
         blastCardsPageObjectModel.viewArchivedCards();
@@ -60,10 +44,11 @@ public class BlastCardArchive_StepDefn {
     }
     @Then("the user verifies that the blast card is visible in the archive list")
     public void the_user_verifies_that_the_blast_card_is_visible_in_the_archive_list() {
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateArchivedCardsURL("http://localhost:8080/en/settings/archivedCards");
         blastCardsValidation.validateArchiveCardsLabelVisibility();
         blastCardsValidation.validateArchiveCardsLabelName("Archive Cards");
-//        TODO: There must be blast cards added to archives in order to complete this scenario
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

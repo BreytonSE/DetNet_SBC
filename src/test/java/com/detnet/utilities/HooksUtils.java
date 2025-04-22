@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class HooksUtils {
     private static Page page;
-    private static Browser browser;
     private PageObjectManager pageObjectManager;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
     private static final int TOTAL_SCENARIOS = 2;
