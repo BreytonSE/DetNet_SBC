@@ -3,8 +3,13 @@ package com.detnet.stepdefinitions.blastCardManagement;
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.BlastCardsPageObjectModel;
+import com.detnet.pageObjects.DashboardPageObjectModel;
+import com.detnet.pageObjects.LoginPageObjectModel;
+import com.detnet.pageObjects.SettingsPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.BlastCardsValidation;
+import com.detnet.validations.blastWebValidations.DashboardValidation;
+import com.detnet.validations.blastWebValidations.SettingsValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
@@ -14,10 +19,20 @@ public class BlastCardArchive_StepDefn {
     private final PageObjectManager pageObjectManager;
     private final BlastCardsPageObjectModel blastCardsPageObjectModel;
     private final BlastCardsValidation blastCardsValidation;
+    private final LoginPageObjectModel loginPageObjectModel;
+    private final DashboardPageObjectModel dashboardPageObjectModel;
+    private final DashboardValidation dashboardValidation;
+    private final SettingsPageObjectModel settingsPageObjectModel;
+    private final SettingsValidation settingsValidation;
 
     public BlastCardArchive_StepDefn() {
         this.page = PlaywrightManager.getPage();
         this.pageObjectManager = PageObjectManager.getInstance(page);
+        this.loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
+        this.dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        this.dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        this.settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
+        this.settingsValidation = new SettingsValidation(settingsPageObjectModel);
         this.blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
         this.blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
     }

@@ -56,25 +56,52 @@ public class PlaywrightManager {
 
     public static void tearDownPlayWright(){
         try{
-            if(page != null && !page.isClosed()){
-                page.close();
-            }
-            if (context != null){
-                context.close();
-            }
-            if(browser != null){
-                browser.close();
-            }
             if(playwright != null){
                 playwright.close();
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            page = null;
-            context = null;
-            browser = null;
             playwright = null;
+        }
+    }
+
+    public static void shutDownActiveTab(){
+        try{
+            if(page != null && !page.isClosed()){
+                page.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            page = null;
+        }
+    }
+
+    public static void clearBrowsingSession(){
+        try{
+            if (context != null){
+                context.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            context = null;
+        }
+    }
+
+    public static void closeBrowser(){
+        try {
+            if(browser != null){
+                browser.close();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            browser = null;
         }
     }
 }

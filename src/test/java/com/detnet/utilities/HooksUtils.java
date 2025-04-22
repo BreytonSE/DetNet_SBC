@@ -5,6 +5,7 @@ import com.detnet.managers.ServiceManager;
 import com.detnet.managers.PageObjectManager;
 import com.microsoft.playwright.*;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -12,7 +13,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class HooksUtils {
     private static Page page;
+    private static Browser browser;
     private PageObjectManager pageObjectManager;
+    private static final AtomicInteger scenarioCount = new AtomicInteger(0);
+    private static final int TOTAL_SCENARIOS = 2;
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -24,6 +28,9 @@ public class HooksUtils {
 
                 EmailUtils.sendEmail();
                 System.out.println("✅ Email Sent");
+
+                PlaywrightManager.tearDownPlayWright();
+                System.out.println("✅ Playwright connection closed successfully");
 
                 ServiceManager.stopBlastWebService();
                 System.out.println("✅ BlastWeb Service Stopped");
@@ -66,16 +73,15 @@ public class HooksUtils {
         }catch (Exception e){
             throw new RuntimeException("Error in @After: " + e.getMessage(),e);
         }finally {
+            scenarioCount.incrementAndGet();
             SoftAssertionUtils.reset();
-            PlaywrightManager.tearDownPlayWright();
+            PlaywrightManager.shutDownActiveTab();
+            PlaywrightManager.clearBrowsingSession();
+            PlaywrightManager.closeBrowser();
 
-            if(page == null || page.isClosed()){
+            if(scenarioCount.get() < TOTAL_SCENARIOS) {
                 PlaywrightManager.setUpPlaywright();
                 page = PlaywrightManager.getPage();
-            }
-            if(pageObjectManager == null){
-                pageObjectManager = PageObjectManager.getInstance(page);
-            }else {
                 pageObjectManager.updatePage(page);
             }
         }
