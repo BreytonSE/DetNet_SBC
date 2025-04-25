@@ -56,7 +56,7 @@ public class BlastCardAdd_StepDefn {
     public void the_user_navigates_to_the_blast_cards_section() {
         SettingsPageObjectModel settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
         SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
-        settingsValidation.validateSettingsURL("http://localhost:8080/en/settings/networks"); // deliberate failure
+        settingsValidation.validateSettingsURL("http://localhost:8080/en/settings/networks");
         settingsValidation.validateSettingsLabelVisibility();
         settingsValidation.validateSettingsLabelName("Settings");
         settingsValidation.validateBlastCardButtonVisibility();

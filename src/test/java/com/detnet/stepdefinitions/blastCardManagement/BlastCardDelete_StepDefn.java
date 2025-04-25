@@ -9,24 +9,21 @@ import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
 public class BlastCardDelete_StepDefn {
-    private Page page;
     private final PageObjectManager pageObjectManager;
-    private final BlastCardsPageObjectModel blastCardsPageObjectModel;
-    private final BlastCardsValidation blastCardsValidation;
 
     public BlastCardDelete_StepDefn() {
-        this.page = PlaywrightManager.getPage();
-        this.pageObjectManager = PageObjectManager.getInstance(page);
-        this.blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
-        this.blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
+        Page page = PlaywrightManager.getPage();
+        pageObjectManager = PageObjectManager.getInstance(page);
     }
 
     @Then("the user clicks on the {string} button to delete multiple cards")
     public void the_user_clicks_on_the_button_to_delete_multiple_cards(String string) {
-//        blastCardsValidation.validateDeleteCardsButtonVisibility();
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
+        blastCardsValidation.validateDeleteCardsButtonVisibility();
 //        blastCardsValidation.validateDeleteButtonOnClick();
 //        blastCardsPageObjectModel.deleteBlastCard();
-//        SoftAssertionUtils.getSoftAssertions().assertAll();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("the user clicks the {string} icon from the table to delete a single card")
     public void the_user_clicks_the_icon_from_the_table_to_delete_a_single_card(String string) {

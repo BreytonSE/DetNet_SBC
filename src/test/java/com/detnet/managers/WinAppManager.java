@@ -47,6 +47,7 @@ public class WinAppManager {
                 System.out.println("⚠\uFE0F Error while quitting driver: " + e.getMessage());
             }finally {
                 driver = null;
+                stopWinAppDriver();
             }
         }
     }
@@ -63,6 +64,21 @@ public class WinAppManager {
             Thread.sleep(3000); // wait for few seconds for it to start
         }catch (IOException | InterruptedException e){
             throw new RuntimeException("❌ Could not start WinAppDriver", e);
+        }
+    }
+
+    private static void stopWinAppDriver(){
+//        Skip stopping in CI/CD environments
+        if(isRunningInCI()){
+            System.out.println("⚙\uFE0F Detected CI/CD environment — skipping WinAppDriver shutdown.");
+            return;
+        }
+        try{
+//            Kill the WinAppDriver.exe process
+            Runtime.getRuntime().exec("taskkill /F /IM WinAppDriver.exe");
+            System.out.println("\uD83D\uDED1 WinAppDriver stopped successfully.");
+        }catch (IOException e){
+            throw new RuntimeException("❌ Could not stop WinAppDriver", e);
         }
     }
 

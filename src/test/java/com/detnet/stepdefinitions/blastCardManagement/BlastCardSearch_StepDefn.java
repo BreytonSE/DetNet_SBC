@@ -9,20 +9,17 @@ import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
 public class BlastCardSearch_StepDefn {
-    private Page page;
     private final PageObjectManager pageObjectManager;
-    private final BlastCardsPageObjectModel blastCardsPageObjectModel;
-    private final BlastCardsValidation blastCardsValidation;
 
     public BlastCardSearch_StepDefn() {
-        this.page = PlaywrightManager.getPage();
-        this.pageObjectManager = PageObjectManager.getInstance(page);
-        this.blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
-        this.blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
+        Page page = PlaywrightManager.getPage();
+        pageObjectManager = PageObjectManager.getInstance(page);
     }
 
     @Then("enter a value in the search bar")
     public void enter_a_value_in_the_search_bar() {
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateSearchBarVisibility();
         blastCardsValidation.validateSearchBarInteractability();
         blastCardsValidation.validateIfSearchBarIsEmpty();
@@ -32,6 +29,8 @@ public class BlastCardSearch_StepDefn {
     }
     @Then("click the search button")
     public void click_the_search_button() {
+        BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
+        BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateSearchButtonVisibility();
         blastCardsValidation.validateSearchButtonInteractability();
         blastCardsPageObjectModel.search();

@@ -47,4 +47,25 @@ public class SettingsValidation {
                 .as("Blast Card button should be visible")
                 .isTrue();
     }
+
+    public void validateUserButtonVisibility(){
+        boolean isButtonVisible = settingsPageObjectModel.isUserButtonVisible();
+        softly.assertThat(isButtonVisible)
+                .as("'Users' button should be visible under settings menu.")
+                .isTrue();
+    }
+
+    public void validateUserButtonState(){
+        boolean isButtonEnabled = settingsPageObjectModel.isUserButtonEnabled();
+        softly.assertThat(isButtonEnabled)
+                .as("'Users' button should enabled.")
+                .isTrue();
+    }
+
+    public void validateUsersButtonText(String expectedText){
+        String actualText = settingsPageObjectModel.getUsersLabel();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text")
+                .isEqualTo(expectedText);
+    }
 }

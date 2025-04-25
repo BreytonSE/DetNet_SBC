@@ -1,6 +1,5 @@
 package com.detnet.utilities;
 
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.FileContent;
 import com.google.api.client.json.JsonFactory;
@@ -9,8 +8,9 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.Permission;
+import com.google.auth.http.HttpCredentialsAdapter;
+import com.google.auth.oauth2.ServiceAccountCredentials;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -28,9 +28,11 @@ public class GoogleDriveUtils {
 //    Initialize the Google Drive Services
     public static Drive getDriveServices() throws GeneralSecurityException, IOException {
         InputStream inputStream = Files.newInputStream(Paths.get(CREDENTIALS_FILE_PATH));
-        GoogleCredential credential = GoogleCredential.fromStream(inputStream)
+        ServiceAccountCredentials credential = (ServiceAccountCredentials) ServiceAccountCredentials.fromStream(inputStream)
                 .createScoped(SCOPES);
-        return new Drive.Builder(GoogleNetHttpTransport.newTrustedTransport(),JSON_FACTORY,credential)
+        return new Drive.Builder(GoogleNetHttpTransport.newTrustedTransport(),
+                JSON_FACTORY,
+                new HttpCredentialsAdapter(credential))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
