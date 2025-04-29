@@ -61,22 +61,55 @@ public class AddUsers_StepDefn {
     }
     @Then("set the name of the user")
     public void set_the_name_of_the_user() {
-
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateFirstNameInputFieldVisibility();
+        usersValidation.validateFirstNameInputFieldState();
+        usersValidation.validateIfFirstNameInputFieldIsEmpty();
+        usersPageObjectModel.setFirstname("John");
+        usersValidation.validateEnteredFirstname("John");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("set the surname of the user")
     public void set_the_surname_of_the_user() {
-
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateSurnameInputFieldVisibility();
+        usersValidation.validateSurnameInputFieldState();
+        usersValidation.validateIfSurnameInputFieldIsEmpty();
+        usersPageObjectModel.setSurname("Doe");
+        usersValidation.validateEnteredSurname("Doe");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("set a role for the user")
     public void set_a_role_for_the_user() {
-
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateRoleFieldVisibility();
+        usersValidation.validateRoleFieldState();
+        usersPageObjectModel.openRoleDropDown();
+        usersValidation.validateIfRoleDropDownIsOpen();
+        usersPageObjectModel.selectRole("administrator");
+        usersValidation.validateSelectedRole("administrator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("clicks the Add User button")
     public void clicks_the_add_user_button() {
-
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateIfCheckboxVisibility();
+        usersValidation.validateIfCheckBoxIsEnabled();
+        usersValidation.validateAddUserSubmitButtonVisibility();
+        usersValidation.validateUserSubmitButtonState();
+        usersPageObjectModel.submitUserData();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("lastly verify that the user has been added and appears as the last item of the user view page")
     public void lastly_verify_that_the_user_has_been_added_and_appears_as_the_last_item_of_the_user_view_page() {
-
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateNewUsername(" JohnD ");
+        usersValidation.validateIfNewUserAdded(2);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }
