@@ -21,6 +21,9 @@ public class UsersPageObjectModel {
     private final String editIcon = "//tbody/tr[1]/td[6]/mat-icon[1]";
     private final String editUserLabel = "//h2[normalize-space()='Edit User']";
     private final String saveButton = "//button[@type='submit']//span[@class='mat-mdc-button-persistent-ripple mdc-button__ripple']";
+    private final String editSurnameInputField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/app-edit-user[1]/div[1]/div[1]/div[1]/form[1]/mat-form-field[4]/div[1]/div[2]/div[1]/input[1]";
+    private final String deleteAlertBox = "//div[@class='mat-mdc-dialog-surface mdc-dialog__surface']";
+    private final String yesButton = "//button[@class='yesBtn']";
 
     public UsersPageObjectModel(Page page) {
         this.page = page;
@@ -238,5 +241,38 @@ public class UsersPageObjectModel {
 
     public void saveUpdatedUserInformation(){
         page.locator(saveButton).click();
+    }
+
+    public void setNewSurname(String surname){
+        page.locator(editSurnameInputField).click();
+        page.locator(editSurnameInputField).clear();
+        page.locator(editSurnameInputField).fill(surname);
+    }
+
+    public String getUpdatedSurname(){
+        String updatedSurname = "//td[normalize-space()='Johnson']";
+        return page.locator(updatedSurname).textContent();
+    }
+
+    public boolean isDeleteIconVisible(int rowNumber){
+        String row = "(//span[@mattooltip='Delete this user'][normalize-space()='delete'])[" + rowNumber + "]";
+        return page.locator(row).isVisible();
+    }
+
+    public void deleteUser(int rowNumber){
+        String row = "(//span[@mattooltip='Delete this user'][normalize-space()='delete'])[" + rowNumber + "]";
+        page.locator(row).click();
+    }
+
+    public boolean isDeleteDialogBoxOpen(){
+        return page.locator(deleteAlertBox).isVisible();
+    }
+
+    public boolean isYesButtonPresent(){
+        return page.locator(yesButton).isVisible();
+    }
+
+    public void confirmToDelete(){
+        page.locator(yesButton).click();
     }
 }

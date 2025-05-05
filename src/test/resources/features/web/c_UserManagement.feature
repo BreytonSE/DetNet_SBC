@@ -10,6 +10,7 @@ Feature: User management feature
     Then the user navigates to the Settings page
     And go to users
     Then verify that the system users can be seen
+    And also on the database
 
   @b_userManagement
   Scenario: Verify that a new user can be added to the system, ensuring that the information can be written back to the
@@ -38,3 +39,13 @@ Feature: User management feature
     And edit any information about the user
     And apply the new changes by clicking the 'Save' button
     Then I verify that the user information has been updated
+
+  @d_userManagement
+  Scenario: Verify that users can be deleted, ensuring that information can be deleted on the backend
+    Given the user has entered valid BlastWeb login credentials
+    When the user opens the navigation menu by clicking the current system user's name
+    Then the user navigates to the Settings page
+    And go to users
+    Then user click on the trash bin icon
+    And confirm to delete the user
+    And then verify in the database that the user has been deleted

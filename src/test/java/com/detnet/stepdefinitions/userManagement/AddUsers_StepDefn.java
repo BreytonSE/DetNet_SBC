@@ -2,9 +2,11 @@ package com.detnet.stepdefinitions.userManagement;
 
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
+import com.detnet.pageObjects.DatabaseObjectModel;
 import com.detnet.pageObjects.UsersPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.UsersValidation;
+import com.detnet.validations.databaseValidations.DatabaseUsersValidations;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
@@ -110,6 +112,9 @@ public class AddUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateNewUsername(" JohnD ");
         usersValidation.validateIfNewUserAdded(2);
+        DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
+        DatabaseUsersValidations databaseUsersValidations = new DatabaseUsersValidations(databaseObjectModel);
+        databaseUsersValidations.validateUserExistsByEmail("johnD@detnet.com");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

@@ -164,6 +164,13 @@
       <artifactId>google-auth-library-oauth2-http</artifactId>
       <version>1.33.1</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.5</version>
+    </dependency>
   </dependencies>
 
   <build>

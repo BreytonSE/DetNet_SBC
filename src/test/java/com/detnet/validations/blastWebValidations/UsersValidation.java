@@ -292,4 +292,32 @@ public class UsersValidation {
                 .as("'Save' -button should be enabled.")
                 .isTrue();
     }
+
+    public void validateUpdatedSurname(String expectedSurname){
+        String actualSurname = usersPageObjectModel.getUpdatedSurname();
+        softly.assertThat(actualSurname)
+                .as("Actual updated surname does not match expected updated surname")
+                .isEqualTo(expectedSurname);
+    }
+
+    public void validateDeleteIconVisibility(int rowNumber){
+        boolean isVisible = usersPageObjectModel.isDeleteIconVisible(rowNumber);
+        softly.assertThat(isVisible)
+                .as("Delete icon should be visible on row " + rowNumber + " in order to delete the user")
+                .isTrue();
+    }
+
+    public void validateDeleteDialogBoxVisibility(){
+        boolean isOpen = usersPageObjectModel.isDeleteDialogBoxOpen();
+        softly.assertThat(isOpen)
+                .as("Delete dialog box should be open after user clicked on trash bin icon.")
+                .isTrue();
+    }
+
+    public void validateYesButtonVisibility(){
+        boolean isVisible = usersPageObjectModel.isYesButtonPresent();
+        softly.assertThat(isVisible)
+                .as("'Yes' -button should be visible on the delete alert window")
+                .isTrue();
+    }
 }

@@ -2,12 +2,15 @@ package com.detnet.stepdefinitions.userManagement;
 
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
+import com.detnet.pageObjects.DatabaseObjectModel;
 import com.detnet.pageObjects.UsersPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.UsersValidation;
+import com.detnet.validations.databaseValidations.DatabaseUsersValidations;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.Then;
 
+//  Scenario: Verify that an existing user's data can be edited, ensuring that information can be updated on the backend
 public class EditUsers_StepDefn {
     private final PageObjectManager pageObjectManager;
 
@@ -25,12 +28,12 @@ public class EditUsers_StepDefn {
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("edit any information about the user")
-    public void edit_any_information_about_the_user() {
+    public void edit_any_information_about_the_user() throws InterruptedException {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfEditUserFormIsOpen();
         usersValidation.validateEditUserText("Edit User");
-        usersPageObjectModel.setEmail("johnDoe@detnet.com");
+        usersPageObjectModel.setNewSurname("Johnson");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("apply the new changes by clicking the {string} button")
@@ -40,9 +43,17 @@ public class EditUsers_StepDefn {
         usersValidation.validateIfSaveButtonIsPresent();
         usersValidation.validateIfSaveButtonState();
         usersPageObjectModel.saveUpdatedUserInformation();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("I verify that the user information has been updated")
     public void i_verify_that_the_user_information_has_been_updated() {
-
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateUpdatedSurname(" Johnson ");
+        DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
+        DatabaseUsersValidations databaseUsersValidations = new DatabaseUsersValidations(databaseObjectModel);
+        String email = "johnD@detnet.com";
+        databaseUsersValidations.validateIfUserSurnameUpdated("Johnson",email);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

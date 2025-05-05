@@ -21,7 +21,8 @@ public class PlaywrightManager {
             boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                     .setHeadless(isCI) // Run headless in CD/CI, non-headless locally
-                    .setArgs(Arrays.asList("--disable-gpu",
+                    .setArgs(Arrays.asList(
+                            "--disable-gpu",
                             "--start-fullscreen",
                             "--disable-extentions",
                             "--disable-popup-blocking",
