@@ -22,8 +22,8 @@ public class DeleteUser_StepDefn {
     public void user_click_on_the_trash_bin_icon() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
-        usersValidation.validateDeleteIconVisibility(2);
-        usersPageObjectModel.deleteUser(2);
+        usersValidation.validateDeleteIconVisibility(1);
+        usersPageObjectModel.deleteUser(1);
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("confirm to delete the user")

@@ -7,6 +7,7 @@ import org.assertj.core.api.SoftAssertions;
 import java.util.List;
 import java.util.Map;
 
+// Validate users stored in the backend on the Users -table
 public class DatabaseUsersValidations {
     private final DatabaseObjectModel databaseObjectModel;
     private final SoftAssertions softly;

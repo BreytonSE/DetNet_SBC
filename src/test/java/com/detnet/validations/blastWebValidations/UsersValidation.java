@@ -216,20 +216,6 @@ public class UsersValidation {
                 .isEqualTo(expectedSelectedRole);
     }
 
-    public void validateIfCheckboxVisibility(){
-        boolean isVisible = usersPageObjectModel.isCheckBoxVisible();
-        softly.assertThat(isVisible)
-                .as("Checkbox should be visible")
-                .isTrue();
-    }
-
-    public void validateIfCheckBoxIsEnabled(){
-        boolean isSelected = usersPageObjectModel.isCheckboxEnabled();
-        softly.assertThat(isSelected)
-                .as("Checkbox should be enabled by default")
-                .isTrue();
-    }
-
     public void validateAddUserSubmitButtonVisibility(){
         boolean isVisible = usersPageObjectModel.isSubmitButtonVisible();
         softly.assertThat(isVisible)

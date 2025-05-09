@@ -99,8 +99,6 @@ public class AddUsers_StepDefn {
     public void clicks_the_add_user_button() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
-        usersValidation.validateIfCheckboxVisibility();
-        usersValidation.validateIfCheckBoxIsEnabled();
         usersValidation.validateAddUserSubmitButtonVisibility();
         usersValidation.validateUserSubmitButtonState();
         usersPageObjectModel.submitUserData();

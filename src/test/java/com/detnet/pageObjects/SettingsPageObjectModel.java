@@ -7,6 +7,7 @@ public class SettingsPageObjectModel {
     private final String settingsLabel = "//h2[normalize-space()='Settings']";
     private final String blastCardsButton = "//span[contains(text(),'Blast Cards')]";
     private final String usersButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Users')]";
+    private final String networksButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Networks')]";
 
     public SettingsPageObjectModel(Page page) {
         this.page = page;
@@ -51,5 +52,13 @@ public class SettingsPageObjectModel {
 
     public void viewUsers(){
         page.locator(usersButton).click();
+    }
+
+    public boolean isNetworksTabPresent(){
+        return page.locator(networksButton).isVisible();
+    }
+
+    public void goToNetworks(){
+        page.locator(networksButton).click();
     }
 }

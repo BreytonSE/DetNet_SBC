@@ -10,6 +10,19 @@ public enum DatabaseQueryManager {
             "SELECT name, role, surname, firstname, id, email, notify, createdat, deleted " +
             "FROM public.users " +
             "WHERE email = ?;"
+    ),
+    SELECT_ALL_NETWORKS(
+            "SELECT id, resourcename, param, netdelay, use, statistics, extendedstats, messagegap, serial_type, reportdets, " +
+                    "createdat, lastmodifiedat, createdby, lastmodifiedby, deleted, messages_in, messages_out, " +
+                    "expected_replies, lost_replies, bad_replies\n" +
+                    "\tFROM public.networks;"
+    ),
+    SELECT_NETWORK_BY_ID(
+            "SELECT id, resourcename, param, netdelay, use, statistics, extendedstats, messagegap, serial_type, " +
+                    "reportdets, createdat, lastmodifiedat, createdby, lastmodifiedby, deleted, messages_in, messages_out, " +
+                    "expected_replies, lost_replies, bad_replies\n" +
+                    "\tFROM public.networks " +
+                    "WHERE id = ?;"
     );
 //    TODO: Write more queries here...
 

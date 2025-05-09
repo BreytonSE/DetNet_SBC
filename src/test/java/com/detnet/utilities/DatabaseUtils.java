@@ -53,4 +53,12 @@ public class DatabaseUtils {
     public static List<Map<String,Object>> findUserByEmail(String email){
         return executeQuery(DatabaseQueryManager.SELECT_USER_BY_EMAIL, email);
     }
+
+    public static List<Map<String, Object>> getAllNetworks(){
+        return executeQuery(DatabaseQueryManager.SELECT_ALL_NETWORKS);
+    }
+
+    public static List<Map<String,Object>> findNetworkById(int id){
+        return executeQuery(DatabaseQueryManager.SELECT_NETWORK_BY_ID,id);
+    }
 }

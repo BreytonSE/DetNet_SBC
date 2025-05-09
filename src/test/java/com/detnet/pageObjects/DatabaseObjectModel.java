@@ -7,9 +7,11 @@ import java.util.Map;
 
 public class DatabaseObjectModel {
     private final List<Map<String,Object>> users;
+    private final List<Map<String,Object>> networks;
 
     public DatabaseObjectModel() {
         this.users = DatabaseUtils.getAllUsers();
+        this.networks = DatabaseUtils.getAllNetworks();
     }
 
     public boolean hasUsers(){
@@ -22,5 +24,17 @@ public class DatabaseObjectModel {
 
     public List<Map<String, Object>> findUserByEmail(String email){
         return DatabaseUtils.findUserByEmail(email);
+    }
+
+    public boolean hasNetworks(){
+        return networks != null && !networks.isEmpty();
+    }
+
+    public List<Map<String, Object>> getAllNetworks(){
+        return networks;
+    }
+
+    public List<Map<String,Object>> findNetworkById(int id){
+        return DatabaseUtils.findNetworkById(id);
     }
 }

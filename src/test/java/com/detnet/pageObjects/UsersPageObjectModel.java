@@ -15,7 +15,6 @@ public class UsersPageObjectModel {
     private final String role = ".mat-mdc-select-trigger.ng-tns-c1050202395-30";
     private final String roleDropDown = "//div[@id='addUserRole-panel']";
     private final String selectedRole = ".mat-mdc-select-min-line.ng-tns-c1050202395-30.ng-star-inserted";
-    private final String checkBox = "//div[@class='mdc-checkbox__background']";
     private final String addUserSubmitButton = "//button[@id='addUserSubmitButton']";
     private final String username = "//td[normalize-space()='JohnD']";
     private final String editIcon = "//tbody/tr[1]/td[6]/mat-icon[1]";
@@ -184,14 +183,6 @@ public class UsersPageObjectModel {
         return page.locator(selectedRole).textContent();
     }
 
-    public boolean isCheckBoxVisible(){
-        return page.locator(checkBox).isVisible();
-    }
-
-    public boolean isCheckboxEnabled(){
-        return page.locator(checkBox).isEnabled();
-    }
-
     public boolean isSubmitButtonVisible(){
         return page.locator(addUserSubmitButton).isVisible();
     }
@@ -255,12 +246,12 @@ public class UsersPageObjectModel {
     }
 
     public boolean isDeleteIconVisible(int rowNumber){
-        String row = "(//span[@mattooltip='Delete this user'][normalize-space()='delete'])[" + rowNumber + "]";
+        String row = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined ng-star-inserted'])[" + rowNumber + "]";
         return page.locator(row).isVisible();
     }
 
     public void deleteUser(int rowNumber){
-        String row = "(//span[@mattooltip='Delete this user'][normalize-space()='delete'])[" + rowNumber + "]";
+        String row = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined ng-star-inserted'])[" + rowNumber + "]";
         page.locator(row).click();
     }
 

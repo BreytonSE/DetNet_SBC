@@ -68,4 +68,11 @@ public class SettingsValidation {
                 .as("Actual text does not match expected text")
                 .isEqualTo(expectedText);
     }
+
+    public void validateNetworksTabVisibility(){
+        boolean isPresent = settingsPageObjectModel.isNetworksTabPresent();
+        softly.assertThat(isPresent)
+                .as("'Networks' -tab should be present in the left side menu bar.")
+                .isTrue();
+    }
 }
