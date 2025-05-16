@@ -1,5 +1,6 @@
 package com.detnet.pageObjects;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 public class LoginPageObjectModel {
@@ -16,7 +17,6 @@ public class LoginPageObjectModel {
         this.page = page;
     }
 
-    //    Set the username
     public void setUsername(String username){
         page.locator(userNameInputField).fill(username);
     }
@@ -25,7 +25,6 @@ public class LoginPageObjectModel {
         return page.locator(userNameInputField).inputValue();
     }
 
-    //    Set the password
     public void setPassword(String password){
         page.locator(passwordInputField).click();
         page.locator(passwordInputField).fill(password);
@@ -35,7 +34,6 @@ public class LoginPageObjectModel {
         return page.locator(passwordInputField).inputValue();
     }
 
-    //    Click on the login button
     public void logIn(){
         page.locator(loginButton).click();
     }
@@ -48,8 +46,24 @@ public class LoginPageObjectModel {
         return page.locator(visibilityIcon).isVisible();
     }
 
+    public boolean isVisibilityIconEnabled(){
+        return page.locator(visibilityIcon).isEnabled();
+    }
+
     public void togglePasswordVisibility(){
         page.locator(visibilityIcon).click();
+    }
+
+    public boolean isPasswordShowing(){
+        Locator eyeIcon = page.locator(visibilityIcon);
+        String iconState = eyeIcon.textContent().trim();
+        return iconState.equals("visibility_off");
+    }
+
+    public boolean isPasswordHidden(){
+        Locator eyeIcon = page.locator(visibilityIcon);
+        String iconState = eyeIcon.textContent().trim();
+        return iconState.equals("visibility");
     }
 
     public String getLoginURL(){
@@ -71,5 +85,17 @@ public class LoginPageObjectModel {
 
     public String getUnauthorizedLabel(){
         return page.locator(unauthorizedLabel).textContent();
+    }
+
+    public boolean isPasswordFieldTypeText(){
+        Locator passwordInput = page.locator(passwordInputField);
+        String inputType = passwordInput.getAttribute("type");
+        return inputType.equals("text");
+    }
+
+    public boolean isPasswordFieldPassword(){
+        Locator passwordInput = page.locator(passwordInputField);
+        String inputType = passwordInput.getAttribute("type");
+        return inputType.equals("password");
     }
 }

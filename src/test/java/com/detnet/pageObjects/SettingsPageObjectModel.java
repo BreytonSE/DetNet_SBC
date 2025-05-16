@@ -8,6 +8,7 @@ public class SettingsPageObjectModel {
     private final String blastCardsButton = "//span[contains(text(),'Blast Cards')]";
     private final String usersButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Users')]";
     private final String networksButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Networks')]";
+    private final String devicesTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Devices\")]";
 
     public SettingsPageObjectModel(Page page) {
         this.page = page;
@@ -60,5 +61,21 @@ public class SettingsPageObjectModel {
 
     public void goToNetworks(){
         page.locator(networksButton).click();
+    }
+
+    public boolean isDeviceTabPresent(){
+        return page.locator(devicesTab).isVisible();
+    }
+
+    public boolean isDeviceTabEnabled(){
+        return page.locator(devicesTab).isEnabled();
+    }
+
+    public String getDeviceTabText(){
+        return page.locator(devicesTab).textContent();
+    }
+
+    public void viewDevices(){
+        page.locator(devicesTab).click();
     }
 }

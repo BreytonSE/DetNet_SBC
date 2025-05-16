@@ -275,7 +275,7 @@ public class NetworkValidation {
     public void validateIfNetworkIsDeleted(){
         boolean isDeleted = networkPageObjectModel.isNetworkDeleted();
         softly.assertThat(isDeleted)
-                .as("Network should not exists on the network interface")
+                .as("Network should be deleted from the network interface")
                 .isTrue();
     }
 
@@ -318,6 +318,41 @@ public class NetworkValidation {
         boolean isFound = networkPageObjectModel.isSearchedNetworkAvailable(id);
         softly.assertThat(isFound)
                 .as("Network should be showing based on search criteria.")
+                .isTrue();
+    }
+
+    public void validateDeleteDialogVisibility(){
+        boolean isDisplayed = networkPageObjectModel.isDeleteDialogVisible();
+        softly.assertThat(isDisplayed)
+                .as("Delete dialog box should be visible.")
+                .isTrue();
+    }
+
+    public void validateDeleteDialogClosed(){
+        boolean isClosed = networkPageObjectModel.isDeleteDialogClosedAfterDeletion();
+        softly.assertThat(isClosed)
+                .as("Delete dialog box should close after user confirm or cancel delete action.")
+                .isTrue();
+    }
+
+    public void validateDeleteButtonVisibility(){
+        boolean isVisible = networkPageObjectModel.isDeleteAllButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Delete All Networks' -button should be visible")
+                .isTrue();
+    }
+
+    public void validateDeleteButtonState(){
+        boolean isEnabled = networkPageObjectModel.isDeleteAllButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Delete All Networks' -button should be enabled")
+                .isTrue();
+    }
+
+    public void validateIfSelectedNetworksIsDeleted(String networkName){
+        boolean isDeleted = networkPageObjectModel.isSelectedNetworksDeleted(networkName);
+        softly.assertThat(isDeleted)
+                .as("Selected networks should be deleted.")
                 .isTrue();
     }
 }

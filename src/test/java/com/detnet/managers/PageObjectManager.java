@@ -15,6 +15,7 @@ public class PageObjectManager {
     private BlastCardsPageObjectModel blastCardsPageObjectModel;
     private UsersPageObjectModel usersPageObjectModel;
     private NetworkPageObjectModel networkPageObjectModel;
+    private DevicePageObjectModel devicePageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -87,5 +88,12 @@ public class PageObjectManager {
             networkPageObjectModel = new NetworkPageObjectModel(page);
         }
         return networkPageObjectModel;
+    }
+
+    public DevicePageObjectModel getDevicePageObjectModel(){
+        if(devicePageObjectModel == null){
+            devicePageObjectModel = new DevicePageObjectModel(page);
+        }
+        return devicePageObjectModel;
     }
 }

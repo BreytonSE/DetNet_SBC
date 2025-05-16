@@ -19,3 +19,10 @@ Feature: BlastWeb login feature
     When I click on 'Login'
     Then I should see an error message under the password input field
     And the 'Unauthorized' bar should be visible at the bottom right corner
+
+  @c_login
+  Scenario: Verify that a user can view the password they entered on the login screen
+    Given I enter my BlastWeb username and password
+    When I click on the eye icon
+    Then the password should be revealed
+    And I click the eye icon with a slash to hide the password again

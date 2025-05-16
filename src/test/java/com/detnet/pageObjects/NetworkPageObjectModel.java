@@ -18,13 +18,15 @@ public class NetworkPageObjectModel {
     private final String reportDetonatorsLabel = "//label[normalize-space()='Report Detonators']";
     private final String inUseLabel = "//label[normalize-space()='In Use']";
     private final String saveNewNetwork = "//button[@id='addNetworkSubmitButton']//span[@class='mat-mdc-button-touch-target']";
-    private final String newNetworkPath = "//td[normalize-space()=\"146\"]";
+    private final String newNetworkPath = "//td[normalize-space()=\"Ethernet\"]";
     private final String editIcon = "tbody tr:nth-child(2) td:nth-child(8) mat-icon:nth-child(1)";
     private final String saveButton2 = "//button[@type='submit']//span[@class='mat-mdc-button-persistent-ripple mdc-button__ripple']";
     private final String deleteIcon = "//tbody/tr[1]/td[8]/span[1]";
-    private final String yesButton = "//button[@class='yesBtn']";
-    private final String selectAllCheckBox = "mat-mdc-checkbox-1";
+    private final String yesButton = ".yesBtn";
+    private final String selectAllCheckBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
     private final String searchBar = "//input[@placeholder=\"Search using ID, Name\"]";
+    private final String deleteDialog = "//div[@class=\"mat-mdc-dialog-surface mdc-dialog__surface\"]";
+    private final String deleteAllBtn = "//button[@class=\"deleteAllBtn\"]";
 
     public NetworkPageObjectModel(Page page) {
         this.page = page;
@@ -231,7 +233,8 @@ public class NetworkPageObjectModel {
     }
 
     public void deleteNetwork(String index){
-        String rowIndex = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])[" + index + "]";
+        String rowIndex = "//body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/blastweb-spinner[1]/" +
+                "blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + index + "]/td[8]/span[1]";
         page.locator(rowIndex).click();
     }
 
@@ -244,14 +247,17 @@ public class NetworkPageObjectModel {
     }
 
     public void confirmToDeleteNetwork(){
-        page.locator(yesButton).click();
+        page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
     public boolean isNetworkDeleted(){
+        String network = "//td[normalize-space()=\"ETHER002-DUMMY\"]";
         try{
-            page.locator(newNetworkPath).waitFor(new Locator.WaitForOptions()
-                    .setState(WaitForSelectorState.HIDDEN)
-                    .setTimeout(5000)); // timeout in milliseconds
+//            Wait for row to be deleted from the networks table
+            page.locator(network)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
+                            .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
             return false;
@@ -266,13 +272,15 @@ public class NetworkPageObjectModel {
         return page.locator(selectAllCheckBox).isEnabled();
     }
 
-    public void selectNetwork(String rowNumber){
-        String row = "mat-mdc-checkbox-" + rowNumber;
-        page.locator(row).click();
+    public void deselectNetwork(String rowNumber){
+        String individualCheckBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
+                "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + rowNumber + "]/td[1]/" +
+                "mat-checkbox[1]/div[1]/div[1]/input[1]";
+        page.locator(individualCheckBox).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public void selectAllNetworks(){
-        page.locator(selectAllCheckBox).click();
+    public void selectAllNetworks() {
+        page.locator(selectAllCheckBox).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
     public boolean isSearchBarVisible(){
@@ -299,5 +307,47 @@ public class NetworkPageObjectModel {
     public boolean isSearchedNetworkAvailable(String id){
         String network = "//td[normalize-space()=" + id + "]";
         return page.locator(network).isVisible();
+    }
+
+    public boolean isDeleteDialogVisible(){
+        return page.locator(deleteDialog).isVisible();
+    }
+
+    public boolean isDeleteDialogClosedAfterDeletion(){
+        try{
+//            Wait for the dialog to be detached from the DOM
+            page.locator(deleteDialog)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.DETACHED)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeleteAllButtonVisible(){
+        return page.locator(deleteAllBtn).isVisible();
+    }
+
+    public boolean isDeleteAllButtonEnabled(){
+        return page.locator(deleteAllBtn).isEnabled();
+    }
+
+    public void deleteAll(){
+        page.locator(deleteAllBtn).click();
+    }
+
+    public boolean isSelectedNetworksDeleted(String networkName){
+        String row = "(//td[normalize-space()='" + networkName + "'])[1]";
+        try{
+            page.locator(row)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 }

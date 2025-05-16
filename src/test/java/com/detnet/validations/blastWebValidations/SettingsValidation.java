@@ -75,4 +75,25 @@ public class SettingsValidation {
                 .as("'Networks' -tab should be present in the left side menu bar.")
                 .isTrue();
     }
+
+    public void validateDevicesTabVisibility(){
+        boolean isVisible = settingsPageObjectModel.isDeviceTabPresent();
+        softly.assertThat(isVisible)
+                .as("Devices tab should be visible on the settings menu on the left")
+                .isTrue();
+    }
+
+    public void validateDeviceTabState(){
+        boolean isEnabled = settingsPageObjectModel.isDeviceTabEnabled();
+        softly.assertThat(isEnabled)
+                .as("Devices tab should be enabled on the settings menu on the left")
+                .isTrue();
+    }
+
+    public void validateDevicesTabText(String expectedText){
+        String actualText = settingsPageObjectModel.getDeviceTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
 }

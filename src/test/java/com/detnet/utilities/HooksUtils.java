@@ -5,7 +5,6 @@ import com.detnet.managers.ServiceManager;
 import com.detnet.managers.PageObjectManager;
 import com.microsoft.playwright.*;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
@@ -15,9 +14,8 @@ public class HooksUtils {
     private static Page page;
     private PageObjectManager pageObjectManager;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-    private static final int TOTAL_SCENARIOS = 16;
-//    private static final int TOTAL_SCENARIOS = 5;
-
+    private static final int TOTAL_SCENARIOS = 19;
+//    private static final int TOTAL_SCENARIOS = 1;
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {

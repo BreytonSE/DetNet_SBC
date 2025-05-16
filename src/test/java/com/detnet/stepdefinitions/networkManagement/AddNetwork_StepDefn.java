@@ -115,7 +115,7 @@ public class AddNetwork_StepDefn {
     public void the_new_network_should_be_present_in_the_backend_database() {
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseNetworksValidations databaseNetworksValidations = new DatabaseNetworksValidations(databaseObjectModel);
-        databaseNetworksValidations.validateNetworkExistById(136);
+        databaseNetworksValidations.validateNetworkExistById(26);
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

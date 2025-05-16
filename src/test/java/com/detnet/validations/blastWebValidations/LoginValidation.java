@@ -41,6 +41,13 @@ public class LoginValidation {
                 .isTrue();
     }
 
+    public void validatePasswordVisibilityIconState(){
+        boolean isEnabled = loginPageObjectModel.isVisibilityIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Password visibility icon should be enabled")
+                .isTrue();
+    }
+
     public void validateLoginPageURL(String expectedURL){
         String actualURL = loginPageObjectModel.getLoginURL();
         softly.assertThat(actualURL)
@@ -74,5 +81,33 @@ public class LoginValidation {
         softly.assertThat(actualAlert)
                 .as("Actual alert message does not match expected alert message")
                 .isEqualTo(expectedAlert);
+    }
+
+    public void validateIfPasswordIsShowing(){
+        boolean isVisible = loginPageObjectModel.isPasswordShowing();
+        softly.assertThat(isVisible)
+                .as("Password should be visible after user toggled the password visibility.")
+                .isTrue();
+    }
+
+    public void validateIfPasswordVisibilityChangedToText(){
+        boolean isText = loginPageObjectModel.isPasswordFieldTypeText();
+        softly.assertThat(isText)
+                .as("Password should appear as text, and unhidden.")
+                .isTrue();
+    }
+
+    public void validateIfPasswordIsHidden(){
+        boolean isHidden = loginPageObjectModel.isPasswordHidden();
+        softly.assertThat(isHidden)
+                .as("Password should be hidden after user toggled the password visibility.")
+                .isTrue();
+    }
+
+    public void validateIfPasswordVisibilityChangedToPassword(){
+        boolean isPassword = loginPageObjectModel.isPasswordFieldPassword();
+        softly.assertThat(isPassword)
+                .as("Password should appear as dots or stars (hidden)")
+                .isTrue();
     }
 }

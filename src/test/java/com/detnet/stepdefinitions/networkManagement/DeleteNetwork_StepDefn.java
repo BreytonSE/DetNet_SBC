@@ -27,12 +27,14 @@ public class DeleteNetwork_StepDefn {
     }
 
     @When("the user confirms the deletion by clicking the Delete button in the popup")
-    public void the_user_confirms_the_deletion_by_clicking_the_delete_button_in_the_popup() {
+    public void the_user_confirms_the_deletion_by_clicking_the_delete_button_in_the_popup() throws InterruptedException {
         NetworkPageObjectModel networkPageObjectModel = pageObjectManager.getNetworkPageObjectModel();
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
+        networkValidation.validateDeleteDialogVisibility();
         networkValidation.validateDeleteNetworkYesButtonVisibility();
         networkValidation.validateDeleteNetworkYesButtonState();
         networkPageObjectModel.confirmToDeleteNetwork();
+        networkValidation.validateDeleteDialogClosed();
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 

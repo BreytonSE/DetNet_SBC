@@ -30,14 +30,14 @@ public class SearchNetwork_StepDefn {
     @When("the user types the ID or name of the network in the search bar")
     public void the_user_types_the_id_or_name_of_the_network_in_the_search_bar() {
         NetworkPageObjectModel networkPageObjectModel = pageObjectManager.getNetworkPageObjectModel();
-        networkPageObjectModel.searchId("148");
+        networkPageObjectModel.searchId("162");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("the list should display results matching the entered search keyword")
-    public void the_list_should_display_results_matching_the_entered_search_keyword() {
+    public void the_list_should_display_results_matching_the_entered_search_keyword() throws InterruptedException {
         NetworkPageObjectModel networkPageObjectModel = pageObjectManager.getNetworkPageObjectModel();
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
-        networkValidation.validateIfNetworkIsPresentFromSearch("148");
+        networkValidation.validateIfNetworkIsPresentFromSearch("162");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

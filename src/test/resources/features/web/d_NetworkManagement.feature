@@ -44,17 +44,16 @@
     And the user confirms the deletion by clicking the Delete button in the popup
     Then the network should no longer be visible on the BlastWeb interface
 
-#    Needs fixing
-#  Scenario: Verify that multiple networks can be deleted at once
-#    Given the user has entered valid BlastWeb login credentials
-#    When the user opens the navigation menu by clicking the current system user's name
-#    And the user navigates to the Settings page
-#    And the user opens the "Networks" page
-#    And the user selects multiple networks by clicking the checkboxes in the network list or the header checkbox
-#    And the user clicks the enabled "Delete Networks" button
-#    And a confirmation popup is displayed for network deletion
-#    And the user clicks "Yes" to confirm the deletion
-#    Then the selected networks should be successfully deleted from the interface
+  Scenario: Verify that multiple networks can be deleted at once
+    Given the user has entered valid BlastWeb login credentials
+    When the user opens the navigation menu by clicking the current system user's name
+    And the user navigates to the Settings page
+    And the user opens the "Networks" page
+    And the user selects multiple networks by clicking the checkboxes in the network list or the header checkbox
+    And the user clicks the enabled "Delete Networks" button
+    And a confirmation popup is displayed for network deletion
+    And the user clicks "Yes" to confirm the deletion
+    Then the selected networks should be successfully deleted from the interface
 
   Scenario: Verify that a network can be searched using ID and name
     Given the user has entered valid BlastWeb login credentials
