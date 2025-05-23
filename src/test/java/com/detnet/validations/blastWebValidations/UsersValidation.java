@@ -306,4 +306,88 @@ public class UsersValidation {
                 .as("'Yes' -button should be visible on the delete alert window")
                 .isTrue();
     }
+
+    public void validateIfUserIsDeleted(String username){
+        boolean isDeleted = usersPageObjectModel.isUserDeleted(username);
+        softly.assertThat(isDeleted)
+                .as("User with username %s should be deleted.",username)
+                .isTrue();
+    }
+
+    public void validateSelectAllCheckboxVisibility(){
+        boolean isVisible = usersPageObjectModel.isDeleteAllCheckboxVisible();
+        softly.assertThat(isVisible)
+                .as("'Select All' checkbox should be visible")
+                .isTrue();
+    }
+
+    public void validateSelectAllCheckboxState(){
+        boolean isEnabled = usersPageObjectModel.isDeleteAllCheckboxEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Select All' checkbox should be enabled")
+                .isTrue();
+    }
+
+    public void validateDeleteUsersButtonVisibility(){
+        boolean isVisible = usersPageObjectModel.isDeleteUsersButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Delete Users' -button should be visible.")
+                .isTrue();
+    }
+
+    public void validateDeleteUsersButtonState(){
+        boolean isEnabled = usersPageObjectModel.isDeleteUsersButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Delete Users' -button should be enabled.")
+                .isTrue();
+    }
+
+    public void validatePasswordResetIconVisibility(){
+        boolean isVisible = usersPageObjectModel.isPasswordResetIconVisible();
+        softly.assertThat(isVisible)
+                .as("Password reset icon (indicated as a shield symbol) should be visible")
+                .isTrue();
+    }
+
+    public void validatePasswordResetDialogVisibility(){
+        boolean isOpen = usersPageObjectModel.isPasswordResetDialogOpen();
+        softly.assertThat(isOpen)
+                .as("Password reset dialog should be open")
+                .isTrue();
+    }
+
+    public void validateSearchBarVisibility(){
+        boolean isVisible = usersPageObjectModel.isUserSearchBarVisible();
+        softly.assertThat(isVisible)
+                .as("User search bar should be visible.")
+                .isTrue();
+    }
+
+    public void validateSearchBarState(){
+        boolean isEnabled = usersPageObjectModel.isUserSearchBarEnabled();
+        softly.assertThat(isEnabled)
+                .as("User search bar should be enabled")
+                .isTrue();
+    }
+
+    public void validateIfSearchBarIsEmpty(){
+        boolean isEmpty = usersPageObjectModel.isUserSearchBarEmpty();
+        softly.assertThat(isEmpty)
+                .as("User search bar should be empty by default")
+                .isTrue();
+    }
+
+    public void validateSearchedUser(String expectedUser){
+        String actualUser = usersPageObjectModel.getSearchedValue();
+        softly.assertThat(actualUser)
+                .as("Actual searched user does not match expected searched user")
+                .isEqualTo(expectedUser);
+    }
+
+    public void validateIfUserIsFound(String credentials){
+        boolean isPresent = usersPageObjectModel.isUserFound(credentials);
+        softly.assertThat(isPresent)
+                .as("Searched user should be present")
+                .isTrue();
+    }
 }

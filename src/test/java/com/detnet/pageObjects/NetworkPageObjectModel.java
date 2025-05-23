@@ -306,7 +306,15 @@ public class NetworkPageObjectModel {
 
     public boolean isSearchedNetworkAvailable(String id){
         String network = "//td[normalize-space()=" + id + "]";
-        return page.locator(network).isVisible();
+        try{
+            page.locator(network)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 
     public boolean isDeleteDialogVisible(){

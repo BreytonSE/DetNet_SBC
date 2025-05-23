@@ -35,12 +35,12 @@ public class DeleteUser_StepDefn {
         usersPageObjectModel.confirmToDelete();
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @Then("then verify in the database that the user has been deleted")
-    public void then_verify_in_the_database_that_the_user_has_been_deleted() {
-//        TODO: Don't use this logic if soft deletion is performed
-//        DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
-//        DatabaseUsersValidations databaseUsersValidations = new DatabaseUsersValidations(databaseObjectModel);
-//        databaseUsersValidations.validateIfUserIsDeleted("johnD@detnet.com");
-//        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+    @Then("lastly verify that the user has been deleted on the user interface")
+    public void lastly_verify_that_the_user_has_been_deleted_on_the_user_interface() throws InterruptedException {
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersValidation.validateIfUserIsDeleted("JohnD");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

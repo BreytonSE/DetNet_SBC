@@ -16,6 +16,8 @@ public class PageObjectManager {
     private UsersPageObjectModel usersPageObjectModel;
     private NetworkPageObjectModel networkPageObjectModel;
     private DevicePageObjectModel devicePageObjectModel;
+    private DeviceSummaryPageObjectModel deviceSummaryPageObjectModel;
+    private PasswordResetPageObjectModel passwordResetPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -95,5 +97,19 @@ public class PageObjectManager {
             devicePageObjectModel = new DevicePageObjectModel(page);
         }
         return devicePageObjectModel;
+    }
+
+    public DeviceSummaryPageObjectModel getDeviceSummaryPageObjectModel(){
+        if(deviceSummaryPageObjectModel == null){
+            deviceSummaryPageObjectModel = new DeviceSummaryPageObjectModel(page);
+        }
+        return deviceSummaryPageObjectModel;
+    }
+
+    public PasswordResetPageObjectModel getPasswordResetPageObjectModel(){
+        if (passwordResetPageObjectModel == null){
+            passwordResetPageObjectModel = new PasswordResetPageObjectModel(page);
+        }
+        return passwordResetPageObjectModel;
     }
 }

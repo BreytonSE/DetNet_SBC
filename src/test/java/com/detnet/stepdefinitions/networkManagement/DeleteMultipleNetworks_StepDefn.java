@@ -56,7 +56,7 @@ public class DeleteMultipleNetworks_StepDefn {
         NetworkPageObjectModel networkPageObjectModel = pageObjectManager.getNetworkPageObjectModel();
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateIfSelectedNetworksIsDeleted("ETHER002-DUMMY");
-        networkValidation.validateIfSelectedNetworksIsDeleted("ETHER005-DUMMY");
+        networkValidation.validateIfSelectedNetworksIsDeleted("ETHER004-DUMMY");
         networkValidation.validateIfSelectedNetworksIsDeleted("Ethernet");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }

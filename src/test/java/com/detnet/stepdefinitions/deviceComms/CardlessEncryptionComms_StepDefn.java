@@ -2,9 +2,13 @@ package com.detnet.stepdefinitions.deviceComms;
 
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
+import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.pageObjects.DevicePageObjectModel;
+import com.detnet.pageObjects.DeviceSummaryPageObjectModel;
 import com.detnet.pageObjects.SettingsPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
+import com.detnet.validations.blastWebValidations.DashboardValidation;
+import com.detnet.validations.blastWebValidations.DeviceSummaryValidation;
 import com.detnet.validations.blastWebValidations.DeviceValidation;
 import com.detnet.validations.blastWebValidations.SettingsValidation;
 import com.microsoft.playwright.Page;
@@ -89,12 +93,22 @@ public class CardlessEncryptionComms_StepDefn {
         deviceValidation.validateIfDeviceIsAdded("172.20.3.92");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @Then("the system should verify that the device is on the same network")
-    public void the_system_should_verify_that_the_device_is_on_the_same_network() throws InterruptedException {
-//        TODO: Verify that the BCU device exists on the same network as the pc.
-    }
+
     @Then("the device state should be verified")
-    public void the_device_state_should_be_verified() {
-//        TODO: Verify device state
+    public void the_device_state_should_be_verified() throws InterruptedException {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateDashboardButtonState();
+        dashboardPageObjectModel.goToDashboard();
+        dashboardValidation.validateDeviceDetailsButtonVisibility();
+        dashboardValidation.validateDeviceDetailsButtonState();
+        dashboardValidation.validateIfNewDeviceIsOnDashboard();
+        dashboardPageObjectModel.viewDeviceDetails(1);
+
+        DeviceSummaryPageObjectModel deviceSummaryPageObjectModel = pageObjectManager.getDeviceSummaryPageObjectModel();
+        DeviceSummaryValidation deviceSummaryValidation = new DeviceSummaryValidation(deviceSummaryPageObjectModel);
+        deviceSummaryValidation.validateDeviceStateVisibility();
+        deviceSummaryValidation.validateDeviceCurrentState("Ready to blast"); // IDLE
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

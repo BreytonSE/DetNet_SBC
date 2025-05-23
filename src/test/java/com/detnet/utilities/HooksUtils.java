@@ -14,7 +14,7 @@ public class HooksUtils {
     private static Page page;
     private PageObjectManager pageObjectManager;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-    private static final int TOTAL_SCENARIOS = 19;
+    private static final int TOTAL_SCENARIOS = 23;
 //    private static final int TOTAL_SCENARIOS = 1;
 
     static {

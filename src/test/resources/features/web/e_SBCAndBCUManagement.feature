@@ -10,5 +10,4 @@
     And the user navigates to Device Settings to add a device
     And the user clicks on the Add Device button
     And the user enters the relevant device details for BCU II and presses "Add Device"
-    Then the system should verify that the device is on the same network
     And the device state should be verified

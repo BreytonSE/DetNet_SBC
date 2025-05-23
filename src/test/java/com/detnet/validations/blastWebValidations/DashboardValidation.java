@@ -82,4 +82,32 @@ public class DashboardValidation {
                 .as("Settings button should be enabled")
                 .isTrue();
     }
+
+    public void validateDashboardButtonState(){
+        boolean isEnabled = dashboardPageObjectModel.isDashboardButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Dashboard' button should be enabled.")
+                .isTrue();
+    }
+
+    public void validateDeviceDetailsButtonVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isViewDeviceDetailsButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'View Device Details' -button should be visible.")
+                .isTrue();
+    }
+
+    public void validateDeviceDetailsButtonState(){
+        boolean isEnabled = dashboardPageObjectModel.isViewDetailsButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'View Device Details' -button should be enabled.")
+                .isTrue();
+    }
+
+    public void validateIfNewDeviceIsOnDashboard(){
+        boolean isPresent = dashboardPageObjectModel.isNewDeviceOnDashboard();
+        softly.assertThat(isPresent)
+                .as("New created device should be visible on the BlastWeb dashboard.")
+                .isTrue();
+    }
 }
