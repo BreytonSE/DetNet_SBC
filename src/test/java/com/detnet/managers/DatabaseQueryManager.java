@@ -17,12 +17,12 @@ public enum DatabaseQueryManager {
                     "expected_replies, lost_replies, bad_replies\n" +
                     "\tFROM public.networks;"
     ),
-    SELECT_NETWORK_BY_ID(
+    SELECT_NETWORK_BY_NAME(
             "SELECT id, resourcename, param, netdelay, use, statistics, extendedstats, messagegap, serial_type, " +
                     "reportdets, createdat, lastmodifiedat, createdby, lastmodifiedby, deleted, messages_in, messages_out, " +
                     "expected_replies, lost_replies, bad_replies\n" +
                     "\tFROM public.networks " +
-                    "WHERE id = ?;"
+                    "WHERE resourcename = ?;"
     );
 //    TODO: Write more queries here...
 

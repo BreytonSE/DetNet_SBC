@@ -25,19 +25,19 @@ public class DatabaseNetworksValidations {
         databaseObjectModel.getAllNetworks().forEach(System.out::println);
     }
 
-    public void validateNetworkExistById(int id){
-        List<Map<String, Object>> networkRecords = databaseObjectModel.findNetworkById(id);
+    public void validateNetworkExistByResourceName(String resourceName){
+        List<Map<String, Object>> networkRecords = databaseObjectModel.findNetworkByResourceName(resourceName);
         softly.assertThat(networkRecords)
-                .as("Network with ID '%s' should exist in database",id)
+                .as("Network with resource name '%s' should exist in database",resourceName)
                 .isNotNull()
                 .isNotEmpty();
         databaseObjectModel.getAllUsers().forEach(System.out::println);
     }
 
-    public void validateIfNetworkMessageGapUpdated(int expectedMessageGap, int id){
-        List<Map<String,Object>> networkRecords = databaseObjectModel.findNetworkById(id);
+    public void validateIfNetworkMessageGapUpdated(int expectedMessageGap, String resourceName){
+        List<Map<String,Object>> networkRecords = databaseObjectModel.findNetworkByResourceName(resourceName);
         softly.assertThat(networkRecords)
-                .as("Network with id '%s' should exist in the database",id)
+                .as("Network with resource name '%s' should exist in the database",resourceName)
                 .isNotEmpty();
         int actualMessageGap = (int) networkRecords.get(0).get("messagegap");
         softly.assertThat(actualMessageGap)
@@ -45,10 +45,10 @@ public class DatabaseNetworksValidations {
                 .isEqualTo(expectedMessageGap);
     }
 
-    public void validateIfNetworkDelayUpdated(int expectedDelay,int id){
-        List<Map<String,Object>> networkRecords = databaseObjectModel.findNetworkById(id);
+    public void validateIfNetworkDelayUpdated(int expectedDelay,String resourceName){
+        List<Map<String,Object>> networkRecords = databaseObjectModel.findNetworkByResourceName(resourceName);
         softly.assertThat(networkRecords)
-                .as("Network with id '%s' should exist in the database",id)
+                .as("Network with resource name '%s' should exist in the database",resourceName)
                 .isNotEmpty();
         int actualDelay = (int) networkRecords.get(0).get("netdelay");
         softly.assertThat(actualDelay)

@@ -59,8 +59,8 @@ public class EditNetwork_StepDefn {
     public void the_changes_should_be_reflected_in_the_backend_database() {
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseNetworksValidations databaseNetworksValidations = new DatabaseNetworksValidations(databaseObjectModel);
-        databaseNetworksValidations.validateIfNetworkMessageGapUpdated(30,26);
-        databaseNetworksValidations.validateIfNetworkDelayUpdated(2000,26);
+        databaseNetworksValidations.validateIfNetworkMessageGapUpdated(30,"Ethernet");
+        databaseNetworksValidations.validateIfNetworkDelayUpdated(2000,"Ethernet");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

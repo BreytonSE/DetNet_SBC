@@ -96,4 +96,18 @@ public class SettingsValidation {
                 .as("Actual text does not match expected text.")
                 .isEqualTo(expectedText);
     }
+
+    public void validateNetworkTreeTabVisibility(){
+        boolean isVisible = settingsPageObjectModel.isNetworkTreeTabVisible();
+        softly.assertThat(isVisible)
+                .as("Network Tree tab should be visible.")
+                .isTrue();
+    }
+
+    public void validateNetworkTreeTabText(String expectedText){
+        String actualText = settingsPageObjectModel.getNetworkTreeText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
 }

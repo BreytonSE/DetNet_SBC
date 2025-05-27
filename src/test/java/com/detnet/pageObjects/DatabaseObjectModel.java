@@ -34,7 +34,7 @@ public class DatabaseObjectModel {
         return networks;
     }
 
-    public List<Map<String,Object>> findNetworkById(int id){
-        return DatabaseUtils.findNetworkById(id);
+    public List<Map<String,Object>> findNetworkByResourceName(String resourceName){
+        return DatabaseUtils.findNetworkByResourceName(resourceName);
     }
 }

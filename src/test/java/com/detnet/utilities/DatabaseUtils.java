@@ -58,7 +58,7 @@ public class DatabaseUtils {
         return executeQuery(DatabaseQueryManager.SELECT_ALL_NETWORKS);
     }
 
-    public static List<Map<String,Object>> findNetworkById(int id){
-        return executeQuery(DatabaseQueryManager.SELECT_NETWORK_BY_ID,id);
+    public static List<Map<String,Object>> findNetworkByResourceName(String resourceName){
+        return executeQuery(DatabaseQueryManager.SELECT_NETWORK_BY_NAME,resourceName);
     }
 }

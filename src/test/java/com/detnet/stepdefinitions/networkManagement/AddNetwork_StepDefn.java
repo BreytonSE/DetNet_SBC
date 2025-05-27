@@ -115,7 +115,11 @@ public class AddNetwork_StepDefn {
     public void the_new_network_should_be_present_in_the_backend_database() {
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseNetworksValidations databaseNetworksValidations = new DatabaseNetworksValidations(databaseObjectModel);
-        databaseNetworksValidations.validateNetworkExistById(26);
+        databaseNetworksValidations.validateNetworkExistByResourceName("Ethernet");
+        databaseNetworksValidations.validateNetworkExistByResourceName("ETHER002-DUMMY");
+        databaseNetworksValidations.validateNetworkExistByResourceName("ETHER003-DUMMY");
+        databaseNetworksValidations.validateNetworkExistByResourceName("ETHER004-DUMMY");
+        databaseNetworksValidations.validateNetworkExistByResourceName("ETHER005-DUMMY");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }
