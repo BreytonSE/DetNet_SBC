@@ -35,11 +35,11 @@ public class EmailUtils {
             String allureReportLink = GoogleDriveUtils.uploadReportToDrive(allureReportFile.getPath(),"text/html");
 
             List<String> recipientsEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com"/*,
+                    "breytonseanernstzen1224@gmail.com",
                     "breyton.ernstzen@testheroes.co.za",
                     "moosaa@detnet.com",
                     "maysond@detnet.com",
-                    "kydh@detnet.com"*/
+                    "kydh@detnet.com"
             );
             sendEmailWithAttachment(recipientsEmails,
                     "BlastWeb Test Report",

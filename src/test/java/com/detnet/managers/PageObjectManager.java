@@ -20,6 +20,7 @@ public class PageObjectManager {
     private PasswordResetPageObjectModel passwordResetPageObjectModel;
     private NetworkTreePageObjectModel networkTreePageObjectModel;
     private DeviceDetailsPageObjectModel deviceDetailsPageObjectModel;
+    private GroupsPageObjectModel groupsPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -127,5 +128,12 @@ public class PageObjectManager {
             deviceDetailsPageObjectModel = new DeviceDetailsPageObjectModel(page);
         }
         return deviceDetailsPageObjectModel;
+    }
+
+    public GroupsPageObjectModel getGroupsPageObjectModel(){
+        if(groupsPageObjectModel == null){
+            groupsPageObjectModel = new GroupsPageObjectModel(page);
+        }
+        return groupsPageObjectModel;
     }
 }

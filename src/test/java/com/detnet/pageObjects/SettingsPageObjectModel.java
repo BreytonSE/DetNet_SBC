@@ -11,6 +11,7 @@ public class SettingsPageObjectModel {
     private final String networksButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Networks')]";
     private final String devicesTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Devices\")]";
     private final String networkTreeTab = "//span[contains(text(),\"Network Tree\")]";
+    private final String groupsTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Groups\")]";
 
     public SettingsPageObjectModel(Page page) {
         this.page = page;
@@ -91,5 +92,17 @@ public class SettingsPageObjectModel {
 
     public void openNetworkTree(){
         page.locator(networkTreeTab).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isGroupsTabVisible(){
+         return page.locator(groupsTab).isVisible();
+    }
+
+    public String getGroupsTabText(){
+        return page.locator(groupsTab).textContent();
+    }
+
+    public void openGroups(){
+        page.locator(groupsTab).click(new Locator.ClickOptions().setTimeout(5000));
     }
 }
