@@ -61,4 +61,12 @@ public class DatabaseUtils {
     public static List<Map<String,Object>> findNetworkByResourceName(String resourceName){
         return executeQuery(DatabaseQueryManager.SELECT_NETWORK_BY_NAME,resourceName);
     }
+
+    public static List<Map<String,Object>> findGroupByName(String name){
+        return executeQuery(DatabaseQueryManager.SELECT_GROUP_BY_NAME,name);
+    }
+
+    public static List<Map<String, Object>> getAllGroups(){
+        return executeQuery(DatabaseQueryManager.SELECT_ALL_GROUPS);
+    }
 }

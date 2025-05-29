@@ -8,10 +8,12 @@ import java.util.Map;
 public class DatabaseObjectModel {
     private final List<Map<String,Object>> users;
     private final List<Map<String,Object>> networks;
+    private final List<Map<String,Object>> groups;
 
     public DatabaseObjectModel() {
         this.users = DatabaseUtils.getAllUsers();
         this.networks = DatabaseUtils.getAllNetworks();
+        this.groups = DatabaseUtils.getAllGroups();
     }
 
     public boolean hasUsers(){
@@ -36,5 +38,17 @@ public class DatabaseObjectModel {
 
     public List<Map<String,Object>> findNetworkByResourceName(String resourceName){
         return DatabaseUtils.findNetworkByResourceName(resourceName);
+    }
+
+    public List<Map<String,Object>> getAllGroups(){
+        return groups;
+    }
+
+    public List<Map<String, Object>> findGroupByName(String name){
+        return DatabaseUtils.findGroupByName(name);
+    }
+
+    public boolean hasGroups(){
+        return groups != null && !groups.isEmpty();
     }
 }

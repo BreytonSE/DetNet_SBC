@@ -61,4 +61,117 @@ public class GroupsValidation {
                 .as("'+Add Group' -button should be enabled")
                 .isTrue();
     }
+
+    public void validateAddGroupPageURL(String expectedURL){
+        String actualURL = groupsPageObjectModel.getAddGroupPageURL();
+        softly.assertThat(actualURL)
+                .as("Actual URL does not match expected URL")
+                .isEqualTo(expectedURL);
+    }
+
+    public void validateAddGroupFormVisibility(){
+        boolean isVisible = groupsPageObjectModel.isAddGroupFormVisible();
+        softly.assertThat(isVisible)
+                .as("Add Group form should be visible")
+                .isTrue();
+    }
+
+    public void validateAddGroupHeadingText(String expectedText){
+        String actualText = groupsPageObjectModel.getAddGroupHeadingText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
+
+    public void validateGroupNameFieldVisibility(){
+        boolean isVisible = groupsPageObjectModel.isGroupNameInputFieldVisible();
+        softly.assertThat(isVisible)
+                .as("Group name input field should be visible.")
+                .isTrue();
+    }
+
+    public void validateGroupNameFieldState(){
+        boolean isEnabled = groupsPageObjectModel.isGroupNameFieldEnabled();
+        softly.assertThat(isEnabled)
+                .as("Group name input field should be enabled.")
+                .isTrue();
+    }
+
+    public void validateGroupNameFieldIfEmpty(){
+        boolean isEmpty = groupsPageObjectModel.isGroupNameFieldEmpty();
+        softly.assertThat(isEmpty)
+                .as("Group name field should be empty by default")
+                .isTrue();
+    }
+
+    public void validateGroupNameFieldIfFilled(){
+        boolean isFilled = groupsPageObjectModel.isGroupNameFieldFilled();
+        softly.assertThat(isFilled)
+                .as("Group name field should be filled")
+                .isTrue();
+    }
+
+    public void validateGroupName(String expectedGroupName){
+        String actualGroupName = groupsPageObjectModel.getGroupName();
+        softly.assertThat(actualGroupName)
+                .as("Actual group name does not match expected group name.")
+                .isEqualTo(expectedGroupName);
+    }
+
+    public void validateColorPickerVisibility(){
+        boolean isVisible = groupsPageObjectModel.isColorPickerVisible();
+        softly.assertThat(isVisible)
+                .as("Color picker should be visible")
+                .isTrue();
+    }
+
+    public void validateColorPickerState(){
+        boolean isEnabled = groupsPageObjectModel.isColorPickerEnabled();
+        softly.assertThat(isEnabled)
+                .as("Color picker should be enabled.")
+                .isTrue();
+    }
+
+    public void validateIfColorPickerOpen(){
+        boolean isOpen = groupsPageObjectModel.isColorPickerOpen();
+        softly.assertThat(isOpen)
+                .as("Color picker should be open.")
+                .isTrue();
+    }
+
+    public void validateRGBFieldVisibility(){
+        boolean isVisible = groupsPageObjectModel.isRGBFieldsVisible();
+        softly.assertThat(isVisible)
+                .as("RGB fields should be visible.")
+                .isTrue();
+    }
+
+    public void validateRGBColorCode(String expectedRed, String expectedGreen, String expectedBlue){
+        String actualRGB = groupsPageObjectModel.getRGBColorCode();
+        String expectedRGB = expectedRed + "," + expectedGreen + "," + expectedBlue;
+        softly.assertThat(actualRGB)
+                .as("Actual RGB color code does not match expected RGB color code")
+                .isEqualTo(expectedRGB);
+    }
+
+    public void validateSaveGroupButtonVisibility(){
+        boolean isVisible = groupsPageObjectModel.isSaveGroupButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Add Group button should be visible")
+                .isTrue();
+    }
+
+    public void validateSaveGroupButtonState(){
+        boolean isEnabled = groupsPageObjectModel.isSaveGroupButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("Add Group button should be enabled")
+                .isTrue();
+    }
+
+    public void validateIfGroupIsAdded(){
+        boolean isAdded = groupsPageObjectModel.isGroupAddedToInterface();
+        softly.assertThat(isAdded)
+                .as("Group should be visible on the interface table.")
+                .isTrue();
+    }
 }

@@ -23,6 +23,15 @@ public enum DatabaseQueryManager {
                     "expected_replies, lost_replies, bad_replies\n" +
                     "\tFROM public.networks " +
                     "WHERE resourcename = ?;"
+    ),
+    SELECT_GROUP_BY_NAME(
+            "SELECT id, name, color, createdat, lastmodifiedat, createdby, lastmodifiedby " +
+                    "FROM public.device_groups " +
+                    "WHERE name = ?;"
+    ),
+    SELECT_ALL_GROUPS(
+            "SELECT id, name, color, createdat, lastmodifiedat, createdby, lastmodifiedby " +
+                    "FROM public.device_groups;"
     );
 //    TODO: Write more queries here...
 
