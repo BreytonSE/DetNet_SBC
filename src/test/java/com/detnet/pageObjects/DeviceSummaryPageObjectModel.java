@@ -20,8 +20,8 @@ public class DeviceSummaryPageObjectModel {
         }
     }
 
-    public String getCurrentDeviceState(){
-        String deviceState = "//span[@class=\"text\"][normalize-space()=\"Ready to blast\"]";
+    public String getCurrentDeviceState() {
+        String deviceState = "//span[@class=\"text\"][normalize-space()=\"Idle\"]";
         return page.locator(deviceState).textContent();
     }
 }

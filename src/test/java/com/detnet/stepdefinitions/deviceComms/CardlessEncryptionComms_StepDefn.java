@@ -95,7 +95,7 @@ public class CardlessEncryptionComms_StepDefn {
     }
 
     @Then("the device state should be verified")
-    public void the_device_state_should_be_verified() throws InterruptedException {
+    public void the_device_state_should_be_verified() {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateDashboardButtonState();
@@ -108,7 +108,7 @@ public class CardlessEncryptionComms_StepDefn {
         DeviceSummaryPageObjectModel deviceSummaryPageObjectModel = pageObjectManager.getDeviceSummaryPageObjectModel();
         DeviceSummaryValidation deviceSummaryValidation = new DeviceSummaryValidation(deviceSummaryPageObjectModel);
         deviceSummaryValidation.validateDeviceStateVisibility();
-        deviceSummaryValidation.validateDeviceCurrentState("Ready to blast"); // IDLE
+        deviceSummaryValidation.validateDeviceCurrentState("IDLE"); // IDLE
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }
