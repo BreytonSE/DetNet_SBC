@@ -22,6 +22,9 @@ public class GroupsPageObjectModel {
     private final String rgbField = "//div[@class=\"rgba-text ng-star-inserted\"]";
     private final String saveGroup = "//span[contains(text(),\"Add Group\")]";
     private final String group = "//tr[@class=\"mat-mdc-row mdc-data-table__row cdk-row ng-star-inserted\"]";
+    private final String editHeading = "//h2[normalize-space()=\"Edit Group\"]";
+    private final String updateGroupBtn = "//button[@id=\"addNetworkSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
+    private final String searchBar = "//input[@placeholder=\"Search using ID, Name\"]";
 
     public GroupsPageObjectModel(Page page) {
         this.page = page;
@@ -201,4 +204,89 @@ public class GroupsPageObjectModel {
             return false;
         }
    }
+
+   public boolean isEditIconVisible(int row){
+        String rowIcon = "(//mat-icon[@role='img'][normalize-space()='edit'])[" + row + "]";
+       try {
+           page.locator(rowIcon)
+                   .waitFor(new Locator.WaitForOptions()
+                           .setState(WaitForSelectorState.VISIBLE)
+                           .setTimeout(5000));
+           return true;
+       }catch (PlaywrightException e){
+           return false;
+       }
+   }
+
+   public void editGroup(int groupNumber){
+       String rowIcon = "(//mat-icon[@role='img'][normalize-space()='edit'])[" + groupNumber + "]";
+       page.locator(rowIcon).click(new Locator.ClickOptions().setTimeout(5000));
+   }
+
+   public boolean isEditGroupsHeadingVisible(){
+        return page.locator(editHeading).isVisible();
+   }
+
+   public String getEditGroupsPageURL(){
+        page.waitForURL("**/settings/groups/*/edit");
+        return page.url();
+   }
+
+   public String getEditGroupsHeading(){
+        return page.locator(editHeading).textContent();
+   }
+
+   public void editGroupName(String groupName){
+        page.locator(groupNameInput).click(new Locator.ClickOptions().setTimeout(5000));
+        page.locator(groupNameInput).clear();
+        page.locator(groupNameInput).fill(groupName);
+   }
+
+   public boolean isUpdateButtonVisible(){
+        return page.locator(updateGroupBtn).isVisible();
+   }
+
+   public boolean isUpdateButtonEnabled(){
+        return page.locator(updateGroupBtn).isEnabled();
+   }
+
+   public void updateGroupDetails(){
+        page.locator(updateGroupBtn).click(new Locator.ClickOptions().setTimeout(5000));
+   }
+
+   public boolean isGroupNameUpdated(String groupName){
+        String group = "(//td[normalize-space()='" + groupName + "'])[1]";
+        try{
+            page.locator(group)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+   }
+
+   public boolean isSearchBarVisible(){
+        return page.locator(searchBar).isVisible();
+   }
+
+   public boolean isSearchBarEnabled(){
+        return page.locator(searchBar).isEnabled();
+   }
+
+   public boolean isSearchbarEmpty(){
+        String searchField = page.locator(searchBar).inputValue();
+        return searchField == null || searchField.trim().isEmpty();
+   }
+
+   public void searchGroup(String group){
+        page.locator(searchBar).click();
+        page.locator(searchBar).clear();
+        page.locator(searchBar).fill(group);
+   }
+    public boolean isSearchedGroupFound(String group){
+        String groupName = "(//td[normalize-space()='" + group + "'])[1]";
+        return page.locator(groupName).isVisible();
+    }
 }

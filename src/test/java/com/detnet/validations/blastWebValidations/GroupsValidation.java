@@ -174,4 +174,81 @@ public class GroupsValidation {
                 .as("Group should be visible on the interface table.")
                 .isTrue();
     }
+
+    public void validateEditIconVisibility(int row){
+        boolean isVisible = groupsPageObjectModel.isEditIconVisible(row);
+        softly.assertThat(isVisible)
+                .as("Edit icon should be visible.")
+                .isTrue();
+    }
+
+    public void validateEditGroupsPageHeadingVisibility(){
+        boolean isVisible = groupsPageObjectModel.isEditGroupsHeadingVisible();
+        softly.assertThat(isVisible)
+                .as("Edit Groups heading should be visible")
+                .isTrue();
+    }
+
+    public void validateEditGroupsPageURL(String expectedURL){
+        String actualURL = groupsPageObjectModel.getEditGroupsPageURL();
+        softly.assertThat(actualURL)
+                .as("Actual URL does not match expected URL")
+                .isEqualTo(expectedURL);
+    }
+
+    public void validateEditGroupsHeading(String expectedText){
+        String actualText = groupsPageObjectModel.getEditGroupsHeading();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text")
+                .isEqualTo(expectedText);
+    }
+
+    public void validateUpdateButtonVisibility(){
+        boolean isVisible = groupsPageObjectModel.isUpdateButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Update button (Save) should be visible.")
+                .isTrue();
+    }
+
+    public void validateUpdateButtonButtonState(){
+        boolean isEnabled = groupsPageObjectModel.isUpdateButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("Save button should be enabled before user can update a group")
+                .isTrue();
+    }
+
+    public void validateUpdateGroupNameVisibility(String groupName){
+        boolean isUpdated = groupsPageObjectModel.isGroupNameUpdated(groupName);
+        softly.assertThat(isUpdated)
+                .as("Group name should have changed after group name update")
+                .isTrue();
+    }
+
+    public void validateSearchBarVisibility(){
+        boolean isVisible = groupsPageObjectModel.isSearchBarVisible();
+        softly.assertThat(isVisible)
+                .as("Search bar should be visible.")
+                .isTrue();
+    }
+
+    public void validateSearchBarState(){
+        boolean isEnabled = groupsPageObjectModel.isSearchBarEnabled();
+        softly.assertThat(isEnabled)
+                .as("Searchbar should be enabled by default")
+                .isTrue();
+    }
+
+    public void validateIfSearchbarIsEmpty(){
+        boolean isEmpty = groupsPageObjectModel.isSearchbarEmpty();
+        softly.assertThat(isEmpty)
+                .as("Search bar should be empty")
+                .isTrue();
+    }
+
+    public void validateIfSearchedGroupIsFound(String group){
+        boolean isFound = groupsPageObjectModel.isSearchedGroupFound(group);
+        softly.assertThat(isFound)
+                .as("Searched group should appear in the list")
+                .isTrue();
+    }
 }
