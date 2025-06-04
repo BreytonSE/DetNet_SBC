@@ -21,6 +21,7 @@ public class PageObjectManager {
     private NetworkTreePageObjectModel networkTreePageObjectModel;
     private DeviceDetailsPageObjectModel deviceDetailsPageObjectModel;
     private GroupsPageObjectModel groupsPageObjectModel;
+    private EmailRecipientsPageObjectModel emailRecipientsPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -135,5 +136,12 @@ public class PageObjectManager {
             groupsPageObjectModel = new GroupsPageObjectModel(page);
         }
         return groupsPageObjectModel;
+    }
+
+    public EmailRecipientsPageObjectModel getEmailRecipientsPageObjectModel(){
+        if(emailRecipientsPageObjectModel == null){
+            emailRecipientsPageObjectModel = new EmailRecipientsPageObjectModel(page);
+        }
+        return emailRecipientsPageObjectModel;
     }
 }

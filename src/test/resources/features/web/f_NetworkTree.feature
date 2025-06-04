@@ -4,6 +4,7 @@ Feature: View network tree feature
   networks or devices, so that I can verify the structure and access the details of each network and device for review
   or editing
 
+  @a_networkTree
   Scenario: Verify that the network tree of the system can be viewed and allows navigation to specific devices on an
   selected network.
     Given the user has entered valid BlastWeb login credentials

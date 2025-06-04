@@ -124,4 +124,25 @@ public class SettingsValidation {
                 .as("Actual text does not match expected text.")
                 .isEqualTo(expectedText);
     }
+
+    public void validateEmailRecipientsTabVisibility(){
+        boolean isVisible = settingsPageObjectModel.isEmailRecipientsTabVisible();
+        softly.assertThat(isVisible)
+                .as("'Email Recipients' -tab should be visible")
+                .isTrue();
+    }
+
+    public void validateEmailRecipientsTabState(){
+        boolean isEnabled = settingsPageObjectModel.isEmailRecipientsTabEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Email Recipients' -tab should be enabled")
+                .isTrue();
+    }
+
+    public void validateEmailRecipientsText(String expectedText){
+        String actualText = settingsPageObjectModel.getEmailRecipientsTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
 }

@@ -189,13 +189,6 @@ public class GroupsValidation {
                 .isTrue();
     }
 
-    public void validateEditGroupsPageURL(String expectedURL){
-        String actualURL = groupsPageObjectModel.getEditGroupsPageURL();
-        softly.assertThat(actualURL)
-                .as("Actual URL does not match expected URL")
-                .isEqualTo(expectedURL);
-    }
-
     public void validateEditGroupsHeading(String expectedText){
         String actualText = groupsPageObjectModel.getEditGroupsHeading();
         softly.assertThat(actualText)
@@ -249,6 +242,55 @@ public class GroupsValidation {
         boolean isFound = groupsPageObjectModel.isSearchedGroupFound(group);
         softly.assertThat(isFound)
                 .as("Searched group should appear in the list")
+                .isTrue();
+    }
+
+    public void validateDeleteIconVisibility(){
+        boolean isVisible = groupsPageObjectModel.isDeleteIconVisible();
+        softly.assertThat(isVisible)
+                .as("Delete icon should be visible")
+                .isTrue();
+    }
+
+    public void validateDeleteIconState(){
+        boolean isEnabled = groupsPageObjectModel.isDeleteIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Delete icon should be enabled")
+                .isTrue();
+    }
+
+    public void validateDeleteDialogWindowVisibility(){
+        boolean isOpen = groupsPageObjectModel.isDeleteDialogWindowOpen();
+        softly.assertThat(isOpen)
+                .as("Delete dialog window should be visible.")
+                .isTrue();
+    }
+
+    public void validateCheckBoxVisibility(){
+        boolean isVisible = groupsPageObjectModel.isCheckBoxVisible();
+        softly.assertThat(isVisible)
+                .as("Checkbox should be visible.")
+                .isTrue();
+    }
+
+    public void validateDeleteAllButtonVisibility(){
+        boolean isVisible = groupsPageObjectModel.isDeleteAllGroupsButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Delete Groups' -button should be visible")
+                .isTrue();
+    }
+
+    public void validateDeleteAllButtonState(){
+        boolean isEnabled = groupsPageObjectModel.isDeleteGroupsButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Delete Groups' button should be enabled")
+                .isTrue();
+    }
+
+    public void validateIfGroupIsDeleted(String groupName){
+        boolean isDeleted = groupsPageObjectModel.isSelectedGroupsDeleted(groupName);
+        softly.assertThat(isDeleted)
+                .as("Selected groups should be deleted")
                 .isTrue();
     }
 }

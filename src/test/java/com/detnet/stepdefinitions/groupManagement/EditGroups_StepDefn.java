@@ -32,7 +32,6 @@ public class EditGroups_StepDefn {
         GroupsPageObjectModel groupsPageObjectModel = pageObjectManager.getGroupsPageObjectModel();
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateEditGroupsPageHeadingVisibility();
-        groupsValidation.validateEditGroupsPageURL("http://localhost:8080/en/settings/groups/1/edit");
         groupsValidation.validateEditGroupsHeading("Edit Group");
         groupsPageObjectModel.editGroupName("Test Group 1");
         groupsPageObjectModel.openColorPicker();

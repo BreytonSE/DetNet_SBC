@@ -12,6 +12,7 @@ public class SettingsPageObjectModel {
     private final String devicesTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Devices\")]";
     private final String networkTreeTab = "//span[contains(text(),\"Network Tree\")]";
     private final String groupsTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Groups\")]";
+    private final String emailRecipientsTab = "//span[normalize-space()=\"Email Recipients\"]";
 
     public SettingsPageObjectModel(Page page) {
         this.page = page;
@@ -104,5 +105,21 @@ public class SettingsPageObjectModel {
 
     public void openGroups(){
         page.locator(groupsTab).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isEmailRecipientsTabVisible(){
+        return page.locator(emailRecipientsTab).isVisible();
+    }
+
+    public boolean isEmailRecipientsTabEnabled(){
+        return page.locator(emailRecipientsTab).isEnabled();
+    }
+
+    public String getEmailRecipientsTabText(){
+        return page.locator(emailRecipientsTab).textContent();
+    }
+
+    public void viewEmailRecipients(){
+        page.locator(emailRecipientsTab).click(new Locator.ClickOptions().setTimeout(5000));
     }
 }

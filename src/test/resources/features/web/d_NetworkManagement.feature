@@ -3,6 +3,7 @@
     As a system administrator, I want to view, edit, and delete network configurations via the BlastWeb interface, so
     that I can ensure the network layer of the system is up-to-date, accurate, and reflective of the required setup.
 
+  @a_networkManagement
   Scenario: Verify that networks of the system can be viewed on the BlastWeb interface as well as on the backend
   (database)
     Given the user has entered valid BlastWeb login credentials
@@ -12,6 +13,7 @@
     Then a list of networks should be displayed on the interface
     And the same list of networks should be present in the backend database
 
+  @b_networkManagement
   Scenario: Verify that networks can be added to the system, ensuring the information can written back to the backend
     Given the user has entered valid BlastWeb login credentials
     When the user opens the navigation menu by clicking the current system user's name
@@ -24,6 +26,7 @@
     Then the new network should appear as the last item in the network list
     And the new network should be present in the backend database
 
+  @c_networkManagement
   Scenario: Verify that an existing network can be edited, ensuring that information can be updated on the backend
     Given the user has entered valid BlastWeb login credentials
     When the user opens the navigation menu by clicking the current system user's name
@@ -35,6 +38,7 @@
     Then the updated network information should be saved successfully without any errors
     And the changes should be reflected in the backend database
 
+  @d_networkManagement
   Scenario: Verify that a network can be deleted, ensuring that information can be deleted on the backend
     Given the user has entered valid BlastWeb login credentials
     When the user opens the navigation menu by clicking the current system user's name
@@ -44,6 +48,7 @@
     And the user confirms the deletion by clicking the Delete button in the popup
     Then the network should no longer be visible on the BlastWeb interface
 
+  @e_networkManagement
   Scenario: Verify that multiple networks can be deleted at once
     Given the user has entered valid BlastWeb login credentials
     When the user opens the navigation menu by clicking the current system user's name
@@ -55,6 +60,7 @@
     And the user clicks "Yes" to confirm the deletion
     Then the selected networks should be successfully deleted from the interface
 
+  @f_networkManagement
   Scenario: Verify that a network can be searched using ID and name
     Given the user has entered valid BlastWeb login credentials
     When the user opens the navigation menu by clicking the current system user's name
