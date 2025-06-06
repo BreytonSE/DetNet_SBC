@@ -69,4 +69,12 @@ public class DatabaseUtils {
     public static List<Map<String, Object>> getAllGroups(){
         return executeQuery(DatabaseQueryManager.SELECT_ALL_GROUPS);
     }
+
+    public static List<Map<String,Object>> getAllRecipients(){
+        return executeQuery(DatabaseQueryManager.SELECT_ALL_RECIPIENTS);
+    }
+
+    public static List<Map<String,Object>> findRecipientByEmail(String email){
+        return executeQuery(DatabaseQueryManager.SELECT_RECIPIENT_BY_EMAIL,email);
+    }
 }

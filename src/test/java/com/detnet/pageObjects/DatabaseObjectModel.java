@@ -9,11 +9,13 @@ public class DatabaseObjectModel {
     private final List<Map<String,Object>> users;
     private final List<Map<String,Object>> networks;
     private final List<Map<String,Object>> groups;
+    private final List<Map<String,Object>> recipients;
 
     public DatabaseObjectModel() {
         this.users = DatabaseUtils.getAllUsers();
         this.networks = DatabaseUtils.getAllNetworks();
         this.groups = DatabaseUtils.getAllGroups();
+        this.recipients = DatabaseUtils.getAllRecipients();
     }
 
     public boolean hasUsers(){
@@ -50,5 +52,17 @@ public class DatabaseObjectModel {
 
     public boolean hasGroups(){
         return groups != null && !groups.isEmpty();
+    }
+
+    public List<Map<String,Object>> getAllRecipients(){
+        return recipients;
+    }
+
+    public boolean hasRecipients(){
+        return recipients != null && !groups.isEmpty();
+    }
+
+    public List<Map<String,Object>> findRecipientByEmail(String email){
+        return DatabaseUtils.findRecipientByEmail(email);
     }
 }

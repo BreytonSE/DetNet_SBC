@@ -117,4 +117,67 @@ public class EmailRecipientsValidation {
                 .as("Actual first name does not match expected first name")
                 .isEqualTo(expectedFirstName);
      }
+
+     public void validateLastNameFieldVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isLastnameFieldVisible();
+        softly.assertThat(isVisible)
+                .as("Last name field should be visible")
+                .isTrue();
+     }
+
+     public void validateLastNameFieldState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isLastNameFieldEnabled();
+        softly.assertThat(isEnabled)
+                .as("Last name field should be enabled")
+                .isTrue();
+     }
+
+     public void validateIfLastNameFieldIsEmpty(){
+        boolean isEmpty = emailRecipientsPageObjectModel.isLastNameFieldEmpty();
+        softly.assertThat(isEmpty)
+                .as("Last name field should be empty by default")
+                .isTrue();
+     }
+
+     public void validateEnteredLastName(String expectedLastName){
+        String actualLastName = emailRecipientsPageObjectModel.getLastName();
+        softly.assertThat(actualLastName)
+                .as("Actual last name does not match expected last name")
+                .isEqualTo(expectedLastName);
+     }
+
+     public void validateSeverityLevelVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isSeverityLevelsVisible();
+        softly.assertThat(isVisible)
+                .as("Severity levels should be visible")
+                .isTrue();
+     }
+
+     public void validateSelectedSeverity(String expectedSeverity){
+        String actualSeverity = emailRecipientsPageObjectModel.getSelectedSeverity();
+        softly.assertThat(actualSeverity)
+                .as("Actual severity does not match expected severity")
+                .isEqualTo(expectedSeverity);
+     }
+
+     public void validateSaveRecipientButtonVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isSaveRecipientButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'+Add Recipient' -button should be visible")
+                .isTrue();
+     }
+
+     public void validateSaveRecipientButtonState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isSaveRecipientButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'+Add Recipient' -button should be enabled")
+                .isTrue();
+     }
+
+     public void validateIfRecipientExists(String recipient){
+        boolean exists = emailRecipientsPageObjectModel.isRecipientAdded(recipient);
+        softly.assertThat(exists)
+                .as("Recipient should exist on the 'Recipient List View' -page")
+                .isTrue();
+     }
 }

@@ -32,9 +32,17 @@ public enum DatabaseQueryManager {
     SELECT_ALL_GROUPS(
             "SELECT id, name, color, createdat, lastmodifiedat, createdby, lastmodifiedby " +
                     "FROM public.device_groups;"
+    ),
+    SELECT_ALL_RECIPIENTS(
+            "SELECT email, created_date, last_modified_date, enabled, deleted, critical_errors, moderate_errors, firstname, lastname " +
+                    "FROM public.error_recipients;"
+    ),
+    SELECT_RECIPIENT_BY_EMAIL(
+            "SELECT email, created_date, last_modified_date, enabled, deleted, critical_errors, moderate_errors, firstname, lastname " +
+                    "FROM public.error_recipients " +
+                    "WHERE email = ?;"
     );
 //    TODO: Write more queries here...
-
     private final String query;
 
     DatabaseQueryManager(String query) {

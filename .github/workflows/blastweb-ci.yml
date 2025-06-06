@@ -42,6 +42,20 @@ jobs:
           Start-Process -NoNewWindow -FilePath "C:\Detnet\BlastWeb\blastweb_service.exe"
         shell: powershell
 
+      - name: Create credentials.properties file
+        run: |
+          $path = "src/test/resources/credentials.properties"
+          @"
+          encrypted.username=${{ secrets.ENCRYPTED_USERNAME }}
+          encrypted.password=${{ secrets.ENCRYPTED_PASSWORD }}
+          encrypted.configPassword=${{ secrets.ENCRYPTED_CONFIGPASSWORD }}
+          encrypted.emailAddress=${{ secrets.ENCRYPTED_EMAILADDRESS }}
+          encrypted.emailPassword=${{ secrets.ENCRYPTED_EMAILPASSWORD }}
+          encrypted.databaseUsername=${{ secrets.ENCRYPTED_DATABASEUSERNAME }}
+          encrypted.databasePassword=${{ secrets.ENCRYPTED_DATABASEPASSWORD }}
+          "@ | Out-File -Encoding ASCII -FilePath $path
+          shell: powershell
+
       - name: Run Tests
         run: | 
           mvn test -Dtest=BlastWebMainRunner 

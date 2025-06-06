@@ -14,8 +14,8 @@ public class HooksUtils {
     private static Page page;
     private PageObjectManager pageObjectManager;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-//    private static final int TOTAL_SCENARIOS = 26;
-    private static final int TOTAL_SCENARIOS = 1;
+    private static final int TOTAL_SCENARIOS = 32;
+//    private static final int TOTAL_SCENARIOS = 1;
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
