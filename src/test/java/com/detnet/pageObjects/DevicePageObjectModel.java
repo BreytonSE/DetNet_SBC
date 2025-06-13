@@ -19,96 +19,105 @@ public class DevicePageObjectModel {
     private final String deviceTypePanel = "//div[@id=\"deviceType-panel\"]";
     private final String ipInputField = "//input[@id=\"ipAddress\"]";
     private final String addDeviceSubmitButton = "//button[@id=\"addDeviceSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
+    private final String deviceManagerField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[6]/div[1]/div[2]/div[1]/mat-select[1]/div[1]/div[1]";
+    private final String deviceManagerDropdownPanel = "//div[@id=\"managerId-panel\"]";
+    private final String parentDeviceField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[7]/div[1]/div[2]/div[1]/mat-select[1]/div[1]";
+    private final String parentDeviceDropDownPanel = "//div[@id=\"parentId-panel\"]";
+    private final String deviceGroupField = "//span[normalize-space()=\"Default Group\"]";
+    private final String deviceGroupDropDown = "//div[@id=\"groupId-panel\"]";
+    private final String editIcon = "//tbody/tr[4]/td[11]/div[1]/mat-icon[1]";
+    private final String editDeviceTxt = "//h2[normalize-space()=\"Edit Device\"]";
+    private final String saveUpdates = "//button[@id=\"addDeviceSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
 
     public DevicePageObjectModel(Page page) {
         this.page = page;
     }
 
-    public boolean isAddDeviceButtonVisible(){
+    public boolean isAddDeviceButtonVisible() {
         return page.locator(addDeviceButton).isVisible();
     }
 
-    public boolean isAddDeviceButtonEnabled(){
+    public boolean isAddDeviceButtonEnabled() {
         return page.locator(addDeviceButton).isEnabled();
     }
 
-    public void addNewDevice(){
-     page.locator(addDeviceButton).click();
+    public void addNewDevice() {
+        page.locator(addDeviceButton).click();
     }
 
-    public String getDevicesURL(){
+    public String getDevicesURL() {
         page.waitForURL("**/settings/devices");
         return page.url();
     }
 
-    public boolean isAddDeviceFormOpen(){
+    public boolean isAddDeviceFormOpen() {
         return page.locator(addDeviceForm).isVisible();
     }
 
-    public boolean isDeviceIdFieldVisible(){
+    public boolean isDeviceIdFieldVisible() {
         return page.locator(deviceIdInput).isVisible();
     }
 
-    public boolean isDeviceIdFieldEnabled(){
+    public boolean isDeviceIdFieldEnabled() {
         return page.locator(deviceIdInput).isEnabled();
     }
 
-    public boolean isDeviceIdFieldEmpty(){
+    public boolean isDeviceIdFieldEmpty() {
         String deviceIdInputField = page.locator(deviceIdInput).inputValue();
         return deviceIdInputField == null || deviceIdInputField.trim().isEmpty();
     }
 
-    public void setDeviceId(String deviceId){
+    public void setDeviceId(String deviceId) {
         page.locator(deviceIdInput).click();
         page.locator(deviceIdInput).fill(deviceId);
     }
 
-    public String getDeviceId(){
+    public String getDeviceId() {
         return page.locator(deviceIdInput).inputValue();
     }
 
-    public boolean isLocationFieldVisible(){
+    public boolean isLocationFieldVisible() {
         return page.locator(deviceLocationInput).isVisible();
     }
 
-    public boolean isLocationFieldEnabled(){
+    public boolean isLocationFieldEnabled() {
         return page.locator(deviceLocationInput).isEnabled();
     }
 
-    public boolean isLocationFieldEmpty(){
+    public boolean isLocationFieldEmpty() {
         String deviceLocationField = page.locator(deviceLocationInput).inputValue();
         return deviceLocationField == null || deviceLocationField.trim().isEmpty();
     }
 
-    public void setLocation(String deviceLocation){
+    public void setLocation(String deviceLocation) {
         page.locator(deviceLocationInput).click();
         page.locator(deviceLocationInput).fill(deviceLocation);
     }
 
-    public String getDeviceLocation(){
+    public String getDeviceLocation() {
         return page.locator(deviceLocationInput).inputValue();
     }
 
-    public boolean isNetworkFieldVisible(){
+    public boolean isNetworkFieldVisible() {
         return page.locator(deviceNetworkDropdown).isVisible();
     }
 
-    public boolean isNetworkFieldEnabled(){
+    public boolean isNetworkFieldEnabled() {
         return page.locator(deviceNetworkDropdown).isEnabled();
     }
 
-    public void openDeviceNetworkDropDown(){
+    public void openDeviceNetworkDropDown() {
         page.locator(deviceNetworkDropdown).click();
     }
 
-    public boolean isDeviceNetworkDropDownOpen(){
-        try{
+    public boolean isDeviceNetworkDropDownOpen() {
+        try {
             page.locator(deviceNetworkPanel)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
-        }catch (PlaywrightException e){
+        } catch (PlaywrightException e) {
             return false;
         }
     }
@@ -118,103 +127,203 @@ public class DevicePageObjectModel {
         page.locator(networkRow).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public boolean isNetworkInterfaceFieldVisible(){
+    public boolean isNetworkInterfaceFieldVisible() {
         return page.locator(deviceNetworkInterfaceDropDown).isVisible();
     }
 
-    public boolean isNetworkInterfaceFieldEnabled(){
+    public boolean isNetworkInterfaceFieldEnabled() {
         return page.locator(deviceNetworkInterfaceDropDown).isEnabled();
     }
 
-    public void openNetworkInterfaceDropDown(){
+    public void openNetworkInterfaceDropDown() {
         page.locator(deviceNetworkInterfaceDropDown).click();
     }
 
-    public boolean isNetworkInterfaceDropDownOpen(){
-        try{
+    public boolean isNetworkInterfaceDropDownOpen() {
+        try {
             page.locator(deviceNetworkInterfacePanel)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
-        }catch (PlaywrightException e){
+        } catch (PlaywrightException e) {
             return false;
         }
     }
 
-    public void selectNetworkInterface(String networkInterface){
+    public void selectNetworkInterface(String networkInterface) {
         String interfaceRow = "(//span[normalize-space()='" + networkInterface + "'])[1]";
         page.locator(interfaceRow).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public boolean isDeviceTypeFieldVisible(){
+    public boolean isDeviceTypeFieldVisible() {
         return page.locator(deviceTypeField).isVisible();
     }
 
-    public boolean isDeviceTypeFieldEnabled(){
+    public boolean isDeviceTypeFieldEnabled() {
         return page.locator(deviceTypeField).isEnabled();
     }
 
-    public void openDeviceTypeDropDown(){
+    public void openDeviceTypeDropDown() {
         page.locator(deviceTypeField).click();
     }
 
-    public boolean isDeviceDropDownOpen(){
-        try{
+    public boolean isDeviceDropDownOpen() {
+        try {
             page.locator(deviceTypePanel)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
-        }catch (PlaywrightException e){
+        } catch (PlaywrightException e) {
             return false;
         }
     }
 
-    public void selectDeviceType(String device){
+    public void selectDeviceType(String device) {
         String deviceType = "(//span[normalize-space()='" + device + "'])[1]";
         page.locator(deviceType).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public boolean isIpAddressFieldVisible(){
+    public boolean isIpAddressFieldVisible() {
         return page.locator(ipInputField).isVisible();
     }
 
-    public boolean isIpAddressFieldEnabled(){
+    public boolean isIpAddressFieldEnabled() {
         return page.locator(ipInputField).isEnabled();
     }
 
-    public void setIpAddress(String ipAddress){
+    public void setIpAddress(String ipAddress) {
         page.locator(ipInputField).click();
         page.locator(ipInputField).clear();
         page.locator(ipInputField).fill(ipAddress);
     }
 
-    public boolean isIpAddressFieldEmpty(){
+    public boolean isIpAddressFieldEmpty() {
         String ipField = page.locator(ipInputField).inputValue();
         return ipField == null || ipField.trim().isEmpty();
     }
 
-    public String getIpAddress(){
+    public String getIpAddress() {
         return page.locator(ipInputField).inputValue();
     }
 
-    public boolean isAddDeviceSubmitButtonVisible(){
+    public boolean isAddDeviceSubmitButtonVisible() {
         return page.locator(addDeviceSubmitButton).isVisible();
     }
 
-    public boolean isSubmitButtonEnabled(){
+    public boolean isSubmitButtonEnabled() {
         return page.locator(addDeviceSubmitButton).isEnabled();
     }
 
-    public void addDevice(){
+    public void addDevice() {
         page.locator(addDeviceSubmitButton).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public boolean isDeviceAdded(String ip){
+    public boolean isDeviceAdded(String ip) {
         String deviceIp = "(//td[normalize-space()='" + ip + "'])[1]";
-        try{
+        try {
             page.locator(deviceIp)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public boolean isDevicesVisible(int tableRow) {
+        String rowNumberPath = "//body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-devices[1]/blastweb-spinner[1]/" +
+                "blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + tableRow + "]";
+        try {
+            page.locator(rowNumberPath)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public boolean isDeviceManagerFieldVisible() {
+        try {
+            page.locator(deviceManagerField)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public boolean isDeviceManageFieldEnabled() {
+        return page.locator(deviceManagerField).isEnabled();
+    }
+
+    public void openDeviceManageDropDown() {
+        page.locator(deviceManagerField).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceManagerDropDownOpen() {
+        try {
+            page.locator(deviceManagerDropdownPanel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public void selectManager(String manager) {
+        String panel = "(//span[normalize-space()='" + manager + "'])[1]";
+        page.locator(panel).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isParentDeviceFieldVisible() {
+        try {
+            page.locator(parentDeviceField)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public boolean isParentDeviceFieldEnabled() {
+        return page.locator(parentDeviceField).isEnabled();
+    }
+
+    public void openParentDeviceDropDown() {
+        page.locator(parentDeviceField).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isParentDeviceDropDownOpen() {
+        try {
+            page.locator(parentDeviceDropDownPanel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public void selectParentDevice(String device) {
+        String parentDevicePath = "(//span[normalize-space()='" + device + "'])[1]";
+        page.locator(parentDevicePath).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceGroupFieldVisible(){
+        try{
+            page.locator(deviceGroupField)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
@@ -222,5 +331,97 @@ public class DevicePageObjectModel {
         }catch (PlaywrightException e){
             return false;
         }
+    }
+
+    public boolean isDeviceGroupFieldEnabled(){
+        return page.locator(deviceGroupField).isEnabled();
+    }
+
+    public void openDeviceGroupDropDown(){
+        page.locator(deviceGroupField).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceGroupDropDownOpen(){
+        try{
+            page.locator(deviceGroupDropDown)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void selectDeviceGroup(String deviceGroup){
+        String groupPath = "xpath=/html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/mat-option[" + deviceGroup + "]/span[1]";
+        page.locator(groupPath).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isEditIconVisible(){
+        try{
+            page.locator(editIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isEditIconEnabled(){
+        return page.locator(editIcon).isEnabled();
+    }
+
+    public void clickEditIcon(){
+        page.locator(editIcon).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isEditPageVisible(){
+        try{
+            page.locator(editDeviceTxt)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public String getEditPageURL(){
+        String url = "**/settings/devices/*/edit";
+        page.waitForURL(url);
+        return page.url();
+    }
+
+    public boolean isSaveButtonVisible(){
+        try {
+            page.locator(saveUpdates)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void updateDeviceDetails(){
+        page.locator(saveUpdates).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceLocationUpdated(String location){
+       String updatedLocation = "(//td[normalize-space()='" + location + "'])[1]";
+       try{
+           page.locator(updatedLocation)
+                   .waitFor(new Locator.WaitForOptions()
+                           .setState(WaitForSelectorState.VISIBLE)
+                           .setTimeout(5000));
+           return true;
+       }catch (PlaywrightException e){
+           return false;
+       }
     }
 }

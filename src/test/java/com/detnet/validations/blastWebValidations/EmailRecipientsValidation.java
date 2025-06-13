@@ -180,4 +180,137 @@ public class EmailRecipientsValidation {
                 .as("Recipient should exist on the 'Recipient List View' -page")
                 .isTrue();
      }
+
+     public void validateEditIconVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isEditIconVisible();
+        softly.assertThat(isVisible)
+                .as("Edit/pencil icon should be visible")
+                .isTrue();
+     }
+
+     public void validateEditIconState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isEditIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Edit icon should be enabled")
+                .isTrue();
+     }
+
+     public void validateEditEditRecipientPageVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isEditRecipientPageOpen();
+        softly.assertThat(isVisible)
+                .as("Edit Recipient page should be open.")
+                .isTrue();
+     }
+
+     public void validateEditRecipientSubmitButtonVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isEditSubmitButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Edit submit button should be visible")
+                .isTrue();
+     }
+
+     public void validateEditRecipientSubmitButtonState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isEditSubmitButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("Edit submit button should be enabled.")
+                .isTrue();
+     }
+
+     public void validateModerateSeverityLevelSelected(int row){
+        boolean isChecked = emailRecipientsPageObjectModel.isModerateSeverityLevelSelected(row);
+        softly.assertThat(isChecked)
+                .as("Moderate severity level should be checked")
+                .isTrue();
+     }
+
+     public void validateSearchBarVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isSearchBarVisible();
+        softly.assertThat(isVisible)
+                .as("Search bar should be visible.")
+                .isTrue();
+     }
+
+     public void validateSearchBarState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isSearchBarEnabled();
+        softly.assertThat(isEnabled)
+                .as("Search bar should be enabled")
+                .isTrue();
+     }
+
+     public void validateIfSearchBarIsEmpty(){
+        boolean isEmpty = emailRecipientsPageObjectModel.isSearchBarEmpty();
+        softly.assertThat(isEmpty)
+                .as("Search bar should be empty by default.")
+                .isTrue();
+     }
+
+     public void validateIntervalDropDownVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isIntervalDropdownVisible();
+        softly.assertThat(isVisible)
+                .as("Interval dropdown should be visible")
+                .isTrue();
+     }
+
+     public void validateIntervalDropDownState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isIntervalDropDownEnabled();
+        softly.assertThat(isEnabled)
+                .as("Interval dropdown box should be enabled")
+                .isTrue();
+     }
+
+     public void validateIntervalDropDownPanelVisibility(){
+        boolean isOpen = emailRecipientsPageObjectModel.isIntervalDropDownPanelOpen();
+        softly.assertThat(isOpen)
+                .as("Interval dropdown panel should be open")
+                .isTrue();
+     }
+
+     public void validateDeleteIconVisibility(int rowNumber){
+        boolean isVisible = emailRecipientsPageObjectModel.isDeleteIconVisible(rowNumber);
+        softly.assertThat(isVisible)
+                .as("Bin icon should be displaying")
+                .isTrue();
+     }
+
+     public void validateDeleteDialogVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isDeleteDialogVisible();
+        softly.assertThat(isVisible)
+                .as("Delete dialog should be visible")
+                .isTrue();
+     }
+
+     public void validateIfRecipientIsDeleted(String recipientEmail){
+        boolean isDeleted = emailRecipientsPageObjectModel.isRecipientDeleted(recipientEmail);
+        softly.assertThat(isDeleted)
+                .as("Recipient should not exist on the recipient list")
+                .isTrue();
+     }
+
+     public void validateCheckboxVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isCheckboxVisible();
+        softly.assertThat(isVisible)
+                .as("Check box should be visible")
+                .isTrue();
+     }
+
+     public void validateCheckboxState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isCheckBoxEnabled();
+        softly.assertThat(isEnabled)
+                .as("Checkbox should be enabled")
+                .isTrue();
+     }
+
+     public void validateDeleteAllButtonVisibility(){
+        boolean isVisible = emailRecipientsPageObjectModel.isDeleteAllRecipientsButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Delete Recipients' -button should be visible")
+                .isTrue();
+     }
+
+     public void validateDeleteAllButtonState(){
+        boolean isEnabled = emailRecipientsPageObjectModel.isDeleteAllRecipientsButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Delete Recipient' -button should be enabled")
+                .isTrue();
+     }
 }

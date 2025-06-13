@@ -117,4 +117,31 @@ public class EmailUtils {
             }
         });
     }
+
+    public static void sendDeviceControlRequest(String recipientEmail, String deviceName, String expectedState, int waitMinutes){
+        Session session = createEmailSession();
+
+        try{
+            Message message = new MimeMessage(session);
+            String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
+            message.setFrom(new InternetAddress(senderEmail));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+            message.setSubject("Device State Change Required");
+
+            String body = String.format(
+                    "Hi,\n\nPlease change state of device '%s' to '%s' within the next %d minutes.\n\nRegards,\nTest Hero"
+                    , deviceName,expectedState,waitMinutes);
+
+            Multipart multipart = new MimeMultipart();
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(body);
+            multipart.addBodyPart(messageBodyPart);
+
+            message.setContent(multipart);
+            Transport.send(message);
+            System.out.println("Control request email sent successfully.");
+        }catch (Exception e){
+            throw new RuntimeException("Failed to send device control request email: " + e.getMessage());
+        }
+    }
 }

@@ -42,8 +42,8 @@ public class AddEmailRecipient_StepDefn {
         emailRecipientsValidation.validateEmailAddressInputFieldVisibility();
         emailRecipientsValidation.validateEmailAddressInputFieldState();
         emailRecipientsValidation.validateIfEmailAddressInputFieldIsEmpty();
-        emailRecipientsPageObjectModel.setEmailAddress("moosaa@detnet.com");
-        emailRecipientsValidation.validateEnteredEmailAddress("moosaa@detnet.com");
+        emailRecipientsPageObjectModel.setEmailAddress("alice.bennett@testmail.com");
+        emailRecipientsValidation.validateEnteredEmailAddress("alice.bennett@testmail.com");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user enters the recipient first name")
@@ -53,8 +53,8 @@ public class AddEmailRecipient_StepDefn {
         emailRecipientsValidation.validateFirstNameInputFieldVisibility();
         emailRecipientsValidation.validateFirstNameInputFieldState();
         emailRecipientsValidation.validateIfFirstNameFieldIsEmpty();
-        emailRecipientsPageObjectModel.setFirstName("Allie");
-        emailRecipientsValidation.validateEnteredFirstName("Allie");
+        emailRecipientsPageObjectModel.setFirstName("Alice");
+        emailRecipientsValidation.validateEnteredFirstName("Alice");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user enters the recipient last name")
@@ -64,8 +64,8 @@ public class AddEmailRecipient_StepDefn {
         emailRecipientsValidation.validateLastNameFieldVisibility();
         emailRecipientsValidation.validateLastNameFieldState();
         emailRecipientsValidation.validateIfLastNameFieldIsEmpty();
-        emailRecipientsPageObjectModel.setLastName("Moosa");
-        emailRecipientsValidation.validateEnteredLastName("Moosa");
+        emailRecipientsPageObjectModel.setLastName("Bennett");
+        emailRecipientsValidation.validateEnteredLastName("Bennett");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects the recipient severity")
@@ -90,11 +90,11 @@ public class AddEmailRecipient_StepDefn {
     public void the_new_recipient_should_appear_in_the_recipients_list_as_well_is_in_the_database() {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
-        emailRecipientsValidation.validateIfRecipientExists("moosaa@detnet.com");
+        emailRecipientsValidation.validateIfRecipientExists("alice.bennett@testmail.com");
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseRecipientValidations databaseRecipientValidations = new DatabaseRecipientValidations(databaseObjectModel);
         databaseRecipientValidations.validateIfRecipientsExistInDatabase();
-        databaseRecipientValidations.validateIfRecipientExistByEmail("moosaa@detnet.com");
+        databaseRecipientValidations.validateIfRecipientExistByEmail("alice.bennett@testmail.com");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

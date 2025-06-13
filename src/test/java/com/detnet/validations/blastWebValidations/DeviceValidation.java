@@ -208,4 +208,116 @@ public class DeviceValidation {
                 .as("Device is added")
                 .isTrue();
     }
+
+    public void validateDeviceListVisibility(int deviceNumber){
+        boolean isVisible = devicePageObjectModel.isDevicesVisible(deviceNumber);
+        softly.assertThat(isVisible)
+                .as("A list of devices should be displaying.")
+                .isTrue();
+    }
+
+    public void validateDeviceManagerFieldVisibility(){
+        boolean isVisible = devicePageObjectModel.isDeviceManagerFieldVisible();
+        softly.assertThat(isVisible)
+                .as("Device manager field should be displaying")
+                .isTrue();
+    }
+
+    public void validateDeviceManagerFieldState(){
+        boolean isEnabled = devicePageObjectModel.isDeviceManageFieldEnabled();
+        softly.assertThat(isEnabled)
+                .as("Device manager state should be enabled")
+                .isTrue();
+    }
+
+    public void validateDeviceManagerDropDownIsOpen(){
+        boolean isOpen = devicePageObjectModel.isDeviceManagerDropDownOpen();
+        softly.assertThat(isOpen)
+                .as("Device manager dropdown should be able")
+                .isTrue();
+    }
+
+    public void validateParenDeviceFieldVisibility(){
+        boolean isVisible = devicePageObjectModel.isParentDeviceFieldVisible();
+        softly.assertThat(isVisible)
+                .as("Parent device field should be visible")
+                .isTrue();
+    }
+
+    public void validateParentDeviceFieldState(){
+        boolean isEnabled = devicePageObjectModel.isParentDeviceFieldEnabled();
+        softly.assertThat(isEnabled)
+                .as("Parent device field should be enabled")
+                .isTrue();
+    }
+
+    public void validateParentDeviceDropDownIsOpen(){
+        boolean isOpen = devicePageObjectModel.isParentDeviceDropDownOpen();
+        softly.assertThat(isOpen)
+                .as("Parent device dropdown should be open")
+                .isTrue();
+    }
+
+    public void validateDeviceGroupFieldVisibility(){
+        boolean isVisible = devicePageObjectModel.isDeviceGroupFieldVisible();
+        softly.assertThat(isVisible)
+                .as("Device group field should be visible")
+                .isTrue();
+    }
+
+    public void validateDeviceGroupFieldState(){
+        boolean isEnabled = devicePageObjectModel.isDeviceGroupFieldEnabled();
+        softly.assertThat(isEnabled)
+                .as("Device group field should be enabled")
+                .isTrue();
+    }
+
+    public void validateDeviceGroupDropDownVisibility(){
+        boolean isOpen = devicePageObjectModel.isDeviceGroupDropDownOpen();
+        softly.assertThat(isOpen)
+                .as("Device group dropdown should be visible")
+                .isTrue();
+    }
+
+    public void validateEditIconVisibility(){
+        boolean isVisible = devicePageObjectModel.isEditIconVisible();
+        softly.assertThat(isVisible)
+                .as("Edit icon should be visible")
+                .isTrue();
+    }
+
+    public void validateEditIconState(){
+        boolean isEnabled = devicePageObjectModel.isEditIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Edit icon should be enabled")
+                .isTrue();
+    }
+
+    public void validateEditPageIsOpen(){
+        boolean isOpen = devicePageObjectModel.isEditPageVisible();
+        softly.assertThat(isOpen)
+                .as("Edit page should be displaying.")
+                .isTrue();
+    }
+
+    public void validateEditPageURL(String expectedURL){
+        String actualURL = devicePageObjectModel.getEditPageURL();
+        softly.assertThat(actualURL)
+                .as("Actual URL does not match expected URL")
+                .isEqualTo(expectedURL);
+    }
+
+    public void validateSaveUpdateButtonVisibility(){
+        boolean isVisible = devicePageObjectModel.isSaveButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Save' -button should be visible")
+                .isTrue();
+    }
+
+    public void validateDeviceGroupUpdated(String updatedDeviceName){
+        boolean isUpdated = devicePageObjectModel.isDeviceLocationUpdated(updatedDeviceName);
+        softly.assertThat(isUpdated)
+                .as("Device name should have updated")
+                .isTrue();
+    }
 }

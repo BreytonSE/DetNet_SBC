@@ -6,6 +6,7 @@ import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.pageObjects.DevicePageObjectModel;
 import com.detnet.pageObjects.DeviceSummaryPageObjectModel;
 import com.detnet.pageObjects.SettingsPageObjectModel;
+import com.detnet.utilities.EmailUtils;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.DashboardValidation;
 import com.detnet.validations.blastWebValidations.DeviceSummaryValidation;
@@ -108,6 +109,44 @@ public class CardlessEncryptionComms_StepDefn {
         DeviceSummaryPageObjectModel deviceSummaryPageObjectModel = pageObjectManager.getDeviceSummaryPageObjectModel();
         DeviceSummaryValidation deviceSummaryValidation = new DeviceSummaryValidation(deviceSummaryPageObjectModel);
         deviceSummaryValidation.validateDeviceStateVisibility();
+
+//        Sends a control request to colleague
+        String colleagueEmail= "breyton.ernstzen@testheroes.co.za";
+        String deviceName = "Device 502";
+        String expectedState = "IDLE";
+        int waitMinutes = 10;
+
+        EmailUtils.sendDeviceControlRequest(colleagueEmail, deviceName, expectedState,waitMinutes);
+
+//        Wait up to 10 minutes, polling every 30 seconds
+        int pollIntervalsSeconds = 30;
+        int maxWaitSeconds = waitMinutes * 60;
+        int elapsed = 0;
+        boolean stateMatched = false;
+
+        while (elapsed < maxWaitSeconds){
+            String currentState = deviceSummaryPageObjectModel.getCurrentDeviceState();
+            if(expectedState.equalsIgnoreCase(currentState)){
+                stateMatched = true;
+                System.out.printf("Device state updated to '%s' after %d seconds.\n",expectedState,elapsed);
+                break;
+            }
+
+            try{
+                Thread.sleep(pollIntervalsSeconds * 1000L);
+            }catch (InterruptedException e){
+                Thread.currentThread().interrupt();
+                throw new RuntimeException("Polling interrupted",e);
+            }
+
+            elapsed += pollIntervalsSeconds;
+            System.out.println("Waiting... (" + elapsed + "s elapsed");
+        }
+
+        if(!stateMatched){
+            throw new AssertionError("Device state did not change to '" + expectedState + "' within " +
+                    waitMinutes + " minutes.");
+        }
         deviceSummaryValidation.validateDeviceCurrentState("IDLE"); // IDLE
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }

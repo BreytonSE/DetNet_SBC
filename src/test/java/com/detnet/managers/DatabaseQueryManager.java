@@ -41,6 +41,13 @@ public enum DatabaseQueryManager {
             "SELECT email, created_date, last_modified_date, enabled, deleted, critical_errors, moderate_errors, firstname, lastname " +
                     "FROM public.error_recipients " +
                     "WHERE email = ?;"
+    ),
+    SELECT_DEVICE_BY_ID(
+            "SELECT id, location, groupid " +
+                    "FROM public.devices " +
+                    "WHERE id = ? " +
+                    "AND location = ? " +
+                    "AND groupid = ?;"
     );
 //    TODO: Write more queries here...
     private final String query;

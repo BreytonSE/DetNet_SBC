@@ -21,7 +21,7 @@ public class DeviceSummaryPageObjectModel {
     }
 
     public String getCurrentDeviceState() {
-        String deviceState = "//span[@class=\"text\"][normalize-space()=\"Idle\"]";
-        return page.locator(deviceState).textContent();
+        Locator stateLocator = page.locator("//span[@class='text' and (normalize-space()='Idle' or normalize-space()='Ready to blast' or normalize-space()='Unknown')]");
+        return stateLocator.textContent().trim();
     }
 }
