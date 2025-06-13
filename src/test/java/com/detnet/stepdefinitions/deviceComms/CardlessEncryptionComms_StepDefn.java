@@ -15,6 +15,9 @@ import com.detnet.validations.blastWebValidations.SettingsValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 //   Scenario: Verify that a user can establish encrypted communication between SBC and BCU
 public class CardlessEncryptionComms_StepDefn {
     private final PageObjectManager pageObjectManager;
@@ -111,12 +114,17 @@ public class CardlessEncryptionComms_StepDefn {
         deviceSummaryValidation.validateDeviceStateVisibility();
 
 //        Sends a control request to colleague
-        String colleagueEmail= "breyton.ernstzen@testheroes.co.za";
+        String toEmail = "breyton.ernstzen@testheroes.co.za";
+        List<String> ccEmails = Arrays.asList(
+                "coetseet@detnet.com",
+                "maysond@detnet.com",
+                "moosaa@detnet.com",
+                "breytonseanernstzen1224@gmail.com");
         String deviceName = "Device 502";
         String expectedState = "IDLE";
         int waitMinutes = 10;
 
-        EmailUtils.sendDeviceControlRequest(colleagueEmail, deviceName, expectedState,waitMinutes);
+        EmailUtils.sendDeviceControlRequest(toEmail, ccEmails, deviceName, expectedState, waitMinutes);
 
 //        Wait up to 10 minutes, polling every 30 seconds
         int pollIntervalsSeconds = 30;

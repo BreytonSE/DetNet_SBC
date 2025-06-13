@@ -1,10 +1,7 @@
 package com.detnet.utilities;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.mail.internet.*;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -118,18 +115,36 @@ public class EmailUtils {
         });
     }
 
-    public static void sendDeviceControlRequest(String recipientEmail, String deviceName, String expectedState, int waitMinutes){
+    public static void sendDeviceControlRequest(String toEmail, List<String> ccEmails,String deviceName,
+                                                String expectedState, int waitMinutes){
         Session session = createEmailSession();
 
         try{
             Message message = new MimeMessage(session);
             String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
             message.setFrom(new InternetAddress(senderEmail));
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
-            message.setSubject("Device State Change Required");
 
+//            TO recipient
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+
+//            CC recipients
+            if(ccEmails != null && !ccEmails.isEmpty()){
+                InternetAddress[] ccAddresses = ccEmails.stream()
+                        .map(email -> {
+                            try{
+                                return new InternetAddress(email);
+                            }catch (AddressException e){
+                                throw new RuntimeException("Invalid CC email: " + email,e);
+                            }
+                        })
+                        .toArray(InternetAddress[]:: new);
+
+                message.setRecipients(Message.RecipientType.CC,ccAddresses);
+            }
+
+            message.setSubject("Device State Change Required");
             String body = String.format(
-                    "Hi,\n\nPlease change state of device '%s' to '%s' within the next %d minutes.\n\nRegards,\nTest Hero"
+                    "Hi,\n\nPlease change state of device '%s' to '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot"
                     , deviceName,expectedState,waitMinutes);
 
             Multipart multipart = new MimeMultipart();
