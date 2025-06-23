@@ -4,6 +4,8 @@ import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.utilities.SoftAssertionUtils;
 import org.assertj.core.api.SoftAssertions;
 
+import java.util.List;
+
 public class DashboardValidation {
     private final DashboardPageObjectModel dashboardPageObjectModel;
     private final SoftAssertions softly;
@@ -108,6 +110,153 @@ public class DashboardValidation {
         boolean isPresent = dashboardPageObjectModel.isNewDeviceOnDashboard();
         softly.assertThat(isPresent)
                 .as("New created device should be visible on the BlastWeb dashboard.")
+                .isTrue();
+    }
+
+    public void validateEventsButtonVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isEventsButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Events button in footer section should be visible.")
+                .isTrue();
+    }
+
+    public void validateEventsLogVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isEventsLogOpen();
+        softly.assertThat(isVisible)
+                .as("Events log should be visible.")
+                .isTrue();
+    }
+
+    public void validateDeviceState(String expectedState){
+        String actualState = dashboardPageObjectModel.getDeviceCurrentState();
+        softly.assertThat(actualState)
+                .as("Actual state does not match expected device state")
+                .isEqualTo(expectedState);
+    }
+
+    public void validateOffsetToolTipVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isOffsetToolTipVisible();
+        softly.assertThat(isVisible)
+                .as("Offset tool tip should be displaying")
+                .isTrue();
+    }
+
+    public void validateOffsetToolTipState(){
+        boolean isEnabled = dashboardPageObjectModel.isOffsetToolTipEnabled();
+        softly.assertThat(isEnabled)
+                .as("Offset tool tip should be enabled")
+                .isTrue();
+    }
+
+    public void validateOffsetChannelWindowVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isChannelOffsetWindowOpen();
+        softly.assertThat(isVisible)
+                .as("Channel offset window should be opened")
+                .isTrue();
+    }
+
+    public void validateOffsetChannelFields(String channelNumber){
+        boolean isVisible = dashboardPageObjectModel.isSixChannelFieldsVisible(channelNumber);
+        softly.assertThat(isVisible)
+                .as("Six channel offset fields should be displaying.")
+                .isTrue();
+    }
+
+    public void validateOffsetDelayFieldVisibility(String channelOffsetDelayField){
+        boolean isVisible = dashboardPageObjectModel.isChannelOffsetDelayFieldVisible(channelOffsetDelayField);
+        softly.assertThat(isVisible)
+                .as("Offset delay fields should be visible")
+                .isTrue();
+    }
+
+    public void validateOffsetDelayFieldState(String channelOffsetDelayField){
+        boolean isEnabled = dashboardPageObjectModel.isChannelOffsetDelayFieldEnabled(channelOffsetDelayField);
+        softly.assertThat(isEnabled)
+                .as("Channel offset delay field should be enabled")
+                .isTrue();
+    }
+
+    public void validateSaveButtonVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isSaveButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Save' -button should be displaying")
+                .isTrue();
+    }
+
+    public void validateSaveButtonState(){
+        boolean isEnabled = dashboardPageObjectModel.isSaveButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Save' -button should be enabled")
+                .isTrue();
+    }
+
+    public void validateGroupByDropDownVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isGroupByDropDownVisible();
+        softly.assertThat(isVisible)
+                .as("'Group By' dropdown should be visible")
+                .isTrue();
+    }
+
+    public void validateGroupByDropDownState(){
+        boolean isEnabled = dashboardPageObjectModel.isGroupByDropDownEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Group By' dropdown should be enabled.")
+                .isTrue();
+    }
+
+    public void validateGroupByDropDownPanelVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isGroupByDownOpen();
+        softly.assertThat(isVisible)
+                .as("'Group By' dropdown should be opened")
+                .isTrue();
+    }
+
+    public void validateAlertDropDownButtonVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isAlertDropDownButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Alert dropdown button should be visible.")
+                .isTrue();
+    }
+
+    public void validateAlertDropDownButtonState(){
+        boolean isEnabled = dashboardPageObjectModel.isAlertDropDownButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("Alert dropdown button should be enabled.")
+                .isTrue();
+    }
+
+    public void validateCurrentDeviceAlert(String expectedAlert){
+        List<String> currentAlerts = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+        softly.assertThat(currentAlerts)
+                .as("Actual device alert does not match expected device alert")
+                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+    }
+
+    public void validateReportTabVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isReportTabVisible();
+        softly.assertThat(isVisible)
+                .as("Reports tab should be visible on the dashboard.")
+                .isTrue();
+    }
+
+    public void validateReportTabState(){
+        boolean isEnabled = dashboardPageObjectModel.isReportTabEnabled();
+        softly.assertThat(isEnabled)
+                .as("Report tab should be enabled on the dashboard")
+                .isTrue();
+    }
+
+    public void validateReportDropDownVisibility(){
+        boolean isOpen = dashboardPageObjectModel.isReportsDropDownOpen();
+        softly.assertThat(isOpen)
+                .as("Report dropdown should be open")
+                .isTrue();
+    }
+
+    public void validateErrorVisibilityOnEventLogReport(String event){
+        boolean isVisible = dashboardPageObjectModel.isErrorPresentOnEventsReport(event);
+        softly.assertThat(isVisible)
+                .as("Error should be visible on the event report")
                 .isTrue();
     }
 }

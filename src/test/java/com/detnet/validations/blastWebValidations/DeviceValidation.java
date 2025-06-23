@@ -320,4 +320,109 @@ public class DeviceValidation {
                 .as("Device name should have updated")
                 .isTrue();
     }
+
+    public void validateDeviceSearchBarVisibility(){
+        boolean isVisible = devicePageObjectModel.isSearchBarVisible();
+        softly.assertThat(isVisible)
+                .as("Device search bar should be visible.")
+                .isTrue();
+    }
+
+    public void validateSearchBarState(){
+        boolean isEnabled = devicePageObjectModel.isSearchBarEnabled();
+        softly.assertThat(isEnabled)
+                .as("Search bar should be enabled")
+                .isTrue();
+    }
+
+    public void validateIfSearchBarIsEmpty(){
+        boolean isEmpty = devicePageObjectModel.isSearchBarEmpty();
+        softly.assertThat(isEmpty)
+                .as("Search bar should be empty by default")
+                .isTrue();
+    }
+
+    public void validateSearchedDeviceId(String expectedId){
+        String actualId = devicePageObjectModel.getSearchedDeviceId();
+        softly.assertThat(actualId)
+                .as("Actual searched device Id does not match expected device id.")
+                .isEqualTo(expectedId);
+    }
+
+    public void validateSearchedDeviceLocation(String expectedLocation){
+        String actualLocation = devicePageObjectModel.getSearchedDeviceLocation();
+        softly.assertThat(actualLocation)
+                .as("Actual searched device location does not match expected device location.")
+                .isEqualTo(expectedLocation);
+    }
+
+    public void validateSearchedDeviceIp(String expectedIp){
+        String actualIp = devicePageObjectModel.getSearchedDeviceIp();
+        softly.assertThat(actualIp)
+                .as("Actual searched ip does not match expected searched ip")
+                .isEqualTo(expectedIp);
+    }
+
+    public void validateSearchedDeviceVisibility(String device){
+        boolean isFound = devicePageObjectModel.isSearchedDeviceFound(device);
+        softly.assertThat(isFound)
+                .as("Searched device should be found after search")
+                .isTrue();
+    }
+
+    public void validateDeleteIconVisibility(){
+        boolean isVisible = devicePageObjectModel.isDeleteIconVisible();
+        softly.assertThat(isVisible)
+                .as("Delete icon should be visible")
+                .isTrue();
+    }
+
+    public void validateDeleteIconState(){
+        boolean isEnabled = devicePageObjectModel.isDeleteIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Delete icon should be enabled")
+                .isTrue();
+    }
+
+    public void validateDeleteDialogVisibility(){
+        boolean isVisible = devicePageObjectModel.isDeviceDeleteDialogOpen();
+        softly.assertThat(isVisible)
+                .as("Delete dialog should be opened")
+                .isTrue();
+    }
+
+    public void validateIfDeviceIsDeleted(int deviceId){
+        boolean isDeleted = devicePageObjectModel.isDeviceDeleted(deviceId);
+        softly.assertThat(isDeleted)
+                .as("Device with id '%s' should not be present in the device list.", deviceId)
+                .isTrue();
+    }
+
+    public void validateSelectAllCheckboxVisibility(){
+        boolean isVisible = devicePageObjectModel.isSelectAllCheckboxVisible();
+        softly.assertThat(isVisible)
+                .as("Select all checkbox should be visible.")
+                .isTrue();
+    }
+
+    public void validateCheckboxState(){
+        boolean isEnabled = devicePageObjectModel.isCheckboxEnabled();
+        softly.assertThat(isEnabled)
+                .as("Checkboxes should be enabled")
+                .isTrue();
+    }
+
+    public void validateDeleteAllButtonVisibility(){
+        boolean isVisible = devicePageObjectModel.isDeleteAllButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'Delete Devices' -button should be visible")
+                .isTrue();
+    }
+
+    public void validateDeleteAllButtonState(){
+        boolean isEnabled = devicePageObjectModel.isDeleteAllButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'Delete Devices' -button should be enabled")
+                .isTrue();
+    }
 }

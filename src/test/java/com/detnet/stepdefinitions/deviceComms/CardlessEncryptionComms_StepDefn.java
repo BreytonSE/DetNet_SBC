@@ -119,7 +119,7 @@ public class CardlessEncryptionComms_StepDefn {
                 "coetseet@detnet.com",
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
-                "breytonseanernstzen1224@gmail.com");
+                "mbhalatil@detnet0.onmicrosoft.com");
         String deviceName = "Device 502";
         String expectedState = "IDLE";
         int waitMinutes = 10;
@@ -155,7 +155,7 @@ public class CardlessEncryptionComms_StepDefn {
             throw new AssertionError("Device state did not change to '" + expectedState + "' within " +
                     waitMinutes + " minutes.");
         }
-        deviceSummaryValidation.validateDeviceCurrentState("IDLE"); // IDLE
+        deviceSummaryValidation.validateDeviceCurrentState("Idle"); // IDLE
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

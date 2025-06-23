@@ -171,7 +171,7 @@ public class AddDevices_StepDefn {
 
     @When("the user adds a sixth device")
     public void the_user_adds_a_sixth_device() {
-//        TODO: This is a real device needed from Detnet (Waiting on Liam)
+//        TODO: This is a real device needed from Detnet (Waiting on Liam/Allie)
     }
 
     @When("the user adds a seventh device")

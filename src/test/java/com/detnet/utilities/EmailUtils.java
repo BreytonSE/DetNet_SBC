@@ -159,4 +159,52 @@ public class EmailUtils {
             throw new RuntimeException("Failed to send device control request email: " + e.getMessage());
         }
     }
+
+    public static void sendDeviceAlertRequest(String toEmail, List<String> ccEmails, String deviceName,
+                                              String expectedAlert, int waitMinutes){
+        Session session = createEmailSession();
+
+        try{
+            Message message = new MimeMessage(session);
+            String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
+            message.setFrom(new InternetAddress(senderEmail));
+
+//            TO Recipient
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+
+//            CC Recipients
+            if(ccEmails != null && !ccEmails.isEmpty()){
+                InternetAddress[] ccAddresses = ccEmails.stream()
+                        .map(email -> {
+                            try{
+                                return new InternetAddress(email);
+                            }catch (AddressException e){
+                                throw new RuntimeException("Invalid CC email: " + email,e);
+                            }
+                        })
+                        .toArray(InternetAddress[]::new);
+
+                message.setRecipients(Message.RecipientType.CC,ccAddresses);
+            }
+
+            message.setSubject("Device Alert Change Required");
+            String body = String.format("Hi,\n\nPlease change alert of device '%s' to '%s' within the next %d minutes." +
+                    "\n\nRegards,\nTest Hero bot",deviceName,expectedAlert,waitMinutes);
+
+            Multipart multipart = new MimeMultipart();
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(body);
+            multipart.addBodyPart(messageBodyPart);
+
+            message.setContent(multipart);
+            Transport.send(message);
+            System.out.println("Device alert request email sent successfully.");
+        }catch (Exception e){
+            throw new RuntimeException("Failed to send device alert request email: " + e.getMessage());
+        }
+    }
+
+    public static void sendDeviceAlertRemovalRequest(){
+
+    }
 }

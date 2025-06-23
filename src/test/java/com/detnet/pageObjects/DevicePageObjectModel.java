@@ -28,6 +28,12 @@ public class DevicePageObjectModel {
     private final String editIcon = "//tbody/tr[4]/td[11]/div[1]/mat-icon[1]";
     private final String editDeviceTxt = "//h2[normalize-space()=\"Edit Device\"]";
     private final String saveUpdates = "//button[@id=\"addDeviceSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
+    private final String searchBar = "//input[@placeholder=\"Search using ID, Location, IP\"]";
+    private final String deleteIcon = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined ng-star-inserted'][normalize-space()='delete'])[1]";
+    private final String deleteDialog = "//blastweb-confirmation-dialog[@class=\"ng-star-inserted\"]";
+    private final String yesButton = "//button[@class=\"yesBtn\"]";
+    private final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-devices[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
+    private final String deleteAllButton = "//button[@class=\"deleteAllBtn\"]";
 
     public DevicePageObjectModel(Page page) {
         this.page = page;
@@ -423,5 +429,162 @@ public class DevicePageObjectModel {
        }catch (PlaywrightException e){
            return false;
        }
+    }
+
+    public boolean isSearchBarVisible(){
+        try{
+            page.locator(searchBar)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isSearchBarEnabled(){
+        return page.locator(searchBar).isEnabled();
+    }
+
+    public boolean isSearchBarEmpty(){
+        String searchBarPath = page.locator(searchBar).inputValue();
+        return searchBarPath == null || searchBarPath.trim().isEmpty();
+    }
+
+    public void searchDeviceById(String id){
+        page.locator(searchBar).click();
+        page.locator(searchBar).clear();
+        page.locator(searchBar).fill(id);
+    }
+
+    public String getSearchedDeviceId(){
+        return page.locator(searchBar).inputValue();
+    }
+
+    public void searchDeviceByLocation(String location){
+        page.locator(searchBar).click();
+        page.locator(searchBar).clear();
+        page.locator(searchBar).fill(location);
+    }
+
+    public String getSearchedDeviceLocation(){
+        return page.locator(searchBar).inputValue();
+    }
+
+    public void searchDeviceByIp(String ip){
+        page.locator(searchBar).click();
+        page.locator(searchBar).clear();
+        page.locator(searchBar).fill(ip);
+    }
+
+    public String getSearchedDeviceIp(){
+        return page.locator(searchBar).inputValue();
+    }
+
+    public boolean isSearchedDeviceFound(String deviceName){
+        String devicePath = "(//td[normalize-space()='" + deviceName + "'])[1]";
+        try{
+            page.locator(devicePath)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeleteIconVisible(){
+        try{
+            page.locator(deleteIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeleteIconEnabled(){
+        return page.locator(deleteIcon).isEnabled();
+    }
+
+    public void openDeleteDialog(){
+        page.locator(deleteIcon).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceDeleteDialogOpen(){
+        try{
+            page.locator(deleteDialog);
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void confirmDelete(){
+        page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceDeleted(int deviceId){
+        String deviceIdPath = "(//a[normalize-space()='" + deviceId + "'])[1]";
+        try{
+            page.locator(deviceIdPath)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isSelectAllCheckboxVisible(){
+        try{
+            page.locator(selectAllCheckbox)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isCheckboxEnabled(){
+        return page.locator(selectAllCheckbox).isEnabled();
+    }
+
+    public void selectAllDevices(){
+        page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public void selectOrDeselectDevices(int tableRow){
+        String checkboxRow = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-devices[1]/blastweb-spinner" +
+                "[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + tableRow + "]/td[1]/mat-checkbox[1]/div[1]" +
+                "/div[1]/input[1]";
+        page.locator(checkboxRow).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeleteAllButtonVisible(){
+        try{
+            page.locator(deleteAllButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeleteAllButtonEnabled(){
+        return page.locator(deleteAllButton).isEnabled();
+    }
+
+    public void deleteSelectedDevices(){
+        page.locator(deleteAllButton).click(new Locator.ClickOptions().setTimeout(5000));
     }
 }
