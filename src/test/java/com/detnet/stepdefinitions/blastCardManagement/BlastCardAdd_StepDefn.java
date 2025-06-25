@@ -41,7 +41,6 @@ public class BlastCardAdd_StepDefn {
     public void the_user_opens_the_navigation_menu_by_clicking_the_current_system_user_s_name() {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         dashboardPageObjectModel.openNavigationMenu();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user navigates to the Settings page")
     public void the_user_navigates_to_the_settings_page() {
@@ -49,8 +48,8 @@ public class BlastCardAdd_StepDefn {
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateSettingsButtonVisibility();
         dashboardValidation.validateSettingsButtonClick();
-        dashboardPageObjectModel.openSettings();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        dashboardPageObjectModel.openSettings();
     }
     @When("the user navigates to the Blast Cards section")
     public void the_user_navigates_to_the_blast_cards_section() {
@@ -67,6 +66,7 @@ public class BlastCardAdd_StepDefn {
         SettingsPageObjectModel settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
         SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
         settingsValidation.validateBlastCardClick();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         settingsPageObjectModel.viewActiveBlastCards();
 
         BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
@@ -82,8 +82,8 @@ public class BlastCardAdd_StepDefn {
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateAddBlastCardButtonVisibility();
         blastCardsValidation.validateAddBlastCardClick();
-        blastCardsPageObjectModel.addBlastCard();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        blastCardsPageObjectModel.addBlastCard();
     }
     @Then("the user taps the blast card on the NFC reader when the Add Blast Card popup is displayed")
     public void the_user_taps_the_blast_card_on_the_nfc_reader_when_the_add_blast_card_popup_is_displayed() {

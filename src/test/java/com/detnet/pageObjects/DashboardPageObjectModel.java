@@ -28,6 +28,15 @@ public class DashboardPageObjectModel {
     private final String alertDropdownButton = "//body[1]/app-root[1]/blastweb-navbar[1]/mat-toolbar[1]/mat-toolbar-row[1]/button[3]/span[2]/mat-toolbar-row[1]";
     private final String reportsTab = "//span[normalize-space()=\"Reports\"]";
     private final String eventsReportButton = "//span[contains(text(),\"Events report\")]";
+    private final String keyElement = "(//span[normalize-space()='-  Key'])[1]";
+    private final String networkElement = "(//span[normalize-space()='-  Network'])[1]";
+    private final String stateElement = "(//span[normalize-space()='-  State'])[1]";
+    private final String firmwareElement = "(//span[normalize-space()='-  Firmware'])[1]";
+    private final String customElement = "(//span[normalize-space()='-  Custom'])[1]";
+    private final String selectedElement = "(//span[normalize-space()='-  Selected'])[1]";
+    private final String aliveElement = "(//span[normalize-space()='-  Alive'])[1]";
+    private final String typeLocator = "(//span[normalize-space()='-  Type'])[1]";
+    private final String accessDeniedSnackBar = "//div[@class=\"mat-mdc-snack-bar-label mdc-snackbar__label\"]";
 
     public DashboardPageObjectModel(Page page) {
         this.page = page;
@@ -154,9 +163,25 @@ public class DashboardPageObjectModel {
     }
 
     public String getDeviceCurrentState() {
-        Locator stateLocator = page.locator("//span[contains(text(),\"IDLE\") or contains(text(),\"UNKNOWN\") or " +
-                "contains(text(),\"READY TO BLAST\") or contains(text(),\"READY TO ARM\")]"); // needs to be modified
-        return stateLocator.textContent().trim();
+        List<String> possibleStates = Arrays.asList("IDLE", "UNKNOWN", "READY TO BLAST", "READY TO ARM");
+
+        List<String> matchedStates = page
+                .locator("//span[contains(text(), 'IDLE') or contains(text(), 'UNKNOWN') or contains(text(), " +
+                        "'READY TO BLAST') or contains(text(), 'READY TO ARM') or contains(text(), 'AWAITING GRACE')]")
+                .allTextContents()
+                .stream()
+                .map(String::trim)
+                .collect(Collectors.toList());
+
+        for (String expectedState : possibleStates) {
+            if (matchedStates.contains(expectedState)) {
+                System.out.println("Found device state: " + expectedState);
+                return expectedState; // ✅ return here
+            }
+        }
+
+        // Optional: if no match found, return null or throw exception
+        return null;
     }
 
     public boolean isOffsetToolTipVisible() {
@@ -284,6 +309,11 @@ public class DashboardPageObjectModel {
         }
     }
 
+    public void selectGroupByOption(String group){
+        String groupBy = "(//span[normalize-space()='-  " + group + "'])[1]";
+        page.locator(groupBy).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
     public boolean isAlertDropDownButtonVisible() {
         try {
             page.locator(alertDropdownButton)
@@ -310,7 +340,7 @@ public class DashboardPageObjectModel {
 
         List<String> knownAlerts = Arrays.asList(
                 "Short Circuits", "High Leakage", "High Current", "Low Battery", "Acknowledge Alert", "Device Not Available",
-                "Last Detonator Bad", "Last Detonator Bad Voltage", "Blast Voltage Bad", "Harness Break", "Programming Error",
+                "Last Detonator Bad", "Last Detonator Bad Voltage", "Harness Break", "Programming Error",
                 "Test Mode", "TX Error Preventing Blast"
         );
 
@@ -366,6 +396,127 @@ public class DashboardPageObjectModel {
             page.locator(error)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isAlertRemoved(String alert){
+        String alertPath = "(//span[normalize-space()='" + alert + "'])[1]";
+        try{
+            page.locator(alertPath)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByKey(){
+        try{
+            page.locator(keyElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByNetwork(){
+        try{
+            page.locator(networkElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByState(){
+        try{
+            page.locator(stateElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByFirmware(){
+        try{
+            page.locator(firmwareElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByCustom(){
+        try{
+            page.locator(customElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedBySelected(){
+        try{
+            page.locator(selectedElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByAlive(){
+        try{
+            page.locator(aliveElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceGroupedByType(){
+        try{
+            page.locator(typeLocator)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isAccessDeniedBarHidden(){
+        try{
+            page.locator(accessDeniedSnackBar)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){

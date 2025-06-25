@@ -35,35 +35,74 @@ public class DeviceGrouping_StepDefn {
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Key as the grouping option")
-    public void the_user_selects_key_as_the_grouping_option() {
-
+    public void the_user_selects_key_as_the_grouping_option() throws InterruptedException {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.selectGroupByOption("Key");
+        dashboardValidation.validateIfDevicesGroupByKey();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Network as the grouping option")
     public void the_user_selects_network_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("Network");
+        dashboardValidation.validateIfDeviceGroupByNetwork();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects State as the grouping option")
     public void the_user_selects_state_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("State");
+        dashboardValidation.validateIfDeviceGroupedByState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Firmware as the grouping option")
     public void the_user_selects_firmware_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("Firmware");
+        dashboardValidation.validateIfDeviceGroupedByFirmware();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Custom as the grouping option")
     public void the_user_selects_custom_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("Custom");
+        dashboardValidation.validateIfDeviceGroupedByCustom();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Selected as the grouping option")
     public void the_user_selects_selected_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("Selected");
+        dashboardValidation.validateIfDeviceGroupedBySelected();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Alive as the grouping option")
     public void the_user_selects_alive_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("Alive");
+        dashboardValidation.validateIfDeviceGroupedByAlive();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user selects Type as the grouping option")
     public void the_user_selects_type_as_the_grouping_option() {
-
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openGroupByDropDown();
+        dashboardPageObjectModel.selectGroupByOption("Type");
+        dashboardValidation.validateIfDeviceGroupByType();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

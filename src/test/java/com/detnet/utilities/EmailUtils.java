@@ -36,7 +36,8 @@ public class EmailUtils {
                     "breyton.ernstzen@testheroes.co.za",
                     "moosaa@detnet.com",
                     "maysond@detnet.com",
-                    "kydh@detnet.com"
+                    "kydh@detnet.com",
+                    "coetseet@detnet.com"
             );
             sendEmailWithAttachment(recipientsEmails,
                     "BlastWeb Test Report",
@@ -115,96 +116,72 @@ public class EmailUtils {
         });
     }
 
+//    Generic email request sender - reused by control/alert methods
+    private static void sendDeviceRequestEmail(String toEmail, List<String> ccEmails, String subject, String body){
+        Session session = createEmailSession();
+
+        try{
+            Message message = new MimeMessage(session);
+            String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
+            message.setFrom(new InternetAddress(senderEmail));
+
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+
+            if(ccEmails != null && !ccEmails.isEmpty()){
+                InternetAddress[] ccAddress = ccEmails.stream()
+                        .map(email -> {
+                            try{
+                                return new InternetAddress(email);
+                            }catch (AddressException e){
+                                throw new RuntimeException("Invalid CC email: " + email,e);
+                            }
+                })
+                        .toArray(InternetAddress[]::new);
+                message.setRecipients(Message.RecipientType.CC, ccAddress);
+            }
+
+            message.setSubject(subject);
+
+            Multipart multipart = new MimeMultipart();
+            BodyPart messageBodypart = new MimeBodyPart();
+            messageBodypart.setText(body);
+            multipart.addBodyPart(messageBodypart);
+
+            message.setContent(multipart);
+            Transport.send(message);
+            System.out.println("Request email sent successfully");
+        }catch (Exception e){
+            throw new RuntimeException("Failed to send request email: " + e.getMessage(),e);
+        }
+    }
+
+//    Device state change request
     public static void sendDeviceControlRequest(String toEmail, List<String> ccEmails,String deviceName,
                                                 String expectedState, int waitMinutes){
-        Session session = createEmailSession();
-
-        try{
-            Message message = new MimeMessage(session);
-            String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
-            message.setFrom(new InternetAddress(senderEmail));
-
-//            TO recipient
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-
-//            CC recipients
-            if(ccEmails != null && !ccEmails.isEmpty()){
-                InternetAddress[] ccAddresses = ccEmails.stream()
-                        .map(email -> {
-                            try{
-                                return new InternetAddress(email);
-                            }catch (AddressException e){
-                                throw new RuntimeException("Invalid CC email: " + email,e);
-                            }
-                        })
-                        .toArray(InternetAddress[]:: new);
-
-                message.setRecipients(Message.RecipientType.CC,ccAddresses);
-            }
-
-            message.setSubject("Device State Change Required");
-            String body = String.format(
-                    "Hi,\n\nPlease change state of device '%s' to '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot"
-                    , deviceName,expectedState,waitMinutes);
-
-            Multipart multipart = new MimeMultipart();
-            BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText(body);
-            multipart.addBodyPart(messageBodyPart);
-
-            message.setContent(multipart);
-            Transport.send(message);
-            System.out.println("Control request email sent successfully.");
-        }catch (Exception e){
-            throw new RuntimeException("Failed to send device control request email: " + e.getMessage());
-        }
+       String subject = "Device State Change";
+       String body = String.format(
+               "Hi,\n\nPlease change state of device '%s' to '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot",
+               deviceName,expectedState,waitMinutes);
+       sendDeviceRequestEmail(toEmail,ccEmails,subject,body);
     }
 
+//    Device alert change request
     public static void sendDeviceAlertRequest(String toEmail, List<String> ccEmails, String deviceName,
                                               String expectedAlert, int waitMinutes){
-        Session session = createEmailSession();
-
-        try{
-            Message message = new MimeMessage(session);
-            String senderEmail = LoginConstantUtils.getDecryptedEmailAddress();
-            message.setFrom(new InternetAddress(senderEmail));
-
-//            TO Recipient
-            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-
-//            CC Recipients
-            if(ccEmails != null && !ccEmails.isEmpty()){
-                InternetAddress[] ccAddresses = ccEmails.stream()
-                        .map(email -> {
-                            try{
-                                return new InternetAddress(email);
-                            }catch (AddressException e){
-                                throw new RuntimeException("Invalid CC email: " + email,e);
-                            }
-                        })
-                        .toArray(InternetAddress[]::new);
-
-                message.setRecipients(Message.RecipientType.CC,ccAddresses);
-            }
-
-            message.setSubject("Device Alert Change Required");
-            String body = String.format("Hi,\n\nPlease change alert of device '%s' to '%s' within the next %d minutes." +
-                    "\n\nRegards,\nTest Hero bot",deviceName,expectedAlert,waitMinutes);
-
-            Multipart multipart = new MimeMultipart();
-            BodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText(body);
-            multipart.addBodyPart(messageBodyPart);
-
-            message.setContent(multipart);
-            Transport.send(message);
-            System.out.println("Device alert request email sent successfully.");
-        }catch (Exception e){
-            throw new RuntimeException("Failed to send device alert request email: " + e.getMessage());
-        }
+        String subject = "Device Alert Change";
+        String body = String.format(
+                "Hi,\n\nPlease change alert of device '%s' to '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot",
+                deviceName,expectedAlert,waitMinutes);
+        sendDeviceRequestEmail(toEmail,ccEmails,subject,body);
     }
 
-    public static void sendDeviceAlertRemovalRequest(){
-
+//    Device alert removal request
+    public static void sendDeviceAlertRemovalRequest(String toEmail, List<String> ccEmails, String deviceName,
+                                                     int waitMinutes){
+        String subject = "Device Alert Removal";
+        String body = String.format(
+                "Hi,\n\nPlease activated alerts of device '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot",
+                deviceName,waitMinutes);
+        sendDeviceRequestEmail(toEmail,ccEmails,subject,body);
     }
 }

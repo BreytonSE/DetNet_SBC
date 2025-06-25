@@ -22,12 +22,14 @@ public class BlastCardArchive_StepDefn {
         BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateBlastCardAlertWindowVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         blastCardsPageObjectModel.closeBlastCardAlertWindow();
-//        TODO: Blast cards mus exists!
+//        TODO: Blast cards must exists!
 //        blastCardsValidation.validateArchiveButtonVisibility();
 //        blastCardsValidation.validateArchiveButtonOnClick();
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
 //        blastCardsPageObjectModel.archiveCards();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+
     }
     @Then("the user clicks the Archive icon from the table to archive a single card")
     public void the_user_clicks_the_archive_icon_from_the_table_to_archive_a_single_card() {
@@ -39,8 +41,8 @@ public class BlastCardArchive_StepDefn {
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateArchivedButtonVisibility();
         blastCardsValidation.validateArchivedButtonOnClick();
-        blastCardsPageObjectModel.viewArchivedCards();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        blastCardsPageObjectModel.viewArchivedCards();
     }
     @Then("the user verifies that the blast card is visible in the archive list")
     public void the_user_verifies_that_the_blast_card_is_visible_in_the_archive_list() {

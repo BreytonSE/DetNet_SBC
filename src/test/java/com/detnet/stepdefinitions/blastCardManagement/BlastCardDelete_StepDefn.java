@@ -22,8 +22,8 @@ public class BlastCardDelete_StepDefn {
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateDeleteCardsButtonVisibility();
 //        blastCardsValidation.validateDeleteButtonOnClick();
-//        blastCardsPageObjectModel.deleteBlastCard();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+//        blastCardsPageObjectModel.deleteBlastCard();
     }
     @Then("the user clicks the {string} icon from the table to delete a single card")
     public void the_user_clicks_the_icon_from_the_table_to_delete_a_single_card(String string) {

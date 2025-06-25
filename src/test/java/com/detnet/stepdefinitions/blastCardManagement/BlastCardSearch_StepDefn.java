@@ -23,6 +23,7 @@ public class BlastCardSearch_StepDefn {
         blastCardsValidation.validateSearchBarVisibility();
         blastCardsValidation.validateSearchBarInteractability();
         blastCardsValidation.validateIfSearchBarIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         blastCardsPageObjectModel.setSearchValue("123456789");
         blastCardsValidation.validateSearchInputField("123456789");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -33,8 +34,8 @@ public class BlastCardSearch_StepDefn {
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateSearchButtonVisibility();
         blastCardsValidation.validateSearchButtonInteractability();
-        blastCardsPageObjectModel.search();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        blastCardsPageObjectModel.search();
     }
     @Then("finally verify if a list of cards is displaying based on the searched word")
     public void finally_verify_if_a_list_of_cards_is_displaying_based_on_the_searched_word() {

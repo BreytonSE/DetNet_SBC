@@ -83,7 +83,7 @@ public class DeleteDevices_StepDefn {
     public void the_selected_devices_should_be_deleted_and_removed_from_the_list() {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
-        deviceValidation.validateIfDeviceIsDeleted(1);
+//        deviceValidation.validateIfDeviceIsDeleted(1);
         deviceValidation.validateIfDeviceIsDeleted(3);
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }

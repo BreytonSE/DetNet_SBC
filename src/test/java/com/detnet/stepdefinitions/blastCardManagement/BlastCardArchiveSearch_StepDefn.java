@@ -24,20 +24,22 @@ public class BlastCardArchiveSearch_StepDefn {
         SettingsPageObjectModel settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
         SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
         settingsValidation.validateBlastCardClick();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         settingsPageObjectModel.viewActiveBlastCards();
 
         BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateArchivedButtonVisibility();
         blastCardsValidation.validateArchivedButtonOnClick();
-        blastCardsPageObjectModel.viewArchivedCards();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        blastCardsPageObjectModel.viewArchivedCards();
     }
     @Then("search for an archived blast card in the seach bar")
     public void search_for_an_archived_blast_card_in_the_seach_bar() {
         BlastCardsPageObjectModel blastCardsPageObjectModel = pageObjectManager.getBlastCardsPageObjectModel();
         BlastCardsValidation blastCardsValidation = new BlastCardsValidation(blastCardsPageObjectModel);
         blastCardsValidation.validateIfSearchBarIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         blastCardsPageObjectModel.setSearchValue("1234567890");
         blastCardsValidation.validateSearchInputField("1234567890");
         SoftAssertionUtils.getSoftAssertions().assertAll();

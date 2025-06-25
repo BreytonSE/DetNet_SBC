@@ -259,4 +259,74 @@ public class DashboardValidation {
                 .as("Error should be visible on the event report")
                 .isTrue();
     }
+
+    public void validateIfAlertsAreCleared(String alert,String device){
+        boolean isCleared = dashboardPageObjectModel.isAlertRemoved(alert);
+        softly.assertThat(isCleared)
+                .as("All alerts/error should be cleared for device '%s'",device)
+                .isTrue();
+    }
+
+    public void validateIfDevicesGroupByKey(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByKey();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'key'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupByNetwork(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByNetwork();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'network'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupedByState(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByState();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'state'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupedByFirmware(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByFirmware();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'firmware'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupedByCustom(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByCustom();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'custom'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupedBySelected(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedBySelected();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'selected'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupedByAlive(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByAlive();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'alive'")
+                .isTrue();
+    }
+
+    public void validateIfDeviceGroupByType(){
+        boolean isGrouped = dashboardPageObjectModel.isDeviceGroupedByType();
+        softly.assertThat(isGrouped)
+                .as("Devices should be grouped by 'type'")
+                .isTrue();
+    }
+
+    public void validateAccessDeniedSnackBarVisibility(){
+        boolean isHidden = dashboardPageObjectModel.isAccessDeniedBarHidden();
+        softly.assertThat(isHidden)
+                .as("Access denied snack bar should not be displaying when saving channel offset values.")
+                .isTrue();
+    }
 }

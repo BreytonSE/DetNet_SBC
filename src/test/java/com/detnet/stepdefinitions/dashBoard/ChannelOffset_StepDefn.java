@@ -22,18 +22,30 @@ public class ChannelOffset_StepDefn {
     }
 
     @Given("the selected device is in the {string} state")
-    public void the_selected_device_is_in_the_state(String string) {
+    public void the_selected_device_is_in_the_state(String expectedState) {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-//        Sends a control request to colleague
+
+//        Initial check before sending the request
+        String currentState = dashboardPageObjectModel.getDeviceCurrentState();
+        System.out.println("Current state before action: " + currentState);
+
+//        If already in inspected state, no need to send request
+        if(expectedState.equalsIgnoreCase(currentState)){
+            System.out.println("Device is already in inspected state: " + expectedState);
+            dashboardValidation.validateDeviceState(expectedState.toUpperCase());
+            SoftAssertionUtils.getSoftAssertions().assertAll();
+            return;
+        }
+
+//        Else, send the control request
         String toEmail = "breyton.ernstzen@testheroes.co.za";
         List<String> ccEmails = Arrays.asList(
-                "coetseet@detnet.com",
+                /*"coetseet@detnet.com",
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
-                "mbhalatil@detnet0.onmicrosoft.com");
+                "mbhalatil@detnet0.onmicrosoft.com"*/);
         String deviceName = "Device 502"; // Device Id might change
-        String expectedState = "Ready to Arm";
         int waitMinutes = 10;
 
         EmailUtils.sendDeviceControlRequest(toEmail, ccEmails, deviceName, expectedState, waitMinutes);
@@ -45,7 +57,7 @@ public class ChannelOffset_StepDefn {
         boolean stateMatched = false;
 
         while (elapsed < maxWaitSeconds){
-            String currentState = dashboardPageObjectModel.getDeviceCurrentState();
+             currentState = dashboardPageObjectModel.getDeviceCurrentState();
             if(expectedState.equalsIgnoreCase(currentState)){
                 stateMatched = true;
                 System.out.printf("Device state updated to '%s' after %d seconds.\n",expectedState,elapsed);
@@ -67,7 +79,7 @@ public class ChannelOffset_StepDefn {
             throw new AssertionError("Device state did not change to '" + expectedState + "' within " +
                     waitMinutes + " minutes.");
         }
-        dashboardValidation.validateDeviceState("READY TO ARM");
+        dashboardValidation.validateDeviceState(expectedState.toUpperCase());
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user clicks on the offset icon")
@@ -119,6 +131,10 @@ public class ChannelOffset_StepDefn {
     }
     @Then("the offset icon should be displayed in blue and black")
     public void the_offset_icon_should_be_displayed_in_blue_and_black() {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateAccessDeniedSnackBarVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 //        TODO: Validate the offset icon has changed to blue and black
     }
     @Then("the BCU should update the channels with the specified offset seconds")
