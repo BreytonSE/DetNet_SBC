@@ -27,8 +27,8 @@ public class networkTree_StepDefn {
         SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
         settingsValidation.validateNetworkTreeTabVisibility();
         settingsValidation.validateNetworkTreeTabText("Network Tree");
-        settingsPageObjectModel.openNetworkTree();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        settingsPageObjectModel.openNetworkTree();
     }
 
     @Then("the user verifies url of the network tree page")
@@ -53,8 +53,8 @@ public class networkTree_StepDefn {
         NetworkTreeValidation networkTreeValidation = new NetworkTreeValidation(networkTreePageObjectModel);
         networkTreeValidation.validateIfTreeHasDevices();
         networkTreeValidation.validateIfDeviceIsInTree("502");
-        networkTreePageObjectModel.viewDeviceDetails("502");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        networkTreePageObjectModel.viewDeviceDetails("502");
     }
 
     @Then("verify that the user is on device details page")

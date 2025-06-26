@@ -25,8 +25,8 @@ public class AddNetwork_StepDefn {
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateAddNetworkButtonVisibility();
         networkValidation.validateAddNetworkButtonState();
-        networkPageObjectModel.addNetwork();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        networkPageObjectModel.addNetwork();
     }
 
     @When("the user fills in all required form fields with valid network information")
@@ -36,32 +36,32 @@ public class AddNetwork_StepDefn {
         networkValidation.validateResourceNameInputFieldVisibility();
         networkValidation.validateResourceNameInputFieldState();
         networkValidation.validateIfResourceNameFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         networkPageObjectModel.setResourceName("Ethernet");
         networkValidation.validateEnteredResourceName("Ethernet");
-
         networkValidation.validateMessageGapFieldVisibility();
         networkValidation.validateMessageGapFieldState();
         networkValidation.validateIfMessageGapFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         networkPageObjectModel.setNewMessageGap("20");
         networkValidation.validateEnteredGapMessage("20");
-
         networkValidation.validateDelayInputFieldVisibility();
         networkValidation.validateDelayInputFieldState();
         networkValidation.validateIfDelayInputFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         networkPageObjectModel.setDelay("1500");
         networkValidation.validateEnteredDelayValue("1500");
-
         networkValidation.validateBaudRateFieldVisibility();
         networkValidation.validateBaudRateFieldState();
         networkValidation.validateIfBaudRateFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         networkPageObjectModel.setBaudRate("1200");
         networkValidation.validateEnteredBaudRate("1200");
-
         networkValidation.validateReportDetonatorsCheckBoxVisibility();
         networkValidation.validateReportDetonatorsCheckBoxState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         networkPageObjectModel.reportDetonators();
         networkPageObjectModel.inUse();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user submits the new network")
@@ -70,8 +70,8 @@ public class AddNetwork_StepDefn {
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateSaveButtonVisibility();
         networkValidation.validateSaveButtonState();
-        networkPageObjectModel.saveNewNetwork();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        networkPageObjectModel.saveNewNetwork();
     }
 
     @Then("the user adds another network")
@@ -100,7 +100,6 @@ public class AddNetwork_StepDefn {
         networkPageObjectModel.reportDetonators();
         networkPageObjectModel.inUse();
         networkPageObjectModel.saveNewNetwork();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("the new network should appear as the last item in the network list")

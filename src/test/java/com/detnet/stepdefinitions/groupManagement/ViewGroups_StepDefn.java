@@ -25,8 +25,8 @@ public class ViewGroups_StepDefn {
         SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
         settingsValidation.validateGroupsTabVisibility();
         settingsValidation.validateGroupsTabText("Groups");
-        settingsPageObjectModel.openGroups();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        settingsPageObjectModel.openGroups();
     }
     @Then("the Groups page should be displayed")
     public void the_groups_page_should_be_displayed() {

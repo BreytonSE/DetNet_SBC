@@ -23,8 +23,8 @@ public class DeleteMultipleUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateSelectAllCheckboxVisibility();
         usersValidation.validateSelectAllCheckboxState();
-        usersPageObjectModel.selectAllUsers();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.selectAllUsers();
     }
 
     @Then("the administrator clicks on the {string} button to delete selected users")
@@ -37,8 +37,8 @@ public class DeleteMultipleUsers_StepDefn {
 
         usersValidation.validateDeleteUsersButtonVisibility();
         usersValidation.validateDeleteUsersButtonState();
-        usersPageObjectModel.deleteAllUsers();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.deleteAllUsers();
     }
 
     @Then("the administrator confirms deletion of the selected users")
@@ -46,8 +46,8 @@ public class DeleteMultipleUsers_StepDefn {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateDeleteDialogBoxVisibility();
-        usersPageObjectModel.confirmToDelete();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.confirmToDelete();
     }
 
     @Then("the selected users should no longer be visible in the users interface")

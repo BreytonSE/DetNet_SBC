@@ -18,11 +18,12 @@ public class EditRecipient_StepDefn {
     }
 
     @When("the user clicks the pencil icon for a recipient")
-    public void the_user_clicks_the_pencil_icon_for_a_recipient() throws InterruptedException {
+    public void the_user_clicks_the_pencil_icon_for_a_recipient() {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateEditIconVisibility();
         emailRecipientsValidation.validateEditIconState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.openEditRecipientPage(2);
         emailRecipientsValidation.validateEditEditRecipientPageVisibility();
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -31,7 +32,6 @@ public class EditRecipient_StepDefn {
     public void the_user_edits_the_recipient_information() {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         emailRecipientsPageObjectModel.selectSeverityLevel("Moderate");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user clicks the save button")
     public void the_user_clicks_the_save_button() {
@@ -39,8 +39,8 @@ public class EditRecipient_StepDefn {
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateEditRecipientSubmitButtonVisibility();
         emailRecipientsValidation.validateEditRecipientSubmitButtonState();
-        emailRecipientsPageObjectModel.updateRecipientDetails();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        emailRecipientsPageObjectModel.updateRecipientDetails();
     }
 
     @When("update the interval")
@@ -49,10 +49,11 @@ public class EditRecipient_StepDefn {
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateIntervalDropDownVisibility();
         emailRecipientsValidation.validateIntervalDropDownState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.openIntervalPanel();
         emailRecipientsValidation.validateIntervalDropDownPanelVisibility();
-        emailRecipientsPageObjectModel.selectInterval("120 min");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        emailRecipientsPageObjectModel.selectInterval("120 min");
     }
 
     @Then("the recipient data should be updated")

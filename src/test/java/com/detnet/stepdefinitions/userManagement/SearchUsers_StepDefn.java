@@ -24,15 +24,18 @@ public class SearchUsers_StepDefn {
         usersValidation.validateSearchBarVisibility();
         usersValidation.validateSearchBarState();
         usersValidation.validateIfSearchBarIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.searchUser("amy.wilkinson");
         usersValidation.validateSearchedUser("amy.wilkinson");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+
     }
     @Then("the user should be found in the search results")
     public void the_user_should_be_found_in_the_search_results() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfUserIsFound("amy.wilkinson");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.clearSearchBar();
         usersValidation.validateIfSearchBarIsEmpty();
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -43,8 +46,8 @@ public class SearchUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersPageObjectModel.searchUser("Amy");
         usersValidation.validateSearchedUser("Amy");
-        usersPageObjectModel.clearSearchBar();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.clearSearchBar();
     }
     @When("the user types the surname into the search bar")
     public void the_user_types_the_surname_into_the_search_bar() {
@@ -52,7 +55,7 @@ public class SearchUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersPageObjectModel.searchUser("Wilkinson");
         usersValidation.validateSearchedUser("Wilkinson");
-        usersPageObjectModel.clearSearchBar();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.clearSearchBar();
     }
 }

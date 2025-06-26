@@ -34,8 +34,8 @@ public class CardlessEncryptionComms_StepDefn {
         settingsValidation.validateDevicesTabVisibility();
         settingsValidation.validateDeviceTabState();
         settingsValidation.validateDevicesTabText("Devices");
-        settingsPageObjectModel.viewDevices();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        settingsPageObjectModel.viewDevices();
     }
 
     @When("the user clicks on the Add Device button")
@@ -45,8 +45,8 @@ public class CardlessEncryptionComms_StepDefn {
         deviceValidation.validateDeviceURL("http://localhost:8080/en/settings/devices");
         deviceValidation.validateAddButtonVisibility();
         deviceValidation.validateAddButtonState();
-        devicePageObjectModel.addNewDevice();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        devicePageObjectModel.addNewDevice();
     }
 
     @When("the user enters the relevant device details for BCU II and presses {string}")
@@ -54,45 +54,49 @@ public class CardlessEncryptionComms_StepDefn {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
         deviceValidation.validateAddDeviceFormVisibility();
-
         deviceValidation.validateDeviceIdFieldVisibility();
         deviceValidation.validateDeviceIdFieldState();
         deviceValidation.validateIfDeviceIdFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.setDeviceId("502");
         deviceValidation.validateEnteredDeviceId("502");
-
         deviceValidation.validateLocationFieldVisibility();
         deviceValidation.validateLocationFieldState();
         deviceValidation.validateIfLocationFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.setLocation("Cape Town");
         deviceValidation.validateEnteredDeviceLocation("Cape Town");
-
         deviceValidation.validateNetworkFieldVisibility();
         deviceValidation.validateNetworkFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.openDeviceNetworkDropDown();
         deviceValidation.validateIfDeviceNetworkDropDownIsOpen();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.selectNetwork("ETHER001-DUMMY");
-
         deviceValidation.validateNetworkInterfaceFieldVisibility();
         deviceValidation.validateNetworkInterfaceFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.openNetworkInterfaceDropDown();
         deviceValidation.validateNetworkInterfaceDropdownIsOpen();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.selectNetworkInterface("Ethernet");
-
         deviceValidation.validateDeviceTypeFieldVisibility();
         deviceValidation.validateDeviceTypeFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.openDeviceTypeDropDown();
         deviceValidation.validateIfDeviceTypeDropDownIsOpen();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.selectDeviceType("BCU");
-
         deviceValidation.validateIpFieldVisibility();
         deviceValidation.validateIpFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.setIpAddress("172.20.3.92");
         deviceValidation.validateIfIPFieldIsFilled();
         deviceValidation.validateIpEntered("172.20.3.92");
-
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         deviceValidation.validateDeviceSubmitButtonVisibility();
         deviceValidation.validateDeviceSubmitButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.addDevice();
         deviceValidation.validateIfDeviceIsAdded("172.20.3.92");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -103,15 +107,17 @@ public class CardlessEncryptionComms_StepDefn {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateDashboardButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         dashboardPageObjectModel.goToDashboard();
         dashboardValidation.validateDeviceDetailsButtonVisibility();
         dashboardValidation.validateDeviceDetailsButtonState();
         dashboardValidation.validateIfNewDeviceIsOnDashboard();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         dashboardPageObjectModel.viewDeviceDetails(1);
-
         DeviceSummaryPageObjectModel deviceSummaryPageObjectModel = pageObjectManager.getDeviceSummaryPageObjectModel();
         DeviceSummaryValidation deviceSummaryValidation = new DeviceSummaryValidation(deviceSummaryPageObjectModel);
         deviceSummaryValidation.validateDeviceStateVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
 //        Sends a control request to colleague
         String toEmail = "breyton.ernstzen@testheroes.co.za";

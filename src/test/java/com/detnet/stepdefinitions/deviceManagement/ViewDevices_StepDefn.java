@@ -26,8 +26,8 @@ public class ViewDevices_StepDefn {
         settingsValidation.validateDevicesTabVisibility();
         settingsValidation.validateDeviceTabState();
         settingsValidation.validateDevicesTabText("Devices");
-        settingsPageObjectModel.viewDevices();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        settingsPageObjectModel.viewDevices();
     }
     @Then("the user should see all system devices listed without errors")
     public void the_user_should_see_all_system_devices_listed_without_errors() {

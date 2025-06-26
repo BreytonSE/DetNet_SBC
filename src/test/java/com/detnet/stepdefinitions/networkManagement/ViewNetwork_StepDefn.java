@@ -26,8 +26,10 @@ public class ViewNetwork_StepDefn {
         SettingsPageObjectModel settingsPageObjectModel = pageObjectManager.getSettingsPageObjectModel();
         SettingsValidation settingsValidation = new SettingsValidation(settingsPageObjectModel);
         settingsValidation.validateNetworksTabVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         settingsPageObjectModel.goToNetworks();
         settingsValidation.validateSettingsURL("http://localhost:8080/en/settings/networks");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         NetworkPageObjectModel networkPageObjectModel = pageObjectManager.getNetworkPageObjectModel();
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateNetworkLabelVisibility();

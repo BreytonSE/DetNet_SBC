@@ -24,10 +24,10 @@ public class SearchGroups_StepDefn {
         groupsValidation.validateSearchBarVisibility();
         groupsValidation.validateSearchBarState();
         groupsValidation.validateIfSearchbarIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.searchGroup("3");
         groupsPageObjectModel.searchGroup("Test Group 5");
         groupsPageObjectModel.searchGroup("2");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("the group matching the entered name or ID should appear in the results list")
     public void the_group_matching_the_entered_name_or_id_should_appear_in_the_results_list() {

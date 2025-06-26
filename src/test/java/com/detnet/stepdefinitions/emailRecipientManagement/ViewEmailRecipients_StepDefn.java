@@ -26,8 +26,8 @@ public class ViewEmailRecipients_StepDefn {
         settingsValidation.validateEmailRecipientsTabVisibility();
         settingsValidation.validateEmailRecipientsTabState();
         settingsValidation.validateEmailRecipientsText("Email Recipients");
-        settingsPageObjectModel.viewEmailRecipients();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        settingsPageObjectModel.viewEmailRecipients();
     }
 
     @Then("the user should be on the email recipients page")

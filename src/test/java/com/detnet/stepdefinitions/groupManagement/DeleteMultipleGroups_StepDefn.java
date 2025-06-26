@@ -23,26 +23,26 @@ public class DeleteMultipleGroups_StepDefn {
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateDeleteIconVisibility();
         groupsValidation.validateDeleteIconState();
-        groupsPageObjectModel.deleteSingleGroup(2);
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        groupsPageObjectModel.deleteSingleGroup(2);
     }
     @When("the user deletes a single group")
     public void the_user_deletes_a_single_group() {
         GroupsPageObjectModel groupsPageObjectModel = pageObjectManager.getGroupsPageObjectModel();
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateDeleteDialogWindowVisibility();
-        groupsPageObjectModel.confirmDelete();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        groupsPageObjectModel.confirmDelete();
     }
     @When("the user selects multiple groups by clicking on their checkboxes")
     public void the_user_selects_multiple_groups_by_clicking_on_their_checkboxes() {
         GroupsPageObjectModel groupsPageObjectModel = pageObjectManager.getGroupsPageObjectModel();
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateCheckBoxVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.selectAllGroups();
         groupsPageObjectModel.selectOrDeselectMultipleGroups(2);
         groupsPageObjectModel.selectOrDeselectMultipleGroups(4);
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user clicks on the Delete Groups button")
     public void the_user_clicks_on_the_delete_groups_button() {
@@ -50,9 +50,9 @@ public class DeleteMultipleGroups_StepDefn {
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateDeleteAllButtonVisibility();
         groupsValidation.validateDeleteAllButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.deleteSelectedGroups();
         groupsPageObjectModel.confirmDelete();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("the selected groups should no longer be visible in the list")
     public void the_selected_groups_should_no_longer_be_visible_in_the_list() {

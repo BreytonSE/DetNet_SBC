@@ -25,8 +25,8 @@ public class AddUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateAddUserButtonVisibility();
         usersValidation.validateAddUserButtonState();
-        usersPageObjectModel.AddNewUser();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.AddNewUser();
     }
 
     @Then("verify that the User form page is open")
@@ -46,6 +46,7 @@ public class AddUsers_StepDefn {
         usersValidation.validateUsernameInputFieldVisibility();
         usersValidation.validateUsernameInputFieldState();
         usersValidation.validateIfUsernameFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.setUsername("JohnD");
         usersValidation.validateEnteredUsername("JohnD");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -57,6 +58,7 @@ public class AddUsers_StepDefn {
         usersValidation.validateEmailInputFieldVisibility();
         usersValidation.validateEmailInputFieldState();
         usersValidation.validateEmailInputFieldIfEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.setEmail("johnD@detnet.com");
         usersValidation.validateEnteredEmail("johnD@detnet.com");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -68,6 +70,7 @@ public class AddUsers_StepDefn {
         usersValidation.validateFirstNameInputFieldVisibility();
         usersValidation.validateFirstNameInputFieldState();
         usersValidation.validateIfFirstNameInputFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.setFirstname("John");
         usersValidation.validateEnteredFirstname("John");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -79,6 +82,7 @@ public class AddUsers_StepDefn {
         usersValidation.validateSurnameInputFieldVisibility();
         usersValidation.validateSurnameInputFieldState();
         usersValidation.validateIfSurnameInputFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.setSurname("Doe");
         usersValidation.validateEnteredSurname("Doe");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -89,8 +93,10 @@ public class AddUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateRoleFieldVisibility();
         usersValidation.validateRoleFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.openRoleDropDown();
         usersValidation.validateIfRoleDropDownIsOpen();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         usersPageObjectModel.selectRole("administrator");
         usersValidation.validateSelectedRole("administrator");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -101,8 +107,8 @@ public class AddUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateAddUserSubmitButtonVisibility();
         usersValidation.validateUserSubmitButtonState();
-        usersPageObjectModel.submitUserData();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.submitUserData();
     }
     @Then("lastly verify that the user has been added and appears as the last item of the user view page")
     public void lastly_verify_that_the_user_has_been_added_and_appears_as_the_last_item_of_the_user_view_page() {
@@ -110,6 +116,7 @@ public class AddUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateNewUsername(" JohnD ");
         usersValidation.validateIfNewUserAdded(2);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseUsersValidations databaseUsersValidations = new DatabaseUsersValidations(databaseObjectModel);
         databaseUsersValidations.validateUserExistsByEmail("johnD@detnet.com");

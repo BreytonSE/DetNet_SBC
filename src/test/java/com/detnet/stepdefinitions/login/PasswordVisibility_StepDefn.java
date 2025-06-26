@@ -7,12 +7,9 @@ import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.LoginValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 //   Scenario: Verify that a user can view the password they entered on the login screen
 public class PasswordVisibility_StepDefn {
-    private static final Logger log = LoggerFactory.getLogger(PasswordVisibility_StepDefn.class);
     private final PageObjectManager pageObjectManager;
 
     public PasswordVisibility_StepDefn() {
@@ -26,8 +23,8 @@ public class PasswordVisibility_StepDefn {
         LoginValidation loginValidation = new LoginValidation(loginPageObjectModel);
         loginValidation.validatePasswordVisibilityIcon();
         loginValidation.validatePasswordVisibilityIconState();
-        loginPageObjectModel.togglePasswordVisibility();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        loginPageObjectModel.togglePasswordVisibility();
     }
     @Then("the password should be revealed")
     public void the_password_should_be_revealed() {

@@ -31,7 +31,6 @@ public class BlastCardAdd_StepDefn {
         String password = LoginConstantUtils.getDecryptedPassword();
         loginPageObjectModel.setPassword(password);
         loginPageObjectModel.logIn();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Given("the NFC reader is connected to the computer or laptop")
     public void the_nfc_reader_is_connected_to_the_computer_or_laptop() {

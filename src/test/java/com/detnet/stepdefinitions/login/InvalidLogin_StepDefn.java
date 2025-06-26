@@ -23,16 +23,16 @@ public class InvalidLogin_StepDefn {
         LoginValidation loginValidation = new LoginValidation(loginPageObjectModel);
         loginPageObjectModel.setUsername("john");
         loginValidation.validateUsernameField("john");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         loginPageObjectModel.setPassword("portal123");
         loginValidation.validatePasswordField("portal123");
-        loginPageObjectModel.togglePasswordVisibility();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        loginPageObjectModel.togglePasswordVisibility();
     }
     @When("I click on {string}")
     public void i_click_on(String string) {
         LoginPageObjectModel loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
         loginPageObjectModel.logIn();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("I should see an error message under the password input field")
     public void i_should_see_an_error_message_under_the_password_input_field() {

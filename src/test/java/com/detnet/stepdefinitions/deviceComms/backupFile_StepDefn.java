@@ -31,38 +31,41 @@ public class backupFile_StepDefn {
     public void the_user_clicks_on_the_server_configuration_interface(String string) {
         serverConfigValidation.validateRestoreFromBackupButtonVisibility();
         serverConfigValidation.validateRestoreFromBackupButtonState();
-        serverConfigPageObjectModel.restoreFromBackup();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        serverConfigPageObjectModel.restoreFromBackup();
     }
     @When("the user selects the backup file")
     public void the_user_selects_the_backup_file() {
         serverConfigValidation.validateFileNameAndExtension("quickshot",".backup");
         serverConfigPageObjectModel.searchFile("quickshot_202504081318.backup");
         serverConfigValidation.validateFileName("quickshot_202504081318.backup");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         serverConfigPageObjectModel.loadBackupFile();
         serverConfigPageObjectModel.confirmDatabaseRestore();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user saves the configuration")
     public void the_user_saves_the_configuration() throws Exception {
         serverConfigPageObjectModel.closeRestoreAlertWindow();
         serverConfigValidation.validateSaveConfigurationButtonVisibility();
         serverConfigValidation.validateSaveConfigurationButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         serverConfigPageObjectModel.saveConfiguration();
         String configPassword = LoginConstantUtils.getDecryptedServerConfigPassword();
         serverConfigValidation.validateIfConfigPasswordInputFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
         serverConfigPageObjectModel.setConfigurationPassword(configPassword);
         serverConfigValidation.validateDialogOKButtonVisibility();
         serverConfigValidation.validateDialogOkButtonIsEnabled();
-        serverConfigPageObjectModel.confirmPassword();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        serverConfigPageObjectModel.confirmPassword();
     }
     @When("the user starts the server")
     public void the_user_starts_the_server() {
         serverConfigValidation.validateIfStartServerButtonIsVisible();
         serverConfigValidation.validateIfStartServerButtonIsEnabled();
-        serverConfigPageObjectModel.startServer();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        serverConfigPageObjectModel.startServer();
     }
     @Then("the user starts the web server")
     public void the_user_starts_the_web_server() {

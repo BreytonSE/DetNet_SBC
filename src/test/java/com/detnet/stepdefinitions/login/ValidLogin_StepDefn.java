@@ -36,13 +36,12 @@ public class ValidLogin_StepDefn {
         loginPageObjectModel.setUsername(username);
         String password = LoginConstantUtils.getDecryptedPassword();
         loginPageObjectModel.setPassword(password);
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("I click on the login button")
     public void i_click_on_the_login_button() {
         loginValidation.validateLoginButtonClick();
-        loginPageObjectModel.logIn();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        loginPageObjectModel.logIn();
     }
     @Then("I should be on the dashboard page")
     public void i_should_be_on_the_dashboard_page() {
@@ -56,12 +55,13 @@ public class ValidLogin_StepDefn {
     public void then_i_log_out_of_the_application_again() {
         dashboardValidation.validateUserRoleLabelVisibility();
         dashboardValidation.validateRoleName("administrator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         dashboardPageObjectModel.openNavigationMenu();
         dashboardValidation.validateNavigationMenuVisibility();
         dashboardValidation.validateLogOutButtonVisibility();
         dashboardValidation.validateLogOutButtonClick();
-        dashboardPageObjectModel.logOut();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        dashboardPageObjectModel.logOut();
     }
     @Then("verify that I am back on the login page")
     public void verify_that_i_am_back_on_the_login_page() {

@@ -22,10 +22,11 @@ public class DeleteRecipients_StepDefn {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateDeleteIconVisibility(1);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.deleteRecipient(1);
         emailRecipientsValidation.validateDeleteDialogVisibility();
-        emailRecipientsPageObjectModel.confirmToDeleteRecipient();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        emailRecipientsPageObjectModel.confirmToDeleteRecipient();
     }
     @Then("verify the single recipient is deleted")
     public void verify_the_single_recipient_is_deleted() {
@@ -40,15 +41,16 @@ public class DeleteRecipients_StepDefn {
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateCheckboxVisibility();
         emailRecipientsValidation.validateCheckboxState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.selectAllRecipients();
         emailRecipientsPageObjectModel.selectOrDeselectRecipients(1);
         emailRecipientsPageObjectModel.selectOrDeselectRecipients(2);
         emailRecipientsPageObjectModel.selectOrDeselectRecipients(3);
         emailRecipientsValidation.validateDeleteAllButtonVisibility();
         emailRecipientsValidation.validateDeleteAllButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.deleteAllRecipients();
         emailRecipientsPageObjectModel.confirmToDeleteRecipient();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("verify that selected recipients is deleted")
     public void verify_that_selected_recipients_is_deleted() {

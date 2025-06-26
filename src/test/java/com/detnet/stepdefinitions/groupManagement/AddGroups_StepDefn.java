@@ -25,8 +25,8 @@ public class AddGroups_StepDefn {
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateAddGroupButtonVisibility();
         groupsValidation.validateAddGroupButtonState();
-        groupsPageObjectModel.addGroup();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        groupsPageObjectModel.addGroup();
     }
     @Then("the Add Group page should be displayed")
     public void the_add_group_page_should_be_displayed() {
@@ -44,6 +44,7 @@ public class AddGroups_StepDefn {
         groupsValidation.validateGroupNameFieldVisibility();
         groupsValidation.validateGroupNameFieldState();
         groupsValidation.validateGroupNameFieldIfEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.setGroupName("Test Group");
         groupsValidation.validateGroupNameFieldIfFilled();
         groupsValidation.validateGroupName("Test Group");
@@ -55,10 +56,13 @@ public class AddGroups_StepDefn {
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateColorPickerVisibility();
         groupsValidation.validateColorPickerState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.openColorPicker();
         groupsValidation.validateIfColorPickerOpen();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.switchColorCode(1); // 1 for RGB and 2 for HSL
         groupsValidation.validateRGBFieldVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         groupsPageObjectModel.setRGBColor("255","165","0");
         groupsValidation.validateRGBColorCode("255","165","0");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -69,8 +73,8 @@ public class AddGroups_StepDefn {
         GroupsValidation groupsValidation = new GroupsValidation(groupsPageObjectModel);
         groupsValidation.validateSaveGroupButtonVisibility();
         groupsValidation.validateSaveGroupButtonState();
-        groupsPageObjectModel.saveGroup();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        groupsPageObjectModel.saveGroup();
     }
     @Then("the group should appear on the Groups interface")
     public void the_group_should_appear_on_the_groups_interface() {

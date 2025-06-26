@@ -25,8 +25,8 @@ public class EditDevices_StepDefn {
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
         deviceValidation.validateEditIconVisibility();
         deviceValidation.validateEditIconState();
-        devicePageObjectModel.clickEditIcon();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        devicePageObjectModel.clickEditIcon();
     }
     @Then("the device edit page should be displayed")
     public void the_device_edit_page_should_be_displayed() {
@@ -44,8 +44,8 @@ public class EditDevices_StepDefn {
         devicePageObjectModel.openDeviceGroupDropDown();
         devicePageObjectModel.selectDeviceGroup("3");
         deviceValidation.validateSaveUpdateButtonVisibility();
-        devicePageObjectModel.updateDeviceDetails();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        devicePageObjectModel.updateDeviceDetails();
     }
     @Then("the updated group should be reflected on the front end")
     public void the_updated_group_should_be_reflected_on_the_front_end() {

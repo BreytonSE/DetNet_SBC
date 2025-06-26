@@ -22,8 +22,8 @@ public class DeleteNetwork_StepDefn {
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateDeleteIconVisibility();
         networkValidation.validateDeleteIconState();
-        networkPageObjectModel.deleteNetwork("3");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        networkPageObjectModel.deleteNetwork("3");
     }
 
     @When("the user confirms the deletion by clicking the Delete button in the popup")
@@ -33,6 +33,7 @@ public class DeleteNetwork_StepDefn {
         networkValidation.validateDeleteDialogVisibility();
         networkValidation.validateDeleteNetworkYesButtonVisibility();
         networkValidation.validateDeleteNetworkYesButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         networkPageObjectModel.confirmToDeleteNetwork();
         networkValidation.validateDeleteDialogClosed();
         SoftAssertionUtils.getSoftAssertions().assertAll();

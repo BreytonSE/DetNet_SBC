@@ -23,8 +23,8 @@ public class DeleteUser_StepDefn {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateDeleteIconVisibility(1);
-        usersPageObjectModel.deleteUser(1);
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.deleteUser(1);
     }
     @Then("confirm to delete the user")
     public void confirm_to_delete_the_user() {
@@ -32,12 +32,12 @@ public class DeleteUser_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateDeleteDialogBoxVisibility();
         usersValidation.validateYesButtonVisibility();
-        usersPageObjectModel.confirmToDelete();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.confirmToDelete();
     }
 
     @Then("lastly verify that the user has been deleted on the user interface")
-    public void lastly_verify_that_the_user_has_been_deleted_on_the_user_interface() throws InterruptedException {
+    public void lastly_verify_that_the_user_has_been_deleted_on_the_user_interface() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfUserIsDeleted("JohnD");

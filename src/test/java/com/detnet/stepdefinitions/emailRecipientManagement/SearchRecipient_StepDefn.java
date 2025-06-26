@@ -30,8 +30,8 @@ public class SearchRecipient_StepDefn {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateIfSearchBarIsEmpty();
-        emailRecipientsPageObjectModel.search("felix.gray@testmail.com");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        emailRecipientsPageObjectModel.search("felix.gray@testmail.com");
     }
 
     @Then("the matching recipient username should appear in the results")
@@ -46,7 +46,6 @@ public class SearchRecipient_StepDefn {
     public void the_user_enters_a_recipient_s_first_name_into_the_search_bar() {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         emailRecipientsPageObjectModel.search("Daniel");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("the matching recipient first name should appear in the results")
@@ -61,7 +60,6 @@ public class SearchRecipient_StepDefn {
     public void the_user_enters_a_recipient_s_last_name_into_the_search_bar() {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         emailRecipientsPageObjectModel.search("Bennet");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("the matching recipient last name should appear in the results")

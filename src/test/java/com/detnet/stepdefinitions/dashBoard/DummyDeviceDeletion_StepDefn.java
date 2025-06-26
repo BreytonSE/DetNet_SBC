@@ -29,10 +29,9 @@ public class DummyDeviceDeletion_StepDefn {
     }
 
     @Then("the user deletes the dummy device completely from the dashboard")
-    public void the_user_deletes_the_dummy_device_completely_from_the_dashboard() throws InterruptedException {
+    public void the_user_deletes_the_dummy_device_completely_from_the_dashboard() {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         devicePageObjectModel.deleteSelectedDevices();
         devicePageObjectModel.confirmDelete();
-        Thread.sleep(5000);
     }
 }

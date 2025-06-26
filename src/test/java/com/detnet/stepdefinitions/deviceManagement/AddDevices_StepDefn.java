@@ -65,10 +65,11 @@ public class AddDevices_StepDefn {
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
         deviceValidation.validateDeviceManagerFieldVisibility();
         deviceValidation.validateDeviceManagerFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.openDeviceManageDropDown();
         deviceValidation.validateDeviceManagerDropDownIsOpen();
-        devicePageObjectModel.selectManager("ethan.hughes");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        devicePageObjectModel.selectManager("ethan.hughes");
     }
 
     @When("the user assigns a parent device")
@@ -77,10 +78,11 @@ public class AddDevices_StepDefn {
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
         deviceValidation.validateParenDeviceFieldVisibility();
         deviceValidation.validateParentDeviceFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.openParentDeviceDropDown();
         deviceValidation.validateParentDeviceDropDownIsOpen();
-        devicePageObjectModel.selectParentDevice("Dummy device");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        devicePageObjectModel.selectParentDevice("Dummy device");
     }
 
     @When("the user assigns a group to the device")
@@ -89,10 +91,11 @@ public class AddDevices_StepDefn {
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
         deviceValidation.validateDeviceGroupFieldVisibility();
         deviceValidation.validateDeviceGroupFieldState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.openDeviceGroupDropDown();
         deviceValidation.validateDeviceGroupDropDownVisibility();
-        devicePageObjectModel.selectDeviceGroup("2");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        devicePageObjectModel.selectDeviceGroup("2");
     }
 
     @When("the user sets the device IP address")
@@ -108,7 +111,6 @@ public class AddDevices_StepDefn {
     public void the_user_saves_the_new_device() {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         devicePageObjectModel.addDevice();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("the device should be visible in the list and successfully registered on the backend")

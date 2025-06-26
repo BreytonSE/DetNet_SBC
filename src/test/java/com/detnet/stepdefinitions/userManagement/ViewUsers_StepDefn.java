@@ -28,8 +28,8 @@ public class ViewUsers_StepDefn {
         settingsValidation.validateUserButtonVisibility();
         settingsValidation.validateUserButtonState();
         settingsValidation.validateUsersButtonText("Users");
-        settingsPageObjectModel.viewUsers();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        settingsPageObjectModel.viewUsers();
     }
     @Then("verify that the system users can be seen")
     public void verify_that_the_system_users_can_be_seen() {

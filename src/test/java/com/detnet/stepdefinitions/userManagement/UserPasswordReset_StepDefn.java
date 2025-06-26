@@ -23,16 +23,16 @@ public class UserPasswordReset_StepDefn {
     }
 
     @Then("the user clicks on the shield icon next to the target user")
-    public void the_user_clicks_on_the_shield_icon_next_to_the_target_user() throws InterruptedException {
+    public void the_user_clicks_on_the_shield_icon_next_to_the_target_user() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validatePasswordResetIconVisibility();
-        usersPageObjectModel.requestPasswordReset("3");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.requestPasswordReset("3");
     }
 
     @Then("a popup prompt should appear asking the user to confirm the password reset")
-    public void a_popup_prompt_should_appear_asking_the_user_to_confirm_the_password_reset() throws InterruptedException {
+    public void a_popup_prompt_should_appear_asking_the_user_to_confirm_the_password_reset() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validatePasswordResetDialogVisibility();
@@ -43,7 +43,6 @@ public class UserPasswordReset_StepDefn {
     public void the_user_clicks_to_confirm_the_password_reset(String string) {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         usersPageObjectModel.confirmToResetPassword();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("log out of again")
@@ -51,7 +50,6 @@ public class UserPasswordReset_StepDefn {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         dashboardPageObjectModel.openNavigationMenu();
         dashboardPageObjectModel.logOut();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("enter the username in both username and password field once on the login screen")
@@ -59,10 +57,10 @@ public class UserPasswordReset_StepDefn {
         LoginPageObjectModel loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
         LoginValidation loginValidation = new LoginValidation(loginPageObjectModel);
         loginValidation.validateLoginPageURL("http://localhost:8080/en/login");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         loginPageObjectModel.setUsername("amy.wilkinson");
         loginPageObjectModel.setPassword("amy.wilkinson");
         loginPageObjectModel.logIn();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("the user should be prompted to set a new password")
@@ -71,42 +69,46 @@ public class UserPasswordReset_StepDefn {
         PasswordResetValidation passwordResetValidation = new PasswordResetValidation(passwordResetPageObjectModel);
         passwordResetValidation.validatePasswordResetURL("http://localhost:8080/en/password-reset");
         passwordResetValidation.validatePasswordResetFormVisibility();
-
         passwordResetValidation.validateCurrentPasswordFieldVisibility();
         passwordResetValidation.validateCurrentPasswordFieldState();
         passwordResetValidation.validateIfCurrentPasswordFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
         passwordResetPageObjectModel.setCurrentPassword("amy.wilkinson");
         passwordResetValidation.validateIfCurrentPasswordIsHidden();
         passwordResetValidation.validateCurrentPasswordVisibilityIconPresence();
         passwordResetValidation.validateCurrentPasswordVisibilityIconState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetPageObjectModel.toggleCurrentPasswordVisibility();
         passwordResetValidation.validateIfCurrentPasswordIsShownAsText();
         passwordResetValidation.validateCurrentPassword("amy.wilkinson");
-
         passwordResetValidation.validateNewPasswordFieldVisibility();
         passwordResetValidation.validateNewPasswordFieldState();
         passwordResetValidation.validateIfNewPasswordFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetPageObjectModel.setNewPassword("Amy.Wilk@123");
         passwordResetValidation.validateIfNewPasswordIsHidden();
         passwordResetValidation.validateNewPasswordVisibilityIconState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetPageObjectModel.toggleNewPasswordVisibility();
         passwordResetValidation.validateIfNewPasswordIsShowAsText();
         passwordResetValidation.validateNewPassword("Amy.Wilk@123");
-
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetValidation.validateConfirmedPasswordFieldVisibility();
         passwordResetValidation.validateConfirmedPasswordFieldState();
         passwordResetValidation.validateIfConfirmPasswordFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetPageObjectModel.setConfirmedPassword("Amy.Wilk@123");
         passwordResetValidation.validateIfConfirmedPasswordIsHidden();
         passwordResetValidation.validateConfirmPasswordVisibilityIconPresence();
         passwordResetValidation.validateConfirmPasswordVisibilityIconState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetPageObjectModel.toggleConfirmedPasswordVisibility();
         passwordResetValidation.validateIfConfirmPasswordIsText();
         passwordResetValidation.validateConfirmedPassword("Amy.Wilk@123");
-
         passwordResetValidation.validateChangePasswordButtonVisibility();
         passwordResetValidation.validateChangePasswordButtonState();
-        passwordResetPageObjectModel.changePassword();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        passwordResetPageObjectModel.changePassword();
     }
 }

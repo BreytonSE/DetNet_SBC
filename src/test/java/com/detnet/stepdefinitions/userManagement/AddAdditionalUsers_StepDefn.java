@@ -23,19 +23,24 @@ public class AddAdditionalUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersPageObjectModel.setUsername("amy.wilkinson");
         usersValidation.validateEnteredUsername("amy.wilkinson");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setEmail("aWilkinson@detnet.com");
         usersValidation.validateEnteredEmail("aWilkinson@detnet.com");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setFirstname("Amy");
         usersValidation.validateEnteredFirstname("Amy");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setSurname("Wilkinson");
         usersValidation.validateEnteredSurname("Wilkinson");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.openRoleDropDown();
         usersPageObjectModel.selectRole("operator");
         usersValidation.validateSelectedRole("operator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.submitUserData();
         usersValidation.validateIfNewUserAdded(3);
@@ -48,19 +53,24 @@ public class AddAdditionalUsers_StepDefn {
         usersPageObjectModel.AddNewUser();
         usersPageObjectModel.setUsername("ethan.hughes");
         usersValidation.validateEnteredUsername("ethan.hughes");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setEmail("hughesE@detnet.com");
         usersValidation.validateEnteredEmail("hughesE@detnet.com");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setFirstname("Ethan");
         usersValidation.validateEnteredFirstname("Ethan");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setSurname("Hughes");
         usersValidation.validateEnteredSurname("Hughes");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.openRoleDropDown();
         usersPageObjectModel.selectRole("operator");
         usersValidation.validateSelectedRole("operator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.submitUserData();
         usersValidation.validateIfNewUserAdded(4);
@@ -73,19 +83,24 @@ public class AddAdditionalUsers_StepDefn {
         usersPageObjectModel.AddNewUser();
         usersPageObjectModel.setUsername("cody007");
         usersValidation.validateEnteredUsername("cody007");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setEmail("dixonCody@detnet.com");
         usersValidation.validateEnteredEmail("dixonCody@detnet.com");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setFirstname("Cody");
         usersValidation.validateEnteredFirstname("Cody");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setSurname("Dixon");
         usersValidation.validateEnteredSurname("Dixon");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.openRoleDropDown();
         usersPageObjectModel.selectRole("central blast operator");
         usersValidation.validateSelectedRole("central blast operator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.submitUserData();
         usersValidation.validateIfNewUserAdded(5);
@@ -98,19 +113,24 @@ public class AddAdditionalUsers_StepDefn {
         usersPageObjectModel.AddNewUser();
         usersPageObjectModel.setUsername("jane.smith");
         usersValidation.validateEnteredUsername("jane.smith");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setEmail("smithj@detnet.com");
         usersValidation.validateEnteredEmail("smithj@detnet.com");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setFirstname("Jane");
         usersValidation.validateEnteredFirstname("Jane");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setSurname("Smith");
         usersValidation.validateEnteredSurname("Smith");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.openRoleDropDown();
         usersPageObjectModel.selectRole("administrator");
         usersValidation.validateSelectedRole("administrator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.submitUserData();
         usersValidation.validateIfNewUserAdded(6);
@@ -123,19 +143,24 @@ public class AddAdditionalUsers_StepDefn {
         usersPageObjectModel.AddNewUser();
         usersPageObjectModel.setUsername("oliver.thomas");
         usersValidation.validateEnteredUsername("oliver.thomas");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setEmail("thomaso@detnet.com");
         usersValidation.validateEnteredEmail("thomaso@detnet.com");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setFirstname("Oliver");
         usersValidation.validateEnteredFirstname("Oliver");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.setSurname("Thomas");
         usersValidation.validateEnteredSurname("Thomas");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.openRoleDropDown();
         usersPageObjectModel.selectRole("detnet engineering");
         usersValidation.validateSelectedRole("detnet engineering");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
 
         usersPageObjectModel.submitUserData();
         usersValidation.validateIfNewUserAdded(7);

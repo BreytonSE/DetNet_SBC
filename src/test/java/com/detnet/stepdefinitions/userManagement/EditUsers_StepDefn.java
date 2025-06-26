@@ -24,8 +24,8 @@ public class EditUsers_StepDefn {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfEditIconIsVisible();
-        usersPageObjectModel.editUserData(2);
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.editUserData(2);
     }
     @Then("edit any information about the user")
     public void edit_any_information_about_the_user() throws InterruptedException {
@@ -33,8 +33,8 @@ public class EditUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfEditUserFormIsOpen();
         usersValidation.validateEditUserText("Edit User");
-        usersPageObjectModel.setNewSurname("Johnson");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.setNewSurname("Johnson");
     }
     @Then("apply the new changes by clicking the {string} button")
     public void apply_the_new_changes_by_clicking_the_button(String string) {
@@ -42,14 +42,15 @@ public class EditUsers_StepDefn {
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfSaveButtonIsPresent();
         usersValidation.validateIfSaveButtonState();
-        usersPageObjectModel.saveUpdatedUserInformation();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        usersPageObjectModel.saveUpdatedUserInformation();
     }
     @Then("I verify that the user information has been updated")
     public void i_verify_that_the_user_information_has_been_updated() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateUpdatedSurname(" Johnson ");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseUsersValidations databaseUsersValidations = new DatabaseUsersValidations(databaseObjectModel);
         String email = "johnD@detnet.com";

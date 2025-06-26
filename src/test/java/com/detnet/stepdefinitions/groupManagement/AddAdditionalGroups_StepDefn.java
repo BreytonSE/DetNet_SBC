@@ -3,7 +3,6 @@ package com.detnet.stepdefinitions.groupManagement;
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.GroupsPageObjectModel;
-import com.detnet.utilities.SoftAssertionUtils;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
@@ -24,7 +23,6 @@ public class AddAdditionalGroups_StepDefn {
         groupsPageObjectModel.switchColorCode(1);
         groupsPageObjectModel.setRGBColor("220","41","175");
         groupsPageObjectModel.saveGroup();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user creates a third group")
@@ -36,7 +34,6 @@ public class AddAdditionalGroups_StepDefn {
         groupsPageObjectModel.switchColorCode(1);
         groupsPageObjectModel.setRGBColor("14","79","218");
         groupsPageObjectModel.saveGroup();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user creates a fourth group")
@@ -48,7 +45,6 @@ public class AddAdditionalGroups_StepDefn {
         groupsPageObjectModel.switchColorCode(1);
         groupsPageObjectModel.setRGBColor("110","22","22");
         groupsPageObjectModel.saveGroup();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user creates a fifth group")
     public void the_user_creates_a_fifth_group() {
@@ -59,7 +55,6 @@ public class AddAdditionalGroups_StepDefn {
         groupsPageObjectModel.switchColorCode(1);
         groupsPageObjectModel.setRGBColor("140","202","160");
         groupsPageObjectModel.saveGroup();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user creates a sixth group")
     public void the_user_creates_a_sixth_group() {
@@ -70,6 +65,5 @@ public class AddAdditionalGroups_StepDefn {
         groupsPageObjectModel.switchColorCode(1);
         groupsPageObjectModel.setRGBColor("28","25","194");
         groupsPageObjectModel.saveGroup();
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

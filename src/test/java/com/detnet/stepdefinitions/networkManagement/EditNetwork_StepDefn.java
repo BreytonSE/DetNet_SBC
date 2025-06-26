@@ -24,8 +24,8 @@ public class EditNetwork_StepDefn {
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateEditIconVisibility();
         networkValidation.validateEditIconState();
-        networkPageObjectModel.editNetwork("2");
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        networkPageObjectModel.editNetwork("2");
     }
 
     @When("the user updates the desired network information")
@@ -33,7 +33,6 @@ public class EditNetwork_StepDefn {
         NetworkPageObjectModel networkPageObjectModel = pageObjectManager.getNetworkPageObjectModel();
         networkPageObjectModel.setNewMessageGap("30");
         networkPageObjectModel.setDelay("2000");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user clicks the Save button")
@@ -42,8 +41,8 @@ public class EditNetwork_StepDefn {
         NetworkValidation networkValidation = new NetworkValidation(networkPageObjectModel);
         networkValidation.validateSaveUpdateButtonVisibility();
         networkValidation.validateSaveUpdateButtonState();
-        networkPageObjectModel.updateNetwork();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        networkPageObjectModel.updateNetwork();
     }
 
     @Then("the updated network information should be saved successfully without any errors")

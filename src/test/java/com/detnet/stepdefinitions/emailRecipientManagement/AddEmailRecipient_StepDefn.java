@@ -25,8 +25,8 @@ public class AddEmailRecipient_StepDefn {
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateAddRecipientButtonVisibility();
         emailRecipientsValidation.validateAddRecipientButtonState();
-        emailRecipientsPageObjectModel.createEmailRecipient();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        emailRecipientsPageObjectModel.createEmailRecipient();
     }
     @Then("the Add Recipient form should be displayed")
     public void the_add_recipient_form_should_be_displayed() {
@@ -42,6 +42,7 @@ public class AddEmailRecipient_StepDefn {
         emailRecipientsValidation.validateEmailAddressInputFieldVisibility();
         emailRecipientsValidation.validateEmailAddressInputFieldState();
         emailRecipientsValidation.validateIfEmailAddressInputFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.setEmailAddress("alice.bennett@testmail.com");
         emailRecipientsValidation.validateEnteredEmailAddress("alice.bennett@testmail.com");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -53,6 +54,7 @@ public class AddEmailRecipient_StepDefn {
         emailRecipientsValidation.validateFirstNameInputFieldVisibility();
         emailRecipientsValidation.validateFirstNameInputFieldState();
         emailRecipientsValidation.validateIfFirstNameFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.setFirstName("Alice");
         emailRecipientsValidation.validateEnteredFirstName("Alice");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -64,6 +66,7 @@ public class AddEmailRecipient_StepDefn {
         emailRecipientsValidation.validateLastNameFieldVisibility();
         emailRecipientsValidation.validateLastNameFieldState();
         emailRecipientsValidation.validateIfLastNameFieldIsEmpty();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.setLastName("Bennett");
         emailRecipientsValidation.validateEnteredLastName("Bennett");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -73,6 +76,7 @@ public class AddEmailRecipient_StepDefn {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateSeverityLevelVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         emailRecipientsPageObjectModel.selectSeverityLevel("Moderate");
         emailRecipientsValidation.validateSelectedSeverity("Moderate");
         SoftAssertionUtils.getSoftAssertions().assertAll();
@@ -83,14 +87,15 @@ public class AddEmailRecipient_StepDefn {
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateSaveRecipientButtonVisibility();
         emailRecipientsValidation.validateSaveRecipientButtonState();
-        emailRecipientsPageObjectModel.saveNewRecipient();
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        emailRecipientsPageObjectModel.saveNewRecipient();
     }
     @Then("the new recipient should appear in the recipients list as well is in the database")
     public void the_new_recipient_should_appear_in_the_recipients_list_as_well_is_in_the_database() {
         EmailRecipientsPageObjectModel emailRecipientsPageObjectModel = pageObjectManager.getEmailRecipientsPageObjectModel();
         EmailRecipientsValidation emailRecipientsValidation = new EmailRecipientsValidation(emailRecipientsPageObjectModel);
         emailRecipientsValidation.validateIfRecipientExists("alice.bennett@testmail.com");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseRecipientValidations databaseRecipientValidations = new DatabaseRecipientValidations(databaseObjectModel);
         databaseRecipientValidations.validateIfRecipientsExistInDatabase();
