@@ -54,7 +54,7 @@ jobs:
           encrypted.databaseUsername=${{ secrets.ENCRYPTED_DATABASEUSERNAME }}
           encrypted.databasePassword=${{ secrets.ENCRYPTED_DATABASEPASSWORD }}
           "@ | Out-File -Encoding ASCII -FilePath $path
-          shell: powershell
+        shell: powershell
 
       - name: Run Tests
         run: | 
