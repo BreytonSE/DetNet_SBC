@@ -71,3 +71,12 @@ Feature: Dashboard functional integrity for BCU device management
     And the user selects Selected as the grouping option
     And the user selects Alive as the grouping option
     And the user selects Type as the grouping option
+
+  @e_dashboard
+  Scenario: Verify that device selection and device de-selection is functional
+    Given the user has entered valid BlastWeb login credentials
+    And the user is on the dashboard page
+    When the user selects a single device checkbox
+    And the user de-selects the device checkbox
+    And the user selects all devices
+    Then all devices should be selected successfully

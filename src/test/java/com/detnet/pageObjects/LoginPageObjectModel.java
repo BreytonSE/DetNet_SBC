@@ -2,10 +2,11 @@ package com.detnet.pageObjects;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.PlaywrightException;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 public class LoginPageObjectModel {
     private final Page page;
-
     private final String userNameInputField = "//input[@id='loginUsername']";
     private final String passwordInputField = "//input[@id='loginPassword']";
     private final String loginButton = "//button[@id='loginButton']";
@@ -26,7 +27,7 @@ public class LoginPageObjectModel {
     }
 
     public void setPassword(String password){
-        page.locator(passwordInputField).click();
+        page.locator(passwordInputField).click(new Locator.ClickOptions().setTimeout(5000));
         page.locator(passwordInputField).fill(password);
     }
 
@@ -35,7 +36,7 @@ public class LoginPageObjectModel {
     }
 
     public void logIn(){
-        page.locator(loginButton).click();
+        page.locator(loginButton).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
     public boolean isLoginButtonEnabled(){
@@ -43,7 +44,15 @@ public class LoginPageObjectModel {
     }
 
     public boolean isVisibilityIconVisible(){
-        return page.locator(visibilityIcon).isVisible();
+        try{
+            page.locator(visibilityIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 
     public boolean isVisibilityIconEnabled(){
@@ -51,7 +60,7 @@ public class LoginPageObjectModel {
     }
 
     public void togglePasswordVisibility(){
-        page.locator(visibilityIcon).click();
+        page.locator(visibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
     public boolean isPasswordShowing(){
@@ -72,7 +81,15 @@ public class LoginPageObjectModel {
     }
 
     public boolean isPasswordErrorMessageVisible(){
-        return page.locator(passwordErrorLabel).isVisible();
+        try{
+            page.locator(passwordErrorLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 
     public String getPasswordErrorLabel(){
@@ -80,7 +97,15 @@ public class LoginPageObjectModel {
     }
 
     public boolean isUnauthorizedMessageVisible(){
-        return page.locator(unauthorizedLabel).isVisible();
+        try{
+            page.locator(unauthorizedLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 
     public String getUnauthorizedLabel(){

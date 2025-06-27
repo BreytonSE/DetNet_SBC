@@ -329,4 +329,53 @@ public class DashboardValidation {
                 .as("Access denied snack bar should not be displaying when saving channel offset values.")
                 .isTrue();
     }
+
+    public void validateDeviceCheckboxVisibility(int checkbox){
+        boolean isVisible = dashboardPageObjectModel.isDeviceCheckBoxVisible(checkbox);
+        softly.assertThat(isVisible)
+                .as("The checkbox should appear next to the device on the dashboard.")
+                .isTrue();
+    }
+
+    public void validateDeviceCheckBoxState(int checkbox){
+        boolean isEnabled = dashboardPageObjectModel.isDeviceCheckboxEnabled(checkbox);
+        softly.assertThat(isEnabled)
+                .as("The checkbox next to the device should be enabled on the dashboard")
+                .isTrue();
+    }
+
+    public void validateIfDeviceIsSelected(int checkbox){
+        boolean isSelected = dashboardPageObjectModel.isDeviceSelected(checkbox);
+        softly.assertThat(isSelected)
+                .as("Checkbox should be in a selected state.")
+                .isTrue();
+    }
+
+    public void validateIfDeviceIsDeselected(int checkbox){
+        boolean isDeselected = dashboardPageObjectModel.isDeviceDeselected(checkbox);
+        softly.assertThat(isDeselected)
+                .as("Device should be deselected.")
+                .isTrue();
+    }
+
+    public void validateSelectAllCheckboxVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isSelectAllCheckBoxVisible();
+        softly.assertThat(isVisible)
+                .as("Select all checkbox should be visible")
+                .isTrue();
+    }
+
+    public void validateSelectAllCheckBoxState(){
+        boolean isEnabled = dashboardPageObjectModel.isSelectAllCheckBoxEnabled();
+        softly.assertThat(isEnabled)
+                .as("Select all checkbox should be enabled")
+                .isTrue();
+    }
+
+    public void validateIfSelectAllCheckboxIsChecked(){
+        boolean isChecked = dashboardPageObjectModel.isAllDevicesChecked();
+        softly.assertThat(isChecked)
+                .as("All devices should be selected.")
+                .isTrue();
+    }
 }

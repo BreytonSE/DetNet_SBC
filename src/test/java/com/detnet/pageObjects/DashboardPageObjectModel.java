@@ -37,6 +37,7 @@ public class DashboardPageObjectModel {
     private final String aliveElement = "(//span[normalize-space()='-  Alive'])[1]";
     private final String typeLocator = "(//span[normalize-space()='-  Type'])[1]";
     private final String accessDeniedSnackBar = "//div[@class=\"mat-mdc-snack-bar-label mdc-snackbar__label\"]";
+    private final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[2]/form[1]/div[3]/mat-toolbar-row[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
 
     public DashboardPageObjectModel(Page page) {
         this.page = page;
@@ -522,5 +523,72 @@ public class DashboardPageObjectModel {
         }catch (PlaywrightException e){
             return false;
         }
+    }
+
+    public boolean isDeviceCheckBoxVisible(int checkboxNumber){
+        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                "div[1]/input[1]";
+        try{
+            page.locator(checkBoxPath)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isDeviceCheckboxEnabled(int checkBoxNumber){
+        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                "/div[1]/div[2]/div[1]/div[" + checkBoxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                "div[1]/input[1]";
+        return page.locator(checkBoxPath).isEnabled();
+    }
+
+    public void selectOrDeselectDevice(int checkboxNumber){
+        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                "div[1]/input[1]";
+        page.locator(checkBoxPath).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceSelected(int checkboxNumber){
+        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                "div[1]/input[1]";
+        return page.locator(checkBoxPath).isChecked();
+    }
+
+    public boolean isDeviceDeselected(int checkBoxNumber){
+        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                "/div[1]/div[2]/div[1]/div[" + checkBoxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                "div[1]/input[1]";
+        return !page.locator(checkBoxPath).isChecked();
+    }
+
+    public boolean isSelectAllCheckBoxVisible(){
+        try{
+            page.locator(selectAllCheckbox)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isSelectAllCheckBoxEnabled(){
+        return page.locator(selectAllCheckbox).isEnabled();
+    }
+
+    public void selectAllDevices(){
+        page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isAllDevicesChecked(){
+        return page.locator(selectAllCheckbox).isChecked();
     }
 }
