@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.Properties;
 
+// This class has been modified that might break the login interactions.. backup is stored on a Notepad++ file (file 14)
 public class EncryptionUtils {
     private static final String ALGORITHM = "AES";
-    private static final String SECRET_KEY = loadSecretKey();
 
     private static String loadSecretKey() {
 //        Load from environment variable
@@ -24,14 +24,21 @@ public class EncryptionUtils {
         try(InputStream inputStream = Files.newInputStream(Paths.get("src/test/resources/encryption.properties"))){
             Properties props = new Properties();
             props.load(inputStream);
-            return props.getProperty("encryption.key");
+            String propKey = props.getProperty("encryption.key");
+            if(propKey != null && !propKey.isEmpty()){
+                return propKey;
+            }
         }catch (IOException e){
             throw new RuntimeException("Encryption key not found in environment or credentials.properties",e);
         }
+
+//        Final fallback - throw a clear error
+        throw new RuntimeException("Encryption key not found in environment variable ENC_KEY or encryption.properties");
     }
 
     public static String encrypt(String data) throws Exception {
-        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(),ALGORITHM);
+        String secretKey = loadSecretKey();
+        SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(),ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE,key);
         byte[] encryptedData = cipher.doFinal(data.getBytes());
@@ -39,7 +46,8 @@ public class EncryptionUtils {
     }
 
     public static String decrypt(String encryptedData) throws Exception{
-        SecretKeySpec key = new SecretKeySpec(SECRET_KEY.getBytes(),ALGORITHM);
+        String secretKey = loadSecretKey();
+        SecretKeySpec key = new SecretKeySpec(secretKey.getBytes(),ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE,key);
         byte[] decryptedData = cipher.doFinal(Base64.getDecoder().decode(encryptedData));
