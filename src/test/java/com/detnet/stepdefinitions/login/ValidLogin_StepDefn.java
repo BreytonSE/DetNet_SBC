@@ -4,7 +4,6 @@ import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.DashboardPageObjectModel;
 import com.detnet.pageObjects.LoginPageObjectModel;
-import com.detnet.utilities.EncryptionUtils;
 import com.detnet.utilities.LoginConstantUtils;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.DashboardValidation;

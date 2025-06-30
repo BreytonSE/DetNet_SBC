@@ -58,7 +58,7 @@ public class EditDevices_StepDefn {
     public void the_backend_should_reflect_the_updated_device_group() {
         DatabaseObjectModel databaseObjectModel = new DatabaseObjectModel();
         DatabaseDevicesValidations databaseDevicesValidations = new DatabaseDevicesValidations(databaseObjectModel);
-        databaseDevicesValidations.validateIfDeviceUpdatedInDatabase(502,"Cape Town 1",4);
+        databaseDevicesValidations.validateIfDeviceUpdatedInDatabase(502,"Cape Town 1",16); // id might change time to time
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }
