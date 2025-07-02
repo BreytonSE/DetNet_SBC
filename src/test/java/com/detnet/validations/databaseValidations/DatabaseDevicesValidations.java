@@ -16,24 +16,20 @@ public class DatabaseDevicesValidations {
         softly = SoftAssertionUtils.getSoftAssertions();
     }
 
-    public void validateIfDeviceUpdatedInDatabase(int deviceId, String expectedDeviceLocation, int expectedGroupId){
-        List<Map<String,Object>> device = databaseObjectModel.findDeviceById(deviceId,expectedDeviceLocation,expectedGroupId);
+    public void validateIfDeviceUpdatedInDatabase(int deviceId, String expectedDeviceLocation){
+        List<Map<String,Object>> device = databaseObjectModel.findDeviceById(deviceId,expectedDeviceLocation);
         
         if (device.isEmpty()) {
-            throw new AssertionError(String.format("Device id '%s' with location '%s' and group id '%s' not found in the database.",
-                    deviceId, expectedDeviceLocation, expectedGroupId));
+            throw new AssertionError(String.format("Device id '%s' with location '%s' not found in the database.",
+                    deviceId, expectedDeviceLocation));
         }
 
         softly.assertThat(device)
-                .as("Device id '%s' with location name '%s' should exist in the database",deviceId,expectedDeviceLocation,expectedGroupId)
+                .as("Device id '%s' with location name '%s' should exist in the database",deviceId,expectedDeviceLocation)
                 .isNotEmpty();
         String actualDeviceLocation = (String) device.get(0).get("location");
         softly.assertThat(actualDeviceLocation)
                 .as("Actual device location does not match expected device location. Expected '%s', but was '%s'",expectedDeviceLocation,actualDeviceLocation)
                 .isEqualTo(expectedDeviceLocation);
-        int actualGroupId = (int) device.get(0).get("groupid");
-        softly.assertThat(actualGroupId)
-                .as("Actual device group id does not match expected device group. Expected '%s', but was '%s'",expectedGroupId,actualGroupId)
-                .isEqualTo(expectedGroupId);
     }
 }

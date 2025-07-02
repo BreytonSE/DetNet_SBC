@@ -391,10 +391,10 @@ public class DeviceValidation {
                 .isTrue();
     }
 
-    public void validateIfDeviceIsDeleted(int deviceId){
-        boolean isDeleted = devicePageObjectModel.isDeviceDeleted(deviceId);
+    public void validateIfDeviceIsDeleted(String deviceLocation){
+        boolean isDeleted = devicePageObjectModel.isDeviceDeleted(deviceLocation);
         softly.assertThat(isDeleted)
-                .as("Device with id '%s' should not be present in the device list.", deviceId)
+                .as("Device with id '%s' should not be present in the device list.", deviceLocation)
                 .isTrue();
     }
 

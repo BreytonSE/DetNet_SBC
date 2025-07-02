@@ -123,4 +123,16 @@ public class LoginPageObjectModel {
         String inputType = passwordInput.getAttribute("type");
         return inputType.equals("password");
     }
+
+    public boolean isCredentialsValid(){
+        try{
+            page.locator(unauthorizedLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
 }

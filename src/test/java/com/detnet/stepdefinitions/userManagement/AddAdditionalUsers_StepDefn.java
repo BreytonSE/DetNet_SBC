@@ -166,4 +166,35 @@ public class AddAdditionalUsers_StepDefn {
         usersValidation.validateIfNewUserAdded(7);
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
+
+    @Then("the user adds an eight user who is a blast operator")
+    public void the_user_adds_an_eight_user_who_is_a_blast_operator() {
+        UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
+        UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
+        usersPageObjectModel.AddNewUser();
+        usersPageObjectModel.setUsername("breyton");
+        usersValidation.validateEnteredUsername("breyton");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+        usersPageObjectModel.setEmail("breyton.ernstzen@testheroes.co.za");
+        usersValidation.validateEnteredEmail("breyton.ernstzen@testheroes.co.za");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+        usersPageObjectModel.setFirstname("Breyton");
+        usersValidation.validateEnteredFirstname("Breyton");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+        usersPageObjectModel.setSurname("Ernstzen");
+        usersValidation.validateEnteredSurname("Ernstzen");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+        usersPageObjectModel.openRoleDropDown();
+        usersPageObjectModel.selectRole("central blast operator");
+        usersValidation.validateSelectedRole("central blast operator");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+        usersPageObjectModel.submitUserData();
+        usersValidation.validateIfNewUserAdded(8);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+    }
 }

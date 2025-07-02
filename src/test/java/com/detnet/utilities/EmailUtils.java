@@ -37,7 +37,8 @@ public class EmailUtils {
                     "moosaa@detnet.com",
                     "maysond@detnet.com",
                     "kydh@detnet.com",
-                    "coetseet@detnet.com"
+                    "coetseet@detnet.com",
+                    "mbhalatil@detnet0.onmicrosoft.com"
             );
             sendEmailWithAttachment(recipientsEmails,
                     "BlastWeb Test Report",
@@ -180,7 +181,7 @@ public class EmailUtils {
                                                      int waitMinutes){
         String subject = "Device Alert Removal";
         String body = String.format(
-                "Hi,\n\nPlease activated alerts of device '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot",
+                "Hi,\n\nPlease remove activated alerts of device '%s' within the next %d minutes.\n\nRegards,\nTest Hero Bot",
                 deviceName,waitMinutes);
         sendDeviceRequestEmail(toEmail,ccEmails,subject,body);
     }

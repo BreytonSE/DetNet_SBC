@@ -34,6 +34,7 @@ public class DeleteMultipleUsers_StepDefn {
         usersPageObjectModel.selectOrDeselectUsers("2");
         usersPageObjectModel.selectOrDeselectUsers("3");
         usersPageObjectModel.selectOrDeselectUsers("4");
+        usersPageObjectModel.selectOrDeselectUsers("7");
 
         usersValidation.validateDeleteUsersButtonVisibility();
         usersValidation.validateDeleteUsersButtonState();

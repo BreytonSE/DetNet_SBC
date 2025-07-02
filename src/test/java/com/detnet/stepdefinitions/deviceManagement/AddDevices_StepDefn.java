@@ -163,8 +163,6 @@ public class AddDevices_StepDefn {
         devicePageObjectModel.selectManager("cody007");
         devicePageObjectModel.openParentDeviceDropDown();
         devicePageObjectModel.selectParentDevice("Dummy device");
-        devicePageObjectModel.openDeviceGroupDropDown();
-        devicePageObjectModel.selectDeviceGroup("4");
         devicePageObjectModel.setIpAddress("192.0.2.123");
         devicePageObjectModel.addDevice();
         deviceValidation.validateIfDeviceIsAdded("192.0.2.123");

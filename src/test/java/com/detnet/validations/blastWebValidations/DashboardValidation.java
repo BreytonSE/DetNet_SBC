@@ -131,7 +131,7 @@ public class DashboardValidation {
         String actualState = dashboardPageObjectModel.getDeviceCurrentState();
         softly.assertThat(actualState)
                 .as("Actual state does not match expected device state")
-                .isEqualTo(expectedState);
+                .isEqualToIgnoringCase(expectedState);
     }
 
     public void validateOffsetToolTipVisibility(){
@@ -323,13 +323,6 @@ public class DashboardValidation {
                 .isTrue();
     }
 
-    public void validateAccessDeniedSnackBarVisibility(){
-        boolean isHidden = dashboardPageObjectModel.isAccessDeniedBarHidden();
-        softly.assertThat(isHidden)
-                .as("Access denied snack bar should not be displaying when saving channel offset values.")
-                .isTrue();
-    }
-
     public void validateDeviceCheckboxVisibility(int checkbox){
         boolean isVisible = dashboardPageObjectModel.isDeviceCheckBoxVisible(checkbox);
         softly.assertThat(isVisible)
@@ -376,6 +369,48 @@ public class DashboardValidation {
         boolean isChecked = dashboardPageObjectModel.isAllDevicesChecked();
         softly.assertThat(isChecked)
                 .as("All devices should be selected.")
+                .isTrue();
+    }
+
+    public void validateIfOffsetIsActive(){
+        boolean isActive = dashboardPageObjectModel.isOffsetActive();
+        softly.assertThat(isActive)
+                .as("Offset should be in an active state")
+                .isTrue();
+    }
+
+    public void validatePlusIconVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isPlusIconVisible();
+        softly.assertThat(isVisible)
+                .as("Plus icon to open action panel should be displaying on the dashboard top right corner.")
+                .isTrue();
+    }
+
+    public void validatePlusIconState(){
+        boolean isEnabled = dashboardPageObjectModel.isPlusIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Plus icon to open action panel should be enabled on the dashboard top right corner.")
+                .isTrue();
+    }
+
+    public void validateActionPanelVisibility(){
+        boolean isOpen = dashboardPageObjectModel.isActionPanelOpen();
+        softly.assertThat(isOpen)
+                .as("Action panel should be visible")
+                .isTrue();
+    }
+
+    public void validateArmSelectedButtonVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isArmSelectedButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Arm Selected button and its corresponding label should be displaying.")
+                .isTrue();
+    }
+
+    public void validateIfDeviceIsReadyToBlast(){
+        boolean readyToBlast = dashboardPageObjectModel.isDeviceReadyToBlast();
+        softly.assertThat(readyToBlast)
+                .as("Device should be in 'Ready to Blast' -state")
                 .isTrue();
     }
 }

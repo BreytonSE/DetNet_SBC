@@ -41,6 +41,7 @@ Feature: User management feature
      And the user adds a fifth user
      And the user adds a sixth user
      And the user adds a seventh user
+     And the user adds an eight user who is a blast operator
 
   @d_userManagement
   Scenario: Verify that an existing user's data can be edited, ensuring that information can be updated on the backend

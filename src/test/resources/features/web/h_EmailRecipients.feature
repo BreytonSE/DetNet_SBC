@@ -41,6 +41,7 @@
     And the user creates a fifth recipient
     And the user creates a sixth recipient
 
+#     There is an issue in this script - Intervals
   @d_emailRecipients
   Scenario: Verify that recipients can be edited, ensuring that information can be updated on the backend
     Given the user has entered valid BlastWeb login credentials

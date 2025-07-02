@@ -528,10 +528,10 @@ public class DevicePageObjectModel {
         page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public boolean isDeviceDeleted(int deviceId){
-        String deviceIdPath = "(//a[normalize-space()='" + deviceId + "'])[1]";
+    public boolean isDeviceDeleted(String deviceLocation){
+        String deviceLocationPath = "(//td[normalize-space()='" + deviceLocation + "'])[1]";
         try{
-            page.locator(deviceIdPath)
+            page.locator(deviceLocationPath)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.HIDDEN)
                             .setTimeout(5000));

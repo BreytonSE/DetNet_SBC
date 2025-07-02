@@ -36,8 +36,12 @@ public class DashboardPageObjectModel {
     private final String selectedElement = "(//span[normalize-space()='-  Selected'])[1]";
     private final String aliveElement = "(//span[normalize-space()='-  Alive'])[1]";
     private final String typeLocator = "(//span[normalize-space()='-  Type'])[1]";
-    private final String accessDeniedSnackBar = "//div[@class=\"mat-mdc-snack-bar-label mdc-snackbar__label\"]";
     private final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[2]/form[1]/div[3]/mat-toolbar-row[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
+    private final String plusIcon = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[1]/button[1]/span[5]";
+    private final String actionPanel = "//div[@class=\"column ng-trigger ng-trigger-speedDialStagger\"]";
+    private final String armSelectedButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[1]/div[1]/button[1]/span[5]\n";
+    private final String armSelectedLabel = "//button[normalize-space()=\"Arm Selected (1)\"]";
+    private final String readyToBlastElement = "//span[contains(text(),\"READY TO BLAST\")]\n";
 
     public DashboardPageObjectModel(Page page) {
         this.page = page;
@@ -336,14 +340,19 @@ public class DashboardPageObjectModel {
     }
 
     public List<String> getAllCurrentDeviceAlerts() {
-        String deviceAlertXpath = "//span[@class='titlecase' or normalize-space()='Device Not Available']";
-        List<String> rawAlerts = page.locator(deviceAlertXpath).allTextContents();
-
         List<String> knownAlerts = Arrays.asList(
                 "Short Circuits", "High Leakage", "High Current", "Low Battery", "Acknowledge Alert", "Device Not Available",
                 "Last Detonator Bad", "Last Detonator Bad Voltage", "Harness Break", "Programming Error",
-                "Test Mode", "TX Error Preventing Blast"
-        );
+                "Test Mode", "TX Error Preventing Blast");
+
+//        Build xpath dynamically using 'or' conditions
+        String dynamicConditions = knownAlerts.stream()
+                .map(alert -> "normalize-space()='" + alert + "'")
+                .collect(Collectors.joining(" or "));
+
+        String deviceAlertXpath = "//span[@class='titlecase' or " + dynamicConditions + "]";
+
+        List<String> rawAlerts = page.locator(deviceAlertXpath).allTextContents();
 
         return rawAlerts.stream()
                 .map(String::trim)
@@ -513,18 +522,6 @@ public class DashboardPageObjectModel {
         }
     }
 
-    public boolean isAccessDeniedBarHidden(){
-        try{
-            page.locator(accessDeniedSnackBar)
-                    .waitFor(new Locator.WaitForOptions()
-                            .setState(WaitForSelectorState.HIDDEN)
-                            .setTimeout(5000));
-            return true;
-        }catch (PlaywrightException e){
-            return false;
-        }
-    }
-
     public boolean isDeviceCheckBoxVisible(int checkboxNumber){
         String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
                 "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
@@ -590,5 +587,76 @@ public class DashboardPageObjectModel {
 
     public boolean isAllDevicesChecked(){
         return page.locator(selectAllCheckbox).isChecked();
+    }
+
+    public boolean isOffsetActive(){
+        Locator offsetImage = page.locator(offsetToolTip);
+        String src = offsetImage.getAttribute("src");
+        return src != null && src.contains("active");
+    }
+
+    public boolean isPlusIconVisible(){
+        try{
+            page.locator(plusIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isPlusIconEnabled(){
+        return page.locator(plusIcon).isEnabled();
+    }
+
+    public void openActionPanel(){
+        page.locator(plusIcon).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isActionPanelOpen(){
+        try{
+            page.locator(actionPanel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isArmSelectedButtonVisible(){
+        try{
+            page.locator(armSelectedLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+
+            page.locator(armSelectedButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void armSelectedDevice(){
+        page.locator(armSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isDeviceReadyToBlast(){
+        try{
+            page.locator(readyToBlastElement)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 }

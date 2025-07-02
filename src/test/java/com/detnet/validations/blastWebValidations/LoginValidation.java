@@ -110,4 +110,11 @@ public class LoginValidation {
                 .as("Password should appear as dots or stars (hidden)")
                 .isTrue();
     }
+
+    public void validateIfCredentialsIsValid(){
+        boolean isValid = loginPageObjectModel.isCredentialsValid();
+        softly.assertThat(isValid)
+                .as("Unauthorized user label should not be displaying when credentials is valid.")
+                .isTrue();
+    }
 }

@@ -60,6 +60,7 @@ Feature: Device groups management feature
     When the user enters the group name or group ID in the search bar
     Then the group matching the entered name or ID should appear in the results list
 
+#    There is an issue with this script..look at it
   @f_groups
   Scenario: Validate user can select and delete multiple groups
     Given the user has entered valid BlastWeb login credentials

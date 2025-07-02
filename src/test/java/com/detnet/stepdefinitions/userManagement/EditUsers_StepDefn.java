@@ -28,7 +28,7 @@ public class EditUsers_StepDefn {
         usersPageObjectModel.editUserData(2);
     }
     @Then("edit any information about the user")
-    public void edit_any_information_about_the_user() throws InterruptedException {
+    public void edit_any_information_about_the_user() {
         UsersPageObjectModel usersPageObjectModel = pageObjectManager.getUsersPageObjectModel();
         UsersValidation usersValidation = new UsersValidation(usersPageObjectModel);
         usersValidation.validateIfEditUserFormIsOpen();

@@ -78,7 +78,7 @@ public class DatabaseUtils {
         return executeQuery(DatabaseQueryManager.SELECT_RECIPIENT_BY_EMAIL,email);
     }
 
-    public static List<Map<String,Object>> findDeviceById(int id, String location, int groupid){
-        return executeQuery(DatabaseQueryManager.SELECT_DEVICE_BY_ID,id,location,groupid);
+    public static List<Map<String,Object>> findDeviceById(int id, String location){
+        return executeQuery(DatabaseQueryManager.SELECT_DEVICE_BY_ID,id,location);
     }
 }

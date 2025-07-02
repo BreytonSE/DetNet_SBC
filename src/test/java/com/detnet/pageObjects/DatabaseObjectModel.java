@@ -66,7 +66,7 @@ public class DatabaseObjectModel {
         return DatabaseUtils.findRecipientByEmail(email);
     }
 
-    public List<Map<String,Object>> findDeviceById(int id,String location, int groupid){
-        return DatabaseUtils.findDeviceById(id,location,groupid);
+    public List<Map<String,Object>> findDeviceById(int id,String location){
+        return DatabaseUtils.findDeviceById(id,location);
     }
 }

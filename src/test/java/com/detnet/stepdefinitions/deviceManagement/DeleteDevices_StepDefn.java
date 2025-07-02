@@ -40,10 +40,10 @@ public class DeleteDevices_StepDefn {
         devicePageObjectModel.confirmDelete();
     }
     @Then("the device should be removed from the list")
-    public void the_device_should_be_removed_from_the_list() {
+    public void the_device_should_be_removed_from_the_list() throws InterruptedException {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
-        deviceValidation.validateIfDeviceIsDeleted(1);
+        deviceValidation.validateIfDeviceIsDeleted("Kathu"); // Throws a failure
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @Then("the checkboxes for device selection should be visible")
@@ -81,8 +81,8 @@ public class DeleteDevices_StepDefn {
     public void the_selected_devices_should_be_deleted_and_removed_from_the_list() {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
-        deviceValidation.validateIfDeviceIsDeleted(1);
-        deviceValidation.validateIfDeviceIsDeleted(3);
+        deviceValidation.validateIfDeviceIsDeleted("Kimberley");
+        deviceValidation.validateIfDeviceIsDeleted("Rustenburg");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

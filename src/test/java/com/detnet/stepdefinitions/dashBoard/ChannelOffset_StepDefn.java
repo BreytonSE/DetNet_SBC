@@ -3,9 +3,11 @@ package com.detnet.stepdefinitions.dashBoard;
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.DashboardPageObjectModel;
+import com.detnet.pageObjects.LoginPageObjectModel;
 import com.detnet.utilities.EmailUtils;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.DashboardValidation;
+import com.detnet.validations.blastWebValidations.LoginValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
@@ -19,6 +21,17 @@ public class ChannelOffset_StepDefn {
     public ChannelOffset_StepDefn() {
         Page page = PlaywrightManager.getPage();
         pageObjectManager = PageObjectManager.getInstance(page);
+    }
+
+    @Given("the user sign in as Blast Central Operator")
+    public void the_user_sign_in_as_blast_central_operator() {
+        LoginPageObjectModel loginPageObjectModel = pageObjectManager.getLoginPageObjectModel();
+        LoginValidation loginValidation = new LoginValidation(loginPageObjectModel);
+        loginPageObjectModel.setUsername("breyton");
+        loginPageObjectModel.setPassword("breyton@123");
+        loginPageObjectModel.logIn();
+        loginValidation.validateIfCredentialsIsValid();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Given("the selected device is in the {string} state")
@@ -41,10 +54,10 @@ public class ChannelOffset_StepDefn {
 //        Else, send the control request
         String toEmail = "breyton.ernstzen@testheroes.co.za";
         List<String> ccEmails = Arrays.asList(
-                /*"coetseet@detnet.com",
+                "coetseet@detnet.com",
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
-                "mbhalatil@detnet0.onmicrosoft.com"*/);
+                "mbhalatil@detnet0.onmicrosoft.com");
         String deviceName = "Device 502"; // Device Id might change
         int waitMinutes = 10;
 
@@ -105,7 +118,7 @@ public class ChannelOffset_StepDefn {
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
     @When("the user sets the channel offset values")
-    public void the_user_sets_the_channel_offset_values() throws InterruptedException {
+    public void the_user_sets_the_channel_offset_values() {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
 
@@ -133,12 +146,7 @@ public class ChannelOffset_StepDefn {
     public void the_offset_icon_should_be_displayed_in_blue_and_black() {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardValidation.validateAccessDeniedSnackBarVisibility();
+        dashboardValidation.validateIfOffsetIsActive(); // Throws a failure here. Might be a timing issue. Fix!
         SoftAssertionUtils.getSoftAssertions().assertAll();
-//        TODO: Validate the offset icon has changed to blue and black
-    }
-    @Then("the BCU should update the channels with the specified offset seconds")
-    public void the_bcu_should_update_the_channels_with_the_specified_offset_seconds() {
-//        TODO: Validate that the BCU update the channels with the offset seconds
     }
 }

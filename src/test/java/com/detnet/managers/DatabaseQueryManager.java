@@ -46,8 +46,7 @@ public enum DatabaseQueryManager {
             "SELECT id, location, groupid " +
                     "FROM public.devices " +
                     "WHERE id = ? " +
-                    "AND location = ? " +
-                    "AND groupid = ?;"
+                    "AND location = ?;"
     );
 //    TODO: Write more queries here...
     private final String query;

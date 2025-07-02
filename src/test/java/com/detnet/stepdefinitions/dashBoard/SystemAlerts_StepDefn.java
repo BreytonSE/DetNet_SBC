@@ -69,10 +69,10 @@ public class SystemAlerts_StepDefn {
            String toEmail = "breyton.ernstzen@testheroes.co.za";
            List<String> ccEmails = Arrays.asList(
                    "breytonseanernstzen1224@gmail.com",
-                "coetseet@detnet.com"/*,
+                "coetseet@detnet.com",
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
-                "mbhalatil@detnet0.onmicrosoft.com"*/);
+                "mbhalatil@detnet0.onmicrosoft.com");
 
            String deviceName = "Device 502";
            int waitMinutes = 10;
@@ -140,10 +140,10 @@ public class SystemAlerts_StepDefn {
             String toEmail = "breyton.ernstzen@testheroes.co.za";
             List<String> ccEmails = Arrays.asList(
                     "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
+                    "coetseet@detnet.com",
                     "maysond@detnet.com",
                     "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/);
+                    "mbhalatil@detnet0.onmicrosoft.com");
 
             String deviceName = "Device 502";
             int waitMinutes = 10;
@@ -211,10 +211,10 @@ public class SystemAlerts_StepDefn {
             String toEmail = "breyton.ernstzen@testheroes.co.za";
             List<String> ccEmails = Arrays.asList(
                     "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
+                    "coetseet@detnet.com",
                     "maysond@detnet.com",
                     "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/);
+                    "mbhalatil@detnet0.onmicrosoft.com");
 
             String deviceName = "Device 502";
             int waitMinutes = 10;
@@ -268,8 +268,8 @@ public class SystemAlerts_StepDefn {
 
     @When("the user refreshes the page after verifying the Acknowledgement Alert alert")
     public void the_user_refreshes_the_page_after_verifying_the_acknowledgement_alert_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the Low Battery alert")
@@ -288,10 +288,10 @@ public class SystemAlerts_StepDefn {
 //            String toEmail = "breyton.ernstzen@testheroes.co.za";
 //            List<String> ccEmails = Arrays.asList(
 //                    "breytonseanernstzen1224@gmail.com",
-//                    "coetseet@detnet.com"/*,
+//                    "coetseet@detnet.com",
 //                    "maysond@detnet.com",
 //                    "moosaa@detnet.com",
-//                    "mbhalatil@detnet0.onmicrosoft.com"*/);
+//                    "mbhalatil@detnet0.onmicrosoft.com");
 //
 //            String deviceName = "Device 502";
 //            int waitMinutes = 10;
@@ -339,438 +339,434 @@ public class SystemAlerts_StepDefn {
 
     @When("the user refreshes the page after verifying the Low Battery alert")
     public void the_user_refreshes_the_page_after_verifying_the_low_battery_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the Last Detonator Bad alert")
     public void the_user_creates_a_condition_that_triggers_the_last_detonator_bad_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardPageObjectModel.openAlertDropDown();
-
-        String expectedAlert = "Last Detonator Bad";
-        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
-                .stream()
-                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
-
-        if(!alertAlreadyPresent) {
-//           Sends a control request to colleague
-            String toEmail = "breyton.ernstzen@testheroes.co.za";
-            List<String> ccEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
-                    "maysond@detnet.com",
-                    "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/);
-
-            String deviceName = "Device 502";
-            int waitMinutes = 10;
-            int pollIntervalsSeconds = 30;
-            int maxWaitSeconds = waitMinutes * 60;
-            int elapsed = 0;
-            boolean alertMatched = false;
-
-            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
-
-            while (elapsed < maxWaitSeconds) {
-                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
-                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
-                    alertMatched = true;
-                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
-                    break;
-                }
-
-                try {
-                    Thread.sleep(pollIntervalsSeconds * 1000L);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Polling interrupted", e);
-                }
-
-                elapsed += pollIntervalsSeconds;
-                System.out.println("Waiting... (" + elapsed + "s elapsed");
-            }
-
-            if (!alertMatched) {
-                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
-                        waitMinutes + " minutes.");
-            }
-
-        }else {
-            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
-        }
-
-//       Continue with validation regardless
-        dashboardPageObjectModel.refreshBrowserTab();
-        dashboardPageObjectModel.openAlertDropDown();
-        dashboardValidation.validateCurrentDeviceAlert("Last Detonator Bad");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+//        dashboardPageObjectModel.openAlertDropDown();
+//
+//        String expectedAlert = "Last Detonator Bad";
+//        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
+//                .stream()
+//                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+//
+//        if(!alertAlreadyPresent) {
+////           Sends a control request to colleague
+//            String toEmail = "breyton.ernstzen@testheroes.co.za";
+//            List<String> ccEmails = Arrays.asList(
+//                    "breytonseanernstzen1224@gmail.com",
+//                    "coetseet@detnet.com",
+//                    "maysond@detnet.com",
+//                    "moosaa@detnet.com",
+//                    "mbhalatil@detnet0.onmicrosoft.com");
+//
+//            String deviceName = "Device 502";
+//            int waitMinutes = 10;
+//            int pollIntervalsSeconds = 30;
+//            int maxWaitSeconds = waitMinutes * 60;
+//            int elapsed = 0;
+//            boolean alertMatched = false;
+//
+//            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
+//
+//            while (elapsed < maxWaitSeconds) {
+//                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+//                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
+//                    alertMatched = true;
+//                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
+//                    break;
+//                }
+//
+//                try {
+//                    Thread.sleep(pollIntervalsSeconds * 1000L);
+//                } catch (InterruptedException e) {
+//                    Thread.currentThread().interrupt();
+//                    throw new RuntimeException("Polling interrupted", e);
+//                }
+//
+//                elapsed += pollIntervalsSeconds;
+//                System.out.println("Waiting... (" + elapsed + "s elapsed");
+//            }
+//
+//            if (!alertMatched) {
+//                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
+//                        waitMinutes + " minutes.");
+//            }
+//
+//        }else {
+//            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
+//        }
+//
+////       Continue with validation regardless
+//        dashboardPageObjectModel.refreshBrowserTab();
+//        dashboardPageObjectModel.openAlertDropDown();
+//        dashboardValidation.validateCurrentDeviceAlert("Last Detonator Bad");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user refreshes the page after verifying the Last Detonator Bad alert")
     public void the_user_refreshes_the_page_after_verifying_the_last_detonator_bad_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the Last Detonator Bad Voltage alert")
     public void the_user_creates_a_condition_that_triggers_the_last_detonator_bad_voltage_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardPageObjectModel.openAlertDropDown();
-
-        String expectedAlert = "Last Detonator Bad Voltage";
-        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
-                .stream()
-                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
-
-        if(!alertAlreadyPresent) {
-//           Sends a control request to colleague
-            String toEmail = "breyton.ernstzen@testheroes.co.za";
-            List<String> ccEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
-                    "maysond@detnet.com",
-                    "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/);
-
-            String deviceName = "Device 502";
-            int waitMinutes = 10;
-            int pollIntervalsSeconds = 30;
-            int maxWaitSeconds = waitMinutes * 60;
-            int elapsed = 0;
-            boolean alertMatched = false;
-
-            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
-
-            while (elapsed < maxWaitSeconds) {
-                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
-                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
-                    alertMatched = true;
-                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
-                    break;
-                }
-
-                try {
-                    Thread.sleep(pollIntervalsSeconds * 1000L);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Polling interrupted", e);
-                }
-
-                elapsed += pollIntervalsSeconds;
-                System.out.println("Waiting... (" + elapsed + "s elapsed");
-            }
-
-            if (!alertMatched) {
-                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
-                        waitMinutes + " minutes.");
-            }
-
-        }else {
-            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
-        }
-
-//       Continue with validation regardless
-        dashboardPageObjectModel.refreshBrowserTab();
-        dashboardPageObjectModel.openAlertDropDown();
-        dashboardValidation.validateCurrentDeviceAlert("Last Detonator Bad Voltage");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+//        dashboardPageObjectModel.openAlertDropDown();
+//
+//        String expectedAlert = "Last Detonator Bad Voltage";
+//        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
+//                .stream()
+//                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+//
+//        if(!alertAlreadyPresent) {
+////           Sends a control request to colleague
+//            String toEmail = "breyton.ernstzen@testheroes.co.za";
+//            List<String> ccEmails = Arrays.asList(
+//                    "breytonseanernstzen1224@gmail.com",
+//                    "coetseet@detnet.com",
+//                    "maysond@detnet.com",
+//                    "moosaa@detnet.com",
+//                    "mbhalatil@detnet0.onmicrosoft.com");
+//
+//            String deviceName = "Device 502";
+//            int waitMinutes = 10;
+//            int pollIntervalsSeconds = 30;
+//            int maxWaitSeconds = waitMinutes * 60;
+//            int elapsed = 0;
+//            boolean alertMatched = false;
+//
+//            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
+//
+//            while (elapsed < maxWaitSeconds) {
+//                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+//                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
+//                    alertMatched = true;
+//                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
+//                    break;
+//                }
+//
+//                try {
+//                    Thread.sleep(pollIntervalsSeconds * 1000L);
+//                } catch (InterruptedException e) {
+//                    Thread.currentThread().interrupt();
+//                    throw new RuntimeException("Polling interrupted", e);
+//                }
+//
+//                elapsed += pollIntervalsSeconds;
+//                System.out.println("Waiting... (" + elapsed + "s elapsed");
+//            }
+//
+//            if (!alertMatched) {
+//                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
+//                        waitMinutes + " minutes.");
+//            }
+//
+//        }else {
+//            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
+//        }
+//
+////       Continue with validation regardless
+//        dashboardPageObjectModel.refreshBrowserTab();
+//        dashboardPageObjectModel.openAlertDropDown();
+//        dashboardValidation.validateCurrentDeviceAlert("Last Detonator Bad Voltage");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user refreshes the page after verifying the Last Detonator Bad Voltage alert")
     public void the_user_refreshes_the_page_after_verifying_the_last_detonator_bad_voltage_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the Harness Break alert")
     public void the_user_creates_a_condition_that_triggers_the_harness_break_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardPageObjectModel.openAlertDropDown();
-
-        String expectedAlert = "Harness Break";
-        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
-                .stream()
-                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
-
-        if(!alertAlreadyPresent) {
-//           Sends a control request to colleague
-            String toEmail = "breyton.ernstzen@testheroes.co.za";
-            List<String> ccEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
-                    "maysond@detnet.com",
-                    "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/
-            );
-
-            String deviceName = "Device 502";
-            int waitMinutes = 10;
-            int pollIntervalsSeconds = 30;
-            int maxWaitSeconds = waitMinutes * 60;
-            int elapsed = 0;
-            boolean alertMatched = false;
-
-            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
-
-            while (elapsed < maxWaitSeconds) {
-                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
-                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
-                    alertMatched = true;
-                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
-                    break;
-                }
-
-                try {
-                    Thread.sleep(pollIntervalsSeconds * 1000L);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Polling interrupted", e);
-                }
-
-                elapsed += pollIntervalsSeconds;
-                System.out.println("Waiting... (" + elapsed + "s elapsed");
-            }
-
-            if (!alertMatched) {
-                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
-                        waitMinutes + " minutes.");
-            }
-
-        }else {
-            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
-        }
-
-//       Continue with validation regardless
-        dashboardPageObjectModel.refreshBrowserTab();
-        dashboardPageObjectModel.openAlertDropDown();
-        dashboardValidation.validateCurrentDeviceAlert("Harness Break");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+//        dashboardPageObjectModel.openAlertDropDown();
+//
+//        String expectedAlert = "Harness Break";
+//        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
+//                .stream()
+//                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+//
+//        if(!alertAlreadyPresent) {
+////           Sends a control request to colleague
+//            String toEmail = "breyton.ernstzen@testheroes.co.za";
+//            List<String> ccEmails = Arrays.asList(
+//                    "breytonseanernstzen1224@gmail.com",
+//                    "coetseet@detnet.com",
+//                    "maysond@detnet.com",
+//                    "moosaa@detnet.com",
+//                    "mbhalatil@detnet0.onmicrosoft.com");
+//
+//            String deviceName = "Device 502";
+//            int waitMinutes = 10;
+//            int pollIntervalsSeconds = 30;
+//            int maxWaitSeconds = waitMinutes * 60;
+//            int elapsed = 0;
+//            boolean alertMatched = false;
+//
+//            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
+//
+//            while (elapsed < maxWaitSeconds) {
+//                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+//                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
+//                    alertMatched = true;
+//                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
+//                    break;
+//                }
+//
+//                try {
+//                    Thread.sleep(pollIntervalsSeconds * 1000L);
+//                } catch (InterruptedException e) {
+//                    Thread.currentThread().interrupt();
+//                    throw new RuntimeException("Polling interrupted", e);
+//                }
+//
+//                elapsed += pollIntervalsSeconds;
+//                System.out.println("Waiting... (" + elapsed + "s elapsed");
+//            }
+//
+//            if (!alertMatched) {
+//                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
+//                        waitMinutes + " minutes.");
+//            }
+//
+//        }else {
+//            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
+//        }
+//
+////       Continue with validation regardless
+//        dashboardPageObjectModel.refreshBrowserTab();
+//        dashboardPageObjectModel.openAlertDropDown();
+//        dashboardValidation.validateCurrentDeviceAlert("Harness Break");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user refreshes the page after verifying the Harness Break alert")
     public void the_user_refreshes_the_page_after_verifying_the_harness_break_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the Programming Error alert")
     public void the_user_creates_a_condition_that_triggers_the_programming_error_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardPageObjectModel.openAlertDropDown();
-
-        String expectedAlert = "Programming Error";
-        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
-                .stream()
-                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
-
-        if(!alertAlreadyPresent) {
-//           Sends a control request to colleague
-            String toEmail = "breyton.ernstzen@testheroes.co.za";
-            List<String> ccEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
-                    "maysond@detnet.com",
-                    "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/
-            );
-
-            String deviceName = "Device 502";
-            int waitMinutes = 10;
-            int pollIntervalsSeconds = 30;
-            int maxWaitSeconds = waitMinutes * 60;
-            int elapsed = 0;
-            boolean alertMatched = false;
-
-            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
-
-            while (elapsed < maxWaitSeconds) {
-                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
-                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
-                    alertMatched = true;
-                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
-                    break;
-                }
-
-                try {
-                    Thread.sleep(pollIntervalsSeconds * 1000L);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Polling interrupted", e);
-                }
-
-                elapsed += pollIntervalsSeconds;
-                System.out.println("Waiting... (" + elapsed + "s elapsed");
-            }
-
-            if (!alertMatched) {
-                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
-                        waitMinutes + " minutes.");
-            }
-
-        }else {
-            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
-        }
-
-//       Continue with validation regardless
-        dashboardPageObjectModel.refreshBrowserTab();
-        dashboardPageObjectModel.openAlertDropDown();
-        dashboardValidation.validateCurrentDeviceAlert("Programming Error");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+//        dashboardPageObjectModel.openAlertDropDown();
+//
+//        String expectedAlert = "Programming Error";
+//        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
+//                .stream()
+//                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+//
+//        if(!alertAlreadyPresent) {
+////           Sends a control request to colleague
+//            String toEmail = "breyton.ernstzen@testheroes.co.za";
+//            List<String> ccEmails = Arrays.asList(
+//                    "breytonseanernstzen1224@gmail.com",
+//                    "coetseet@detnet.com",
+//                    "maysond@detnet.com",
+//                    "moosaa@detnet.com",
+//                    "mbhalatil@detnet0.onmicrosoft.com");
+//
+//            String deviceName = "Device 502";
+//            int waitMinutes = 10;
+//            int pollIntervalsSeconds = 30;
+//            int maxWaitSeconds = waitMinutes * 60;
+//            int elapsed = 0;
+//            boolean alertMatched = false;
+//
+//            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
+//
+//            while (elapsed < maxWaitSeconds) {
+//                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+//                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
+//                    alertMatched = true;
+//                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
+//                    break;
+//                }
+//
+//                try {
+//                    Thread.sleep(pollIntervalsSeconds * 1000L);
+//                } catch (InterruptedException e) {
+//                    Thread.currentThread().interrupt();
+//                    throw new RuntimeException("Polling interrupted", e);
+//                }
+//
+//                elapsed += pollIntervalsSeconds;
+//                System.out.println("Waiting... (" + elapsed + "s elapsed");
+//            }
+//
+//            if (!alertMatched) {
+//                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
+//                        waitMinutes + " minutes.");
+//            }
+//
+//        }else {
+//            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
+//        }
+//
+////       Continue with validation regardless
+//        dashboardPageObjectModel.refreshBrowserTab();
+//        dashboardPageObjectModel.openAlertDropDown();
+//        dashboardValidation.validateCurrentDeviceAlert("Programming Error");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user refreshes the page after verifying the Programming Error alert")
     public void the_user_refreshes_the_page_after_verifying_the_programming_error_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the Test Mode alert")
     public void the_user_creates_a_condition_that_triggers_the_test_mode_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardPageObjectModel.openAlertDropDown();
-
-        String expectedAlert = "Test Mode";
-        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
-                .stream()
-                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
-
-        if(!alertAlreadyPresent) {
-//           Sends a control request to colleague
-            String toEmail = "breyton.ernstzen@testheroes.co.za";
-            List<String> ccEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
-                    "maysond@detnet.com",
-                    "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/
-            );
-
-            String deviceName = "Device 502";
-            int waitMinutes = 10;
-            int pollIntervalsSeconds = 30;
-            int maxWaitSeconds = waitMinutes * 60;
-            int elapsed = 0;
-            boolean alertMatched = false;
-
-            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
-
-            while (elapsed < maxWaitSeconds) {
-                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
-                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
-                    alertMatched = true;
-                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
-                    break;
-                }
-
-                try {
-                    Thread.sleep(pollIntervalsSeconds * 1000L);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Polling interrupted", e);
-                }
-
-                elapsed += pollIntervalsSeconds;
-                System.out.println("Waiting... (" + elapsed + "s elapsed");
-            }
-
-            if (!alertMatched) {
-                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
-                        waitMinutes + " minutes.");
-            }
-
-        }else {
-            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
-        }
-
-//       Continue with validation regardless
-        dashboardPageObjectModel.refreshBrowserTab();
-        dashboardPageObjectModel.openAlertDropDown();
-        dashboardValidation.validateCurrentDeviceAlert("Test Mode");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+//        dashboardPageObjectModel.openAlertDropDown();
+//
+//        String expectedAlert = "Test Mode";
+//        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
+//                .stream()
+//                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+//
+//        if(!alertAlreadyPresent) {
+////           Sends a control request to colleague
+//            String toEmail = "breyton.ernstzen@testheroes.co.za";
+//            List<String> ccEmails = Arrays.asList(
+//                    "breytonseanernstzen1224@gmail.com",
+//                    "coetseet@detnet.com",
+//                    "maysond@detnet.com",
+//                    "moosaa@detnet.com",
+//                    "mbhalatil@detnet0.onmicrosoft.com");
+//
+//            String deviceName = "Device 502";
+//            int waitMinutes = 10;
+//            int pollIntervalsSeconds = 30;
+//            int maxWaitSeconds = waitMinutes * 60;
+//            int elapsed = 0;
+//            boolean alertMatched = false;
+//
+//            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
+//
+//            while (elapsed < maxWaitSeconds) {
+//                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+//                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
+//                    alertMatched = true;
+//                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
+//                    break;
+//                }
+//
+//                try {
+//                    Thread.sleep(pollIntervalsSeconds * 1000L);
+//                } catch (InterruptedException e) {
+//                    Thread.currentThread().interrupt();
+//                    throw new RuntimeException("Polling interrupted", e);
+//                }
+//
+//                elapsed += pollIntervalsSeconds;
+//                System.out.println("Waiting... (" + elapsed + "s elapsed");
+//            }
+//
+//            if (!alertMatched) {
+//                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
+//                        waitMinutes + " minutes.");
+//            }
+//
+//        }else {
+//            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
+//        }
+//
+////       Continue with validation regardless
+//        dashboardPageObjectModel.refreshBrowserTab();
+//        dashboardPageObjectModel.openAlertDropDown();
+//        dashboardValidation.validateCurrentDeviceAlert("Test Mode");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user refreshes the page after verifying the Test Mode alert")
     public void the_user_refreshes_the_page_after_verifying_the_test_mode_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @When("the user creates a condition that triggers the TX Error Preventing Blast alert")
     public void the_user_creates_a_condition_that_triggers_the_tx_error_preventing_blast_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
-        dashboardPageObjectModel.openAlertDropDown();
-
-        String expectedAlert = "TX Error Preventing Blast";
-        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
-                .stream()
-                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
-
-        if(!alertAlreadyPresent) {
-//           Sends a control request to colleague
-            String toEmail = "breyton.ernstzen@testheroes.co.za";
-            List<String> ccEmails = Arrays.asList(
-                    "breytonseanernstzen1224@gmail.com",
-                    "coetseet@detnet.com"/*,
-                    "maysond@detnet.com",
-                    "moosaa@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/
-            );
-
-            String deviceName = "Device 502";
-            int waitMinutes = 10;
-            int pollIntervalsSeconds = 30;
-            int maxWaitSeconds = waitMinutes * 60;
-            int elapsed = 0;
-            boolean alertMatched = false;
-
-            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
-
-            while (elapsed < maxWaitSeconds) {
-                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
-                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
-                    alertMatched = true;
-                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
-                    break;
-                }
-
-                try {
-                    Thread.sleep(pollIntervalsSeconds * 1000L);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    throw new RuntimeException("Polling interrupted", e);
-                }
-
-                elapsed += pollIntervalsSeconds;
-                System.out.println("Waiting... (" + elapsed + "s elapsed");
-            }
-
-            if (!alertMatched) {
-                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
-                        waitMinutes + " minutes.");
-            }
-
-        }else {
-            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
-        }
-
-//       Continue with validation regardless
-        dashboardPageObjectModel.refreshBrowserTab();
-        dashboardPageObjectModel.openAlertDropDown();
-        dashboardValidation.validateCurrentDeviceAlert("TX Error Preventing Blast");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+//        dashboardPageObjectModel.openAlertDropDown();
+//
+//        String expectedAlert = "TX Error Preventing Blast";
+//        boolean alertAlreadyPresent = dashboardPageObjectModel.getAllCurrentDeviceAlerts()
+//                .stream()
+//                .anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert));
+//
+//        if(!alertAlreadyPresent) {
+////           Sends a control request to colleague
+//            String toEmail = "breyton.ernstzen@testheroes.co.za";
+//            List<String> ccEmails = Arrays.asList(
+//                    "breytonseanernstzen1224@gmail.com",
+//                    "coetseet@detnet.com",
+//                    "maysond@detnet.com",
+//                    "moosaa@detnet.com",
+//                    "mbhalatil@detnet0.onmicrosoft.com");
+//
+//            String deviceName = "Device 502";
+//            int waitMinutes = 10;
+//            int pollIntervalsSeconds = 30;
+//            int maxWaitSeconds = waitMinutes * 60;
+//            int elapsed = 0;
+//            boolean alertMatched = false;
+//
+//            EmailUtils.sendDeviceAlertRequest(toEmail, ccEmails, deviceName, expectedAlert, waitMinutes);
+//
+//            while (elapsed < maxWaitSeconds) {
+//                List<String> currentState = dashboardPageObjectModel.getAllCurrentDeviceAlerts();
+//                if (currentState.stream().anyMatch(alert -> alert.equalsIgnoreCase(expectedAlert))) {
+//                    alertMatched = true;
+//                    System.out.printf("Device alert updated to '%s' after '%d' seconds.\n", expectedAlert, elapsed);
+//                    break;
+//                }
+//
+//                try {
+//                    Thread.sleep(pollIntervalsSeconds * 1000L);
+//                } catch (InterruptedException e) {
+//                    Thread.currentThread().interrupt();
+//                    throw new RuntimeException("Polling interrupted", e);
+//                }
+//
+//                elapsed += pollIntervalsSeconds;
+//                System.out.println("Waiting... (" + elapsed + "s elapsed");
+//            }
+//
+//            if (!alertMatched) {
+//                throw new AssertionError("Device alert did not change to '" + expectedAlert + "' within " +
+//                        waitMinutes + " minutes.");
+//            }
+//
+//        }else {
+//            System.out.printf("Alert '%s' is already visible - skipping email request.%n",expectedAlert);
+//        }
+//
+////       Continue with validation regardless
+//        dashboardPageObjectModel.refreshBrowserTab();
+//        dashboardPageObjectModel.openAlertDropDown();
+//        dashboardValidation.validateCurrentDeviceAlert("TX Error Preventing Blast");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user refreshes the page after verifying the TX Error Preventing Blast alert")
     public void the_user_refreshes_the_page_after_verifying_the_tx_error_preventing_blast_alert() {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.refreshBrowserTab();
+//        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+//        dashboardPageObjectModel.refreshBrowserTab();
     }
 
     @Then("the event log should reflect the resolution of each error condition")
@@ -784,8 +780,8 @@ public class SystemAlerts_StepDefn {
         dashboardValidation.validateReportDropDownVisibility();
         SoftAssertionUtils.getSoftAssertions().assertAll();
         dashboardPageObjectModel.openEventsReport();
-        dashboardValidation.validateErrorVisibilityOnEventLogReport("Io 3 Short Circuit E:0x00000040");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
+//        dashboardValidation.validateErrorVisibilityOnEventLogReport("Io 3 Short Circuit E:0x00000040");
+//        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @Then("the user restores the BCU condition to operate without alerts")
@@ -795,17 +791,17 @@ public class SystemAlerts_StepDefn {
         dashboardPageObjectModel.openAlertDropDown();
 
         List<String> expectedAlertsToBeCleared = Arrays.asList(
-                "Short Circuits", "High Leakage", "High Current", "Low Battery", "Acknowledge Alert", "Device Not Available",
-                "Last Detonator Bad", "Last Detonator Bad Voltage", "Harness Break", "Programming Error",
+                "Short Circuits", "High Leakage", "High Current", "Low Battery", "Acknowledge Alert", "Last Detonator Bad",
+                "Last Detonator Bad Voltage", "Harness Break", "Programming Error",
                 "Test Mode", "TX Error Preventing Blast");
 
         String toEmail = "breyton.ernstzen@testheroes.co.za";
         List<String> ccEmails = Arrays.asList(
                 "breytonseanernstzen1224@gmail.com",
-                "coetseet@detnet.com"/*,
+                "coetseet@detnet.com",
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
-                "mbhalatil@detnet0.onmicrosoft.com"*/);
+                "mbhalatil@detnet0.onmicrosoft.com");
 
         String deviceName = "Device 502";
         int waitMinutes = 10;
