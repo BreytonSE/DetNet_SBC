@@ -11,8 +11,8 @@ jobs:
     runs-on: self-hosted # Use Windows if needed: windows-latest
 
     env: # Make secrets available as environment variables
-      ENCRYPTED_USERNAME: ${{ secrets.BLASTWEB_USERNAME }}
-      ENCRYPTED_PASSWORD: ${{ secrets.BLASTWEB_PASSWORD }}
+      BLASTWEB_USERNAME: ${{ secrets.BLASTWEB_USERNAME }}
+      BLASTWEB_PASSWORD: ${{ secrets.BLASTWEB_PASSWORD }}
 
     steps:
       - name: Checkout repository
