@@ -3,16 +3,10 @@ package com.detnet.pageObjects;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
+import static com.detnet.locators.SettingsPageLocators.*;
+
 public class SettingsPageObjectModel {
     private final Page page;
-    private final String settingsLabel = "//h2[normalize-space()='Settings']";
-    private final String blastCardsButton = "//span[contains(text(),'Blast Cards')]";
-    private final String usersButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Users')]";
-    private final String networksButton = "//span[@class='mat-button-toggle-label-content']//span[contains(text(),'Networks')]";
-    private final String devicesTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Devices\")]";
-    private final String networkTreeTab = "//span[contains(text(),\"Network Tree\")]";
-    private final String groupsTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Groups\")]";
-    private final String emailRecipientsTab = "//span[normalize-space()=\"Email Recipients\"]";
 
     public SettingsPageObjectModel(Page page) {
         this.page = page;

@@ -22,6 +22,8 @@ public class PageObjectManager {
     private DeviceDetailsPageObjectModel deviceDetailsPageObjectModel;
     private GroupsPageObjectModel groupsPageObjectModel;
     private EmailRecipientsPageObjectModel emailRecipientsPageObjectModel;
+    private BlastConfirmationPageObjectModel blastConfirmationPageObjectModel;
+    private BlastReportPageObjectModel blastReportPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -143,5 +145,19 @@ public class PageObjectManager {
             emailRecipientsPageObjectModel = new EmailRecipientsPageObjectModel(page);
         }
         return emailRecipientsPageObjectModel;
+    }
+
+    public BlastConfirmationPageObjectModel getBlastConfirmationPageObjectModel(){
+        if(blastConfirmationPageObjectModel == null){
+            blastConfirmationPageObjectModel = new BlastConfirmationPageObjectModel(page);
+        }
+        return blastConfirmationPageObjectModel;
+    }
+
+    public BlastReportPageObjectModel getBlastReportPageObjectModel(){
+        if(blastReportPageObjectModel == null){
+            blastReportPageObjectModel = new BlastReportPageObjectModel(page);
+        }
+        return blastReportPageObjectModel;
     }
 }

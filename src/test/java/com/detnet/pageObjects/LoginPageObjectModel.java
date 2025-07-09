@@ -5,42 +5,65 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import static com.detnet.locators.LoginPageLocators.*;
+
 public class LoginPageObjectModel {
     private final Page page;
-    private final String userNameInputField = "//input[@id='loginUsername']";
-    private final String passwordInputField = "//input[@id='loginPassword']";
-    private final String loginButton = "//button[@id='loginButton']";
-    private final String visibilityIcon = "//mat-icon[@role='img']";
-    private final String passwordErrorLabel = "[id^='mat-mdc-error-']";
-    private final String unauthorizedLabel = "//span[normalize-space()='Dismiss']";
 
     public LoginPageObjectModel(Page page) {
         this.page = page;
     }
 
     public void setUsername(String username){
-        page.locator(userNameInputField).fill(username);
+        try{
+            page.locator(userNameInputField).fill(username);
+        }catch (PlaywrightException e){
+            System.out.println("Username input field not or not visible: " + e.getMessage());
+        }
     }
 
     public String getUsername(){
-        return page.locator(userNameInputField).inputValue();
+        try{
+            return page.locator(userNameInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Username input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void setPassword(String password){
-        page.locator(passwordInputField).click(new Locator.ClickOptions().setTimeout(5000));
-        page.locator(passwordInputField).fill(password);
+        try{
+            page.locator(passwordInputField).click(new Locator.ClickOptions().setTimeout(5000));
+            page.locator(passwordInputField).fill(password);
+        }catch (PlaywrightException e){
+            System.out.println("Password input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getPassword(){
-        return page.locator(passwordInputField).inputValue();
+        try{
+            return page.locator(passwordInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Password input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void logIn(){
-        page.locator(loginButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(loginButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Login button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isLoginButtonEnabled(){
-        return page.locator(loginButton).isEnabled();
+        try{
+            return page.locator(loginButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Login button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isVisibilityIconVisible(){
@@ -51,33 +74,58 @@ public class LoginPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Visibility icon not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isVisibilityIconEnabled(){
-        return page.locator(visibilityIcon).isEnabled();
+        try{
+            return page.locator(visibilityIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Visibility icon not found or not visible: "  + e.getMessage());
+            return false;
+        }
     }
 
     public void togglePasswordVisibility(){
-        page.locator(visibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(visibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Visibility icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isPasswordShowing(){
-        Locator eyeIcon = page.locator(visibilityIcon);
-        String iconState = eyeIcon.textContent().trim();
-        return iconState.equals("visibility_off");
+        try{
+            Locator eyeIcon = page.locator(visibilityIcon);
+            String iconState = eyeIcon.textContent().trim();
+            return iconState.equals("visibility_off");
+        }catch (PlaywrightException e){
+            System.out.println("Visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isPasswordHidden(){
-        Locator eyeIcon = page.locator(visibilityIcon);
-        String iconState = eyeIcon.textContent().trim();
-        return iconState.equals("visibility");
+        try{
+            Locator eyeIcon = page.locator(visibilityIcon);
+            String iconState = eyeIcon.textContent().trim();
+            return iconState.equals("visibility");
+        }catch (PlaywrightException e){
+            System.out.println("Visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getLoginURL(){
-        page.waitForURL("**/login");
-        return page.url();
+        try{
+            page.waitForURL("**/login");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("Failed to get login page URL: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isPasswordErrorMessageVisible(){
@@ -88,12 +136,18 @@ public class LoginPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Password error not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public String getPasswordErrorLabel(){
-        return page.locator(passwordErrorLabel).textContent();
+        try{
+            return page.locator(passwordErrorLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Password error not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isUnauthorizedMessageVisible(){
@@ -104,24 +158,40 @@ public class LoginPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Unauthorized snack bar not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public String getUnauthorizedLabel(){
-        return page.locator(unauthorizedLabel).textContent();
+        try{
+            return page.locator(unauthorizedLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Unauthorized snack bar not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isPasswordFieldTypeText(){
-        Locator passwordInput = page.locator(passwordInputField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("text");
+        try{
+            Locator passwordInput = page.locator(passwordInputField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("text");
+        }catch (PlaywrightException e){
+            System.out.println("Password input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isPasswordFieldPassword(){
-        Locator passwordInput = page.locator(passwordInputField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("password");
+        try{
+            Locator passwordInput = page.locator(passwordInputField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("password");
+        }catch (PlaywrightException e){
+            System.out.println("Password input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCredentialsValid(){
@@ -132,6 +202,7 @@ public class LoginPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Unauthorized label not found or not visible: " + e.getMessage());
             return false;
         }
     }

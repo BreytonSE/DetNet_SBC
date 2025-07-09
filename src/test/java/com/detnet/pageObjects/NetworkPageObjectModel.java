@@ -5,28 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import static com.detnet.locators.NetworkPageLocators.*;
+
 public class NetworkPageObjectModel {
     private final Page page;
-    private final String addNetworkButton = "//button[@class='addBtn ng-star-inserted']//span[contains(text(),'Add Network')]";
-    private final String network = "//tr[@class='mat-mdc-row mdc-data-table__row cdk-row ng-star-inserted']";
-    private final String networkLabel = "//h2[normalize-space()='Networks']";
-    private final String networkName = "//td[normalize-space()='ETHER001-DUMMY']";
-    private final String resourceNameInputField = "//input[@id='addNetworkResourceName']";
-    private final String messageGapInputField = "//input[@id='networkMessageGap']";
-    private final String delayInputField = "//input[@id='networkDelay']";
-    private final String baudRateInputField = "//input[@id='baudRate']";
-    private final String reportDetonatorsLabel = "//label[normalize-space()='Report Detonators']";
-    private final String inUseLabel = "//label[normalize-space()='In Use']";
-    private final String saveNewNetwork = "//button[@id='addNetworkSubmitButton']//span[@class='mat-mdc-button-touch-target']";
-    private final String newNetworkPath = "//td[normalize-space()=\"Ethernet\"]";
-    private final String editIcon = "tbody tr:nth-child(2) td:nth-child(8) mat-icon:nth-child(1)";
-    private final String saveButton2 = "//button[@type='submit']//span[@class='mat-mdc-button-persistent-ripple mdc-button__ripple']";
-    private final String deleteIcon = "//tbody/tr[1]/td[8]/span[1]";
-    private final String yesButton = ".yesBtn";
-    private final String selectAllCheckBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
-    private final String searchBar = "//input[@placeholder=\"Search using ID, Name\"]";
-    private final String deleteDialog = "//div[@class=\"mat-mdc-dialog-surface mdc-dialog__surface\"]";
-    private final String deleteAllBtn = "//button[@class=\"deleteAllBtn\"]";
 
     public NetworkPageObjectModel(Page page) {
         this.page = page;

@@ -1,0 +1,45 @@
+package com.detnet.locators;
+
+public class DashboardPageLocators {
+    public static final String userRoleLabel = "//p[@class='userRole']";
+    public static final String navigationMenu = "#mat-menu-panel-2";
+    public static final String logoutButton = "//span[contains(text(),'Logout')]";
+    public static final String settingsButton = "//span[contains(text(),'Settings')]";
+    public static final String dashboardButton = "//span[contains(text(),\"Dashboard\")]";
+    public static final String deviceDetailsButton = "//body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/div[2]/div[1]/div[1]/bcu-card-high-detail[1]/mat-card[1]/div[5]\n";
+    public static final String newDevice = "(//span[normalize-space()='Cape Town'])[1]";
+    public static final String eventsButton = "//button[@class=\"fixedButton mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\"]//span[@class=\"mat-mdc-button-touch-target\"]";
+    public static final String eventsLog = "//tr[@class=\"mat-mdc-header-row mdc-data-table__header-row cdk-header-row ng-star-inserted\"]";
+    public static final String offsetToolTip = "//img[@class=\"mat-mdc-tooltip-trigger offsetButton ng-star-inserted\"]";
+    public static final String offsetHeader = "//h3[normalize-space()=\"Offset Channels\"]";
+    public static final String saveButton = "//button[@type=\"submit\"]";
+    public static final String groupByDropDown = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[2]/form[1]/div[1]/mat-form-field[1]/div[1]/div[1]/div[2]";
+    public static final String groupByDropDownPanel = "//div[@id=\"deviceGroupingFunctionSelector-panel\"]";
+    public static final String alertDropdownButton = "//body[1]/app-root[1]/blastweb-navbar[1]/mat-toolbar[1]/mat-toolbar-row[1]/button[3]/span[2]/mat-toolbar-row[1]";
+    public static final String reportsTab = "//span[normalize-space()=\"Reports\"]";
+    public static final String eventsReportButton = "//span[contains(text(),\"Events report\")]";
+    public static final String keyElement = "(//span[normalize-space()='-  Key'])[1]";
+    public static final String networkElement = "(//span[normalize-space()='-  Network'])[1]";
+    public static final String stateElement = "(//span[normalize-space()='-  State'])[1]";
+    public static final String firmwareElement = "(//span[normalize-space()='-  Firmware'])[1]";
+    public static final String customElement = "(//span[normalize-space()='-  Custom'])[1]";
+    public static final String selectedElement = "(//span[normalize-space()='-  Selected'])[1]";
+    public static final String aliveElement = "(//span[normalize-space()='-  Alive'])[1]";
+    public static final String typeLocator = "(//span[normalize-space()='-  Type'])[1]";
+    public static final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[2]/form[1]/div[3]/mat-toolbar-row[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
+    public static final String plusIcon = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[1]/button[1]/span[5]";
+    public static final String actionPanel = "//div[@class=\"column ng-trigger ng-trigger-speedDialStagger\"]";
+    public static final String armSelectedButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[1]/div[1]/button[1]/span[5]\n";
+    public static final String armSelectedLabel = "//button[normalize-space()=\"Arm Selected (1)\"]";
+    public static final String readyToBlastElement = "//span[contains(text(),\"READY TO BLAST\")]\n";
+    public static final String blastSelectedLabel = "//button[normalize-space()=\"Blast Selected (1)\"]";
+    public static final String blastSelectedButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[4]/div[1]/button[1]/span[2]/i[1]";
+    public static final String blastReportButton = "//span[@class=\"titlecase\"][normalize-space()=\"Blast Report\"]";
+    public static final String armAllReadyLabel = "//button[normalize-space()=\"Arm All Ready\"]";
+    public static final String armAllReadyButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[2]/div[1]/button[1]/span[2]/i[1]";
+    public static final String noDeviceToArmSnackBar = "//div[@class=\"mat-mdc-snack-bar-label mdc-snackbar__label\"]";
+    public static final String armWirelessSelectedLabel = "//button[contains(normalize-space(), 'Arm Wireless Selected')]";
+    public static final String armWirelessSelectedButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[3]/div[1]/button[1]/span[2]/i[1]";
+    public static final String cyberDetImage = "//img[@alt=\"Cyberdet I\"]";
+    public static final String blastGroupDropDown = "//select[@fdprocessedid=\"obtco\"]";
+}

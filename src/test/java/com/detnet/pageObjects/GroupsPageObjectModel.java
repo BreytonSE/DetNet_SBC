@@ -5,31 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import static com.detnet.locators.GroupsPageLocators.*;
+
 public class GroupsPageObjectModel {
     private final Page page;
-
-    private final String groupsHeading = "//h2[normalize-space()=\"Groups\"]";
-    private final String noGroupsLabel = "//h2[normalize-space()=\"No Groups Present\"]";
-    private final String addGroupBtn = "//button[@class=\"addBtn ng-star-inserted\"]";
-    private final String addGroupHeading = "//h2[normalize-space()=\"Add Group\"]";
-    private final String groupNameInput = "//input[@id=\"name\"]";
-    private final String colorPicker = "//input[@class=\"colorPicker\"]";
-    private final String colorPickerTray = "//div[@class=\"color-picker open\"]";
-    private final String colorPickerDownArrow = "//color-picker[@class=\"ng-star-inserted\"]//span[2]";
-    private final String redInputField = "div[class=\"rgba-text ng-star-inserted\"] input:nth-child(1)";
-    private final String greenInputField = "div[class=\"rgba-text ng-star-inserted\"] input:nth-child(2)";
-    private final String blueInputField = "div[class=\"rgba-text ng-star-inserted\"] input:nth-child(3)";
-    private final String rgbField = "//div[@class=\"rgba-text ng-star-inserted\"]";
-    private final String saveGroup = "//span[contains(text(),\"Add Group\")]";
-    private final String group = "//tr[@class=\"mat-mdc-row mdc-data-table__row cdk-row ng-star-inserted\"]";
-    private final String editHeading = "//h2[normalize-space()=\"Edit Group\"]";
-    private final String updateGroupBtn = "//button[@id=\"addNetworkSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String searchBar = "//input[@placeholder=\"Search using ID, Name\"]";
-    private final String binIcon = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])[1]";
-    private final String deleteDialogWindow = "//div[@class=\"mat-mdc-dialog-surface mdc-dialog__surface\"]";
-    private final String yesButton = "//button[@class=\"yesBtn\"]";
-    private final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-groups[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]/mat-checkbox[1]/div[1]/div[1]/input[1]\n";
-    private final String deleteAllBtn = "//button[@class=\"deleteAllBtn\"]";
 
     public GroupsPageObjectModel(Page page) {
         this.page = page;

@@ -10,6 +10,10 @@ jobs:
   test:
     runs-on: self-hosted # Use Windows if needed: windows-latest
 
+    env: # Make secrets available as environment variables
+      ENCRYPTED_USERNAME: ${{ secrets.BLASTWEB_USERNAME }}
+      ENCRYPTED_PASSWORD: ${{ secrets.BLASTWEB_PASSWORD }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,20 +44,6 @@ jobs:
       - name: Start BlastWeb Service
         run: |
           Start-Process -NoNewWindow -FilePath "C:\Detnet\BlastWeb\blastweb_service.exe"
-        shell: powershell
-
-      - name: Create credentials.properties file
-        run: |
-          $path = "src/test/resources/credentials.properties"
-          @"
-          encrypted.username=${{ secrets.ENCRYPTED_USERNAME }}
-          encrypted.password=${{ secrets.ENCRYPTED_PASSWORD }}
-          encrypted.configPassword=${{ secrets.ENCRYPTED_CONFIGPASSWORD }}
-          encrypted.emailAddress=${{ secrets.ENCRYPTED_EMAILADDRESS }}
-          encrypted.emailPassword=${{ secrets.ENCRYPTED_EMAILPASSWORD }}
-          encrypted.databaseUsername=${{ secrets.ENCRYPTED_DATABASEUSERNAME }}
-          encrypted.databasePassword=${{ secrets.ENCRYPTED_DATABASEPASSWORD }}
-          "@ | Out-File -Encoding ASCII -FilePath $path
         shell: powershell
 
       - name: Run Tests

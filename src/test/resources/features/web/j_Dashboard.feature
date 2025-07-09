@@ -103,11 +103,43 @@ Feature: Dashboard functional integrity for BCU device management
     And the user opens the action panel and selects "Arm Selected"
     Then the device should be presented for arming without any errors
 
-#  @h_dashboard
-#  Scenario: Verify that device in "Ready to Blast" -state will be presented to be blasted
-#    Given the user sign in as Blast Central Operator
-#    And the user is on the dashboard page
-#    When the user selects a device that is in the Ready to Blast state
-#    And the user opens the action panel and selects Blast Selected
-#    Then the blast confirmation screen should be displayed
-#    And the user clicks the "Proceed to Blast" button
+#    Come back to this scenario to complete
+  @h_dashboard
+  Scenario: Verify that device in "Ready to Blast" -state will be presented to be blasted
+    Given the user sign in as Blast Central Operator
+    And the user is on the dashboard page
+    When the user selects a device that is in the Ready to Blast state
+    And the user opens the action panel and selects Blast Selected
+    Then the blast confirmation screen should be displayed
+    And the user clicks the "Proceed to Blast" button
+
+#    Come back to this scenario to complete
+  @i_dashboard
+  Scenario: Verify that you can view blast summary after blast is successfully completed
+    Given the user sign in as Blast Central Operator
+    And the user is on the dashboard page
+    When the user opens the "Reports" tab
+    Then a dropdown should open with three different report types
+    When the user selects the Blast Report option
+    Then the blast summary should be visible after the successful blast
+
+#    Come back to this  scenario to complete
+  @j_dashboard
+  Scenario: Verify that a device in "Ready to Arm" -state will be armed using the "Arm All Ready" option from action panel
+    Given the user sign in as Blast Central Operator
+    And the user is on the dashboard page
+    When the user selects a device that is in the "Ready to Arm" state
+    And the user opens the action panel and selects Arm All Ready
+    Then the device should be successfully armed after selecting the "Arm All Ready" option
+
+  @k_dashboard
+  Scenario: Verify that a BCU connected to a wireless system will be armed
+    Given the user sign in as Blast Central Operator
+    And the user is on the dashboard page
+    When the user selects a device that is in the "Ready to Arm" state
+    And the user opens the action panel and selects Arm Wireless Selected
+    And the user selects the blast group associated with the blast and confirms
+    And the user clicks the re-blast checkbox
+    And the user clicks the OK button
+    Then the device should be successfully armed with a wireless channel
+    And the device state should be "Ready to Arm" if re-blast checkbox is checked, otherwise it should remain as "Blasted"

@@ -5,59 +5,66 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
-import static com.detnet.locators.NetworkTreePageLocators.*;
+import static com.detnet.locators.BlastConfirmationPageLocators.*;
 
-public class NetworkTreePageObjectModel {
+public class BlastConfirmationPageObjectModel {
     private final Page page;
 
-    public NetworkTreePageObjectModel(Page page) {
+    public BlastConfirmationPageObjectModel(Page page) {
         this.page = page;
     }
 
-    public String getNetworkTreePageURL(){
-        page.waitForURL("**/settings/tree");
+    public String getPageURL() {
+        page.waitForURL("**/blast");
         return page.url();
     }
 
-    public boolean isNetworkTreePageOpen(){
-        try{
-            page.locator(networkTreeHeading)
+    public boolean isBlastConfirmationScreenOpen() {
+        try {
+            page.locator(confirmBlastHeading)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
-        }catch (PlaywrightException e){
+        } catch (PlaywrightException e) {
             return false;
         }
     }
 
-    public boolean hasDevices(){
-        try{
-            page.locator(networkStructure)
+    public boolean isProceedButtonVisible() {
+        try {
+            page.locator(proceedButton)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
-        }catch (PlaywrightException e){
+        } catch (PlaywrightException e) {
             return false;
         }
     }
 
-    public boolean isDevicePresent(String deviceId){
-        String device = "(//a[contains(text(),'Device ― " + deviceId + "')])[1]";
-        try{
-            page.locator(device)
+    public boolean isProceedButtonEnabled() {
+        try {
+            page.locator(proceedButton).isEnabled();
+            return true;
+        } catch (PlaywrightException e) {
+            return false;
+        }
+    }
+
+    public void proceedToBlast() {
+        page.locator(proceedButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isNFCReaderConfirmationDialogVisible() {
+        try {
+            page.locator(dialogTitle)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
-        }catch (PlaywrightException e){
+        } catch (PlaywrightException e) {
             return false;
         }
-    }
-
-    public void viewDeviceDetails(String deviceId){
-        String device = "(//a[contains(text(),'Device ― " + deviceId + "')])[1]";
-        page.locator(device).click(new Locator.ClickOptions().setTimeout(5000));
     }
 }

@@ -53,7 +53,7 @@ public class EditRecipient_StepDefn {
         emailRecipientsPageObjectModel.openIntervalPanel();
         emailRecipientsValidation.validateIntervalDropDownPanelVisibility();
         SoftAssertionUtils.getSoftAssertions().assertAll();
-//        emailRecipientsPageObjectModel.selectInterval("120 min");
+        emailRecipientsPageObjectModel.selectInterval("120 min");
     }
 
     @Then("the recipient data should be updated")

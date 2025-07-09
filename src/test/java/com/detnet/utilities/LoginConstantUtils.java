@@ -8,21 +8,34 @@ import java.util.Properties;
 public class LoginConstantUtils {
     private static final String CREDENTIALS_FILE = "src/test/resources/credentials.properties";
     private static final Properties properties = new Properties();
+    private static final boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
 
     static {
-        try{
-            properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
-        }catch (IOException e){
-            throw new RuntimeException("Failed to load credentials file");
+        if(!isCI){
+            try{
+                properties.load(Files.newInputStream(Paths.get(CREDENTIALS_FILE)));
+            }catch (IOException e) {
+                throw new RuntimeException("Failed to load credentials file", e);
+            }
+        }
+    }
+
+    private static String getEncryptedValue(String key, String envVar){
+        if(isCI){
+            String value = System.getenv(envVar);
+            if (value == null) throw new RuntimeException("Missing environment variable: " + envVar);
+            return value.trim();
+        }else {
+            return properties.getProperty(key).trim();
         }
     }
 
     public static String getDecryptedUsername() throws Exception {
-        return EncryptionUtils.decrypt(properties.getProperty("encrypted.username").trim());
+        return EncryptionUtils.decrypt(getEncryptedValue("encrypted.username","BLASTWEB_USERNAME"));
     }
 
     public static String getDecryptedPassword() throws Exception {
-        return EncryptionUtils.decrypt(properties.getProperty("encrypted.password")).trim();
+        return EncryptionUtils.decrypt(getEncryptedValue("encrypted.password","BLASTWEB_PASSWORD"));
     }
 
     public static String getDecryptedServerConfigPassword() throws Exception {

@@ -3,16 +3,10 @@ package com.detnet.pageObjects;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
+import static com.detnet.locators.PasswordResetPageLocators.*;
+
 public class PasswordResetPageObjectModel {
     private final Page page;
-    private final String passwordResetForm = "//mat-card[@class=\"mat-mdc-card mdc-card\"]";
-    private final String currentPasswordField = "xpath=/html[1]/body[1]/app-root[1]/password-reset[1]/div[1]/div[1]/mat-card[1]/mat-card-content[1]/div[1]/form[1]/mat-form-field[1]/div[1]/div[2]/div[1]/input[1]";
-    private final String newPasswordField = "xpath=/html[1]/body[1]/app-root[1]/password-reset[1]/div[1]/div[1]/mat-card[1]/mat-card-content[1]/div[1]/form[1]/mat-form-field[2]/div[1]/div[2]/div[1]/input[1]";
-    private final String confirmedPasswordField = "xpath=/html[1]/body[1]/app-root[1]/password-reset[1]/div[1]/div[1]/mat-card[1]/mat-card-content[1]/div[1]/form[1]/mat-form-field[3]/div[1]/div[2]/div[1]/input[1]";
-    private final String changePasswordButton = "//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String currentPasswordVisibilityIcon = "xpath=/html[1]/body[1]/app-root[1]/password-reset[1]/div[1]/div[1]/mat-card[1]/mat-card-content[1]/div[1]/form[1]/mat-form-field[1]/div[1]/div[2]/div[2]/mat-icon[1]\n";
-    private final String newPasswordVisibilityIcon = "xpath=/html[1]/body[1]/app-root[1]/password-reset[1]/div[1]/div[1]/mat-card[1]/mat-card-content[1]/div[1]/form[1]/mat-form-field[2]/div[1]/div[2]/div[2]/mat-icon[1]\n";
-    private final String confirmedPasswordVisibilityIcon = "xpath=/html[1]/body[1]/app-root[1]/password-reset[1]/div[1]/div[1]/mat-card[1]/mat-card-content[1]/div[1]/form[1]/mat-form-field[3]/div[1]/div[2]/div[2]/mat-icon[1]\n";
 
     public PasswordResetPageObjectModel(Page page) {
         this.page = page;

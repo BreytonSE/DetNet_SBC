@@ -3,29 +3,17 @@ package com.detnet.pageObjects;
 import io.appium.java_client.windows.WindowsDriver;
 import io.appium.java_client.windows.WindowsElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
-import java.time.Duration;
 import java.util.Set;
+
+import static com.detnet.locators.ServerConfigPageLocators.*;
 
 // For Desktop App scenario
 public class ServerConfigPageObjectModel {
     private final WindowsDriver<WindowsElement> driver;
-
-    private final String webServerStopButton = "NetConfig.stopWeb";
-    private final String restoreFromBackupButton = "NetConfig.restore_";
-    private final String openButton = "Open";
-    private final String yesButton = "Yes";
-    private final String saveConfigurationButton = "NetConfig.saveConfigButton";
-    private final String fileNameInputField = "Edit";
-    private final String okayButton = "OK";
-    private final String startServerButton = "Start Server";
-    private final String webServerStartButton = "Start Web Server";
-    private final String configPasswordInputField = "NetConfig.passwordDlg.lineEdit";
-    private final String passwordDialogOKButton = "NetConfig.passwordDlg.okButton";
 
     public ServerConfigPageObjectModel(WindowsDriver<WindowsElement> driver) {
         this.driver = driver;

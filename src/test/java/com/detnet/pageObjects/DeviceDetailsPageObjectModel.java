@@ -5,14 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import static com.detnet.locators.DeviceDetailsPageLocators.*;
+
 public class DeviceDetailsPageObjectModel {
     private final Page page;
-
-    private final String deviceStatusColumn = "(//mat-toolbar[@class='mat-toolbar summary-div-header mat-toolbar-single-row'])[1]";
-    private final String deviceDetailsAndConfigColumn = "(//mat-toolbar[@class='mat-toolbar summary-div-header mat-toolbar-single-row'])[2]";
-    private final String deviceStatisticsColumn = "(//mat-toolbar[@class='mat-toolbar summary-div-header mat-toolbar-single-row'])[3]";
-    private final String deviceAuxiliaryRelaysColumn = "(//mat-toolbar[@class='mat-toolbar summary-div-header mat-toolbar-single-row'])[4]";
-    private final String bcuBlastKeyColumn = "(//mat-toolbar[@class='mat-toolbar summary-div-header mat-toolbar-single-row'])[5]";
 
     public DeviceDetailsPageObjectModel(Page page) {
         this.page = page;

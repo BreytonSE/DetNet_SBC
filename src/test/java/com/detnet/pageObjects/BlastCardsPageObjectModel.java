@@ -2,18 +2,10 @@ package com.detnet.pageObjects;
 
 import com.microsoft.playwright.Page;
 
+import static com.detnet.locators.BlastCardsPageLocators.*;
+
 public class BlastCardsPageObjectModel {
     private final Page page;
-    private final String activeCardsLabel = "//h2[normalize-space()='Active Cards']";
-    private final String addBlastCardsButton = "//button[@class='addBtn ng-star-inserted']//span[contains(text(),'Add Blast Card')]";
-    private final String archiveCardsButton = "//button[@class='disableThirdBtn ng-star-inserted']//span[contains(text(),'Archive Cards')]";
-    private final String archivedCardsButton = "//span[normalize-space()='Archived Cards']";
-    private final String blastCardAlertWindow = "//div[@class='mat-mdc-dialog-surface mdc-dialog__surface']";
-    private final String closeIcon = "//span[normalize-space()='highlight_off']";
-    private final String archiveCardsLabel = "//h2[normalize-space()='Archive Cards']";
-    private final String deleteCardsButton = "//button[@class='disableDeleteAllBtn']//span[contains(text(),'Delete Cards')]";
-    private final String searchBar = "//input[@placeholder='Search using Serial Number, Key Type, Updated Date']";
-    private final String searchButton = "//mat-icon[normalize-space()='search']";
 
     public BlastCardsPageObjectModel(Page page) {
         this.page = page;

@@ -5,35 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import static com.detnet.locators.DevicePageLocators.*;
+
 public class DevicePageObjectModel {
     private final Page page;
-    private final String addDeviceButton = "//button[@class=\"addBtn ng-star-inserted\"]";
-    private final String addDeviceForm = "//h2[normalize-space()=\"Add Device\"]";
-    private final String deviceIdInput = "//input[@id=\"id\"]";
-    private final String deviceLocationInput = "//input[@id=\"location\"]";
-    private final String deviceNetworkDropdown = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[3]/div[1]/div[2]/div[1]/mat-select[1]/div[1]/div[1]/span[1]";
-    private final String deviceNetworkPanel = "//div[@id=\"networkId-panel\"]";
-    private final String deviceNetworkInterfaceDropDown = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[4]/div[1]/div[2]/div[1]/mat-select[1]/div[1]/div[1]";
-    private final String deviceNetworkInterfacePanel = "//div[@id=\"method-panel\"]";
-    private final String deviceTypeField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[5]/div[1]/div[2]/div[1]/mat-select[1]/div[1]/div[1]";
-    private final String deviceTypePanel = "//div[@id=\"deviceType-panel\"]";
-    private final String ipInputField = "//input[@id=\"ipAddress\"]";
-    private final String addDeviceSubmitButton = "//button[@id=\"addDeviceSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String deviceManagerField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[6]/div[1]/div[2]/div[1]/mat-select[1]/div[1]/div[1]";
-    private final String deviceManagerDropdownPanel = "//div[@id=\"managerId-panel\"]";
-    private final String parentDeviceField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/add-device[1]/div[1]/form[1]/div[1]/div[1]/mat-form-field[7]/div[1]/div[2]/div[1]/mat-select[1]/div[1]";
-    private final String parentDeviceDropDownPanel = "//div[@id=\"parentId-panel\"]";
-    private final String deviceGroupField = "//span[normalize-space()=\"Default Group\"]";
-    private final String deviceGroupDropDown = "//div[@id=\"groupId-panel\"]";
-    private final String editIcon = "//tbody/tr[4]/td[11]/div[1]/mat-icon[1]";
-    private final String editDeviceTxt = "//h2[normalize-space()=\"Edit Device\"]";
-    private final String saveUpdates = "//button[@id=\"addDeviceSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String searchBar = "//input[@placeholder=\"Search using ID, Location, IP\"]";
-    private final String deleteIcon = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined ng-star-inserted'][normalize-space()='delete'])[1]";
-    private final String deleteDialog = "//blastweb-confirmation-dialog[@class=\"ng-star-inserted\"]";
-    private final String yesButton = "//button[@class=\"yesBtn\"]";
-    private final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-devices[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
-    private final String deleteAllButton = "//button[@class=\"deleteAllBtn\"]";
 
     public DevicePageObjectModel(Page page) {
         this.page = page;

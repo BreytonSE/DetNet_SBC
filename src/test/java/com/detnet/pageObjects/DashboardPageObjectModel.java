@@ -9,39 +9,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.detnet.locators.DashboardPageLocators.*;
+
 public class DashboardPageObjectModel {
     private final Page page;
-    private final String userRoleLabel = "//p[@class='userRole']";
-    private final String navigationMenu = "#mat-menu-panel-2";
-    private final String logoutButton = "//span[contains(text(),'Logout')]";
-    private final String settingsButton = "//span[contains(text(),'Settings')]";
-    private final String dashboardButton = "//span[contains(text(),\"Dashboard\")]";
-    private final String deviceDetailsButton = "//body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/div[2]/div[1]/div[1]/bcu-card-high-detail[1]/mat-card[1]/div[5]\n";
-    private final String newDevice = "(//span[normalize-space()='Cape Town'])[1]";
-    private final String eventsButton = "//button[@class=\"fixedButton mdc-button mdc-button--unelevated mat-mdc-unelevated-button mat-primary mat-mdc-button-base\"]//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String eventsLog = "//tr[@class=\"mat-mdc-header-row mdc-data-table__header-row cdk-header-row ng-star-inserted\"]";
-    private final String offsetToolTip = "//img[@class=\"mat-mdc-tooltip-trigger offsetButton ng-star-inserted\"]";
-    private final String offsetHeader = "//h3[normalize-space()=\"Offset Channels\"]";
-    private final String saveButton = "//button[@type=\"submit\"]";
-    private final String groupByDropDown = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[2]/form[1]/div[1]/mat-form-field[1]/div[1]/div[1]/div[2]";
-    private final String groupByDropDownPanel = "//div[@id=\"deviceGroupingFunctionSelector-panel\"]";
-    private final String alertDropdownButton = "//body[1]/app-root[1]/blastweb-navbar[1]/mat-toolbar[1]/mat-toolbar-row[1]/button[3]/span[2]/mat-toolbar-row[1]";
-    private final String reportsTab = "//span[normalize-space()=\"Reports\"]";
-    private final String eventsReportButton = "//span[contains(text(),\"Events report\")]";
-    private final String keyElement = "(//span[normalize-space()='-  Key'])[1]";
-    private final String networkElement = "(//span[normalize-space()='-  Network'])[1]";
-    private final String stateElement = "(//span[normalize-space()='-  State'])[1]";
-    private final String firmwareElement = "(//span[normalize-space()='-  Firmware'])[1]";
-    private final String customElement = "(//span[normalize-space()='-  Custom'])[1]";
-    private final String selectedElement = "(//span[normalize-space()='-  Selected'])[1]";
-    private final String aliveElement = "(//span[normalize-space()='-  Alive'])[1]";
-    private final String typeLocator = "(//span[normalize-space()='-  Type'])[1]";
-    private final String selectAllCheckbox = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[2]/form[1]/div[3]/mat-toolbar-row[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
-    private final String plusIcon = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[1]/button[1]/span[5]";
-    private final String actionPanel = "//div[@class=\"column ng-trigger ng-trigger-speedDialStagger\"]";
-    private final String armSelectedButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[1]/div[1]/button[1]/span[5]\n";
-    private final String armSelectedLabel = "//button[normalize-space()=\"Arm Selected (1)\"]";
-    private final String readyToBlastElement = "//span[contains(text(),\"READY TO BLAST\")]\n";
 
     public DashboardPageObjectModel(Page page) {
         this.page = page;
@@ -658,5 +629,118 @@ public class DashboardPageObjectModel {
         }catch (PlaywrightException e){
             return false;
         }
+    }
+
+    public boolean isBlastSelectedOptionAvailable(){
+        try{
+            page.locator(blastSelectedLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+
+            page.locator(blastSelectedButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void blastSelectDevice(){
+        page.locator(blastSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public void openBlastReport(){
+        page.locator(blastReportButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isArmAllReadyOptionAvailable(){
+        try{
+            page.locator(armAllReadyLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            page.locator(armAllReadyButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void armAllReady(){
+        page.locator(armAllReadyButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isNoDeviceToArmSnackBarHidden(){
+        try{
+            page.locator(noDeviceToArmSnackBar)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.HIDDEN)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isArmWirelessSelectedOptionAvailable(){
+        try{
+            page.locator(armWirelessSelectedLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            page.locator(armWirelessSelectedButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public void armWirelessSelected(){
+        page.locator(armWirelessSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public boolean isCyberDetDialogOpen(){
+        try{
+            page.locator(cyberDetImage)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public boolean isBlastGroupDropDownVisible(){
+        try{
+            page.locator(blastGroupDropDown)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            return false;
+        }
+    }
+
+    public  boolean isBlastGroupDropDownEnabled(){
+        return page.locator(blastGroupDropDown).isEnabled();
+    }
+
+    public void openBlastGroupDropDown(){
+        page.locator(blastGroupDropDown).click(new Locator.ClickOptions().setTimeout(5000));
+    }
+
+    public  void selectBlastGroup(){
+//        TODO: Select blast group from dropdown.
     }
 }

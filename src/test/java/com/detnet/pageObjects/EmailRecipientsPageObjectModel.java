@@ -5,28 +5,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import static com.detnet.locators.EmailRecipientsPageLocators.*;
+
 public class EmailRecipientsPageObjectModel {
     private final Page page;
-    private final String recipientListHeading = "//h2[normalize-space()=\"Recipient List\"]";
-    private final String noRecipientsText = "//h2[normalize-space()=\"No Recipient Present\"]";
-    private final String addRecipientBtn = "//button[@class=\"addBtn ng-star-inserted\"]";
-    private final String addRecipientHeading = "//h2[normalize-space()=\"Add Recipient\"]";
-    private final String emailAddressField = "//input[@id=\"addRecipientEmail\"]";
-    private final String firstNameField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/app-add-email[1]/div[1]/div[1]/div[1]/form[1]/mat-form-field[2]/div[1]/div[2]/div[1]/label[1]/mat-label[1]";
-    private final String lastNameField = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/app-add-email[1]/div[1]/div[1]/div[1]/form[1]/mat-form-field[3]/div[1]/div[2]/div[1]/input[1]";
-    private final String severityLevel = "//div[@fxlayout=\"column\"]//div[@fxlayout=\"row\"]";
-    private final String moderateSeverityElement = "//label[normalize-space()=\"Moderate\"]";
-    private final String addRecipientButton = "//button[@id=\"addRecipientSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String editIcon = "(//mat-icon[@role='img'][normalize-space()='edit'])[2]";
-    private final String editRecipientHeading = "//h2[normalize-space()=\"Edit Recipient\"]";
-    private final String editRecipientSubmitBtn = "//button[@id=\"editRecipientSubmitButton\"]//span[@class=\"mat-mdc-button-touch-target\"]";
-    private final String searchBar = "//input[@placeholder=\"Search using Username, First Name, Last Name\"]";
-    private final String intervalDropDown = "//mat-icon[normalize-space()=\"timer\"]";
-    private final String intervalDropDownPanel = "//div[@id=\"minutes-panel\"]";
-    private final String deleteDialog = "//div[@class=\"mat-mdc-dialog-surface mdc-dialog__surface\"]";
-    private final String yesButton = "//button[@class=\"yesBtn\"]";
-    private final String checkBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/app-email-recipient[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/thead[1]/tr[1]/th[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
-    private final String deleteAllButton = "//button[@class=\"deleteAllBtn\"]";
 
     public EmailRecipientsPageObjectModel(Page page) {
         this.page = page;

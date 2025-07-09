@@ -413,4 +413,53 @@ public class DashboardValidation {
                 .as("Device should be in 'Ready to Blast' -state")
                 .isTrue();
     }
+
+    public void validateBlastSelectedOptionVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isBlastSelectedOptionAvailable();
+        softly.assertThat(isVisible)
+                .as("Blast Selected option should be visible in the action panel.")
+                .isTrue();
+    }
+
+    public void validateArmAllReadyOptionVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isArmAllReadyOptionAvailable();
+        softly.assertThat(isVisible)
+                .as("'Arm All Ready' -button should be visible and its corresponding label.")
+                .isTrue();
+    }
+
+    public void validateNoDeviceToArmSnackBarVisibility(){
+        boolean isHidden = dashboardPageObjectModel.isNoDeviceToArmSnackBarHidden();
+        softly.assertThat(isHidden)
+                .as("Snack bar with message 'There are no devices to arm' should not be displaying.")
+                .isTrue();
+    }
+
+    public void validateIfArmWirelessOptionIsAvailable(){
+        boolean isVisible = dashboardPageObjectModel.isArmWirelessSelectedOptionAvailable();
+        softly.assertThat(isVisible)
+                .as("'Arm Wireless Selected' -option should be visible from the action panel.")
+                .isTrue();
+    }
+
+    public void validateCyberDetDialogVisibility(){
+        boolean isOpen = dashboardPageObjectModel.isCyberDetDialogOpen();
+        softly.assertThat(isOpen)
+                .as("CyberDet dialog should be open before user can select a blast group.")
+                .isTrue();
+    }
+
+    public void validateBlastGroupDropDownVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isBlastGroupDropDownVisible();
+        softly.assertThat(isVisible)
+                .as("Blast group dropdown should be visible")
+                .isTrue();
+    }
+
+    public void validateBlastGroupDropDownState(){
+        boolean isEnabled = dashboardPageObjectModel.isBlastGroupDropDownEnabled();
+        softly.assertThat(isEnabled)
+                .as("Blast group dropdown should be enabled ")
+                .isTrue();
+    }
 }
