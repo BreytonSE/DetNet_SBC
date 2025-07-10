@@ -54,6 +54,11 @@ jobs:
           if ($?) { echo "Test Passed." } else { echo "Test failed, continuing pipeline."; }
         shell: powershell
 
+      - name: Generate Report and Send Email
+        run: |
+          mvn exec: java -Dexec.mainClass="com.detnet.runners.ReportSender" -Dexec.classpathScope=test
+        shell: powershell
+
       - name: Wait for JVM Shutdown Hook
         run: |
           Start-Sleep -Seconds 30  # Ensures shutdown hook executes
