@@ -43,10 +43,6 @@ jobs:
         run: |
           npx playwright install --with-deps
 
-      - name: Start WinAppDriver
-        run: |
-          Start-Process -NoNewWindow -FilePath "C:\Program Files (x86)\Windows Application Driver\WinAppDriver.exe"
-
       - name: Start BlastWeb Service
         run: |
           Start-Process -NoNewWindow -FilePath "C:\Detnet\BlastWeb\blastweb_service.exe"

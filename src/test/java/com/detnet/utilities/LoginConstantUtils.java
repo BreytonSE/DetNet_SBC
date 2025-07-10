@@ -40,7 +40,6 @@ public class LoginConstantUtils {
 
     public static String getDecryptedServerConfigPassword() throws Exception {
         return EncryptionUtils.decrypt(getEncryptedValue("encrypted.configPassword","BLASTWEB_SERVER_CONFIG_PASSWORD"));
-//        return EncryptionUtils.decrypt(properties.getProperty("encrypted.configPassword")).trim(); // revert back to this logic if the logic above is not working correctly
     }
 
     public static String getDecryptedEmailAddress() throws Exception {
