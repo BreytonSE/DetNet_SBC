@@ -13,6 +13,7 @@ jobs:
     env: # Make secrets available as environment variables
       BLASTWEB_USERNAME: ${{ secrets.BLASTWEB_USERNAME }}
       BLASTWEB_PASSWORD: ${{ secrets.BLASTWEB_PASSWORD }}
+      BLASTWEB_SERVER_CONFIG_PASSWORD: ${{ secrets.BLASTWEB_SERVER_CONFIG_PASSWORD }}
       ENC_KEY: ${{ secrets.ENC_KEY }}
 
     steps:

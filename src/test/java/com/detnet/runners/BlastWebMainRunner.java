@@ -5,9 +5,8 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-//        features = {"src/test/resources/features/web",
-//                    "src/test/resources/features/desktop"}, // comment out if pipeline works 100%
-        features = "src/test/resources/features/web/a_Login.feature", // remove if pipeline is fixed
+        features = {/*"src/test/resources/features/web",*/
+                    "src/test/resources/features/desktop"},
         glue = {"com.detnet.stepdefinitions","com.detnet.utilities"},
         plugin = {"pretty",
                 "html:target/cucumber-reports.html",
