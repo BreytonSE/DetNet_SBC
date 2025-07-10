@@ -43,11 +43,11 @@ public class LoginConstantUtils {
     }
 
     public static String getDecryptedEmailAddress() throws Exception {
-        return EncryptionUtils.decrypt(properties.getProperty("encrypted.emailAddress")).trim();
+        return EncryptionUtils.decrypt(getEncryptedValue("encrypted.emailAddress","TESTER_EMAIL_ADDRESS"));
     }
 
     public static String getDecryptedEmailPassword() throws Exception {
-        return EncryptionUtils.decrypt(properties.getProperty("encrypted.emailPassword")).trim();
+        return EncryptionUtils.decrypt(getEncryptedValue("encrypted.emailPassword","TESTER_EMAIL_APP_PASSWORD"));
     }
 
     public static String getDecryptedDatabaseUsername() throws Exception {
