@@ -57,10 +57,14 @@ jobs:
         shell: powershell
 
       - name: Generate Report and Send Email
+        shell: cmd
         run: |
-          mvn -Dexec.mainClass="com.detnet.runners.ReportSender" -Dexec.classpathScope="test" exec:java
-          if ($?) { echo "Report sent." } else { echo "Report failed, continuing pipeline."; }
-        shell: powershell
+          mvn exec:java -Dexec.mainClass=com.detnet.runners.ReportSender -Dexec.classpathScope=test
+          if %ERRORLEVEL% equ 0 (
+            echo Report sent.
+          ) else (
+            echo Report failed, continuing pipeline
+          )
 
       - name: Wait for JVM Shutdown Hook
         run: |
