@@ -210,13 +210,13 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <mainClass>com.detnet.utilities.HooksUtils</mainClass>
-          <classpathScope>compile</classpathScope>
-          <arguments>
-            <argument>shutdown</argument>
-          </arguments>
-        </configuration>
+<!--        <configuration>-->
+<!--          <mainClass>com.detnet.utilities.HooksUtils</mainClass>-->
+<!--          <classpathScope>compile</classpathScope>-->
+<!--          <arguments>-->
+<!--            <argument>shutdown</argument>-->
+<!--          </arguments>-->
+<!--        </configuration>-->
       </plugin>
 
     </plugins>
