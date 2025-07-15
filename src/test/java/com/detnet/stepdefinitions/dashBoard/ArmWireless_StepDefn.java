@@ -21,6 +21,7 @@ public class ArmWireless_StepDefn {
     public void the_user_opens_the_action_panel_and_selects_arm_wireless_selected() {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardPageObjectModel.openActionPanel();
         dashboardValidation.validateIfArmWirelessOptionIsAvailable();
         SoftAssertionUtils.getSoftAssertions().assertAll();
         dashboardPageObjectModel.armWirelessSelected();
@@ -35,17 +36,29 @@ public class ArmWireless_StepDefn {
         dashboardValidation.validateBlastGroupDropDownState();
         SoftAssertionUtils.getSoftAssertions().assertAll();
         dashboardPageObjectModel.openBlastGroupDropDown();
-//        TODO: The user select the blast group associated with the blast
+        dashboardPageObjectModel.selectBlastGroup("Test Group 2");
     }
 
     @When("the user clicks the re-blast checkbox")
     public void the_user_clicks_the_re_blast_checkbox() {
-//        TODO: The user clicks the re-blast checkbox
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateReBlastCheckBoxVisibility();
+        dashboardValidation.validateReBlastCheckBoxState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+        dashboardPageObjectModel.reBlastDevice();
+        dashboardValidation.validateIfDeviceIsSelectedForReBlast();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user clicks the OK button")
     public void the_user_clicks_the_ok_button() {
-//        TODO: The user click on the 'OK' -button
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateCyberDetOkButtonVisible();
+        dashboardValidation.validateCyberDetOkButtonState();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+        dashboardPageObjectModel.applyBlastGroupToDevice();
     }
 
     @Then("the device should be successfully armed with a wireless channel")

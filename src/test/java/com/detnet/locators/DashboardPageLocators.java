@@ -41,5 +41,7 @@ public class DashboardPageLocators {
     public static final String armWirelessSelectedLabel = "//button[contains(normalize-space(), 'Arm Wireless Selected')]";
     public static final String armWirelessSelectedButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[3]/div[1]/button[1]/span[2]/i[1]";
     public static final String cyberDetImage = "//img[@alt=\"Cyberdet I\"]";
-    public static final String blastGroupDropDown = "//select[@fdprocessedid=\"obtco\"]";
+    public static final String blastGroupDropDown = "//app-cyberdet-dialog[@class=\"ng-star-inserted\"]//div//select";
+    public static final String reBlastCheckbox = "xpath=/html[1]/body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-cyberdet-dialog[1]/div[2]/input[1]";
+    public static final String cyberDetOkButton = "//button[@type=\"submit\"]//span[@class=\"mat-mdc-button-touch-target\"]";
 }

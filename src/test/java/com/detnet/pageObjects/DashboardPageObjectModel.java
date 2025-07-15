@@ -3,6 +3,7 @@ package com.detnet.pageObjects;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
+import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
 import java.util.Arrays;
@@ -740,7 +741,81 @@ public class DashboardPageObjectModel {
         page.locator(blastGroupDropDown).click(new Locator.ClickOptions().setTimeout(5000));
     }
 
-    public  void selectBlastGroup(){
-//        TODO: Select blast group from dropdown.
+    public void selectBlastGroup(String blastGroup){
+        try{
+            Locator selectorDropDown = page.locator("select");
+            selectorDropDown.selectOption(new SelectOption().setLabel(blastGroup));
+        }catch (PlaywrightException e){
+            System.out.println("Blast group element not found or not visible in dropdown: " + e.getMessage());
+        }
+    }
+
+    public boolean isReBlastCheckBoxVisible(){
+        try{
+            page.locator(reBlastCheckbox)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Re-blast checkbox not found or not visible on the Cyberdet dialogue window: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isReBlastCheckBoxEnabled(){
+        try{
+            return page.locator(reBlastCheckbox).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Re-blast checkbox not found or not visible on the Cyberdet dialogue window: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void reBlastDevice(){
+        try{
+            page.locator(reBlastCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Re-blast checkbox not found or not visible on the Cyberdet dialogue window: " + e.getMessage());
+        }
+    }
+
+    public boolean isDeviceSelectedToReBlast(){
+        try{
+            return page.locator(reBlastCheckbox).isChecked();
+        }catch (PlaywrightException e){
+            System.out.println("Re-blast checkbox not found or not visible on the Cyberdet dialogue window: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isCyberDetOkButtonVisible(){
+        try{
+            page.locator(cyberDetOkButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("'OK' button not found or not visible on Cyberdet dialog window: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isCyberDetOkButtonEnabled(){
+        try{
+            return page.locator(cyberDetOkButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'OK' button not found or not visible on Cyberdet dialog window: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void applyBlastGroupToDevice(){
+        try{
+            page.locator(cyberDetOkButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'OK' button not found or not visible on Cyberdet dialog window: " + e.getMessage());
+        }
     }
 }

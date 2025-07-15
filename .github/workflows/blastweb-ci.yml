@@ -58,7 +58,7 @@ jobs:
 
       - name: Generate Report and Send Email
         run: |
-          mvn exec:java -Dexec.mainClass="com.detnet.runners.ReportSender" -Dexec.classpathScope="test"
+          mvn -Dexec.mainClass="com.detnet.runners.ReportSender" -Dexec.classpathScope="test" exec:java
           if ($?) { echo "Report sent." } else { echo "Report failed, continuing pipeline."; }
         shell: powershell
 

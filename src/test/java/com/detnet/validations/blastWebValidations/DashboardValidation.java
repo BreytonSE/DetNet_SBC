@@ -462,4 +462,39 @@ public class DashboardValidation {
                 .as("Blast group dropdown should be enabled ")
                 .isTrue();
     }
+
+    public void validateReBlastCheckBoxVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isReBlastCheckBoxVisible();
+        softly.assertThat(isVisible)
+                .as("Re-blast checkbox should be visible on the Cyberdet dialogue window.")
+                .isTrue();
+    }
+
+    public void validateReBlastCheckBoxState(){
+        boolean isEnabled = dashboardPageObjectModel.isReBlastCheckBoxEnabled();
+        softly.assertThat(isEnabled)
+                .as("Re-blast checkbox should be enabled by default on the Cyberdet dialogue window.")
+                .isTrue();
+    }
+
+    public void validateIfDeviceIsSelectedForReBlast(){
+        boolean isSelected = dashboardPageObjectModel.isDeviceSelectedToReBlast();
+        softly.assertThat(isSelected)
+                .as("Device should be selected for re-blast.")
+                .isTrue();
+    }
+
+    public void validateCyberDetOkButtonVisible(){
+        boolean isVisible = dashboardPageObjectModel.isCyberDetOkButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'OK' -button should be visible.")
+                .isTrue();
+    }
+
+    public void validateCyberDetOkButtonState(){
+        boolean isEnabled = dashboardPageObjectModel.isCyberDetOkButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("'OK' -button should be enabled.")
+                .isTrue();
+    }
 }
