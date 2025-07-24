@@ -15,147 +15,308 @@ public class NetworkPageObjectModel {
     }
 
     public boolean isNetworksLabelPresent(){
-        return page.locator(networkLabel).isVisible();
+        try{
+            return page.locator(networkLabel).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Network label not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getNetworkText(){
-        return page.locator(networkLabel).textContent();
+        try{
+            return page.locator(networkLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Network label not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isAddNetworkButtonVisible(){
-        return page.locator(addNetworkButton).isVisible();
+        try{
+            return page.locator(addNetworkButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Network' -button not visible or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isAddNetworkButtonEnabled(){
-        return page.locator(addNetworkButton).isEnabled();
+        try{
+            return page.locator(addNetworkButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Network' -button not visible or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void addNetwork(){
-        page.locator(addNetworkButton).click();
+        try{
+            page.locator(addNetworkButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Network' -button not visible or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNetworkPresent(){
-        return page.locator(network).isVisible();
+        try{
+            return page.locator(network).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Network element not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getNetworkName(){
-        return page.locator(networkName).textContent();
+        try{
+            return page.locator(networkName).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Network name not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isResourceNameFieldVisible(){
-        return page.locator(resourceNameInputField).isVisible();
+        try{
+            return page.locator(resourceNameInputField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Resource name input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isResourceNameInputFieldEnabled(){
-        return page.locator(resourceNameInputField).isEnabled();
+        try{
+            return page.locator(resourceNameInputField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Resource name input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isResourceNameInputFieldEmpty(){
-        String inputField = page.locator(resourceNameInputField).inputValue();
-        return inputField == null || inputField.trim().isEmpty();
+        try{
+            String inputField = page.locator(resourceNameInputField).inputValue();
+            return inputField == null || inputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Resource name input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setResourceName(String resourceName){
-        page.locator(resourceNameInputField).fill(resourceName);
+        try{
+            page.locator(resourceNameInputField).fill(resourceName);
+        }catch (PlaywrightException e){
+            System.out.println("Resource name input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getResourceName(){
-        return page.locator(resourceNameInputField).inputValue();
+        try{
+            return page.locator(resourceNameInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Resource name input field not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isMessageGapFieldVisible(){
-        return page.locator(messageGapInputField).isVisible();
+        try{
+            return page.locator(messageGapInputField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Message gap input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isMessageGapFieldEnabled(){
-        return page.locator(messageGapInputField).isEnabled();
+        try{
+            return page.locator(messageGapInputField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Message gap input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isMessageGapFieldEmpty(){
-        String inputField = page.locator(messageGapInputField).inputValue();
-        return inputField == null || inputField.trim().isEmpty();
+        try{
+            String inputField = page.locator(messageGapInputField).inputValue();
+            return inputField == null || inputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Message gap input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setNewMessageGap(String messageGap){
-        page.locator(messageGapInputField).click();
-        page.locator(messageGapInputField).clear();
-        page.locator(messageGapInputField).fill(messageGap);
+        try{
+            page.locator(messageGapInputField).click();
+            page.locator(messageGapInputField).clear();
+            page.locator(messageGapInputField).fill(messageGap);
+        }catch (PlaywrightException e){
+            System.out.println("Message gap input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getMessageGap(){
-        return page.locator(messageGapInputField).inputValue();
+        try{
+            return page.locator(messageGapInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Message gap input field not found or not visible: ");
+            return null;
+        }
     }
 
     public boolean isDelayFieldVisible(){
-        return page.locator(delayInputField).isVisible();
+        try{
+            return page.locator(delayInputField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Delay input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDelayFieldEnabled(){
-        return page.locator(delayInputField).isEnabled();
+        try{
+            return page.locator(delayInputField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Delay input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDelayFieldEmpty(){
-        String inputField = page.locator(delayInputField).inputValue();
-        return inputField == null || inputField.trim().isEmpty();
+        try{
+            String inputField = page.locator(delayInputField).inputValue();
+            return inputField == null || inputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Delay input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setDelay(String delay){
-        page.locator(delayInputField).click();
-        page.locator(delayInputField).clear();
-        page.locator(delayInputField).fill(delay);
+        try{
+            page.locator(delayInputField).click();
+            page.locator(delayInputField).clear();
+            page.locator(delayInputField).fill(delay);
+        }catch (PlaywrightException e){
+            System.out.println("Delay input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getDelay(){
-        return page.locator(delayInputField).inputValue();
+        try{
+            return page.locator(delayInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Delay input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isBaudRateFieldVisible(){
-        return page.locator(baudRateInputField).isVisible();
+        try{
+            return page.locator(baudRateInputField).isVisible();
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 
     public boolean isBaudRateFieldEnabled(){
-        return page.locator(baudRateInputField).isEnabled();
+        try{
+            return page.locator(baudRateInputField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Baud rate input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isBaudRateFieldEmpty(){
-        String input = page.locator(baudRateInputField).inputValue();
-        return input == null || input.trim().isEmpty();
+        try{
+            String input = page.locator(baudRateInputField).inputValue();
+            return input == null || input.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Baud rate input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setBaudRate(String baudRate){
-        page.locator(baudRateInputField).fill(baudRate);
+        try{
+            page.locator(baudRateInputField).fill(baudRate);
+        }catch (PlaywrightException e){
+            System.out.println("Baud rate input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getBaudRate(){
-        return page.locator(baudRateInputField).inputValue();
+        try{
+            return page.locator(baudRateInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Baud rate input field not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isReportDetonatorsCheckBoxVisible(){
-        return page.locator(reportDetonatorsLabel).isVisible();
+        try{
+            return page.locator(reportDetonatorsLabel).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Report Detonators' -label not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isReportDetonatorsCheckBoxEnabled(){
-        return page.locator(reportDetonatorsLabel).isEnabled();
+        try{
+            return page.locator(reportDetonatorsLabel).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Report Detonators' -label not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void reportDetonators(){
-        page.locator(reportDetonatorsLabel).click();
+        try{
+            page.locator(reportDetonatorsLabel).click();
+        }catch (PlaywrightException e){
+            System.out.println("'Report Detonators' -label not visible or not found: " + e.getMessage());
+        }
     }
 
     public void inUse(){
-        page.locator(inUseLabel).click();
+        try{
+            page.locator(inUseLabel).click();
+        }catch (PlaywrightException e){
+            System.out.println("In Use label not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isSaveNewNetworkButtonVisible(){
-        return page.locator(saveNewNetwork).isVisible();
+        try{
+            return page.locator(saveNewNetwork).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSaveNewNetworkButtonEnabled(){
-        return page.locator(saveNewNetwork).isEnabled();
+        try{
+            return page.locator(saveNewNetwork).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void saveNewNetwork(){
-        page.locator(saveNewNetwork).click();
+        try{
+            page.locator(saveNewNetwork).click();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNewNetworkAdded(){
@@ -165,125 +326,233 @@ public class NetworkPageObjectModel {
                     .setTimeout(5000)); // timeout in milliseconds
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network path not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isEditIconPresent(){
-        return page.locator(editIcon).isVisible();
+        try{
+            return page.locator(editIcon).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Edit icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isEditIconEnabled(){
-        return page.locator(editIcon).isEnabled();
+        try{
+            return page.locator(editIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Edit icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void editNetwork(String index){
-        String rowIndex = "(//mat-icon[@role='img'][normalize-space()='edit'])[" + index + "]";
-        page.locator(rowIndex).click();
+        try{
+            String rowIndex = "(//mat-icon[@role='img'][normalize-space()='edit'])[" + index + "]";
+            page.locator(rowIndex).click();
+        }catch (PlaywrightException e){
+            System.out.println("Row index element not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isSaveUpdateButtonVisible(){
-        return page.locator(saveButton2).isVisible();
+        try{
+            return page.locator(saveButton2).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSaveUpdateButtonEnabled(){
-        return page.locator(saveButton2).isEnabled();
+        try{
+            return page.locator(saveButton2).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void updateNetwork(){
-        page.locator(saveButton2).click();
+        try{
+            page.locator(saveButton2).click();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getUpdatedMessageGap(){
-        String updatedMessageGap = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
-                "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]";
-        return page.locator(updatedMessageGap).textContent();
+        try{
+            String updatedMessageGap = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
+                    "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[2]/td[4]";
+            return page.locator(updatedMessageGap).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Update message not found or not displaying: " + e.getMessage());
+            return null;
+        }
     }
 
     public String getUpdatedDelay(){
-        String updatedDelay = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
-                "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[2]/td[5]";
-        return page.locator(updatedDelay).textContent();
+        try{
+            String updatedDelay = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
+                    "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[2]/td[5]";
+            return page.locator(updatedDelay).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Delay element not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isDeleteIconVisible(){
-        return page.locator(deleteIcon).isVisible();
+        try{
+            return page.locator(deleteIcon).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Delete icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeleteIconEnabled(){
-        return page.locator(deleteIcon).isEnabled();
+        try{
+            return page.locator(deleteIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Delete icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void deleteNetwork(String index){
-        String rowIndex = "//body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/blastweb-spinner[1]/" +
-                "blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + index + "]/td[8]/span[1]";
-        page.locator(rowIndex).click();
+        try{
+            String rowIndex = "//body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/blastweb-spinner[1]/" +
+                    "blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + index + "]/td[8]/span[1]";
+            page.locator(rowIndex).click();
+        }catch (PlaywrightException e){
+            System.out.println("Row index element not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isYesButtonVisible(){
-        return page.locator(yesButton).isVisible();
+        try{
+            return page.locator(yesButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Yes button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isYesButtonEnabled(){
-        return page.locator(yesButton).isEnabled();
+        try{
+            return page.locator(yesButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Yes button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void confirmToDeleteNetwork(){
-        page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Yes button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNetworkDeleted(){
         String network = "//td[normalize-space()=\"ETHER002-DUMMY\"]";
         try{
-//            Wait for row to be deleted from the networks table
             page.locator(network)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.HIDDEN)
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network element not visible or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isCheckboxVisible(){
-        return page.locator(selectAllCheckBox).isVisible();
+        try{
+            return page.locator(selectAllCheckBox).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Select all checkbox not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCheckBoxEnabled(){
-        return page.locator(selectAllCheckBox).isEnabled();
+        try{
+            return page.locator(selectAllCheckBox).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Select all checkbox not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void deselectNetwork(String rowNumber){
-        String individualCheckBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
-                "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + rowNumber + "]/td[1]/" +
-                "mat-checkbox[1]/div[1]/div[1]/input[1]";
-        page.locator(individualCheckBox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String individualCheckBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-networks[1]/" +
+                    "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + rowNumber + "]/td[1]/" +
+                    "mat-checkbox[1]/div[1]/div[1]/input[1]";
+            page.locator(individualCheckBox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Network checkbox not found or not visible: " + e.getMessage());
+        }
     }
 
     public void selectAllNetworks() {
-        page.locator(selectAllCheckBox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(selectAllCheckBox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Select All checkbox not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isSearchBarVisible(){
-        return page.locator(searchBar).isVisible();
+        try{
+            return page.locator(searchBar).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarEnabled(){
-        return page.locator(searchBar).isEnabled();
+        try{
+            return page.locator(searchBar).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarEmpty(){
-        String input = page.locator(searchBar).inputValue();
-        return input == null || input.trim().isEmpty();
+        try{
+            String input = page.locator(searchBar).inputValue();
+            return input == null || input.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void searchId(String id){
-        page.locator(searchBar).fill(id);
+        try{
+            page.locator(searchBar).fill(id);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+        }
     }
 
     public void openSearchBar(){
-        page.locator(searchBar).click();
+        try{
+            page.locator(searchBar).click();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isSearchedNetworkAvailable(String id){
@@ -295,37 +564,57 @@ public class NetworkPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network Id not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteDialogVisible(){
-        return page.locator(deleteDialog).isVisible();
+        try{
+            return page.locator(deleteDialog).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Delete dialog not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeleteDialogClosedAfterDeletion(){
         try{
-//            Wait for the dialog to be detached from the DOM
             page.locator(deleteDialog)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.DETACHED)
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Delete dialog element not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteAllButtonVisible(){
-        return page.locator(deleteAllBtn).isVisible();
+        try{
+            return page.locator(deleteAllBtn).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeleteAllButtonEnabled(){
-        return page.locator(deleteAllBtn).isEnabled();
+        try{
+            return page.locator(deleteAllBtn).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void deleteAll(){
-        page.locator(deleteAllBtn).click();
+        try{
+            page.locator(deleteAllBtn).click();
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isSelectedNetworksDeleted(String networkName){
@@ -337,6 +626,7 @@ public class NetworkPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network name not found or not visible: " + e.getMessage());
             return false;
         }
     }

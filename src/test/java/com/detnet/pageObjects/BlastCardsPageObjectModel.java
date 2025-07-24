@@ -1,6 +1,7 @@
 package com.detnet.pageObjects;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.PlaywrightException;
 
 import static com.detnet.locators.BlastCardsPageLocators.*;
 
@@ -12,118 +13,235 @@ public class BlastCardsPageObjectModel {
     }
 
     public String getActiveBlastCardsPageURL(){
-        page.waitForURL("**/settings/activeCards");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/activeCards");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isActiveCardsLabelVisible(){
-        return page.locator(activeCardsLabel).isVisible();
+        try{
+            return page.locator(activeCardsLabel).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Active cards label not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getActiveCardsLabel(){
-        return page.locator(activeCardsLabel).textContent();
+        try{
+            return page.locator(activeCardsLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Active cards label not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isAddBlastCardButtonVisible(){
-        return page.locator(addBlastCardsButton).isVisible();
+        try{
+            return page.locator(addBlastCardsButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Blast Card' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isAddBlastCardButtonEnabled(){
-        return page.locator(addBlastCardsButton).isEnabled();
+        try{
+            return page.locator(addBlastCardsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Blast Card' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void addBlastCard(){
-        page.locator(addBlastCardsButton).click();
+        try{
+            page.locator(addBlastCardsButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Blast Card' -button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isArchiveButtonVisible(){
-        return page.locator(archiveCardsButton).isVisible();
+        try{
+            return page.locator(archiveCardsButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Card' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isArchiveButtonEnabled(){
-        return page.locator(archiveCardsButton).isEnabled();
-    }
-
-    public void archiveCards(){
-        page.locator(archiveCardsButton).click();
+        try{
+            return page.locator(archiveCardsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Card' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void viewArchivedCards(){
-        page.locator(archivedCardsButton).click();
+        try{
+            page.locator(archivedCardsButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Card' -button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isArchivedCardsButtonEnabled(){
-        return page.locator(archivedCardsButton).isEnabled();
+        try{
+            return page.locator(archivedCardsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Card' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isArchivedCardsButtonVisible(){
-        return page.locator(archivedCardsButton).isVisible();
+        try{
+            return page.locator(archivedCardsButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Card' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getArchivedBlastCardsURL(){
-        page.waitForURL("**/settings/archivedCards");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/archivedCards");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isBlastCardAlertWindowOpen(){
-        return page.locator(blastCardAlertWindow).isVisible();
+        try{
+            return page.locator(blastCardAlertWindow).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Blast card alert window not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void closeBlastCardAlertWindow(){
-        page.locator(closeIcon).click();
+        try{
+            page.locator(closeIcon).click();
+        }catch (PlaywrightException e){
+            System.out.println("Close icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isArchivedCardsLabelVisible(){
-        return page.locator(archiveCardsLabel).isVisible();
+        try{
+            return page.locator(archiveCardsLabel).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Cards' -label not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getArchivedCardsLabel(){
-        return page.locator(archiveCardsLabel).textContent();
+        try{
+            return page.locator(archiveCardsLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("'Archive Cards' -label not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isDeleteButtonVisible(){
-        return page.locator(deleteCardsButton).isVisible();
+        try{
+            return page.locator(deleteCardsButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Delete button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeleteButtonEnabled(){
-        return page.locator(deleteCardsButton).isEnabled();
-    }
-
-    public void deleteBlastCard(){
-        page.locator(deleteCardsButton).click();
+        try{
+            return page.locator(deleteCardsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Delete button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarVisible(){
-        return page.locator(searchBar).isVisible();
+        try{
+            return page.locator(searchBar).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarEnabled(){
-        return page.locator(searchBar).isEnabled();
+        try{
+            return page.locator(searchBar).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarEmpty(){
-        String value = page.locator(searchBar).inputValue();
-        return value == null || value.trim().isEmpty();
+        try{
+            String value = page.locator(searchBar).inputValue();
+            return value == null || value.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setSearchValue(String value){
-        page.locator(searchBar).click();
-        page.locator(searchBar).fill(value);
+        try{
+            page.locator(searchBar).click();
+            page.locator(searchBar).fill(value);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getSearchValue(){
-        return page.locator(searchBar).inputValue();
+        try{
+            return page.locator(searchBar).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSearchButtonVisible(){
-        return page.locator(searchButton).isVisible();
+        try{
+            return page.locator(searchButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Search button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchButtonEnabled(){
-        return page.locator(searchButton).isEnabled();
+        try{
+            return page.locator(searchButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Search button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void search(){
-        page.locator(searchButton).click();
+        try{
+            page.locator(searchButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("Search button not found or not visible: " + e.getMessage());
+        }
     }
 }

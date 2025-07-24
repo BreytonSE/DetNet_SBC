@@ -7,6 +7,7 @@ import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,60 +33,126 @@ public class DashboardPageObjectModel {
     }
 
     public String getDashboardLabelName() {
-        return page.locator(dashboardButton).textContent();
+        try{
+            return page.locator(dashboardButton).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Dashboard button not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public String getDashboardURL() {
-        page.waitForURL("**/dashboard");
-        return page.url();
+        try{
+            page.waitForURL("**/dashboard");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL for dashboard page not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isUserRoleLabelVisible() {
-        return page.locator(userRoleLabel).isVisible();
+        try {
+            return page.locator(userRoleLabel).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("User role label not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getUserRoleLabel() {
-        return page.locator(userRoleLabel).textContent();
+        try{
+            return page.locator(userRoleLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("User role label not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public void openNavigationMenu() {
-        page.locator(userRoleLabel).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(userRoleLabel).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("User role label not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNavigationMenuOpen() {
-        return page.locator(navigationMenu).isVisible();
+        try{
+            return page.locator(navigationMenu).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Navigation menu not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isLogoutButtonVisible() {
-        return page.locator(logoutButton).isVisible();
+        try{
+            return page.locator(logoutButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Logout button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isLogoutButtonEnabled() {
-        return page.locator(logoutButton).isEnabled();
+        try{
+            return page.locator(logoutButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Logout button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void logOut() {
-        page.locator(logoutButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(logoutButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Logout button not found or not visible: " + e.getMessage());
+        }
     }
 
     public void openSettings() {
-        page.locator(settingsButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(settingsButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch(PlaywrightException e){
+            System.out.println("Settings button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isSettingsButtonVisible() {
-        return page.locator(settingsButton).isVisible();
+        try{
+            return page.locator(settingsButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Settings button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSettingsButtonEnabled() {
-        return page.locator(settingsButton).isEnabled();
+        try{
+            return page.locator(settingsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Settings button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDashboardButtonEnabled() {
-        return page.locator(dashboardButton).isEnabled();
+        try{
+            return page.locator(dashboardButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Dashboard button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void goToDashboard() {
-        page.locator(dashboardButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(dashboardButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Dashboard button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isViewDeviceDetailsButtonVisible() {
@@ -93,22 +160,37 @@ public class DashboardPageObjectModel {
             page.locator(deviceDetailsButton).waitFor(new Locator.WaitForOptions().setTimeout(5000));
             return page.locator(deviceDetailsButton).isVisible();
         } catch (Exception e) {
+            System.out.println("Device details button not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isViewDetailsButtonEnabled() {
-        return page.locator(deviceDetailsButton).isEnabled();
+        try{
+            return page.locator(deviceDetailsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device details button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void viewDeviceDetails(int deviceNumber) {
-        String device = "//body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/div[2]/div[" +
-                "1]/div[" + deviceNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[5]";
-        page.locator(device).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String device = "//body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/div[2]/div[" +
+                    "1]/div[" + deviceNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[5]";
+            page.locator(device).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNewDeviceOnDashboard() {
-        return page.locator(newDevice).isVisible();
+        try{
+            return page.locator(newDevice).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("New device not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isEventsButtonVisible() {
@@ -119,12 +201,17 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Events button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void openEventLogs() {
-        page.locator(eventsButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(eventsButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Events button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isEventsLogOpen() {
@@ -135,30 +222,34 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Events log not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public String getDeviceCurrentState() {
-        List<String> possibleStates = Arrays.asList("IDLE", "UNKNOWN", "READY TO BLAST", "READY TO ARM");
+        try{
+            List<String> possibleStates = Arrays.asList("IDLE", "UNKNOWN", "READY TO BLAST", "READY TO ARM");
 
-        List<String> matchedStates = page
-                .locator("//span[contains(text(), 'IDLE') or contains(text(), 'UNKNOWN') or contains(text(), " +
-                        "'READY TO BLAST') or contains(text(), 'READY TO ARM') or contains(text(), 'AWAITING GRACE')]")
-                .allTextContents()
-                .stream()
-                .map(String::trim)
-                .collect(Collectors.toList());
+            List<String> matchedStates = page
+                    .locator("//span[contains(text(), 'IDLE') or contains(text(), 'UNKNOWN') or contains(text(), " +
+                            "'READY TO BLAST') or contains(text(), 'READY TO ARM') or contains(text(), 'AWAITING GRACE')]")
+                    .allTextContents()
+                    .stream()
+                    .map(String::trim)
+                    .collect(Collectors.toList());
 
-        for (String expectedState : possibleStates) {
-            if (matchedStates.contains(expectedState)) {
-                System.out.println("Found device state: " + expectedState);
-                return expectedState; // ✅ return here
+            for (String expectedState : possibleStates) {
+                if (matchedStates.contains(expectedState)) {
+                    System.out.println("Found device state: " + expectedState);
+                    return expectedState; // ✅ return here
+                }
             }
+            return null;
+        }catch (PlaywrightException e){
+            System.out.println("Failed to get device state caused by: " + e.getMessage());
+            return null;
         }
-
-        // Optional: if no match found, return null or throw exception
-        return null;
     }
 
     public boolean isOffsetToolTipVisible() {
@@ -169,16 +260,26 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Offset tool tip not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isOffsetToolTipEnabled() {
-        return page.locator(offsetToolTip).isEnabled();
+        try{
+            return page.locator(offsetToolTip).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Offset tool tip not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openOffsetChannelWindow() {
-        page.locator(offsetToolTip).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(offsetToolTip).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Offset tool tip not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isChannelOffsetWindowOpen() {
@@ -189,6 +290,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Offset header not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -202,6 +304,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Channel path not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -216,22 +319,32 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Offset delay field not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isChannelOffsetDelayFieldEnabled(String channelOffsetDelayField) {
-        String offsetDelayField = "xpath=/html[1]/body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-" +
-                "channel-offset-dialog[1]/div[1]/div[2]/div[" + channelOffsetDelayField + "]/div[3]/input[1]\n";
-        return page.locator(offsetDelayField).isEnabled();
+        try{
+            String offsetDelayField = "xpath=/html[1]/body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-" +
+                    "channel-offset-dialog[1]/div[1]/div[2]/div[" + channelOffsetDelayField + "]/div[3]/input[1]\n";
+            return page.locator(offsetDelayField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Offset delay field not visible or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setOffSetDelay(String channelNumber, int delay) {
-        String offsetDelayField = "xpath=/html[1]/body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/" +
-                "app-channel-offset-dialog[1]/div[1]/div[2]/div[" + channelNumber + "]/div[3]/input[1]\n";
-        page.locator(offsetDelayField).click();
-        page.locator(offsetDelayField).clear();
-        page.locator(offsetDelayField).fill(String.valueOf(delay));
+        try{
+            String offsetDelayField = "xpath=/html[1]/body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/" +
+                    "app-channel-offset-dialog[1]/div[1]/div[2]/div[" + channelNumber + "]/div[3]/input[1]\n";
+            page.locator(offsetDelayField).click();
+            page.locator(offsetDelayField).clear();
+            page.locator(offsetDelayField).fill(String.valueOf(delay));
+        }catch (PlaywrightException e){
+            System.out.println("Offset delay field not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isSaveButtonVisible() {
@@ -242,16 +355,26 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("'Save' button not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isSaveButtonEnabled() {
-        return page.locator(saveButton).isEnabled();
+        try{
+            return page.locator(saveButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void saveOffsetChannel() {
-        page.locator(saveButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(saveButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isGroupByDropDownVisible() {
@@ -262,16 +385,26 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Group by dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isGroupByDropDownEnabled() {
-        return page.locator(groupByDropDown).isEnabled();
+        try{
+            return page.locator(groupByDropDown).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Group by dropdown not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openGroupByDropDown() {
-        page.locator(groupByDropDown).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(groupByDropDown).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Group by dropdown not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isGroupByDownOpen() {
@@ -282,13 +415,18 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Group by dropdown panel not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectGroupByOption(String group){
-        String groupBy = "(//span[normalize-space()='-  " + group + "'])[1]";
-        page.locator(groupBy).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String groupBy = "(//span[normalize-space()='-  " + group + "'])[1]";
+            page.locator(groupBy).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Group by option not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isAlertDropDownButtonVisible() {
@@ -299,41 +437,59 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Alert dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isAlertDropDownButtonEnabled() {
-        return page.locator(alertDropdownButton).isEnabled();
+        try{
+            return page.locator(alertDropdownButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Alert dropdown not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openAlertDropDown() {
-        page.locator(alertDropdownButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(alertDropdownButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Alert dropdown button not found or not visible: " + e.getMessage());
+        }
     }
 
     public List<String> getAllCurrentDeviceAlerts() {
-        List<String> knownAlerts = Arrays.asList(
-                "Short Circuits", "High Leakage", "High Current", "Low Battery", "Acknowledge Alert", "Device Not Available",
-                "Last Detonator Bad", "Last Detonator Bad Voltage", "Harness Break", "Programming Error",
-                "Test Mode", "TX Error Preventing Blast");
+        try{
+            List<String> knownAlerts = Arrays.asList(
+                    "Short Circuits", "High Leakage", "High Current", "Low Battery", "Acknowledge Alert", "Device Not Available",
+                    "Last Detonator Bad", "Last Detonator Bad Voltage", "Harness Break", "Programming Error",
+                    "Test Mode", "TX Error Preventing Blast");
 
-//        Build xpath dynamically using 'or' conditions
-        String dynamicConditions = knownAlerts.stream()
-                .map(alert -> "normalize-space()='" + alert + "'")
-                .collect(Collectors.joining(" or "));
+            String dynamicConditions = knownAlerts.stream()
+                    .map(alert -> "normalize-space()='" + alert + "'")
+                    .collect(Collectors.joining(" or "));
 
-        String deviceAlertXpath = "//span[@class='titlecase' or " + dynamicConditions + "]";
+            String deviceAlertXpath = "//span[@class='titlecase' or " + dynamicConditions + "]";
 
-        List<String> rawAlerts = page.locator(deviceAlertXpath).allTextContents();
+            List<String> rawAlerts = page.locator(deviceAlertXpath).allTextContents();
 
-        return rawAlerts.stream()
-                .map(String::trim)
-                .filter(knownAlerts::contains)
-                .collect(Collectors.toList());
+            return rawAlerts.stream()
+                    .map(String::trim)
+                    .filter(knownAlerts::contains)
+                    .collect(Collectors.toList());
+        }catch (PlaywrightException e){
+            System.out.println("Failed to fetch current device alerts: " + e.getMessage());
+            return Collections.emptyList();
+        }
     }
 
     public void refreshBrowserTab() {
-        page.reload();
+        try{
+            page.reload();
+        }catch (PlaywrightException e){
+            System.out.println("Could not refresh browser tab. Caused by: " + e.getMessage());
+        }
     }
 
     public boolean isReportTabVisible() {
@@ -344,16 +500,25 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Reports tab not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isReportTabEnabled(){
-        return page.locator(reportsTab).isEnabled();
+        try{
+            return page.locator(reportsTab).isEnabled();
+        }catch (PlaywrightException e){
+            return false;
+        }
     }
 
     public void openReportTab(){
-        page.locator(reportsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        try {
+            page.locator(reportsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Reports tab not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isReportsDropDownOpen(){
@@ -364,12 +529,17 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Events report button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void openEventsReport(){
-        page.locator(eventsReportButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(eventsReportButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Events report button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isErrorPresentOnEventsReport(String event){
@@ -381,6 +551,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Error not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -394,6 +565,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Alert not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -406,6 +578,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Key element not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -418,6 +591,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network element not visible or not found");
             return false;
         }
     }
@@ -430,6 +604,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("State element not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -442,6 +617,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Firmware element not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -454,6 +630,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Custom element not visible or not found: " + e.getMessage());
             return false;
         }
     }
@@ -466,6 +643,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Selected element not visible or not found: " + e.getMessage());
             return false;
         }
     }
@@ -478,6 +656,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Alive element not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -490,6 +669,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Type locator not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -505,36 +685,56 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Checkbox not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeviceCheckboxEnabled(int checkBoxNumber){
-        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
-                "/div[1]/div[2]/div[1]/div[" + checkBoxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
-                "div[1]/input[1]";
-        return page.locator(checkBoxPath).isEnabled();
+        try{
+            String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                    "/div[1]/div[2]/div[1]/div[" + checkBoxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                    "div[1]/input[1]";
+            return page.locator(checkBoxPath).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void selectOrDeselectDevice(int checkboxNumber){
-        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
-                "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
-                "div[1]/input[1]";
-        page.locator(checkBoxPath).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                    "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                    "div[1]/input[1]";
+            page.locator(checkBoxPath).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox path not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceSelected(int checkboxNumber){
-        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
-                "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
-                "div[1]/input[1]";
-        return page.locator(checkBoxPath).isChecked();
+        try{
+            String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                    "/div[1]/div[2]/div[1]/div[" + checkboxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                    "div[1]/input[1]";
+            return page.locator(checkBoxPath).isChecked();
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox path not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeviceDeselected(int checkBoxNumber){
-        String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
-                "/div[1]/div[2]/div[1]/div[" + checkBoxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
-                "div[1]/input[1]";
-        return !page.locator(checkBoxPath).isChecked();
+        try{
+            String checkBoxPath = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/blastweb-zero-data[1]" +
+                    "/div[1]/div[2]/div[1]/div[" + checkBoxNumber + "]/bcu-card-high-detail[1]/mat-card[1]/div[1]/div[1]/mat-checkbox[1]/div[1]/" +
+                    "div[1]/input[1]";
+            return !page.locator(checkBoxPath).isChecked();
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox path not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSelectAllCheckBoxVisible(){
@@ -545,26 +745,46 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Select All checkbox not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isSelectAllCheckBoxEnabled(){
-        return page.locator(selectAllCheckbox).isEnabled();
+        try{
+            return page.locator(selectAllCheckbox).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Select All checkbox not found or not visible: ");
+            return false;
+        }
     }
 
     public void selectAllDevices(){
-        page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Selected All checkbox not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isAllDevicesChecked(){
-        return page.locator(selectAllCheckbox).isChecked();
+        try{
+            return page.locator(selectAllCheckbox).isChecked();
+        }catch (PlaywrightException e){
+            System.out.println("Select All checkbox not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isOffsetActive(){
-        Locator offsetImage = page.locator(offsetToolTip);
-        String src = offsetImage.getAttribute("src");
-        return src != null && src.contains("active");
+        try{
+            Locator offsetImage = page.locator(offsetToolTip);
+            String src = offsetImage.getAttribute("src");
+            return src != null && src.contains("active");
+        }catch (PlaywrightException e){
+            System.out.println("Offset tool tip not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isPlusIconVisible(){
@@ -575,16 +795,26 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Offset tool tip not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isPlusIconEnabled(){
-        return page.locator(plusIcon).isEnabled();
+        try{
+            return page.locator(plusIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Plus icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openActionPanel(){
-        page.locator(plusIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(plusIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Plus icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isActionPanelOpen(){
@@ -595,6 +825,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Action panel not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -605,19 +836,23 @@ public class DashboardPageObjectModel {
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
-
             page.locator(armSelectedButton)
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Arm Selected element not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void armSelectedDevice(){
-        page.locator(armSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(armSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Arm Selected element not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceReadyToBlast(){
@@ -628,6 +863,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Ready to Blast element not visible or not found: " + e.getMessage());
             return false;
         }
     }
@@ -645,16 +881,25 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Blast Selected element not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void blastSelectDevice(){
-        page.locator(blastSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(blastSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Blast Selected' -button not found or not visible: " + e.getMessage());
+        }
     }
 
     public void openBlastReport(){
-        page.locator(blastReportButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(blastReportButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Blast Report button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isArmAllReadyOptionAvailable(){
@@ -669,12 +914,17 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Arm All Ready -element not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public void armAllReady(){
-        page.locator(armAllReadyButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(armAllReadyButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Arm All Ready button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNoDeviceToArmSnackBarHidden(){
@@ -685,6 +935,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Snack bar not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -701,12 +952,17 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Arm Wireless Selected -element not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void armWirelessSelected(){
-        page.locator(armWirelessSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(armWirelessSelectedButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Arm Wireless Selected -element not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isCyberDetDialogOpen(){
@@ -717,6 +973,7 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Cyberdet image not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -729,22 +986,32 @@ public class DashboardPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Blast group dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
-    public  boolean isBlastGroupDropDownEnabled(){
-        return page.locator(blastGroupDropDown).isEnabled();
+    public boolean isBlastGroupDropDownEnabled(){
+        try{
+            return page.locator(blastGroupDropDown).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Blast group dropdown not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openBlastGroupDropDown(){
-        page.locator(blastGroupDropDown).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(blastGroupDropDown).click(new Locator.ClickOptions().setForce(true).setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Blast group dropdown not found or not visible: " + e.getMessage());
+        }
     }
 
+//    Created groups does not appear in dropdown during automation.
     public void selectBlastGroup(String blastGroup){
         try{
-            Locator selectorDropDown = page.locator("select");
-            selectorDropDown.selectOption(new SelectOption().setLabel(blastGroup));
+          page.selectOption("select",new SelectOption().setLabel(blastGroup));
         }catch (PlaywrightException e){
             System.out.println("Blast group element not found or not visible in dropdown: " + e.getMessage());
         }
@@ -816,6 +1083,70 @@ public class DashboardPageObjectModel {
             page.locator(cyberDetOkButton).click(new Locator.ClickOptions().setTimeout(5000));
         }catch (PlaywrightException e){
             System.out.println("'OK' button not found or not visible on Cyberdet dialog window: " + e.getMessage());
+        }
+    }
+
+    public boolean isSortByDropDownVisible(){
+        try{
+            page.locator(sortByDropdown)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Sort by dropdown not found or not visible: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isSortByDropDownEnabled(){
+        try{
+            return page.locator(sortByDropdown).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Sort by dropdown not found or not visible: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void openSortByDropDown(){
+        try{
+            page.locator(sortByDropdown).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Sort by dropdown button not found or not visible: " + e.getMessage());
+        }
+    }
+
+    public void sortBy(String sortBy){
+        try{
+            String sortElement = "(//span[normalize-space()='-  " + sortBy +"'])[1]";
+            page.locator(sortElement).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Sort by element not found or not visible: " +e.getMessage());
+        }
+    }
+
+    public boolean isBlastAllReadyOptionAvailable(){
+        try{
+            page.locator(blastAllReadyLabel)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            page.locator(blastAllReadyButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("'Blast all Ready' -label and button not found or not visible: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void blastAllReady(){
+        try{
+            page.locator(blastAllReadyButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Blast All Ready' -button not found or not visible: " + e.getMessage());
         }
     }
 }

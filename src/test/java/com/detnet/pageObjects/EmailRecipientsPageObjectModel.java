@@ -15,8 +15,13 @@ public class EmailRecipientsPageObjectModel {
     }
 
     public String getEmailRecipientPageURL() {
-        page.waitForURL("**/settings/emailRecipient");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/emailRecipient");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or invalid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isRecipientListHeadingVisible() {
@@ -27,12 +32,18 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Recipients list heading not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public String getHeadingText() {
-        return page.locator(recipientListHeading).textContent();
+        try{
+            return page.locator(recipientListHeading).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Recipient list heading not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isRecipientListEmpty() {
@@ -43,6 +54,7 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("No recipients text not visible or not found: " + e.getMessage());
             return false;
         }
     }
@@ -55,16 +67,26 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Add Recipient button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isAddRecipientButtonEnabled() {
-        return page.locator(addRecipientBtn).isEnabled();
+        try{
+            return page.locator(addRecipientBtn).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Add Recipient button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void createEmailRecipient() {
-        page.locator(addRecipientBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(addRecipientBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Add Recipient button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isAddRecipientFormVisible() {
@@ -75,6 +97,7 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Add recipient heading not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -87,26 +110,46 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Email address field not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isEmailAddressFieldEnabled() {
-        return page.locator(emailAddressField).isEnabled();
+        try{
+            return page.locator(emailAddressField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Email address field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isEmailAddressFieldEmpty() {
-        String emailAddressInputField = page.locator(emailAddressField).inputValue();
-        return emailAddressInputField == null || emailAddressInputField.trim().isEmpty();
+        try{
+            String emailAddressInputField = page.locator(emailAddressField).inputValue();
+            return emailAddressInputField == null || emailAddressInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Email address field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setEmailAddress(String emailAddress) {
-        page.locator(emailAddressField).click();
-        page.locator(emailAddressField).fill(emailAddress);
+        try{
+            page.locator(emailAddressField).click();
+            page.locator(emailAddressField).fill(emailAddress);
+        }catch (PlaywrightException e){
+            System.out.println("Email address field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getEmailAddress() {
-        return page.locator(emailAddressField).inputValue();
+        try{
+            return page.locator(emailAddressField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Email address field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isFirstNameFieldVisible() {
@@ -117,26 +160,46 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("First name input field not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isFirstNameFieldEnabled() {
-        return page.locator(firstNameField).isEnabled();
+        try{
+            return page.locator(firstNameField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("First name input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isFirstNameFieldEmpty() {
-        String firstNameInputField = page.locator(firstNameField).inputValue();
-        return firstNameInputField == null || firstNameInputField.trim().isEmpty();
+        try{
+            String firstNameInputField = page.locator(firstNameField).inputValue();
+            return firstNameInputField == null || firstNameInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("First name input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setFirstName(String firstName) {
-        page.locator(firstNameField).click();
-        page.locator(firstNameField).fill(firstName);
+        try{
+            page.locator(firstNameField).click();
+            page.locator(firstNameField).fill(firstName);
+        }catch (PlaywrightException e){
+            System.out.println("First name input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getFirstName() {
-        return page.locator(firstNameField).inputValue();
+        try{
+            return page.locator(firstNameField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("First name input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isLastnameFieldVisible() {
@@ -147,26 +210,46 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Last name input field not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isLastNameFieldEnabled() {
-        return page.locator(lastNameField).isEnabled();
+        try{
+            return page.locator(lastNameField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Last name input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isLastNameFieldEmpty() {
-        String lastNameInputField = page.locator(lastNameField).inputValue();
-        return lastNameInputField == null || lastNameInputField.trim().isEmpty();
+        try{
+            String lastNameInputField = page.locator(lastNameField).inputValue();
+            return lastNameInputField == null || lastNameInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Last name input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setLastName(String lastName) {
-        page.locator(lastNameField).click();
-        page.locator(lastNameField).fill(lastName);
+        try{
+            page.locator(lastNameField).click();
+            page.locator(lastNameField).fill(lastName);
+        }catch (PlaywrightException e){
+            System.out.println("Last name input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getLastName() {
-        return page.locator(lastNameField).inputValue();
+        try{
+            return page.locator(lastNameField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Last name input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSeverityLevelsVisible() {
@@ -177,17 +260,27 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Severity level not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectSeverityLevel(String severity){
-        String severityLvl = "(//label[normalize-space()='" + severity + "'])[1]";
-        page.locator(severityLvl).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String severityLvl = "(//label[normalize-space()='" + severity + "'])[1]";
+            page.locator(severityLvl).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Severity level not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getSelectedSeverity(){
-        return page.locator(moderateSeverityElement).textContent();
+        try{
+            return page.locator(moderateSeverityElement).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Moderate severity element not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSaveRecipientButtonVisible(){
@@ -198,16 +291,26 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("'Add Recipient' -button button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isSaveRecipientButtonEnabled(){
-        return page.locator(addRecipientButton).isEnabled();
+        try{
+            return page.locator(addRecipientButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Add Recipient button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void saveNewRecipient(){
-        page.locator(addRecipientButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(addRecipientButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Add Recipient button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isRecipientAdded(String recipientUserName){
@@ -219,6 +322,7 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Recipient not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -231,12 +335,18 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Edit icon not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isEditIconEnabled(){
-        return page.locator(editIcon).isEnabled();
+        try{
+            return page.locator(editIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Edit icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openEditRecipientPage(int row){
@@ -304,9 +414,13 @@ public class EmailRecipientsPageObjectModel {
     }
 
     public void search(String recipient){
-        page.locator(searchBar).click(new Locator.ClickOptions().setTimeout(5000));
-        page.locator(searchBar).clear();
-        page.locator(searchBar).fill(recipient);
+        try{
+            page.locator(searchBar).click(new Locator.ClickOptions().setTimeout(5000));
+            page.locator(searchBar).clear();
+            page.locator(searchBar).fill(recipient);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isIntervalDropdownVisible(){
@@ -317,12 +431,18 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Interval dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isIntervalDropDownEnabled(){
-        return page.locator(intervalDropDown).isEnabled();
+        try{
+            return page.locator(intervalDropDown).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Interval dropdown not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isIntervalDropDownPanelOpen(){
@@ -333,21 +453,31 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Interval dropdown panel not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public void openIntervalPanel(){
-        page.locator(intervalDropDown).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(intervalDropDown).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Interval dropdown not found or not visible: " + e.getMessage());
+        }
     }
 
     public void selectInterval(String interval){
-        String intervalElement = "(//span[contains(text(),'" + interval + "')])[1]";
-        page.locator(intervalElement).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String intervalElement = "(//span[contains(text(),'" + interval + "')])[1]";
+            page.locator(intervalElement).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Interval element not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeleteIconVisible(int rowNumber){
-        String row = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])[" + rowNumber + "]";
+        String row = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])["
+                + rowNumber + "]";
         try{
             page.locator(row)
                     .waitFor(new Locator.WaitForOptions()
@@ -355,13 +485,19 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Row number not visible or not found on email recipients dashboard: " + e.getMessage());
             return false;
         }
     }
 
     public void deleteRecipient(int rowNumber){
-        String row = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])[" + rowNumber + "]";
-        page.locator(row).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String row = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])["
+                    + rowNumber + "]";
+            page.locator(row).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Row not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeleteDialogVisible(){
@@ -372,12 +508,17 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Delete dialog not found or not visible on the email recipient dialog: " + e.getMessage());
             return false;
         }
     }
 
     public void confirmToDeleteRecipient(){
-        page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Yes button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isRecipientDeleted(String recipientEmail){
@@ -389,6 +530,7 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Checkbox not found or not visible on the email recipient dashboard: " + e.getMessage());
             return false;
         }
     }
@@ -401,23 +543,37 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Checkbox not found or not visible on the email recipient dashboard: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isCheckBoxEnabled(){
-        return page.locator(checkBox).isEnabled();
+        try{
+            return page.locator(checkBox).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox not found or not visible on the email recipient dashboard: " + e.getMessage());
+            return false;
+        }
     }
 
     public void selectAllRecipients(){
-        page.locator(checkBox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(checkBox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox not found or not visible on the email recipient dashboard: " + e.getMessage());
+        }
     }
 
     public void selectOrDeselectRecipients(int row){
-        String rowPath = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/app-email-recipient[1]/" +
-                "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + row + "]/td[1]/mat-checkbox[1]" +
-                "/div[1]/div[1]/input[1]";
-        page.locator(rowPath).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String rowPath = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/app-email-recipient[1]/" +
+                    "blastweb-spinner[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + row + "]/td[1]/mat-checkbox[1]" +
+                    "/div[1]/div[1]/input[1]";
+            page.locator(rowPath).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Row path not found or not visible on the email recipient dashboard: " + e.getMessage());
+        }
     }
 
     public boolean isDeleteAllRecipientsButtonVisible(){
@@ -428,15 +584,25 @@ public class EmailRecipientsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Delete All button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteAllRecipientsButtonEnabled(){
-        return page.locator(deleteAllButton).isEnabled();
+        try{
+            return page.locator(deleteAllButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not found or not visible:");
+            return false;
+        }
     }
 
     public void deleteAllRecipients(){
-        page.locator(deleteAllButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(deleteAllButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Delete All button not found or not visible: " + e.getMessage());
+        }
     }
 }

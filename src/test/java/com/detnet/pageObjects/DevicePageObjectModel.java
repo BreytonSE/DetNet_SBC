@@ -15,80 +15,166 @@ public class DevicePageObjectModel {
     }
 
     public boolean isAddDeviceButtonVisible() {
-        return page.locator(addDeviceButton).isVisible();
+        try{
+            return page.locator(addDeviceButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Device' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isAddDeviceButtonEnabled() {
-        return page.locator(addDeviceButton).isEnabled();
+        try{
+            return page.locator(addDeviceButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Device' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void addNewDevice() {
-        page.locator(addDeviceButton).click();
+        try{
+            page.locator(addDeviceButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Device' -button not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getDevicesURL() {
-        page.waitForURL("**/settings/devices");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/devices");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or invalid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isAddDeviceFormOpen() {
-        return page.locator(addDeviceForm).isVisible();
+        try{
+            return page.locator(addDeviceForm).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Add device form not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeviceIdFieldVisible() {
-        return page.locator(deviceIdInput).isVisible();
+        try{
+            return page.locator(deviceIdInput).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Device Id input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeviceIdFieldEnabled() {
-        return page.locator(deviceIdInput).isEnabled();
+        try{
+            return page.locator(deviceIdInput).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device Id input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeviceIdFieldEmpty() {
-        String deviceIdInputField = page.locator(deviceIdInput).inputValue();
-        return deviceIdInputField == null || deviceIdInputField.trim().isEmpty();
+        try{
+            String deviceIdInputField = page.locator(deviceIdInput).inputValue();
+            return deviceIdInputField == null || deviceIdInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Device Id input field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setDeviceId(String deviceId) {
-        page.locator(deviceIdInput).click();
-        page.locator(deviceIdInput).fill(deviceId);
+        try{
+            page.locator(deviceIdInput).click();
+            page.locator(deviceIdInput).fill(deviceId);
+        }catch (PlaywrightException e){
+            System.out.println("Device Id input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getDeviceId() {
-        return page.locator(deviceIdInput).inputValue();
+        try{
+            return page.locator(deviceIdInput).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Device Id input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isLocationFieldVisible() {
-        return page.locator(deviceLocationInput).isVisible();
+        try{
+            return page.locator(deviceLocationInput).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Device location input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isLocationFieldEnabled() {
-        return page.locator(deviceLocationInput).isEnabled();
+        try{
+            return page.locator(deviceLocationInput).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device location input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isLocationFieldEmpty() {
-        String deviceLocationField = page.locator(deviceLocationInput).inputValue();
-        return deviceLocationField == null || deviceLocationField.trim().isEmpty();
+        try{
+            String deviceLocationField = page.locator(deviceLocationInput).inputValue();
+            return deviceLocationField == null || deviceLocationField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Device location input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setLocation(String deviceLocation) {
-        page.locator(deviceLocationInput).click();
-        page.locator(deviceLocationInput).fill(deviceLocation);
+        try{
+            page.locator(deviceLocationInput).click();
+            page.locator(deviceLocationInput).fill(deviceLocation);
+        }catch (PlaywrightException e){
+            System.out.println("Device location input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getDeviceLocation() {
-        return page.locator(deviceLocationInput).inputValue();
+        try{
+            return page.locator(deviceLocationInput).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Device location input field not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isNetworkFieldVisible() {
-        return page.locator(deviceNetworkDropdown).isVisible();
+        try{
+            return page.locator(deviceNetworkDropdown).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Device network dropdown not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNetworkFieldEnabled() {
-        return page.locator(deviceNetworkDropdown).isEnabled();
+        try{
+            return page.locator(deviceNetworkDropdown).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device network dropdown not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openDeviceNetworkDropDown() {
-        page.locator(deviceNetworkDropdown).click();
+        try{
+            page.locator(deviceNetworkDropdown).click();
+        }catch (PlaywrightException e){
+            System.out.println("Device network dropdown not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceNetworkDropDownOpen() {
@@ -99,25 +185,44 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Network panel not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectNetwork(String network) {
-        String networkRow = "(//span[@class='mdc-list-item__primary-text'][normalize-space()='" + network + "'])[1]";
-        page.locator(networkRow).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String networkRow = "(//span[@class='mdc-list-item__primary-text'][normalize-space()='" + network + "'])[1]";
+            page.locator(networkRow).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Network row not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNetworkInterfaceFieldVisible() {
-        return page.locator(deviceNetworkInterfaceDropDown).isVisible();
+        try{
+            return page.locator(deviceNetworkInterfaceDropDown).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Network interface not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNetworkInterfaceFieldEnabled() {
-        return page.locator(deviceNetworkInterfaceDropDown).isEnabled();
+        try{
+            return page.locator(deviceNetworkInterfaceDropDown).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Network interface not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openNetworkInterfaceDropDown() {
-        page.locator(deviceNetworkInterfaceDropDown).click();
+        try{
+            page.locator(deviceNetworkInterfaceDropDown).click();
+        }catch (PlaywrightException e){
+            System.out.println("Network interface not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNetworkInterfaceDropDownOpen() {
@@ -128,25 +233,44 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Network interface panel not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectNetworkInterface(String networkInterface) {
-        String interfaceRow = "(//span[normalize-space()='" + networkInterface + "'])[1]";
-        page.locator(interfaceRow).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String interfaceRow = "(//span[normalize-space()='" + networkInterface + "'])[1]";
+            page.locator(interfaceRow).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Network interface not found or not not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceTypeFieldVisible() {
-        return page.locator(deviceTypeField).isVisible();
+        try {
+            return page.locator(deviceTypeField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Device type input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeviceTypeFieldEnabled() {
-        return page.locator(deviceTypeField).isEnabled();
+        try{
+            return page.locator(deviceTypeField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device type input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openDeviceTypeDropDown() {
-        page.locator(deviceTypeField).click();
+        try{
+            page.locator(deviceTypeField).click();
+        }catch (PlaywrightException e){
+            System.out.println("Device type input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceDropDownOpen() {
@@ -157,48 +281,91 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Device type panel not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectDeviceType(String device) {
-        String deviceType = "(//span[normalize-space()='" + device + "'])[1]";
-        page.locator(deviceType).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String deviceType = "(//span[normalize-space()='" + device + "'])[1]";
+            page.locator(deviceType).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device type is not found or visible in the dropdown menu: " + e.getMessage());
+        }
     }
 
     public boolean isIpAddressFieldVisible() {
-        return page.locator(ipInputField).isVisible();
+        try{
+            return page.locator(ipInputField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("IP address field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isIpAddressFieldEnabled() {
-        return page.locator(ipInputField).isEnabled();
+        try{
+            return page.locator(ipInputField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("IP input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setIpAddress(String ipAddress) {
-        page.locator(ipInputField).click();
-        page.locator(ipInputField).clear();
-        page.locator(ipInputField).fill(ipAddress);
+        try{
+            page.locator(ipInputField).click();
+            page.locator(ipInputField).clear();
+            page.locator(ipInputField).fill(ipAddress);
+        }catch (PlaywrightException e){
+            System.out.println("IP input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isIpAddressFieldEmpty() {
-        String ipField = page.locator(ipInputField).inputValue();
-        return ipField == null || ipField.trim().isEmpty();
+        try{
+            String ipField = page.locator(ipInputField).inputValue();
+            return ipField == null || ipField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("IP input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getIpAddress() {
-        return page.locator(ipInputField).inputValue();
+        try{
+            return page.locator(ipInputField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("IP input field not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isAddDeviceSubmitButtonVisible() {
-        return page.locator(addDeviceSubmitButton).isVisible();
+        try{
+            return page.locator(addDeviceSubmitButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Device' -button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSubmitButtonEnabled() {
-        return page.locator(addDeviceSubmitButton).isEnabled();
+        try{
+            return page.locator(addDeviceSubmitButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Submit button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void addDevice() {
-        page.locator(addDeviceSubmitButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(addDeviceSubmitButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device submit button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceAdded(String ip) {
@@ -210,6 +377,7 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Device IP not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -224,6 +392,7 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Row number not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -236,16 +405,26 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Device manager input field not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeviceManageFieldEnabled() {
-        return page.locator(deviceManagerField).isEnabled();
+        try{
+            return page.locator(deviceManagerField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device manager field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openDeviceManageDropDown() {
-        page.locator(deviceManagerField).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(deviceManagerField).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device manager input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceManagerDropDownOpen() {
@@ -256,13 +435,18 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Device manager dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectManager(String manager) {
-        String panel = "(//span[normalize-space()='" + manager + "'])[1]";
-        page.locator(panel).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String panel = "(//span[normalize-space()='" + manager + "'])[1]";
+            page.locator(panel).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Manager panel not found or not visible on the dropdown: " + e.getMessage());
+        }
     }
 
     public boolean isParentDeviceFieldVisible() {
@@ -273,16 +457,26 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Parent device field not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isParentDeviceFieldEnabled() {
-        return page.locator(parentDeviceField).isEnabled();
+        try{
+            return page.locator(parentDeviceField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Parent device field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openParentDeviceDropDown() {
-        page.locator(parentDeviceField).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(parentDeviceField).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Parent device field not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isParentDeviceDropDownOpen() {
@@ -293,13 +487,18 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Parent device dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectParentDevice(String device) {
-        String parentDevicePath = "(//span[normalize-space()='" + device + "'])[1]";
-        page.locator(parentDevicePath).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String parentDevicePath = "(//span[normalize-space()='" + device + "'])[1]";
+            page.locator(parentDevicePath).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Parent device path not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceGroupFieldVisible(){
@@ -310,16 +509,26 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device group field not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeviceGroupFieldEnabled(){
-        return page.locator(deviceGroupField).isEnabled();
+        try{
+            return page.locator(deviceGroupField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device group field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openDeviceGroupDropDown(){
-        page.locator(deviceGroupField).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(deviceGroupField).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device group field not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceGroupDropDownOpen(){
@@ -330,13 +539,18 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device group dropdown not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void selectDeviceGroup(String deviceGroup){
-        String groupPath = "xpath=/html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/mat-option[" + deviceGroup + "]/span[1]";
-        page.locator(groupPath).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String groupPath = "xpath=/html[1]/body[1]/div[2]/div[2]/div[1]/div[1]/mat-option[" + deviceGroup + "]/span[1]";
+            page.locator(groupPath).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device group not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isEditIconVisible(){
@@ -347,16 +561,26 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Edit icon not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isEditIconEnabled(){
-        return page.locator(editIcon).isEnabled();
+        try{
+            return page.locator(editIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Edit icon not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void clickEditIcon(){
-        page.locator(editIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(editIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Edit icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isEditPageVisible(){
@@ -367,14 +591,20 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Edit device page not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public String getEditPageURL(){
-        String url = "**/settings/devices/*/edit";
-        page.waitForURL(url);
-        return page.url();
+        try{
+            String url = "**/settings/devices/*/edit";
+            page.waitForURL(url);
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSaveButtonVisible(){
@@ -385,12 +615,17 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void updateDeviceDetails(){
-        page.locator(saveUpdates).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(saveUpdates).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Save button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceLocationUpdated(String location){
@@ -402,6 +637,7 @@ public class DevicePageObjectModel {
                            .setTimeout(5000));
            return true;
        }catch (PlaywrightException e){
+           System.out.println("Location not found or not visible: " + e.getMessage());
            return false;
        }
     }
@@ -414,47 +650,85 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isSearchBarEnabled(){
-        return page.locator(searchBar).isEnabled();
+        try{
+            return page.locator(searchBar).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarEmpty(){
-        String searchBarPath = page.locator(searchBar).inputValue();
-        return searchBarPath == null || searchBarPath.trim().isEmpty();
+        try{
+            String searchBarPath = page.locator(searchBar).inputValue();
+            return searchBarPath == null || searchBarPath.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void searchDeviceById(String id){
-        page.locator(searchBar).click();
-        page.locator(searchBar).clear();
-        page.locator(searchBar).fill(id);
+        try{
+            page.locator(searchBar).click();
+            page.locator(searchBar).clear();
+            page.locator(searchBar).fill(id);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getSearchedDeviceId(){
-        return page.locator(searchBar).inputValue();
+        try{
+            return page.locator(searchBar).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void searchDeviceByLocation(String location){
-        page.locator(searchBar).click();
-        page.locator(searchBar).clear();
-        page.locator(searchBar).fill(location);
+        try{
+            page.locator(searchBar).click();
+            page.locator(searchBar).clear();
+            page.locator(searchBar).fill(location);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getSearchedDeviceLocation(){
-        return page.locator(searchBar).inputValue();
+        try{
+            return page.locator(searchBar).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void searchDeviceByIp(String ip){
-        page.locator(searchBar).click();
-        page.locator(searchBar).clear();
-        page.locator(searchBar).fill(ip);
+        try{
+            page.locator(searchBar).click();
+            page.locator(searchBar).clear();
+            page.locator(searchBar).fill(ip);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getSearchedDeviceIp(){
-        return page.locator(searchBar).inputValue();
+        try{
+            return page.locator(searchBar).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSearchedDeviceFound(String deviceName){
@@ -466,6 +740,7 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device name not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -478,16 +753,26 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Delete icon not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteIconEnabled(){
-        return page.locator(deleteIcon).isEnabled();
+        try{
+            return page.locator(deleteIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Delete icon not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openDeleteDialog(){
-        page.locator(deleteIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(deleteIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Delete icon not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceDeleteDialogOpen(){
@@ -495,12 +780,17 @@ public class DevicePageObjectModel {
             page.locator(deleteDialog);
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Delete dialog not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public void confirmDelete(){
-        page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Yes' -button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceDeleted(String deviceLocation){
@@ -512,6 +802,7 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device location not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -524,23 +815,37 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("'Select All' -checkbox not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isCheckboxEnabled(){
-        return page.locator(selectAllCheckbox).isEnabled();
+        try{
+            return page.locator(selectAllCheckbox).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Select All' -checkbox not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void selectAllDevices(){
-        page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Select All' -checkbox not found or not visible: " + e.getMessage());
+        }
     }
 
     public void selectOrDeselectDevices(int tableRow){
-        String checkboxRow = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-devices[1]/blastweb-spinner" +
-                "[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + tableRow + "]/td[1]/mat-checkbox[1]/div[1]" +
-                "/div[1]/input[1]";
-        page.locator(checkboxRow).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String checkboxRow = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-devices[1]/blastweb-spinner" +
+                    "[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + tableRow + "]/td[1]/mat-checkbox[1]/div[1]" +
+                    "/div[1]/input[1]";
+            page.locator(checkboxRow).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Checkbox is not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeleteAllButtonVisible(){
@@ -551,15 +856,25 @@ public class DevicePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteAllButtonEnabled(){
-        return page.locator(deleteAllButton).isEnabled();
+        try{
+            return page.locator(deleteAllButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void deleteSelectedDevices(){
-        page.locator(deleteAllButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(deleteAllButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not visible or not found: " + e.getMessage());
+        }
     }
 }

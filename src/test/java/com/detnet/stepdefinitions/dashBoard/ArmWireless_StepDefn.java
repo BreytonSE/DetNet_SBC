@@ -28,7 +28,7 @@ public class ArmWireless_StepDefn {
     }
 
     @When("the user selects the blast group associated with the blast and confirms")
-    public void the_user_selects_the_blast_group_associated_with_the_blast_and_confirms() {
+    public void the_user_selects_the_blast_group_associated_with_the_blast_and_confirms() throws InterruptedException {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateCyberDetDialogVisibility();

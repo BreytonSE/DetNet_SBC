@@ -44,4 +44,7 @@ public class DashboardPageLocators {
     public static final String blastGroupDropDown = "//app-cyberdet-dialog[@class=\"ng-star-inserted\"]//div//select";
     public static final String reBlastCheckbox = "xpath=/html[1]/body[1]/div[3]/div[2]/div[1]/mat-dialog-container[1]/div[1]/div[1]/app-cyberdet-dialog[1]/div[2]/input[1]";
     public static final String cyberDetOkButton = "//button[@type=\"submit\"]//span[@class=\"mat-mdc-button-touch-target\"]";
+    public static final String sortByDropdown = "//span[normalize-space()=\"-  Ascending\"]";
+    public static final String blastAllReadyLabel = "//button[normalize-space()=\"Blast All Ready\"]";
+    public static final String blastAllReadyButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[5]/div[1]/button[1]/span[5]";
 }

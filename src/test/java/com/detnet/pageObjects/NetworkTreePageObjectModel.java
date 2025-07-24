@@ -15,8 +15,13 @@ public class NetworkTreePageObjectModel {
     }
 
     public String getNetworkTreePageURL(){
-        page.waitForURL("**/settings/tree");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/tree");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isNetworkTreePageOpen(){
@@ -27,6 +32,7 @@ public class NetworkTreePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network tree not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -39,6 +45,7 @@ public class NetworkTreePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Network structure not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -52,12 +59,17 @@ public class NetworkTreePageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device id not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void viewDeviceDetails(String deviceId){
-        String device = "(//a[contains(text(),'Device ― " + deviceId + "')])[1]";
-        page.locator(device).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String device = "(//a[contains(text(),'Device ― " + deviceId + "')])[1]";
+            page.locator(device).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device id not found or not visible: " + e.getMessage());
+        }
     }
 }

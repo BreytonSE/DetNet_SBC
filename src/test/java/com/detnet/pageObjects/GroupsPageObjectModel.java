@@ -15,8 +15,13 @@ public class GroupsPageObjectModel {
     }
 
     public String getGroupsURL() {
-        page.waitForURL("**/settings/groups");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/groups");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isGroupsHeadingVisible() {
@@ -27,12 +32,18 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Groups heading not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public String getHeadingText() {
-        return page.locator(groupsHeading).textContent();
+        try{
+            return page.locator(groupsHeading).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Groups heading not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean hasNoGroups() {
@@ -43,75 +54,153 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("'No Groups' text not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public String getNoGroupsText() {
-        return page.locator(noGroupsLabel).textContent();
+        try{
+            return page.locator(noGroupsLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("'No Groups' text not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isAddGroupButtonVisible() {
-        return page.locator(addGroupBtn).isVisible();
+        try{
+            return page.locator(addGroupBtn).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Groups' -button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isAddGroupButtonEnabled() {
-        return page.locator(addGroupBtn).isEnabled();
+        try{
+            return page.locator(addGroupBtn).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Groups' -button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void addGroup() {
-        page.locator(addGroupBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(addGroupBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Add Groups' -button not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getAddGroupPageURL() {
-        page.waitForURL("**/groups/add");
-        return page.url();
+        try{
+            page.waitForURL("**/groups/add");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isAddGroupFormVisible() {
-        return page.locator(addGroupHeading).isVisible();
+        try{
+            return page.locator(addGroupHeading).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Group' -heading not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getAddGroupHeadingText() {
-        return page.locator(addGroupHeading).textContent();
+        try{
+            return page.locator(addGroupHeading).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("'Add Group' -heading not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isGroupNameInputFieldVisible() {
-        return page.locator(groupNameInput).isVisible();
+        try{
+            return page.locator(groupNameInput).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isGroupNameFieldEnabled() {
-        return page.locator(groupNameInput).isEnabled();
+        try{
+            return page.locator(groupNameInput).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isGroupNameFieldEmpty() {
-        String xpath = page.locator(groupNameInput).inputValue();
-        return xpath == null || xpath.trim().isEmpty();
+        try{
+            String xpath = page.locator(groupNameInput).inputValue();
+            return xpath == null || xpath.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isGroupNameFieldFilled() {
-        String xpath = page.locator(groupNameInput).inputValue();
-        return !(xpath == null || xpath.trim().isEmpty());
+        try{
+            String xpath = page.locator(groupNameInput).inputValue();
+            return !(xpath == null || xpath.trim().isEmpty());
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setGroupName(String groupName) {
-        page.locator(groupNameInput).fill(groupName);
+        try{
+            page.locator(groupNameInput).fill(groupName);
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getGroupName() {
-        return page.locator(groupNameInput).inputValue();
+        try{
+            return page.locator(groupNameInput).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isColorPickerVisible() {
-        return page.locator(colorPicker).isVisible();
+        try{
+            return page.locator(colorPicker).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Color picker not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isColorPickerEnabled() {
-        return page.locator(colorPicker).isEnabled();
+        try{
+            return page.locator(colorPicker).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Color picker not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void openColorPicker() {
-        page.locator(colorPicker).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(colorPicker).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Color picker not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isColorPickerOpen() {
@@ -122,13 +211,18 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Color picker tray not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void switchColorCode(int clickCounter) {
-        for (int i = 0; i < clickCounter; i++) {
-            page.locator(colorPickerDownArrow).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            for (int i = 0; i < clickCounter; i++) {
+                page.locator(colorPickerDownArrow).click(new Locator.ClickOptions().setTimeout(5000));
+            }
+        }catch (PlaywrightException e){
+            System.out.println("Color picker dropdown arrow not found or not visible: " + e.getMessage());
         }
     }
 
@@ -140,41 +234,65 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("RGB color picker not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void setRGBColor(String r, String g, String b) {
-        page.locator(redInputField).click();
-        page.locator(redInputField).clear();
-        page.locator(redInputField).fill(r);
+        try{
+            page.locator(redInputField).click();
+            page.locator(redInputField).clear();
+            page.locator(redInputField).fill(r);
 
-        page.locator(greenInputField).click();
-        page.locator(greenInputField).clear();
-        page.locator(greenInputField).fill(g);
+            page.locator(greenInputField).click();
+            page.locator(greenInputField).clear();
+            page.locator(greenInputField).fill(g);
 
-        page.locator(blueInputField).click();
-        page.locator(blueInputField).clear();
-        page.locator(blueInputField).fill(b);
+            page.locator(blueInputField).click();
+            page.locator(blueInputField).clear();
+            page.locator(blueInputField).fill(b);
+        }catch (PlaywrightException e){
+            System.out.println("Red, green, blue color input field not found or not visible: " + e.getMessage());
+        }
     }
 
     public String getRGBColorCode() {
-        String red = page.locator(redInputField).inputValue();
-        String green = page.locator(greenInputField).inputValue();
-        String blue = page.locator(blueInputField).inputValue();
-        return red + "," + green + "," + blue;
+        try{
+            String red = page.locator(redInputField).inputValue();
+            String green = page.locator(greenInputField).inputValue();
+            String blue = page.locator(blueInputField).inputValue();
+            return red + "," + green + "," + blue;
+        }catch (PlaywrightException e){
+            System.out.println("Red, green, blue color input field not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSaveGroupButtonVisible() {
-        return page.locator(saveGroup).isVisible();
+        try{
+            return page.locator(saveGroup).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSaveGroupButtonEnabled() {
-        return page.locator(saveGroup).isEnabled();
+        try{
+            return page.locator(saveGroup).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Save button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void saveGroup() {
-        page.locator(saveGroup).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(saveGroup).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Save button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isGroupAddedToInterface() {
@@ -185,6 +303,7 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Group not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -198,44 +317,72 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Row icon not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public void editGroup(int groupNumber) {
-        String rowIcon = "(//mat-icon[@role='img'][normalize-space()='edit'])[" + groupNumber + "]";
-        page.locator(rowIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String rowIcon = "(//mat-icon[@role='img'][normalize-space()='edit'])[" + groupNumber + "]";
+            page.locator(rowIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Row icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isEditGroupsHeadingVisible() {
-        return page.locator(editHeading).isVisible();
-    }
-
-    public String getEditGroupsPageURL() {
-        page.waitForURL("**/settings/groups/*/edit");
-        return page.url();
+        try{
+            return page.locator(editHeading).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Edit' -heading not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getEditGroupsHeading() {
-        return page.locator(editHeading).textContent();
+        try{
+            return page.locator(editHeading).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("'Edit' -heading not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public void editGroupName(String groupName) {
-        page.locator(groupNameInput).click(new Locator.ClickOptions().setTimeout(5000));
-        page.locator(groupNameInput).clear();
-        page.locator(groupNameInput).fill(groupName);
+        try{
+            page.locator(groupNameInput).click(new Locator.ClickOptions().setTimeout(5000));
+            page.locator(groupNameInput).clear();
+            page.locator(groupNameInput).fill(groupName);
+        }catch (PlaywrightException e){
+            System.out.println("Group name input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isUpdateButtonVisible() {
-        return page.locator(updateGroupBtn).isVisible();
+        try{
+            return page.locator(updateGroupBtn).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Update button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isUpdateButtonEnabled() {
-        return page.locator(updateGroupBtn).isEnabled();
+        try{
+            return page.locator(updateGroupBtn).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Update button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void updateGroupDetails() {
-        page.locator(updateGroupBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(updateGroupBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Update button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isGroupNameUpdated(String groupName) {
@@ -247,32 +394,57 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Group name not found or not visible: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isSearchBarVisible() {
-        return page.locator(searchBar).isVisible();
+        try{
+            return page.locator(searchBar).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchBarEnabled() {
-        return page.locator(searchBar).isEnabled();
+        try{
+            return page.locator(searchBar).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isSearchbarEmpty() {
-        String searchField = page.locator(searchBar).inputValue();
-        return searchField == null || searchField.trim().isEmpty();
+        try{
+            String searchField = page.locator(searchBar).inputValue();
+            return searchField == null || searchField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void searchGroup(String group) {
-        page.locator(searchBar).click();
-        page.locator(searchBar).clear();
-        page.locator(searchBar).fill(group);
+        try{
+            page.locator(searchBar).click();
+            page.locator(searchBar).clear();
+            page.locator(searchBar).fill(group);
+        }catch (PlaywrightException e){
+            System.out.println("Search bar not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isSearchedGroupFound(String group) {
-        String groupName = "(//td[normalize-space()='" + group + "'])[1]";
-        return page.locator(groupName).isVisible();
+        try{
+            String groupName = "(//td[normalize-space()='" + group + "'])[1]";
+            return page.locator(groupName).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Group name not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeleteIconVisible() {
@@ -283,17 +455,27 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Bin icon not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteIconEnabled() {
-        return page.locator(binIcon).isEnabled();
+        try{
+            return page.locator(binIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Bin icon not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void deleteSingleGroup(int rowNumber) {
-        String deleteIcon = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])[" + rowNumber + "]";
-        page.locator(deleteIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String deleteIcon = "(//span[@class='mat-mdc-tooltip-trigger material-symbols-outlined'][normalize-space()='delete'])[" + rowNumber + "]";
+            page.locator(deleteIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Delete icon not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeleteDialogWindowOpen() {
@@ -304,12 +486,17 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Delete dialog window not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public void confirmDelete() {
-        page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(yesButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Yes button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isCheckBoxVisible() {
@@ -320,18 +507,27 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Select All checkbox not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public void selectAllGroups() {
-        page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(selectAllCheckbox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Select All checkbox not visible or not found");
+        }
     }
 
     public void selectOrDeselectMultipleGroups(int row) {
-        String checkBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-groups[1]/blastweb-spinner" +
-                "[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + row + "]/td[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
-        page.locator(checkBox).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            String checkBox = "xpath=/html[1]/body[1]/app-root[1]/settings[1]/div[1]/div[2]/settings-groups[1]/blastweb-spinner" +
+                    "[1]/blastweb-zero-data[1]/div[1]/table[1]/tbody[1]/tr[" + row + "]/td[1]/mat-checkbox[1]/div[1]/div[1]/input[1]";
+            page.locator(checkBox).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Groups selection checkbox not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeleteAllGroupsButtonVisible() {
@@ -342,16 +538,26 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         } catch (PlaywrightException e) {
+            System.out.println("Delete All button not visible or not found: " + e.getMessage());
             return false;
         }
     }
 
     public boolean isDeleteGroupsButtonEnabled(){
-     return page.locator(deleteAllBtn).isEnabled();
+        try {
+            return page.locator(deleteAllBtn).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void deleteSelectedGroups(){
-        page.locator(deleteAllBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(deleteAllBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Delete All' -button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isSelectedGroupsDeleted(String groupName){
@@ -363,6 +569,7 @@ public class GroupsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Group name not found or not visible: " + e.getMessage());
             return false;
         }
     }

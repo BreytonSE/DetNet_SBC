@@ -32,7 +32,7 @@ public class ArmingAllReady_StepDefn {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateNoDeviceToArmSnackBarVisibility();
-//        TODO: Validate that devices is successfully armed
+        dashboardValidation.validateDeviceState("Ready to Blast");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

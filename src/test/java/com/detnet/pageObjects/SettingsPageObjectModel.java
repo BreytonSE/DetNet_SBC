@@ -2,6 +2,7 @@ package com.detnet.pageObjects;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.PlaywrightException;
 
 import static com.detnet.locators.SettingsPageLocators.*;
 
@@ -13,107 +14,230 @@ public class SettingsPageObjectModel {
     }
 
     public String getSettingsURL(){
-        page.waitForURL("**/settings/networks");
-        return page.url();
+        try{
+            page.waitForURL("**/settings/networks");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or invalid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isSettingsLabelVisible(){
-        return page.locator(settingsLabel).isVisible();
+        try{
+            return page.locator(settingsLabel).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Settings label not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getSettingsLabel(){
-        return page.locator(settingsLabel).textContent();
+        try{
+            return page.locator(settingsLabel).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Settings label not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isBlastCardButtonVisible(){
-        return page.locator(blastCardsButton).isVisible();
+        try{
+            return page.locator(blastCardsButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Blast card button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isBlastCardButtonEnabled(){
-        return page.locator(blastCardsButton).isEnabled();
+        try{
+            return page.locator(blastCardsButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Blast card button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void viewActiveBlastCards(){
-        page.locator(blastCardsButton).click();
+        try{
+            page.locator(blastCardsButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("Blast card button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isUserButtonVisible(){
-        return page.locator(usersButton).isVisible();
+        try{
+            return page.locator(usersButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Users button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isUserButtonEnabled(){
-        return page.locator(usersButton).isEnabled();
+        try{
+            return page.locator(usersButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Users button not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getUsersLabel(){
-        return page.locator(usersButton).textContent();
+        try{
+            return page.locator(usersButton).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Users button not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void viewUsers(){
-        page.locator(usersButton).click();
+        try{
+            page.locator(usersButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Users button not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNetworksTabPresent(){
-        return page.locator(networksButton).isVisible();
+        try{
+            return page.locator(networksButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Networks button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void goToNetworks(){
-        page.locator(networksButton).click();
+        try{
+            page.locator(networksButton).click();
+        }catch (PlaywrightException e){
+            System.out.println("Networks button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isDeviceTabPresent(){
-        return page.locator(devicesTab).isVisible();
+        try{
+            return page.locator(devicesTab).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Device tab not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isDeviceTabEnabled(){
-        return page.locator(devicesTab).isEnabled();
+        try {
+            return page.locator(devicesTab).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Device tab not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getDeviceTabText(){
-        return page.locator(devicesTab).textContent();
+        try{
+            return page.locator(devicesTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Device tab not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void viewDevices(){
-        page.locator(devicesTab).click();
+        try{
+            page.locator(devicesTab).click();
+        }catch (PlaywrightException e){
+            System.out.println("Device tab not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNetworkTreeTabVisible(){
-        return page.locator(networkTreeTab).isVisible();
+        try{
+            return page.locator(networkTreeTab).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Network Tree tab not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getNetworkTreeText(){
-        return page.locator(networkTreeTab).textContent();
+        try{
+            return page.locator(networkTreeTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Network Tree tab not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void openNetworkTree(){
-        page.locator(networkTreeTab).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(networkTreeTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Network tree tab not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isGroupsTabVisible(){
-         return page.locator(groupsTab).isVisible();
+        try{
+            return page.locator(groupsTab).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Groups tab not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getGroupsTabText(){
-        return page.locator(groupsTab).textContent();
+        try{
+            return page.locator(groupsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Groups -tab not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void openGroups(){
-        page.locator(groupsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(groupsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Groups -tab not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isEmailRecipientsTabVisible(){
-        return page.locator(emailRecipientsTab).isVisible();
+        try{
+            return page.locator(emailRecipientsTab).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Email recipients tab not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isEmailRecipientsTabEnabled(){
-        return page.locator(emailRecipientsTab).isEnabled();
+        try{
+            return page.locator(emailRecipientsTab).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Email recipients tab not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public String getEmailRecipientsTabText(){
-        return page.locator(emailRecipientsTab).textContent();
+        try{
+            return page.locator(emailRecipientsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Email recipients tab not found or not visible: " + e.getMessage());
+            return null;
+        }
     }
 
     public void viewEmailRecipients(){
-        page.locator(emailRecipientsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(emailRecipientsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Email recipients tab not found or not visible: " + e.getMessage());
+        }
     }
 }

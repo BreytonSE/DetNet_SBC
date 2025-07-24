@@ -15,8 +15,13 @@ public class DeviceDetailsPageObjectModel {
     }
 
     public String getDeviceDetailsSummaryPageURL(){
-        page.waitForURL("**/device-details/*/summary");
-        return page.url();
+        try{
+            page.waitForURL("**/device-details/*/summary");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isDeviceStatusVisible(){
@@ -27,6 +32,7 @@ public class DeviceDetailsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device status column not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -39,6 +45,7 @@ public class DeviceDetailsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device details and configuration column not visible or not found: " + e.getMessage());
             return false;
         }
     }
@@ -51,6 +58,7 @@ public class DeviceDetailsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device statistics column not visible or not found: " + e.getMessage());
             return false;
         }
     }
@@ -63,6 +71,7 @@ public class DeviceDetailsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Device auxiliary relays column not found or not visible: " + e.getMessage());
             return false;
         }
     }
@@ -75,6 +84,7 @@ public class DeviceDetailsPageObjectModel {
                             .setTimeout(5000));
             return true;
         }catch (PlaywrightException e){
+            System.out.println("Blast key column not visible or not found: " + e.getMessage());
             return false;
         }
     }

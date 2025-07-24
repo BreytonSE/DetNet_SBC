@@ -497,4 +497,25 @@ public class DashboardValidation {
                 .as("'OK' -button should be enabled.")
                 .isTrue();
     }
+
+    public void validateSortByDropDownVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isSortByDropDownVisible();
+        softly.assertThat(isVisible)
+                .as("Sort by dropdown should be visible on the dashboard.")
+                .isTrue();
+    }
+
+    public void validateSortByDropDownState(){
+        boolean isEnabled = dashboardPageObjectModel.isSortByDropDownEnabled();
+        softly.assertThat(isEnabled)
+                .as("Sort by dropdown should be enabled on the dashboard.")
+                .isTrue();
+    }
+
+    public void validateBlastAllReadyOptionVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isBlastAllReadyOptionAvailable();
+        softly.assertThat(isVisible)
+                .as("Blast All Ready option should be visible in the action panel.")
+                .isTrue();
+    }
 }

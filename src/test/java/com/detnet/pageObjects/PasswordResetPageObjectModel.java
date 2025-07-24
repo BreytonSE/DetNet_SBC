@@ -2,6 +2,7 @@ package com.detnet.pageObjects;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.PlaywrightException;
 
 import static com.detnet.locators.PasswordResetPageLocators.*;
 
@@ -13,160 +14,328 @@ public class PasswordResetPageObjectModel {
     }
 
     public String getPasswordResetPageURL(){
-        page.waitForURL("**/password-reset");
-        return page.url();
+        try{
+            page.waitForURL("**/password-reset");
+            return page.url();
+        }catch (PlaywrightException e){
+            System.out.println("URL not found or not valid: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isPasswordResetFormVisible(){
-        return page.locator(passwordResetForm).isVisible();
+        try{
+            return page.locator(passwordResetForm).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Password reset form not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCurrentPasswordFieldVisible(){
-        return page.locator(currentPasswordField).isVisible();
+        try{
+            return page.locator(currentPasswordField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Current Password' input field not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCurrentPasswordFieldEnabled(){
-        return page.locator(currentPasswordField).isEnabled();
+        try{
+            return page.locator(currentPasswordField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Current Password' input field not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCurrentPasswordFieldEmpty(){
-        String currentPasswordInputField = page.locator(currentPasswordField).inputValue();
-        return currentPasswordInputField == null || currentPasswordInputField.trim().isEmpty();
+        try{
+            String currentPasswordInputField = page.locator(currentPasswordField).inputValue();
+            return currentPasswordInputField == null || currentPasswordInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("'Current Password' input field not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setCurrentPassword(String currentPassword){
-        page.locator(currentPasswordField).fill(currentPassword);
+        try{
+            page.locator(currentPasswordField).fill(currentPassword);
+        }catch (PlaywrightException e){
+            System.out.println("'Current Password' input field not found or not displaying: " + e.getMessage());
+        }
     }
 
     public String getCurrentPassword(){
-        return page.locator(currentPasswordField).inputValue();
+        try{
+            return page.locator(currentPasswordField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("'Current Password' input field not found or not displaying: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isNewPasswordFieldVisible(){
-        return page.locator(newPasswordField).isVisible();
+        try{
+            return page.locator(newPasswordField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNewPasswordFieldEnabled(){
-        return page.locator(newPasswordField).isEnabled();
+        try{
+            return page.locator(newPasswordField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNewPasswordFieldEmpty(){
-        String newPasswordInputField = page.locator(newPasswordField).inputValue();
-        return newPasswordInputField == null || newPasswordInputField.trim().isEmpty();
+        try{
+            String newPasswordInputField = page.locator(newPasswordField).inputValue();
+            return newPasswordInputField == null || newPasswordInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setNewPassword(String newPassword){
-        page.locator(newPasswordField).click();
-        page.locator(newPasswordField).fill(newPassword);
+        try{
+            page.locator(newPasswordField).click();
+            page.locator(newPasswordField).fill(newPassword);
+        }catch (PlaywrightException e){
+            System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
+        }
     }
 
     public String getNewPassword(){
-        return page.locator(newPasswordField).inputValue();
+        try{
+            return page.locator(newPasswordField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isConfirmedPasswordFieldVisible(){
-        return page.locator(confirmedPasswordField).isVisible();
+        try{
+            return page.locator(confirmedPasswordField).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isConfirmedPasswordFieldEnabled(){
-        return page.locator(confirmedPasswordField).isEnabled();
+        try{
+            return page.locator(confirmedPasswordField).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isConfirmedPasswordFieldEmpty(){
-        String confirmPasswordInputField = page.locator(confirmedPasswordField).inputValue();
-        return confirmPasswordInputField == null || confirmPasswordInputField.trim().isEmpty();
+        try{
+            String confirmPasswordInputField = page.locator(confirmedPasswordField).inputValue();
+            return confirmPasswordInputField == null || confirmPasswordInputField.trim().isEmpty();
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
+            return false;
+        }
     }
 
     public void setConfirmedPassword(String confirmedPassword){
-        page.locator(confirmedPasswordField).click();
-        page.locator(confirmedPasswordField).fill(confirmedPassword);
+        try{
+            page.locator(confirmedPasswordField).click();
+            page.locator(confirmedPasswordField).fill(confirmedPassword);
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
+        }
     }
 
     public String getConfirmedPassword(){
-        return page.locator(confirmedPasswordField).inputValue();
+        try{
+            return page.locator(confirmedPasswordField).inputValue();
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
+            return null;
+        }
     }
 
     public boolean isChangePasswordButtonVisible(){
-        return page.locator(changePasswordButton).isVisible();
+        try{
+            return page.locator(changePasswordButton).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Change Password button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isChangedPasswordButtonEnabled(){
-        return page.locator(changePasswordButton).isEnabled();
+        try{
+            return page.locator(changePasswordButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Change Password button not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public void changePassword(){
-        page.locator(changePasswordButton).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(changePasswordButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Change Password button not visible or not found: " + e.getMessage());
+        }
     }
 
     public boolean isCurrentPasswordVisibilityIconPresent(){
-        return page.locator(currentPasswordVisibilityIcon).isVisible();
+        try{
+            return page.locator(currentPasswordVisibilityIcon).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCurrentPasswordVisibilityIconEnabled(){
-        return page.locator(currentPasswordVisibilityIcon).isEnabled();
+        try{
+            return page.locator(currentPasswordVisibilityIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void toggleCurrentPasswordVisibility(){
-        page.locator(currentPasswordVisibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(currentPasswordVisibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isCurrentPasswordFieldTypeText(){
-        Locator passwordInput = page.locator(currentPasswordField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("text");
+        try{
+            Locator passwordInput = page.locator(currentPasswordField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("text");
+        }catch (PlaywrightException e){
+            System.out.println("Current Password field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isCurrentPasswordFieldPassword(){
-        Locator passwordInput = page.locator(currentPasswordField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("password");
+        try{
+            Locator passwordInput = page.locator(currentPasswordField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("password");
+        }catch (PlaywrightException e){
+            System.out.println("Current Password field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNewPasswordVisibilityIconPresent(){
-        return page.locator(newPasswordVisibilityIcon).isVisible();
+        try{
+            return page.locator(newPasswordVisibilityIcon).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNewPasswordVisibilityIconEnabled(){
-        return page.locator(newPasswordVisibilityIcon).isEnabled();
+        try{
+            return page.locator(newPasswordVisibilityIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void toggleNewPasswordVisibility(){
-        page.locator(newPasswordVisibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(newPasswordVisibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isNewPasswordFieldTypeText(){
-        Locator passwordInput = page.locator(newPasswordField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("text");
+        try{
+            Locator passwordInput = page.locator(newPasswordField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("text");
+        }catch (PlaywrightException e){
+            System.out.println("'New Password' -input field not visible or not found: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isNewPasswordFieldPassword(){
-        Locator passwordInput = page.locator(newPasswordField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("password");
+        try{
+            Locator passwordInput = page.locator(newPasswordField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("password");
+        }catch (PlaywrightException e){
+            System.out.println("Password field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isConfirmPasswordVisibilityIconPresent(){
-        return page.locator(confirmedPasswordVisibilityIcon).isVisible();
+        try{
+            return page.locator(confirmedPasswordVisibilityIcon).isVisible();
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isConfirmPasswordVisibilityIconEnabled(){
-        return page.locator(confirmedPasswordVisibilityIcon).isEnabled();
+        try{
+            return page.locator(confirmedPasswordVisibilityIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public void toggleConfirmedPasswordVisibility(){
-        page.locator(confirmedPasswordVisibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        try{
+            page.locator(confirmedPasswordVisibilityIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
+        }
     }
 
     public boolean isConfirmedPasswordHidden(){
-        Locator passwordInput = page.locator(confirmedPasswordField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("password");
+        try{
+            Locator passwordInput = page.locator(confirmedPasswordField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("password");
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 
     public boolean isConfirmedPasswordText(){
-        Locator passwordInput = page.locator(confirmedPasswordField);
-        String inputType = passwordInput.getAttribute("type");
-        return inputType.equals("text");
+        try{
+            Locator passwordInput = page.locator(confirmedPasswordField);
+            String inputType = passwordInput.getAttribute("type");
+            return inputType.equals("text");
+        }catch (PlaywrightException e){
+            System.out.println("'Confirmed Password' field not found or not visible: " + e.getMessage());
+            return false;
+        }
     }
 }
