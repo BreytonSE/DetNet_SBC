@@ -24,6 +24,7 @@ public class PageObjectManager {
     private EmailRecipientsPageObjectModel emailRecipientsPageObjectModel;
     private BlastConfirmationPageObjectModel blastConfirmationPageObjectModel;
     private BlastReportPageObjectModel blastReportPageObjectModel;
+    private DeviceEventsPageObjectModel deviceEventsPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -159,5 +160,12 @@ public class PageObjectManager {
             blastReportPageObjectModel = new BlastReportPageObjectModel(page);
         }
         return blastReportPageObjectModel;
+    }
+
+    public DeviceEventsPageObjectModel getDeviceEventsPageObjectModel(){
+        if(deviceEventsPageObjectModel == null){
+            deviceEventsPageObjectModel = new DeviceEventsPageObjectModel(page);
+        }
+        return deviceEventsPageObjectModel;
     }
 }

@@ -32,8 +32,6 @@ Feature: Device management feature
     Then the device should be visible in the list and successfully registered on the backend
     When the user adds a fourth device
     And the user adds a fifth device
-    And the user adds a sixth device
-    And the user adds a seventh device
 
   @c_deviceManagement
   Scenario: Verify that a device can be edited, ensuring that information can be updated on the backend

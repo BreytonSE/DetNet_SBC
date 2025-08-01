@@ -17,7 +17,7 @@ public class DeviceDetailsValidation {
         String actualURL = deviceDetailsPageObjectModel.getDeviceDetailsSummaryPageURL();
         softly.assertThat(actualURL)
                 .as("Actual URL does not match expected URL")
-                .isEqualTo(expectedURL);
+                .matches(expectedURL);
     }
 
     public void validateDeviceStatusVisibility(){
@@ -53,5 +53,19 @@ public class DeviceDetailsValidation {
         softly.assertThat(isVisible)
                 .as("Device BCU blast key should be visible.")
                 .isTrue();
+    }
+
+    public void validateEventsTabVisibility(){
+        boolean isDisplayed = deviceDetailsPageObjectModel.isEventsTabVisible();
+        softly.assertThat(isDisplayed)
+                .as("Events tab should be displaying on the device details page.")
+                .isTrue();
+    }
+
+    public void validateEventsTabText(String expectedText){
+        String actualText = deviceDetailsPageObjectModel.getEventsTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
     }
 }

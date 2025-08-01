@@ -7,27 +7,22 @@ import com.detnet.utilities.EmailUtils;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.DashboardValidation;
 import com.microsoft.playwright.Page;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Then;
 
 import java.util.Arrays;
 import java.util.List;
 
-//   Scenario: Verify that a devices in "Ready to Blast" state will be presented to be blasted without using a blast card
-public class BlastWithoutCard_StepDefn {
+//   Scenario: Verify that the device is in an UNKNOWN state when there is no communication between BCU and SBC
+public class LostBCUComms_StepDefn {
     private final PageObjectManager pageObjectManager;
 
-    public BlastWithoutCard_StepDefn() {
+    public LostBCUComms_StepDefn() {
         Page page = PlaywrightManager.getPage();
         pageObjectManager = PageObjectManager.getInstance(page);
     }
 
-    @Given("select device with id {int}")
-    public void select_device_with_id(Integer int1) {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.selectOrDeselectDevice(1);
-    }
-    @Given("verify the device {int} is in a {string} state else send an email request")
-    public void verify_the_device_is_in_a_state_else_send_an_email_request(Integer deviceId, String expectedState) {
+    @Then("verify that the BCU is in an {string} state else send a state change request via email")
+    public void verify_that_the_bcu_is_in_an_state_else_send_a_state_change_request_via_email(String expectedState) {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
 
@@ -50,7 +45,7 @@ public class BlastWithoutCard_StepDefn {
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
                 "mbhalatil@detnet0.onmicrosoft.com");
-        String deviceName = "Device " + deviceId; // Device Id might change
+        String deviceName = "Device 502"; // Device Id might change
         int waitMinutes = 10;
 
         EmailUtils.sendDeviceControlRequest(toEmail, ccEmails, deviceName, expectedState, waitMinutes);
@@ -86,19 +81,5 @@ public class BlastWithoutCard_StepDefn {
         }
         dashboardValidation.validateDeviceState(expectedState.toUpperCase());
         SoftAssertionUtils.getSoftAssertions().assertAll();
-    }
-    @When("the user supplies their own password")
-    public void the_user_supplies_their_own_password() throws InterruptedException {
-//        TODO: Supply password
-    }
-
-    @When("the user supplies valid account credentials for another user authorized to initiate a blast")
-    public void the_user_supplies_valid_account_credentials_for_another_user_authorized_to_initiate_a_blast() {
-//        TODO: The user supplies valida account credentials
-    }
-
-    @Then("the blast card prompt window should not be displayed")
-    public void the_blast_card_prompt_window_should_not_be_displayed() {
-//        TODO: Verify the Blast card prompt window is open
     }
 }

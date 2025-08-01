@@ -229,11 +229,12 @@ public class DashboardPageObjectModel {
 
     public String getDeviceCurrentState() {
         try{
-            List<String> possibleStates = Arrays.asList("IDLE", "UNKNOWN", "READY TO BLAST", "READY TO ARM");
+            List<String> possibleStates = Arrays.asList("IDLE", "UNKNOWN", "READY TO BLAST", "READY TO ARM","ARMING");
 
             List<String> matchedStates = page
                     .locator("//span[contains(text(), 'IDLE') or contains(text(), 'UNKNOWN') or contains(text(), " +
-                            "'READY TO BLAST') or contains(text(), 'READY TO ARM') or contains(text(), 'AWAITING GRACE')]")
+                            "'READY TO BLAST') or contains(text(), 'READY TO ARM') or contains(text(), 'AWAITING GRACE') " +
+                            "or contains(text(), 'ARMING')]")
                     .allTextContents()
                     .stream()
                     .map(String::trim)

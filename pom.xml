@@ -190,7 +190,7 @@
         <version>3.0.0-M8</version>
         <configuration>
           <suiteXmlFiles>
-            <suiteXmlFile>testng.xml</suiteXmlFile>
+            <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
             <testFailureIgnore>true</testFailureIgnore> <!-- Ensure the next steps still execute even if there is a failure-->
           </suiteXmlFiles>
           <forkCount>1</forkCount>

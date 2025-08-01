@@ -188,3 +188,36 @@ Feature: Dashboard functional integrity for BCU device management
     And the user supplies their own password
     And the user supplies valid account credentials for another user authorized to initiate a blast
     Then the blast card prompt window should not be displayed
+
+#   TODO: Implement the following missing scenarios
+#    Acknowledgement of Disabled Channels (@p_dashboard)
+#    BCU Panel Colors (@q_dashboard)
+#    Highlight BCU State (@r_dashboard)
+
+  @s_dashboard
+  Scenario: Verify that the aggregated dashboard events log is functional and shows events
+    Given the user has entered valid BlastWeb login credentials
+    And the user is on the dashboard page
+    When the user views the device details
+    And the user navigates to the BCU events section
+    Then the event date should be visible
+    And the event time should be visible
+
+  @t_dashboard
+  Scenario: Verify that the device is in an UNKNOWN state when there is no communication between BCU and SBC
+    Given the user has entered valid BlastWeb login credentials
+    And the user is on the dashboard page
+    Then verify that the BCU is in an "UNKNOWN" state else send a state change request via email
+
+  @u_dashboard
+  Scenario: Verify the expiration countdown window period for the 'Ready to Blast' command
+    Given the user sign in as Blast Central Operator
+    And the user is on the dashboard page
+    And the device is in "Ready to Arm" state or a request is made for a state change
+    When the user selects the wireless device to arm
+    And the user opens the action panel
+    And the user clicks on "Arm Wireless Selected"
+    Then the device state should change to "Arming"
+    And then change to "Ready to Blast"
+    And the countdown window period should be displayed
+    And the device state should revert to "Ready to Arm" after the window period expires

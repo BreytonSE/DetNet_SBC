@@ -168,14 +168,4 @@ public class AddDevices_StepDefn {
         deviceValidation.validateIfDeviceIsAdded("192.0.2.123");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-
-    @When("the user adds a sixth device")
-    public void the_user_adds_a_sixth_device() {
-//        TODO: This is a real device needed from Detnet (Waiting on Liam/Allie)
-    }
-
-    @When("the user adds a seventh device")
-    public void the_user_adds_a_seventh_device() {
-//        TODO: This is a real device needed from Detnet (SDVT device)
-    }
 }

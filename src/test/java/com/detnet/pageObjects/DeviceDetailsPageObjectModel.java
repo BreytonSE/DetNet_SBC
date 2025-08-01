@@ -88,4 +88,34 @@ public class DeviceDetailsPageObjectModel {
             return false;
         }
     }
+
+    public boolean isEventsTabVisible(){
+        try{
+            page.locator(eventsTab)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Events -tab not visible or not found: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getEventsTabText(){
+        try{
+            return page.locator(eventsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Events -tab not visible or not found: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void viewDeviceEvents(){
+        try{
+            page.locator(eventsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Events -tab not visible or not found: " + e.getMessage());
+        }
+    }
 }

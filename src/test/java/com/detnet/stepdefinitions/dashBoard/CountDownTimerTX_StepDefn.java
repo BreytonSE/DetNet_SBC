@@ -12,22 +12,17 @@ import io.cucumber.java.en.*;
 import java.util.Arrays;
 import java.util.List;
 
-//   Scenario: Verify that a devices in "Ready to Blast" state will be presented to be blasted without using a blast card
-public class BlastWithoutCard_StepDefn {
+//   Scenario: Verify the expiration countdown window period for the 'Ready to Blast' command
+public class CountDownTimerTX_StepDefn {
     private final PageObjectManager pageObjectManager;
 
-    public BlastWithoutCard_StepDefn() {
+    public CountDownTimerTX_StepDefn() {
         Page page = PlaywrightManager.getPage();
         pageObjectManager = PageObjectManager.getInstance(page);
     }
 
-    @Given("select device with id {int}")
-    public void select_device_with_id(Integer int1) {
-        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
-        dashboardPageObjectModel.selectOrDeselectDevice(1);
-    }
-    @Given("verify the device {int} is in a {string} state else send an email request")
-    public void verify_the_device_is_in_a_state_else_send_an_email_request(Integer deviceId, String expectedState) {
+    @Given("the device is in {string} state or a request is made for a state change")
+    public void the_device_is_in_state_or_a_request_is_made_for_a_state_change(String expectedState) {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
 
@@ -50,7 +45,7 @@ public class BlastWithoutCard_StepDefn {
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
                 "mbhalatil@detnet0.onmicrosoft.com");
-        String deviceName = "Device " + deviceId; // Device Id might change
+        String deviceName = "Device 502"; // Device Id might change
         int waitMinutes = 10;
 
         EmailUtils.sendDeviceControlRequest(toEmail, ccEmails, deviceName, expectedState, waitMinutes);
@@ -87,18 +82,49 @@ public class BlastWithoutCard_StepDefn {
         dashboardValidation.validateDeviceState(expectedState.toUpperCase());
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
-    @When("the user supplies their own password")
-    public void the_user_supplies_their_own_password() throws InterruptedException {
-//        TODO: Supply password
+
+    @When("the user selects the wireless device to arm")
+    public void the_user_selects_the_wireless_device_to_arm() {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        dashboardPageObjectModel.selectOrDeselectDevice(1);
     }
 
-    @When("the user supplies valid account credentials for another user authorized to initiate a blast")
-    public void the_user_supplies_valid_account_credentials_for_another_user_authorized_to_initiate_a_blast() {
-//        TODO: The user supplies valida account credentials
+    @When("the user clicks on {string}")
+    public void the_user_clicks_on(String string) {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateIfArmWirelessOptionIsAvailable();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+        dashboardPageObjectModel.armWirelessSelected();
     }
 
-    @Then("the blast card prompt window should not be displayed")
-    public void the_blast_card_prompt_window_should_not_be_displayed() {
-//        TODO: Verify the Blast card prompt window is open
+    @Then("the device state should change to {string}")
+    public void the_device_state_should_change_to(String expectedState) {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateDeviceState(expectedState);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+    }
+
+    @Then("then change to {string}")
+    public void then_change_to(String expectedState) throws InterruptedException {
+        Thread.sleep(5000);
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateDeviceState(expectedState);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+    }
+
+    @Then("the countdown window period should be displayed")
+    public void the_countdown_window_period_should_be_displayed() {
+//       TODO: Verify that the countdown window is displayed
+    }
+
+    @Then("the device state should revert to {string} after the window period expires")
+    public void the_device_state_should_revert_to_after_the_window_period_expires(String expectedState) {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
+        dashboardValidation.validateDeviceState(expectedState);
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

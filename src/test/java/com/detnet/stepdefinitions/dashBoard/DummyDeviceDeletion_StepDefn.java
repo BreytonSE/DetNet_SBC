@@ -33,7 +33,5 @@ public class DummyDeviceDeletion_StepDefn {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         devicePageObjectModel.deleteSelectedDevices();
         devicePageObjectModel.confirmDelete();
-//        Needs a wait delay (Use Thread.sleep() only for debugging)
-        Thread.sleep(5000);
     }
 }
