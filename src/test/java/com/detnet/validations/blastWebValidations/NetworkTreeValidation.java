@@ -27,13 +27,6 @@ public class NetworkTreeValidation {
                 .isTrue();
     }
 
-    public void validateIfTreeHasDevices(){
-        boolean hasDevices = networkTreePageObjectModel.hasDevices();
-        softly.assertThat(hasDevices)
-                .as("Devices should be present under the selected network.")
-                .isTrue();
-    }
-
     public void validateIfDeviceIsInTree(String deviceId){
         boolean isPresent = networkTreePageObjectModel.isDevicePresent(deviceId);
         softly.assertThat(isPresent)

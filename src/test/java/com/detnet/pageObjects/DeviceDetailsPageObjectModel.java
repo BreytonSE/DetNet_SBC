@@ -118,4 +118,64 @@ public class DeviceDetailsPageObjectModel {
             System.out.println("Events -tab not visible or not found: " + e.getMessage());
         }
     }
+
+    public boolean isChannelsTabVisible(){
+        try {
+            page.locator(channelsTab)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Channels tab not visible or not found from the menu: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getChannelsTabText(){
+        try{
+            return page.locator(channelsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Channels tab not visible or not found from the menu: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void viewDeviceChannels(){
+        try{
+            page.locator(channelsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Channels tab not visible or not found from the menu: " + e.getMessage());
+        }
+    }
+
+    public boolean isLogsTabVisible(){
+        try{
+            page.locator(logsTab)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Logs tab not found or not visible on the menu panel: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getLogsTabText(){
+        try{
+            return page.locator(logsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Logs tab not found or not visible on the menu panel: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void viewDeviceLogs(){
+        try{
+            page.locator(logsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Logs tab not found or not visible on the menu panel: " + e.getMessage());
+        }
+    }
 }

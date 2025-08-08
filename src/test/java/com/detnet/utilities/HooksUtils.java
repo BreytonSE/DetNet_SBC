@@ -14,8 +14,8 @@ public class HooksUtils {
     private static Page page;
     private PageObjectManager pageObjectManager;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-//    private static final int TOTAL_SCENARIOS = 48;
-    private static final int TOTAL_SCENARIOS = 1;
+    private static final int TOTAL_SCENARIOS = 47;
+//    private static final int TOTAL_SCENARIOS = 8;
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -41,8 +41,10 @@ public class HooksUtils {
     }
 
     static {
-//        Start the service before any tests run
-        ServiceManager.startBlastWebService();
+//        If it runs in Docker, skip this logic.
+        if(!ServiceManager.isRunningInDocker()){
+            ServiceManager.startBlastWebService();
+        }
     }
 
     @Before("@web")

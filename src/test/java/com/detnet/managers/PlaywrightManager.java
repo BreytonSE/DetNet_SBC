@@ -4,6 +4,8 @@ import com.microsoft.playwright.*;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlaywrightManager {
     private static Playwright playwright;
@@ -17,20 +19,28 @@ public class PlaywrightManager {
                 playwright = Playwright.create();
             }
 
-//            Detect if running in GitHub Actions
-            boolean isCI = System.getenv("GITHUB_ACTIONS") != null;
+//            Detect if running in GitHub Actions or Docker
+            boolean isCI = System.getenv("GITHUB_ACTIONS") != null || System.getenv("RUNNING_IN_DOCKER") != null;
+
+//            Use host.docker.internal if in Docker, otherwise localhost
+            String targetURL = isCI ? "http://host.docker.internal:8080/en/login" : "http://localhost:8080/en/login";
             browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                     .setHeadless(isCI) // Run headless in CD/CI, non-headless locally
                     .setArgs(Arrays.asList(
                             "--disable-gpu",
                             "--start-fullscreen",
-                            "--disable-extentions",
+                            "--disable-extensions",
                             "--disable-popup-blocking",
                             "--no-sandbox",
-                            "--disable-dev-shm-usage"
+                            "--disable-dev-shm-usage",
+                            "--disable-blink-features=AutomationControlled", // disguise automation
+                            "--disable-infobars", // hide "Chrome is being controlled"
+                            "--disable-notifications", // block notification prompts
+                            "--disable-background-timer-throttling",
+                            "--disable-renderer-backgrounding",
+                            "--disable-background-occluded-windows"
                     ))
-//                     Mimic user behavior
-                    .setIgnoreDefaultArgs(Collections.singletonList("--disable-blink-features=AutomationControlled"))
+                            .setIgnoreDefaultArgs(Collections.emptyList())
             );
             context = browser.newContext(new Browser.NewContextOptions().setIgnoreHTTPSErrors(true));
             page = context.newPage();
@@ -40,8 +50,8 @@ public class PlaywrightManager {
                 page.evaluate("window.moveTo(0, 0); window.resizeTo(screen.width, screen.height);");
             }
 
-//          Navigate to the login page
-            page.navigate("http://localhost:8080/en/login");
+//          Navigates to the login page.
+            page.navigate(targetURL);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -20,5 +20,7 @@ RUN npx playwright install --with-deps
 # Copy the rest of your source code
 COPY . .
 
+ENV RUNNING_IN_DOCKER=true
+
 # Set the default command to run tests (this will trigger your internal reporting + email logic)
 CMD ["mvn", "clean", "test"]

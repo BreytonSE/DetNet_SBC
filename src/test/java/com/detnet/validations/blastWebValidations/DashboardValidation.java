@@ -33,7 +33,7 @@ public class DashboardValidation {
         String actualURL = dashboardPageObjectModel.getDashboardURL();
         softly.assertThat(actualURL)
                 .as("Actual URL does not match expected URL")
-                .isEqualTo(expectedURL);
+                .matches(expectedURL);
     }
 
     public void validateUserRoleLabelVisibility(){

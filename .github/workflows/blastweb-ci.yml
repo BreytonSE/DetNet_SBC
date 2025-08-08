@@ -51,8 +51,8 @@ jobs:
         shell: powershell
 
       - name: Run Tests
-        run: | 
-          mvn test -Dtest=BlastWebMainRunner 
+        run: |
+          mvn test -Dtest=BlastWebMainRunner
           if ($?) { echo "Test Passed." } else { echo "Test failed, continuing pipeline."; }
         shell: powershell
 

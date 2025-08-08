@@ -877,4 +877,12 @@ public class DevicePageObjectModel {
             System.out.println("'Delete All' -button not visible or not found: " + e.getMessage());
         }
     }
+
+    public void scrollToBottom(){
+        try{
+            page.evaluate("window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })");
+        }catch (PlaywrightException e){
+            System.out.println("Unable to scroll to bottom of the screen. Make sure logic is correct: " + e.getMessage());
+        }
+    }
 }

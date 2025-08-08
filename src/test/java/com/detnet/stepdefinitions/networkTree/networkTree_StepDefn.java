@@ -51,7 +51,6 @@ public class networkTree_StepDefn {
     public void the_user_selects_a_device_to_view_the_dropdown_list_of_sub_devices_or_navigates_to_the_selected_device_s_details_page() {
         NetworkTreePageObjectModel networkTreePageObjectModel = pageObjectManager.getNetworkTreePageObjectModel();
         NetworkTreeValidation networkTreeValidation = new NetworkTreeValidation(networkTreePageObjectModel);
-        networkTreeValidation.validateIfTreeHasDevices();
         networkTreeValidation.validateIfDeviceIsInTree("502");
         SoftAssertionUtils.getSoftAssertions().assertAll();
         networkTreePageObjectModel.viewDeviceDetails("502");

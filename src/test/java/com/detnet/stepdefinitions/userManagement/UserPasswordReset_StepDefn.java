@@ -2,11 +2,9 @@ package com.detnet.stepdefinitions.userManagement;
 
 import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
-import com.detnet.pageObjects.DashboardPageObjectModel;
-import com.detnet.pageObjects.LoginPageObjectModel;
-import com.detnet.pageObjects.PasswordResetPageObjectModel;
-import com.detnet.pageObjects.UsersPageObjectModel;
+import com.detnet.pageObjects.*;
 import com.detnet.utilities.SoftAssertionUtils;
+import com.detnet.validations.blastWebValidations.ForbiddenValidation;
 import com.detnet.validations.blastWebValidations.LoginValidation;
 import com.detnet.validations.blastWebValidations.PasswordResetValidation;
 import com.detnet.validations.blastWebValidations.UsersValidation;
@@ -64,7 +62,7 @@ public class UserPasswordReset_StepDefn {
     }
 
     @Then("the user should be prompted to set a new password")
-    public void the_user_should_be_prompted_to_set_a_new_password() throws InterruptedException {
+    public void the_user_should_be_prompted_to_set_a_new_password() {
         PasswordResetPageObjectModel passwordResetPageObjectModel = pageObjectManager.getPasswordResetPageObjectModel();
         PasswordResetValidation passwordResetValidation = new PasswordResetValidation(passwordResetPageObjectModel);
         passwordResetValidation.validatePasswordResetURL("http://localhost:8080/en/password-reset");
@@ -110,5 +108,12 @@ public class UserPasswordReset_StepDefn {
         passwordResetValidation.validateChangePasswordButtonState();
         SoftAssertionUtils.getSoftAssertions().assertAll();
         passwordResetPageObjectModel.changePassword();
+        passwordResetValidation.validatePasswordResetSuccess();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
+
+        ForbiddenPageObjectModel forbiddenPageObjectModel = pageObjectManager.getForbiddenPageObjectModel();
+        ForbiddenValidation forbiddenValidation = new ForbiddenValidation(forbiddenPageObjectModel);
+        forbiddenValidation.validateForbiddenPageVisibility();
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

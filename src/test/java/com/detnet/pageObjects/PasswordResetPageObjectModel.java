@@ -3,6 +3,7 @@ package com.detnet.pageObjects;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
 import static com.detnet.locators.PasswordResetPageLocators.*;
 
@@ -25,7 +26,11 @@ public class PasswordResetPageObjectModel {
 
     public boolean isPasswordResetFormVisible(){
         try{
-            return page.locator(passwordResetForm).isVisible();
+            page.locator(passwordResetForm)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("Password reset form not found or not displaying: " + e.getMessage());
             return false;
@@ -34,7 +39,11 @@ public class PasswordResetPageObjectModel {
 
     public boolean isCurrentPasswordFieldVisible(){
         try{
-            return page.locator(currentPasswordField).isVisible();
+            page.locator(currentPasswordField)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("'Current Password' input field not found or not displaying: " + e.getMessage());
             return false;
@@ -79,7 +88,11 @@ public class PasswordResetPageObjectModel {
 
     public boolean isNewPasswordFieldVisible(){
         try{
-            return page.locator(newPasswordField).isVisible();
+            page.locator(newPasswordField)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
             return false;
@@ -107,7 +120,7 @@ public class PasswordResetPageObjectModel {
 
     public void setNewPassword(String newPassword){
         try{
-            page.locator(newPasswordField).click();
+            page.locator(newPasswordField).click(new Locator.ClickOptions().setTimeout(5000));
             page.locator(newPasswordField).fill(newPassword);
         }catch (PlaywrightException e){
             System.out.println("'New Password' input field not visible or not found: " + e.getMessage());
@@ -125,7 +138,11 @@ public class PasswordResetPageObjectModel {
 
     public boolean isConfirmedPasswordFieldVisible(){
         try{
-            return page.locator(confirmedPasswordField).isVisible();
+            page.locator(confirmedPasswordField)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
             return false;
@@ -153,7 +170,7 @@ public class PasswordResetPageObjectModel {
 
     public void setConfirmedPassword(String confirmedPassword){
         try{
-            page.locator(confirmedPasswordField).click();
+            page.locator(confirmedPasswordField).click(new Locator.ClickOptions().setTimeout(5000));
             page.locator(confirmedPasswordField).fill(confirmedPassword);
         }catch (PlaywrightException e){
             System.out.println("'Confirmed Password' input field not found or not displaying: " + e.getMessage());
@@ -171,7 +188,11 @@ public class PasswordResetPageObjectModel {
 
     public boolean isChangePasswordButtonVisible(){
         try{
-            return page.locator(changePasswordButton).isVisible();
+            page.locator(changePasswordButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("Change Password button not visible or not found: " + e.getMessage());
             return false;
@@ -189,15 +210,22 @@ public class PasswordResetPageObjectModel {
 
     public void changePassword(){
         try{
+            Thread.sleep(5000);
             page.locator(changePasswordButton).click(new Locator.ClickOptions().setTimeout(5000));
         }catch (PlaywrightException e){
             System.out.println("Change Password button not visible or not found: " + e.getMessage());
+        }catch (Exception e){
+            System.out.println("Timeout exception: " + e.getMessage());
         }
     }
 
     public boolean isCurrentPasswordVisibilityIconPresent(){
         try{
-            return page.locator(currentPasswordVisibilityIcon).isVisible();
+            page.locator(currentPasswordVisibilityIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
             return false;
@@ -243,15 +271,6 @@ public class PasswordResetPageObjectModel {
         }
     }
 
-    public boolean isNewPasswordVisibilityIconPresent(){
-        try{
-            return page.locator(newPasswordVisibilityIcon).isVisible();
-        }catch (PlaywrightException e){
-            System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
-            return false;
-        }
-    }
-
     public boolean isNewPasswordVisibilityIconEnabled(){
         try{
             return page.locator(newPasswordVisibilityIcon).isEnabled();
@@ -293,7 +312,11 @@ public class PasswordResetPageObjectModel {
 
     public boolean isConfirmPasswordVisibilityIconPresent(){
         try{
-            return page.locator(confirmedPasswordVisibilityIcon).isVisible();
+            page.locator(confirmedPasswordVisibilityIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
         }catch (PlaywrightException e){
             System.out.println("Password visibility icon not found or not visible: " + e.getMessage());
             return false;
@@ -335,6 +358,19 @@ public class PasswordResetPageObjectModel {
             return inputType.equals("text");
         }catch (PlaywrightException e){
             System.out.println("'Confirmed Password' field not found or not visible: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isPasswordUpdated(){
+        try{
+            page.locator(passwordResetUpdateMessage)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Password update not displaying or not found on password reset screen: " + e.getMessage());
             return false;
         }
     }

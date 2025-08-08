@@ -33,12 +33,12 @@ public class EmailUtils {
 
             List<String> recipientsEmails = Arrays.asList(
                     "breytonseanernstzen1224@gmail.com",
-                    "breyton.ernstzen@testheroes.co.za"/*,
+                    "breyton.ernstzen@testheroes.co.za",
                     "moosaa@detnet.com",
                     "maysond@detnet.com",
                     "kydh@detnet.com",
                     "coetseet@detnet.com",
-                    "mbhalatil@detnet0.onmicrosoft.com"*/
+                    "mbhalatil@detnet0.onmicrosoft.com"
             );
             sendEmailWithAttachment(recipientsEmails,
                     "BlastWeb Test Report",

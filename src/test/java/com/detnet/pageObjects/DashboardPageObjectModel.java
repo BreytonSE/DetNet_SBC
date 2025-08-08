@@ -44,7 +44,14 @@ public class DashboardPageObjectModel {
     public String getDashboardURL() {
         try{
             page.waitForURL("**/dashboard");
-            return page.url();
+
+            String actualURL = page.url();
+
+//            Normalize base URL for Docker/CI environments
+            if(actualURL.contains("host.docker.internal")){
+                actualURL = actualURL.replace("host.docker.internal","localhost");
+            }
+            return actualURL;
         }catch (PlaywrightException e){
             System.out.println("URL for dashboard page not found or not visible: " + e.getMessage());
             return null;

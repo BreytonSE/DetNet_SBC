@@ -68,4 +68,32 @@ public class DeviceDetailsValidation {
                 .as("Actual text does not match expected text.")
                 .isEqualTo(expectedText);
     }
+
+    public void validateChannelsTabVisibility(){
+        boolean isVisible = deviceDetailsPageObjectModel.isChannelsTabVisible();
+        softly.assertThat(isVisible)
+                .as("Channels tab should be displaying on the device details menu.")
+                .isTrue();
+    }
+
+    public void validateChannelsTabText(String expectedText){
+        String actualText = deviceDetailsPageObjectModel.getChannelsTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
+
+    public void validateLogTabVisibility(){
+        boolean isVisible = deviceDetailsPageObjectModel.isLogsTabVisible();
+        softly.assertThat(isVisible)
+                .as("Device logs tab should be displaying on the device details menu.")
+                .isTrue();
+    }
+
+    public void validateLogsTabText(String expectedText){
+        String actualText = deviceDetailsPageObjectModel.getLogsTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
 }

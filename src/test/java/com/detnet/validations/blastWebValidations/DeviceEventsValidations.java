@@ -26,4 +26,46 @@ public class DeviceEventsValidations {
                 .as("Events time should be displaying under device details.")
                 .isTrue();
     }
+
+    public void validateEventsPageVisibility(){
+        boolean isVisible = deviceEventsPageObjectModel.isEventsPageOpen();
+        softly.assertThat(isVisible)
+                .as("Events page should be displaying after user clicked on the 'Events' -tab")
+                .isTrue();
+    }
+
+    public void validateEventVisibility(){
+        boolean isVisible = deviceEventsPageObjectModel.isEventNameDisplayed();
+        softly.assertThat(isVisible)
+                .as("Event should be displaying under the events table heading.")
+                .isTrue();
+    }
+
+    public void validateIfEventsPageIsPaginated(){
+        boolean isPaginated = deviceEventsPageObjectModel.isEventsPaginated();
+        softly.assertThat(isPaginated)
+                .as("Event should be paginated on the device events page.")
+                .isTrue();
+    }
+
+    public void validateFromDatePickerButtonVisibility(){
+        boolean isVisible = deviceEventsPageObjectModel.isFromDatePickerButtonVisible();
+        softly.assertThat(isVisible)
+                .as("'From' date picker button should be visible on the events screen.")
+                .isTrue();
+    }
+
+    public void validateIfFromDatePickerWindowIsOpen(){
+        boolean isOpen = deviceEventsPageObjectModel.isFromDatePickerOpen();
+        softly.assertThat(isOpen)
+                .as("'From' date picker window should be open.")
+                .isTrue();
+    }
+
+    public void validateToDatePickerVisibility(){
+        boolean isVisible = deviceEventsPageObjectModel.isToDatePickerVisible();
+        softly.assertThat(isVisible)
+                .as("'To' date picker should be visible on the events screen.")
+                .isTrue();
+    }
 }

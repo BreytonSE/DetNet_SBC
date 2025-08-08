@@ -2,6 +2,9 @@ package com.detnet.managers;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class ServiceManager {
     private static Process process;
@@ -25,6 +28,23 @@ public class ServiceManager {
         if(process != null){
             process.destroy();
             System.out.println("BlastWeb service stopped.");
+        }
+    }
+
+    public static boolean isRunningInDocker() {
+        String env = System.getenv("RUNNING_IN_DOCKER");
+        if ("true".equalsIgnoreCase(env)) {
+            System.out.println("[DEBUG] Docker detected via environment variable.");
+            return true;
+        }
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("/proc/1/cgroup"));
+            boolean inDocker = lines.stream().anyMatch(line -> line.contains("docker"));
+            System.out.println("[DEBUG] Docker detected via /proc/1/cgroup: " + inDocker);
+            return inDocker;
+        } catch (IOException e) {
+            System.out.println("[DEBUG] Could not read /proc/1/cgroup, assuming not in Docker");
+            return false;
         }
     }
 }

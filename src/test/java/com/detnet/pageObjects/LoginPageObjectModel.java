@@ -121,7 +121,14 @@ public class LoginPageObjectModel {
     public String getLoginURL(){
         try{
             page.waitForURL("**/login");
-            return page.url();
+
+            String actualURL = page.url();
+
+//            Normalize base URL for Docker/CI environments
+            if(actualURL.contains("host.docker.internal")){
+                actualURL = actualURL.replace("host.docker.internal","localhost");
+            }
+            return actualURL;
         }catch (PlaywrightException e){
             System.out.println("Failed to get login page URL: " + e.getMessage());
             return null;

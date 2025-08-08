@@ -25,6 +25,9 @@ public class PageObjectManager {
     private BlastConfirmationPageObjectModel blastConfirmationPageObjectModel;
     private BlastReportPageObjectModel blastReportPageObjectModel;
     private DeviceEventsPageObjectModel deviceEventsPageObjectModel;
+    private DeviceChannelPageObjectModel deviceChannelPageObjectModel;
+    private DeviceLogsPageObjectModel deviceLogsPageObjectModel;
+    private ForbiddenPageObjectModel forbiddenPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -167,5 +170,26 @@ public class PageObjectManager {
             deviceEventsPageObjectModel = new DeviceEventsPageObjectModel(page);
         }
         return deviceEventsPageObjectModel;
+    }
+
+    public DeviceChannelPageObjectModel getDeviceChannelPageObjectModel(){
+        if(deviceChannelPageObjectModel == null){
+            deviceChannelPageObjectModel = new DeviceChannelPageObjectModel(page);
+        }
+        return deviceChannelPageObjectModel;
+    }
+
+    public DeviceLogsPageObjectModel getDeviceLogsPageObjectModel(){
+        if (deviceLogsPageObjectModel == null){
+            deviceLogsPageObjectModel = new DeviceLogsPageObjectModel(page);
+        }
+        return deviceLogsPageObjectModel;
+    }
+
+    public ForbiddenPageObjectModel getForbiddenPageObjectModel(){
+        if(forbiddenPageObjectModel == null){
+            forbiddenPageObjectModel = new ForbiddenPageObjectModel(page);
+        }
+        return forbiddenPageObjectModel;
     }
 }

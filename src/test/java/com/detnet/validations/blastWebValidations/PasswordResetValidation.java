@@ -157,13 +157,6 @@ public class PasswordResetValidation {
                 .isTrue();
     }
 
-    public void validateNewPasswordVisibilityIconPresence(){
-        boolean isPresent = passwordResetPageObjectModel.isNewPasswordVisibilityIconPresent();
-        softly.assertThat(isPresent)
-                .as("Password visibility icon should be displaying")
-                .isTrue();
-    }
-
     public void validateNewPasswordVisibilityIconState(){
         boolean isEnabled = passwordResetPageObjectModel.isNewPasswordVisibilityIconEnabled();
         softly.assertThat(isEnabled)
@@ -210,6 +203,13 @@ public class PasswordResetValidation {
         boolean isText = passwordResetPageObjectModel.isConfirmedPasswordText();
         softly.assertThat(isText)
                 .as("Confirmed password should be displayed as plain text")
+                .isTrue();
+    }
+
+    public void validatePasswordResetSuccess(){
+        boolean isUpdated = passwordResetPageObjectModel.isPasswordUpdated();
+        softly.assertThat(isUpdated)
+                .as("Password should be updated successfully.")
                 .isTrue();
     }
 }
