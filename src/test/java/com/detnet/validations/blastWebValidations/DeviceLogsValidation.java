@@ -75,4 +75,39 @@ public class DeviceLogsValidation {
                 .as("Log category dropdown should be displaying.")
                 .isTrue();
     }
+
+    public void validateLogRequestButtonVisibility(){
+        boolean isVisible = deviceLogsPageObjectModel.isLogRequestButtonVisible();
+        softly.assertThat(isVisible)
+                .as("Request Log button should be displaying on the device logs page.")
+                .isTrue();
+    }
+
+    public void validateLogRequestButtonState(){
+        boolean isEnabled = deviceLogsPageObjectModel.isLogRequestButtonEnabled();
+        softly.assertThat(isEnabled)
+                .as("Request Log button should be enabled on the device logs page.")
+                .isTrue();
+    }
+
+    public void validateDeviceLogsLoaderLabelVisibility(){
+        boolean isFetching = deviceLogsPageObjectModel.isDeviceLogsRequestSent();
+        softly.assertThat(isFetching)
+                .as("Device log loader should be displaying when user request for logs.")
+                .isTrue();
+    }
+
+    public void validateCloudDownloadIconVisibility(){
+        boolean isVisible = deviceLogsPageObjectModel.isDownloadIconVisible();
+        softly.assertThat(isVisible)
+                .as("Cloud download icon should be displaying on device logs page.")
+                .isTrue();
+    }
+
+    public void validateCloudDownloadIconState(){
+        boolean isEnabled = deviceLogsPageObjectModel.isDownloadIconEnabled();
+        softly.assertThat(isEnabled)
+                .as("Cloud download icon should be enabled on device logs page.")
+                .isTrue();
+    }
 }

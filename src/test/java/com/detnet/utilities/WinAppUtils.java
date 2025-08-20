@@ -1,5 +1,6 @@
 package com.detnet.utilities;
 
+import com.detnet.managers.ServiceManager;
 import com.detnet.managers.WinAppManager;
 import io.appium.java_client.windows.WindowsDriver;
 import io.appium.java_client.windows.WindowsElement;
@@ -16,6 +17,7 @@ public class WinAppUtils {
 
     static {
         WinAppManager.startWinAppDriver();
+        ServiceManager.startBlastWeb();
     }
 
     @Before("@desktop")

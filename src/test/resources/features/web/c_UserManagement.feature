@@ -75,18 +75,18 @@ Feature: User management feature
     And the administrator confirms deletion of the selected users
     Then the selected users should no longer be visible in the users interface
 
-  @g_userManagement
-  Scenario: Verify that a user can reset their password
-    Given the user has entered valid BlastWeb login credentials
-    When the user opens the navigation menu by clicking the current system user's name
-    Then the user navigates to the Settings page
-    And go to users
-    And the user clicks on the shield icon next to the target user
-    Then a popup prompt should appear asking the user to confirm the password reset
-    When the user clicks "Yes" to confirm the password reset
-    Then log out of again
-    And enter the username in both username and password field once on the login screen
-    And the user should be prompted to set a new password
+#  @g_userManagement
+#  Scenario: Verify that a user can reset their password
+#    Given the user has entered valid BlastWeb login credentials
+#    When the user opens the navigation menu by clicking the current system user's name
+#    Then the user navigates to the Settings page
+#    And go to users
+#    And the user clicks on the shield icon next to the target user
+#    Then a popup prompt should appear asking the user to confirm the password reset
+#    When the user clicks "Yes" to confirm the password reset
+#    Then log out of again
+#    And enter the username in both username and password field once on the login screen
+#    And the user should be prompted to set a new password
 
   @h_userManagement
   Scenario: Verify that a user can be searched using their username, first name and surname

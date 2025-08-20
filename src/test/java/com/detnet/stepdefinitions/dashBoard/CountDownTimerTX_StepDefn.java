@@ -12,7 +12,7 @@ import io.cucumber.java.en.*;
 import java.util.Arrays;
 import java.util.List;
 
-//   Scenario: Verify the expiration countdown window period for the 'Ready to Blast' command
+// Scenario: Verify the expiration countdown window period for the 'Ready to Blast' command
 public class CountDownTimerTX_StepDefn {
     private final PageObjectManager pageObjectManager;
 

@@ -90,20 +90,20 @@ public class CardlessEncryptionComms_StepDefn {
         deviceValidation.validateIpFieldVisibility();
         deviceValidation.validateIpFieldState();
         SoftAssertionUtils.getSoftAssertions().assertAll();
-        devicePageObjectModel.setIpAddress("172.20.3.92");
+        devicePageObjectModel.setIpAddress("172.20.3.93");
         deviceValidation.validateIfIPFieldIsFilled();
-        deviceValidation.validateIpEntered("172.20.3.92");
+        deviceValidation.validateIpEntered("172.20.3.93");
         SoftAssertionUtils.getSoftAssertions().assertAll();
         deviceValidation.validateDeviceSubmitButtonVisibility();
         deviceValidation.validateDeviceSubmitButtonState();
         SoftAssertionUtils.getSoftAssertions().assertAll();
         devicePageObjectModel.addDevice();
-        deviceValidation.validateIfDeviceIsAdded("172.20.3.92");
+        deviceValidation.validateIfDeviceIsAdded("172.20.3.93");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
-    @Then("the device state should be verified")
-    public void the_device_state_should_be_verified() {
+    @When("the device state should be verified in {string} state")
+    public void the_device_state_should_be_verified_in_state(String expectedState) {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         DashboardValidation dashboardValidation = new DashboardValidation(dashboardPageObjectModel);
         dashboardValidation.validateDashboardButtonState();
@@ -117,17 +117,28 @@ public class CardlessEncryptionComms_StepDefn {
         DeviceSummaryPageObjectModel deviceSummaryPageObjectModel = pageObjectManager.getDeviceSummaryPageObjectModel();
         DeviceSummaryValidation deviceSummaryValidation = new DeviceSummaryValidation(deviceSummaryPageObjectModel);
         deviceSummaryValidation.validateDeviceStateVisibility();
+        deviceSummaryValidation.validateDeviceCurrentState("Idle"); // IDLE
         SoftAssertionUtils.getSoftAssertions().assertAll();
+        dashboardPageObjectModel.goToDashboard();
 
-//        Sends a control request to colleague
+        String currentState = dashboardPageObjectModel.getDeviceCurrentState();
+        System.out.println("Current state before action: " + currentState);
+
+        if(expectedState.equalsIgnoreCase(currentState)){
+            System.out.println("Device is already in expected state: " + expectedState + " .Skipping email request.");
+            dashboardValidation.validateDeviceState(expectedState.toUpperCase());
+            SoftAssertionUtils.getSoftAssertions().assertAll();
+            return;
+        }
+
+//        Sends a control request to colleague if device is not in IDLE state
         String toEmail = "breyton.ernstzen@testheroes.co.za";
         List<String> ccEmails = Arrays.asList(
-                "coetseet@detnet.com",
+                /*"coetseet@detnet.com",
                 "maysond@detnet.com",
                 "moosaa@detnet.com",
-                "mbhalatil@detnet0.onmicrosoft.com");
+                "mbhalatil@detnet0.onmicrosoft.com"*/);
         String deviceName = "Device 502";
-        String expectedState = "IDLE";
         int waitMinutes = 10;
 
         EmailUtils.sendDeviceControlRequest(toEmail, ccEmails, deviceName, expectedState, waitMinutes);
@@ -139,7 +150,6 @@ public class CardlessEncryptionComms_StepDefn {
         boolean stateMatched = false;
 
         while (elapsed < maxWaitSeconds){
-            String currentState = deviceSummaryPageObjectModel.getCurrentDeviceState();
             if(expectedState.equalsIgnoreCase(currentState)){
                 stateMatched = true;
                 System.out.printf("Device state updated to '%s' after %d seconds.\n",expectedState,elapsed);
@@ -161,7 +171,8 @@ public class CardlessEncryptionComms_StepDefn {
             throw new AssertionError("Device state did not change to '" + expectedState + "' within " +
                     waitMinutes + " minutes.");
         }
-        deviceSummaryValidation.validateDeviceCurrentState("Idle"); // IDLE
+        dashboardPageObjectModel.viewDeviceDetails(1);
+        deviceSummaryValidation.validateDeviceState("Idle");
         SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

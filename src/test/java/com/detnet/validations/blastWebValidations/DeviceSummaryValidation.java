@@ -26,4 +26,11 @@ public class DeviceSummaryValidation {
                 .as("Actual device state does not match expected device state")
                 .isEqualToIgnoringCase(expectedState);
     }
+
+    public void validateDeviceState(String expectedState){
+        String actualState = deviceSummaryPageObjectModel.getCurrentDeviceState();
+        softly.assertThat(actualState)
+                .as("Actual state of device should match expected state of device.")
+                .isEqualTo(expectedState);
+    }
 }

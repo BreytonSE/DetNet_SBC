@@ -14,8 +14,8 @@ public class HooksUtils {
     private static Page page;
     private PageObjectManager pageObjectManager;
     private static final AtomicInteger scenarioCount = new AtomicInteger(0);
-    private static final int TOTAL_SCENARIOS = 47;
-//    private static final int TOTAL_SCENARIOS = 8;
+//    private static final int TOTAL_SCENARIOS = 56;
+    private static final int TOTAL_SCENARIOS = 1;
 
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -43,7 +43,9 @@ public class HooksUtils {
     static {
 //        If it runs in Docker, skip this logic.
         if(!ServiceManager.isRunningInDocker()){
-            ServiceManager.startBlastWebService();
+            ServiceManager.startBlastWeb(); // Should always run as Admin
+            ServiceManager.startBlastWebService(); // Only if not already running
+            ServiceManager.startWebServer(); // Only if not already running
         }
     }
 

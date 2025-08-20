@@ -9,4 +9,6 @@ public class DeviceDetailsPageLocators {
     public static final String eventsTab = "//span[normalize-space()=\"Events\"]";
     public static final String channelsTab = "//span[@class=\"titlecase\"][normalize-space()=\"Channels\"]";
     public static final String logsTab = "//span[normalize-space()=\"Logs\"]";
+    public static final String commentsTab = "//span[@class=\"mat-button-toggle-label-content\"]//span[contains(text(),\"Comments\")]";
+    public static final String detonatorsTab = "//span[normalize-space()=\"Detonators\"]";
 }

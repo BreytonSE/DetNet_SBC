@@ -96,4 +96,25 @@ public class DeviceDetailsValidation {
                 .as("Actual text does not match expected text.")
                 .isEqualTo(expectedText);
     }
+
+    public void validateCommentsTabVisibility(){
+        boolean isVisible = deviceDetailsPageObjectModel.isCommentsTabVisible();
+        softly.assertThat(isVisible)
+                .as("'Comments' -tab should be displaying on the details menu.")
+                .isTrue();
+    }
+
+    public void validateDetonatorsTabVisibility(){
+        boolean isVisible = deviceDetailsPageObjectModel.isDetonatorsTabVisible();
+        softly.assertThat(isVisible)
+                .as("Detonators tab should be displaying on the device details menu.")
+                .isTrue();
+    }
+
+    public void validateDetonatorsTabText(String expectedText){
+        String actualText = deviceDetailsPageObjectModel.getDetonatorsTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
 }

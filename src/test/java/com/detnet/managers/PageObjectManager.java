@@ -28,6 +28,10 @@ public class PageObjectManager {
     private DeviceChannelPageObjectModel deviceChannelPageObjectModel;
     private DeviceLogsPageObjectModel deviceLogsPageObjectModel;
     private ForbiddenPageObjectModel forbiddenPageObjectModel;
+    private DeviceCommentsPageObjectModel deviceCommentsPageObjectModel;
+    private DeviceDetonatorsPageObjectModel deviceDetonatorsPageObjectModel;
+    private UserAccountPageObjectModel userAccountPageObjectModel;
+    private EventsReportPageObjectModel eventsReportPageObjectModel;
 
     private PageObjectManager(Page page) {
         this.page = page;
@@ -191,5 +195,33 @@ public class PageObjectManager {
             forbiddenPageObjectModel = new ForbiddenPageObjectModel(page);
         }
         return forbiddenPageObjectModel;
+    }
+
+    public DeviceCommentsPageObjectModel getDeviceCommentsPageObjectModel(){
+        if(deviceCommentsPageObjectModel == null){
+            deviceCommentsPageObjectModel = new DeviceCommentsPageObjectModel(page);
+        }
+        return deviceCommentsPageObjectModel;
+    }
+
+    public DeviceDetonatorsPageObjectModel getDeviceDetonatorsPageObjectModel(){
+        if(deviceDetonatorsPageObjectModel == null){
+            deviceDetonatorsPageObjectModel = new DeviceDetonatorsPageObjectModel(page);
+        }
+        return deviceDetonatorsPageObjectModel;
+    }
+
+    public UserAccountPageObjectModel getUserAccountPageObjectModel(){
+        if(userAccountPageObjectModel == null){
+            userAccountPageObjectModel = new UserAccountPageObjectModel(page);
+        }
+        return userAccountPageObjectModel;
+    }
+
+    public EventsReportPageObjectModel getEventsReportPageObjectModel(){
+        if(eventsReportPageObjectModel == null){
+            eventsReportPageObjectModel = new EventsReportPageObjectModel(page);
+        }
+        return eventsReportPageObjectModel;
     }
 }

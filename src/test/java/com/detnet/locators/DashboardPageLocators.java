@@ -47,4 +47,5 @@ public class DashboardPageLocators {
     public static final String sortByDropdown = "//span[normalize-space()=\"-  Ascending\"]";
     public static final String blastAllReadyLabel = "//button[normalize-space()=\"Blast All Ready\"]";
     public static final String blastAllReadyButton = "xpath=/html[1]/body[1]/app-root[1]/dashboard[1]/blastweb-spinner[1]/div[1]/div[1]/div[3]/action-panel[1]/speed-dial-fab[1]/div[2]/div[1]/div[5]/div[1]/button[1]/span[5]";
+    public static final String myAccountBtn = "//span[contains(text(),\"My Account\")]";
 }

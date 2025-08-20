@@ -189,4 +189,77 @@ public class DeviceLogsPageObjectModel {
             System.out.println("Selected option not visible or not found in the dropdown: " + e.getMessage());
         }
     }
+
+    public boolean isLogRequestButtonVisible(){
+        try{
+            page.locator(logRequestButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("'Request Log' -button not visible or not found on device logs page: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isLogRequestButtonEnabled(){
+        try{
+            return page.locator(logRequestButton).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("'Request Log' -button not visible or not found on device logs page: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void requestLog(){
+        try{
+            page.locator(logRequestButton).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'Request Log' -button not visible or not found on device logs page: " + e.getMessage());
+        }
+    }
+
+    public boolean isDeviceLogsRequestSent(){
+        try{
+            page.locator(deviceLogRequestLoaderText)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Device log loader label not visible or not found on device logs page: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isDownloadIconVisible(){
+        try{
+            page.locator(cloudDownloadIcon)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Cloud download icon not visible or not found on device logs page: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean isDownloadIconEnabled(){
+        try{
+            return page.locator(cloudDownloadIcon).isEnabled();
+        }catch (PlaywrightException e){
+            System.out.println("Cloud download icon not visible or not found on device logs page: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public void downloadLogs(){
+        try{
+            page.locator(cloudDownloadIcon).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Cloud download icon not visible or not found on device logs page: " + e.getMessage());
+        }
+    }
 }

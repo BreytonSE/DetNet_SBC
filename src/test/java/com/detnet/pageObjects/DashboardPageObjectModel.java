@@ -5,6 +5,9 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.SelectOption;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import io.cucumber.java.zh_tw.並且;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -1155,6 +1158,67 @@ public class DashboardPageObjectModel {
             page.locator(blastAllReadyButton).click(new Locator.ClickOptions().setTimeout(5000));
         }catch (PlaywrightException e){
             System.out.println("'Blast All Ready' -button not found or not visible: " + e.getMessage());
+        }
+    }
+
+    public boolean isMyAccountMenuItemVisible(){
+        try{
+            page.locator(myAccountBtn)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("'My Account' -button not visible or not found on menu: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getMyAccountButtonText(){
+        try{
+            return page.locator(myAccountBtn).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("'My Account' -button not visible or not found on menu: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void viewMyAccountDetails(){
+        try{
+            page.locator(myAccountBtn).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("'My Account' -button not visible or not found on menu: " + e.getMessage());
+        }
+    }
+
+    public boolean isEventsReportTabVisible(){
+        try{
+            page.locator(eventsReportButton)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("'Events Report' -tab not visible or not found in reports dropdown: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getReportsTabText(){
+        try{
+            return page.locator(reportsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Reports tab not visible or not found on the SBC dashboard: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public String getEventsReportTabText(){
+        try{
+            return page.locator(eventsReportButton).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("'Events Report' -tab not visible or not found in reports dropdown: " + e.getMessage());
+            return null;
         }
     }
 }

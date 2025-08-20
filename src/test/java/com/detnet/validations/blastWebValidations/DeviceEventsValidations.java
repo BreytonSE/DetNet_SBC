@@ -68,4 +68,11 @@ public class DeviceEventsValidations {
                 .as("'To' date picker should be visible on the events screen.")
                 .isTrue();
     }
+
+    public void validateDeviceLogsVisibility(){
+        boolean isVisible = deviceEventsPageObjectModel.isDeviceLogsVisible();
+        softly.assertThat(isVisible)
+                .as("Device logs should be displaying on the events page.")
+                .isTrue();
+    }
 }

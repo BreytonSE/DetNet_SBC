@@ -4,6 +4,7 @@ Feature: Dashboard functional integrity for BCU device management
   verify the status and behavior of BCU devices, so that I can ensure accurate execution of blasting operations,
   maintain system safety, and quickly respond to errors or device conditions.
 
+#  Test this tomorrow: 2025/08/12
 #  @a_dashboard
 #  Scenario: Verify system alerts and event logs reflect, and clear device error conditions correctly for Blastweb 1
 #    Given the user has entered valid BlastWeb login credentials
@@ -17,7 +18,6 @@ Feature: Dashboard functional integrity for BCU device management
 #    And the user refreshes the page after verifying the High Leakage alert
 #    And the user creates a condition that triggers the High Current alert
 #    And the user refreshes the page after verifying the High Current alert
-#    And the user refreshes the page after verifying the Acknowledgement Alert alert
 #    And the user creates a condition that triggers the Low Battery alert
 #    And the user refreshes the page after verifying the Low Battery alert
 #    And the user creates a condition that triggers the Last Detonator Bad alert
@@ -34,7 +34,7 @@ Feature: Dashboard functional integrity for BCU device management
 #    And the user refreshes the page after verifying the TX Error Preventing Blast alert
 #    Then the event log should reflect the resolution of each error condition
 #    And the user restores the BCU condition to operate without alerts
-
+#
 #  @b_dashboard
 #   Scenario: Delete dummy device from the dashboard
 #    Given the user has entered valid BlastWeb login credentials
@@ -43,7 +43,8 @@ Feature: Dashboard functional integrity for BCU device management
 #    And the user navigates to the Devices page
 #    And the user select the Dummy Device to delete
 #    Then the user deletes the dummy device completely from the dashboard
-
+#
+##    Test this tomorrow: 2025/08/12
 #  @c_dashboard
 #  Scenario: Verify that user can set the channel offset using SBC
 #    Given the user sign in as Blast Central Operator
@@ -54,7 +55,7 @@ Feature: Dashboard functional integrity for BCU device management
 #    When the user sets the channel offset values
 #    And clicks the save button
 #    Then the offset icon should be displayed in blue and black
-
+#
 #    @d_dashboard
 #  Scenario: Add the dummy device back to the dashboard that user deleted earlier
 #    Given the user has entered valid BlastWeb login credentials
@@ -95,15 +96,17 @@ Feature: Dashboard functional integrity for BCU device management
     And the user selects all devices
     Then all devices should be selected successfully
 
+#    Test this tomorrow: 2025/08/12
 #  @g_dashboard
 #  Scenario: Verify that device that are in the "Ready to Arm" state will be armed
 #    Given the user sign in as Blast Central Operator
 #    And the user is on the dashboard page
+#    And verify that the device is in a "Ready to Arm" state
 #    When the user selects a device that is in the "Ready to Arm" state
 #    And the user opens the action panel and selects "Arm Selected"
 #    Then the device should be presented for arming without any errors
-
-#    Not done yet -- Needs a NFC card reader
+#
+##    Not done yet -- Needs a NFC card reader
 #  @h_dashboard
 #  Scenario: Verify that device in "Ready to Blast" -state will be presented to be blasted
 #    Given the user sign in as Blast Central Operator
@@ -122,25 +125,26 @@ Feature: Dashboard functional integrity for BCU device management
     Then a dropdown should open with three different report types
     When the user selects the Blast Report option
     Then the blast summary should be visible after the successful blast
-#
-#  @j_dashboard
-#  Scenario: Delete dummy device from the dashboard again
-#    Given the user has entered valid BlastWeb login credentials
-#    When the user opens the navigation menu by clicking the current system user's name
-#    And the user navigates to the Settings page
-#    And the user navigates to the Devices page
-#    And the user select the Dummy Device to delete
-#    Then the user deletes the dummy device completely from the dashboard
 
+  @j_dashboard
+  Scenario: Delete dummy device from the dashboard again
+    Given the user has entered valid BlastWeb login credentials
+    When the user opens the navigation menu by clicking the current system user's name
+    And the user navigates to the Settings page
+    And the user navigates to the Devices page
+    And the user select the Dummy Device to delete
+    Then the user deletes the dummy device completely from the dashboard
+
+##    Needs a re-run to confirm that it works as expected
 #  @k_dashboard
 #  Scenario: Send a device state change request to make it in a "Ready to Arm" -state
 #    Given the user sign in as Blast Central Operator
 #    And the user is on the dashboard page
 #    When the user views the device details
-#    And the device state is not already "Ready to Arm"
 #    And the device by firmware and sort by descending
 #    Then the user sends a device state change request to set it to "Ready to Arm"
 
+#    Needs a run to confirm that it works
 #  @l_dashboard
 #  Scenario: Verify that a device in "Ready to Arm" -state will be armed using the "Arm All Ready" option from action panel
 #    Given the user sign in as Blast Central Operator
@@ -203,11 +207,12 @@ Feature: Dashboard functional integrity for BCU device management
 #    Then the event date should be visible
 #    And the event time should be visible
 
-  @t_dashboard
-  Scenario: Verify that the device is in an UNKNOWN state when there is no communication between BCU and SBC
-    Given the user has entered valid BlastWeb login credentials
-    And the user is on the dashboard page
-    Then verify that the BCU is in an "UNKNOWN" state else send a state change request via email
+#  @t_dashboard
+#  Scenario: Verify that the device is in an UNKNOWN state when there is no communication between BCU and SBC
+#    Given the user has entered valid BlastWeb login credentials
+#    And the user is on the dashboard page
+#    And select device and view device details
+#    Then verify that the BCU is in an "UNKNOWN" state else send a state change request via email
 
 #  @u_dashboard
 #  Scenario: Verify the expiration countdown window period for the 'Ready to Blast' command

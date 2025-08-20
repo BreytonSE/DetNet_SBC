@@ -4,6 +4,8 @@ import com.detnet.managers.PageObjectManager;
 import com.detnet.managers.PlaywrightManager;
 import com.detnet.pageObjects.DevicePageObjectModel;
 import com.detnet.pageObjects.SettingsPageObjectModel;
+import com.detnet.utilities.SoftAssertionUtils;
+import com.detnet.validations.blastWebValidations.DeviceValidation;
 import com.microsoft.playwright.Page;
 import io.cucumber.java.en.*;
 
@@ -29,9 +31,12 @@ public class DummyDeviceDeletion_StepDefn {
     }
 
     @Then("the user deletes the dummy device completely from the dashboard")
-    public void the_user_deletes_the_dummy_device_completely_from_the_dashboard() throws InterruptedException {
+    public void the_user_deletes_the_dummy_device_completely_from_the_dashboard() {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
+        DeviceValidation deviceValidation = new DeviceValidation(devicePageObjectModel);
         devicePageObjectModel.deleteSelectedDevices();
         devicePageObjectModel.confirmDelete();
+        deviceValidation.validateIfDeviceIsDeleted("Dummy device");
+        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 }

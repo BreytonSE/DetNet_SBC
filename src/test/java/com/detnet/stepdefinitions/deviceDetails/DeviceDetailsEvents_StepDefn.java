@@ -26,6 +26,18 @@ public class DeviceDetailsEvents_StepDefn {
         deviceDetailsPageObjectModel.viewDeviceEvents();
     }
 
+    @When("filter the from dates accordingly")
+    public void filter_the_from_dates_accordingly() {
+        DeviceEventsPageObjectModel deviceEventsPageObjectModel = pageObjectManager.getDeviceEventsPageObjectModel();
+        deviceEventsPageObjectModel.openFromDatePicker();
+        deviceEventsPageObjectModel.goToPreviousMonth();
+        int randomDay = new Random().nextInt(30) + 1;
+        deviceEventsPageObjectModel.selectDate(randomDay);
+        for(int i=0;i<2;i++){
+            deviceEventsPageObjectModel.selectTime();
+        }
+    }
+
     @Then("the device details events should display meaningful data without errors")
     public void the_device_details_events_should_display_meaningful_data_without_errors() {
         DeviceEventsPageObjectModel deviceEventsPageObjectModel = pageObjectManager.getDeviceEventsPageObjectModel();
@@ -56,6 +68,5 @@ public class DeviceDetailsEvents_StepDefn {
         SoftAssertionUtils.getSoftAssertions().assertAll();
         int randomDay = new Random().nextInt(30) + 1;
         deviceEventsPageObjectModel.selectDate(randomDay);
-//        TODO: Finish off
     }
 }

@@ -40,7 +40,6 @@ public class AddDevices_StepDefn {
         DevicePageObjectModel devicePageObjectModel = pageObjectManager.getDevicePageObjectModel();
         devicePageObjectModel.openDeviceNetworkDropDown();
         devicePageObjectModel.selectNetwork("ETHER001-DUMMY");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
     }
 
     @When("the user selects the device network interface")
@@ -82,7 +81,7 @@ public class AddDevices_StepDefn {
         devicePageObjectModel.openParentDeviceDropDown();
         deviceValidation.validateParentDeviceDropDownIsOpen();
         SoftAssertionUtils.getSoftAssertions().assertAll();
-        devicePageObjectModel.selectParentDevice("unknown location");
+        devicePageObjectModel.selectParentDevice("Dummy device");
     }
 
     @When("the user assigns a group to the device")
@@ -138,7 +137,7 @@ public class AddDevices_StepDefn {
         devicePageObjectModel.openDeviceManageDropDown();
         devicePageObjectModel.selectManager("amy.wilkinson");
         devicePageObjectModel.openParentDeviceDropDown();
-        devicePageObjectModel.selectParentDevice("unknown location");
+        devicePageObjectModel.selectParentDevice("Dummy device");
         devicePageObjectModel.openDeviceGroupDropDown();
         devicePageObjectModel.selectDeviceGroup("1");
         devicePageObjectModel.setIpAddress("203.0.113.10");
@@ -163,7 +162,7 @@ public class AddDevices_StepDefn {
         devicePageObjectModel.openDeviceManageDropDown();
         devicePageObjectModel.selectManager("cody007");
         devicePageObjectModel.openParentDeviceDropDown();
-        devicePageObjectModel.selectParentDevice("unknown location");
+        devicePageObjectModel.selectParentDevice("Dummy device");
         devicePageObjectModel.setIpAddress("192.0.2.123");
         devicePageObjectModel.addDevice();
         deviceValidation.validateIfDeviceIsAdded("192.0.2.123");

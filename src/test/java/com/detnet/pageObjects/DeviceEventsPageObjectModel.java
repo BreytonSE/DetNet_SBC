@@ -140,12 +140,34 @@ public class DeviceEventsPageObjectModel {
         }
     }
 
-    public void openToDatePicker(){
+    public void goToPreviousMonth(){
         try{
-            page.locator(toDatePicker).click(new Locator.ClickOptions().setTimeout(5000));
+            page.locator(previousButton).click(new Locator.ClickOptions().setTimeout(5000));
         }catch (PlaywrightException e){
-            System.out.println("'To' date picker button not visible or not found on device logs screen: " +
+            System.out.println("Back arrow not visible or not found on date picker to move to previous month: " +
                     e.getMessage());
+        }
+    }
+
+    public void selectTime(){
+        try{
+            page.locator(clock).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Time picker not visible or not found after user selected a 'From' date: " + e.getMessage());
+        }
+    }
+
+    public boolean isDeviceLogsVisible(){
+        try{
+            page.waitForTimeout(3000);
+            page.locator(log)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Device logs not visible or not found on device events page: " + e.getMessage());
+            return false;
         }
     }
 }

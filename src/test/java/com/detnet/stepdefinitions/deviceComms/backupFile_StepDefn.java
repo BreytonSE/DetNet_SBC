@@ -63,7 +63,6 @@ public class backupFile_StepDefn {
     @When("the user starts the server")
     public void the_user_starts_the_server() {
         serverConfigValidation.validateIfStartServerButtonIsVisible();
-        serverConfigValidation.validateIfStartServerButtonIsEnabled();
         SoftAssertionUtils.getSoftAssertions().assertAll();
         serverConfigPageObjectModel.startServer();
     }

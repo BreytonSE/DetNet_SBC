@@ -27,15 +27,6 @@ public class DeviceStateRequest_StepDefn {
         DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
         dashboardPageObjectModel.viewDeviceDetails(1);
     }
-    @When("the device state is not already {string}")
-    public void the_device_state_is_not_already(String string) {
-        DeviceSummaryPageObjectModel deviceSummaryPageObjectModel = pageObjectManager.getDeviceSummaryPageObjectModel();
-        DeviceSummaryValidation deviceSummaryValidation = new DeviceSummaryValidation(deviceSummaryPageObjectModel);
-        deviceSummaryPageObjectModel.getCurrentDeviceState();
-        deviceSummaryValidation.validateDeviceCurrentState("Ready to Arm");
-        SoftAssertionUtils.getSoftAssertions().assertAll();
-
-    }
 
     @When("the device by firmware and sort by descending")
     public void the_device_by_firmware_and_sort_by_descending() {

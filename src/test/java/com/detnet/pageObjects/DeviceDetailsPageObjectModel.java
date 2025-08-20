@@ -178,4 +178,57 @@ public class DeviceDetailsPageObjectModel {
             System.out.println("Logs tab not found or not visible on the menu panel: " + e.getMessage());
         }
     }
+
+    public boolean isCommentsTabVisible(){
+        try{
+            page.locator(commentsTab)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.printf("Device comments tab not visible or not found on the device details screen: " +
+                    e.getMessage());
+            return false;
+        }
+    }
+
+    public void openDeviceComments(){
+        try{
+            page.locator(commentsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Device comments tab not visible or not found on the device details screen: " +
+                    e.getMessage());
+        }
+    }
+
+    public boolean isDetonatorsTabVisible(){
+        try{
+            page.locator(detonatorsTab)
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+            return true;
+        }catch (PlaywrightException e){
+            System.out.println("Detonators tab not visible or not found on device details menu: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public String getDetonatorsTabText(){
+        try{
+            return page.locator(detonatorsTab).textContent();
+        }catch (PlaywrightException e){
+            System.out.println("Detonators tab not visible or not found on device details menu: " + e.getMessage());
+            return null;
+        }
+    }
+
+    public void openDeviceDetonatorsPage(){
+        try{
+            page.locator(detonatorsTab).click(new Locator.ClickOptions().setTimeout(5000));
+        }catch (PlaywrightException e){
+            System.out.println("Detonators tab not visible or not found on device details menu: " + e.getMessage());
+        }
+    }
 }

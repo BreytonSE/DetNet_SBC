@@ -7,6 +7,7 @@ import com.detnet.utilities.EmailUtils;
 import com.detnet.utilities.SoftAssertionUtils;
 import com.detnet.validations.blastWebValidations.DashboardValidation;
 import com.microsoft.playwright.Page;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 import java.util.Arrays;
@@ -19,6 +20,12 @@ public class LostBCUComms_StepDefn {
     public LostBCUComms_StepDefn() {
         Page page = PlaywrightManager.getPage();
         pageObjectManager = PageObjectManager.getInstance(page);
+    }
+
+    @Given("select device and view device details")
+    public void select_device_and_view_device_details() throws InterruptedException {
+        DashboardPageObjectModel dashboardPageObjectModel = pageObjectManager.getDashboardPageObjectModel();
+        dashboardPageObjectModel.viewDeviceDetails(2);
     }
 
     @Then("verify that the BCU is in an {string} state else send a state change request via email")

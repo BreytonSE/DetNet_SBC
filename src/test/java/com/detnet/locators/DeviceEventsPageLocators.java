@@ -9,4 +9,7 @@ public class DeviceEventsPageLocators {
     public static final String paginatorRangeLabel = "//div[@class=\"mat-mdc-paginator-range-label\"]";
     public static final String fromDatePicker = "xpath=/html[1]/body[1]/app-root[1]/device-details[1]/div[1]/div[2]/app-device-events[1]/div[1]/div[2]/div[1]/div[1]/mat-form-field[1]/div[1]/div[1]/div[3]/mat-datetimepicker-toggle[1]/button[1]/span[4]";
     public static final String toDatePicker = "xpath=/html[1]/body[1]/app-root[1]/device-details[1]/div[1]/div[2]/app-device-events[1]/div[1]/div[2]/div[1]/div[2]/mat-form-field[1]/div[1]/div[1]/div[3]/mat-datetimepicker-toggle[1]/button[1]/span[4]";
+    public static final String previousButton = "//div[@aria-label=\"Previous month\"]//*[name()=\"svg\"]";
+    public static final String clock = "//mat-datetimepicker-clock[@role=\"clock\"]";
+    public static final String log = "//tbody/tr[1]";
 }

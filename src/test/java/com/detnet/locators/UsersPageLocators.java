@@ -2,7 +2,7 @@ package com.detnet.locators;
 
 public class UsersPageLocators {
     public static final String usersLabel = "//h2[normalize-space()='Users']";
-    public static final String user = "//tr[@class='mat-mdc-row mdc-data-table__row cdk-row ng-star-inserted']";
+    public static final String user = "//td[@class=\"mat-mdc-cell mdc-data-table__cell cdk-cell cdk-column-name mat-column-name ng-star-inserted\"][normalize-space()=\"administrator\"]";
     public static final String addButton = "//button[@class='addBtn ng-star-inserted']";
     public static final String addUserLabel = "//h2[normalize-space()='Add User']";
     public static final String userNameInputField = "//input[@id='addUserUsername']";

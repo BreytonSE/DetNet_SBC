@@ -518,4 +518,39 @@ public class DashboardValidation {
                 .as("Blast All Ready option should be visible in the action panel.")
                 .isTrue();
     }
+
+    public void validateMyAccountButtonVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isMyAccountMenuItemVisible();
+        softly.assertThat(isVisible)
+                .as("'My Account' menu item should be displaying in the menu.")
+                .isTrue();
+    }
+
+    public void validateMyAccountMenuItemText(String expectedText){
+        String actualText = dashboardPageObjectModel.getMyAccountButtonText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
+
+    public void validateEventsReportTabVisibility(){
+        boolean isVisible = dashboardPageObjectModel.isEventsReportTabVisible();
+        softly.assertThat(isVisible)
+                .as("'Events Report' -tab should be displaying in the reports dropdown.")
+                .isTrue();
+    }
+
+    public void validateReportsTabText(String expectedText){
+        String actualText = dashboardPageObjectModel.getReportsTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualTo(expectedText);
+    }
+
+    public void validateEventsReportTabText(String expectedText){
+        String actualText = dashboardPageObjectModel.getEventsReportTabText();
+        softly.assertThat(actualText)
+                .as("Actual text does not match expected text.")
+                .isEqualToIgnoringCase(expectedText);
+    }
 }
